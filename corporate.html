@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporate Orders — Broadway Beer Wine & Spirits</title>
+  <meta name="description" content="Corporate gifting, cellar consulting, and event planning from Broadway Beer Wine & Spirits. Serving Vancouver businesses since 1986." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .service-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 80px 0;
+      border-bottom: 1px solid var(--bg-alt);
+    }
+    .service-block:last-of-type { border-bottom: none; }
+    .service-block.reverse { direction: rtl; }
+    .service-block.reverse > * { direction: ltr; }
+    @media (max-width: 768px) {
+      .service-block,
+      .service-block.reverse { grid-template-columns: 1fr; direction: ltr; gap: 32px; padding: 48px 0; }
+    }
+    .service-img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 4/3;
+    }
+    .service-content h2 { margin-bottom: 20px; }
+    .service-content p { color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; font-size: 1.05rem; }
+    .service-content p:last-of-type { margin-bottom: 28px; }
+
+    .intro-band {
+      background: var(--bg-alt);
+      padding: 64px 0;
+      text-align: center;
+    }
+    .intro-band p {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .contact-band {
+      background: var(--bg-card);
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      padding: 80px 0;
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; padding: 48px 0; } }
+    .contact-grid h2 { margin-bottom: 16px; }
+    .contact-grid p { color: var(--text-muted); line-height: 1.7; margin-bottom: 0; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+    .form-field input,
+    .form-field textarea {
+      background: var(--bg);
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--gold); }
+    .form-field textarea { resize: vertical; min-height: 120px; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Broadway Beer Wine & Spirits home">
+        <img src="images/logo.jpg" alt="Broadway Beer Wine &amp; Spirits" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="https://shop.broadwaybeerwine.ca" class="nav-shop" target="_blank" rel="noopener">Shop</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="corporate.html" class="active">Corporate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="https://shop.broadwaybeerwine.ca" class="nav-shop" target="_blank" rel="noopener">Shop ↗</a>
+    <a href="blog.html">Blog</a>
+    <a href="events.html">Events</a>
+    <a href="corporate.html" class="active">Corporate</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main class="page-content">
+
+    <section class="page-hero">
+      <p class="section-eyebrow">Corporate Services</p>
+      <h1>Corporate Orders</h1>
+      <p>Enhance Your Corporate Gifting Today</p>
+    </section>
+
+    <div class="intro-band">
+      <div class="container">
+        <p>We've been supplying corporate clients in Vancouver since 1986. Whether you need a single impressive bottle or a hundred gifts by Friday, we can handle it.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Corporate Gifting -->
+        <div class="service-block fade-in">
+          <img src="images/corporate-gifting.jpg" alt="Corporate gifting — Broadway Beer Wine &amp; Spirits" class="service-img" />
+          <div class="service-content">
+            <p class="section-eyebrow">Service 01</p>
+            <h2>Corporate Gifting</h2>
+            <div class="divider"></div>
+            <p>Recognizing a client, rewarding your team, or sourcing a prize bottle for a special occasion — we'll help you get it right. Broadway Beer Wine &amp; Spirits has been putting together corporate gifts since before most of our current selection existed.</p>
+            <p>We know what impresses, what's appropriate for every budget, and what people actually want to receive. Come in and talk to us.</p>
+            <a href="#contact" class="btn btn-gold">Get in Touch</a>
+          </div>
+        </div>
+
+        <!-- Cellar Consulting -->
+        <div class="service-block reverse fade-in">
+          <img src="images/cellar-consulting.jpg" alt="Cellar consulting — Broadway Beer Wine &amp; Spirits" class="service-img" />
+          <div class="service-content">
+            <p class="section-eyebrow">Service 02</p>
+            <h2>Cellar Consulting</h2>
+            <div class="divider"></div>
+            <p>Building a cellar or looking at what you already have with fresh eyes? We'll help you think through what to stock, what to age, and where the gaps are.</p>
+            <p>Whether you're starting from scratch or refining an existing collection, we bring 40 years of product knowledge to the conversation.</p>
+            <a href="#contact" class="btn btn-gold">Get in Touch</a>
+          </div>
+        </div>
+
+        <!-- Event Planning -->
+        <div class="service-block fade-in">
+          <img src="images/event-planning.jpg" alt="Event beverage planning — Broadway Beer Wine &amp; Spirits" class="service-img" />
+          <div class="service-content">
+            <p class="section-eyebrow">Service 03</p>
+            <h2>Event Planning</h2>
+            <div class="divider"></div>
+            <p>Leave the beverage side of your event to us. We'll help you select the right wines, beers, and spirits for your crowd and occasion, sort out quantities, and arrange delivery.</p>
+            <p>One less thing to manage and a better bar than you'd put together on your own.</p>
+            <a href="#contact" class="btn btn-gold">Get in Touch</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <div class="contact-band" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="fade-in">
+            <p class="section-eyebrow">Work With Us</p>
+            <h2>Interested in Working Together?</h2>
+            <div class="divider"></div>
+            <p>Fill out some info and we will be in touch shortly. We can't wait to hear from you.</p>
+          </div>
+          <form class="contact-form fade-in" action="https://formspree.io/f/placeholder" method="POST">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name" required autocomplete="given-name" />
+              </div>
+              <div class="form-field">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name" required autocomplete="family-name" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email" />
+            </div>
+            <div class="form-field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-gold">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Broadway Beer Wine &amp; Spirits<span>Est. 1986 · Kitsilano</span></div>
+        <p>Not every bottle, the right one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="https://shop.broadwaybeerwine.ca" target="_blank" rel="noopener">Shop ↗</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="corporate.html">Corporate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <address>
+          2752 W Broadway<br>
+          Vancouver, BC<br>
+          V6K 2G4<br><br>
+          10am – 11pm, 7 days a week
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/broadwaybeerwineandspirits" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container" style="max-width:var(--max-width)">
+      <p>&copy; 2025 Broadway Beer Wine &amp; Spirits. All rights reserved.</p>
+      <div class="footer-social" aria-label="Social media">
+        <a href="https://www.instagram.com/broadwaybeerwineandspirits" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
