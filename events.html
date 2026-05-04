@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — Broadway Beer Wine & Spirits</title>
+  <meta name="description" content="Tastings, educational sessions, and the occasional murder mystery. Upcoming events at Broadway Beer Wine & Spirits in Kitsilano." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .events-intro {
+      max-width: 640px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+    .events-section-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .past-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .past-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .past-grid { grid-template-columns: 1fr; } }
+    .past-card {
+      background: var(--dark-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
+    .past-card:hover { opacity: 1; }
+    .past-card-img {
+      height: 160px;
+      background: var(--dark-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .past-card-body { padding: 20px; }
+    .past-card-body h3 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .past-card-body p { font-size: 0.82rem; color: var(--gray); margin: 0; }
+    .past-label {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-bottom: 8px;
+    }
+    .signup-box {
+      background: var(--dark-2);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 56px 48px;
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .signup-box h2 { margin-bottom: 12px; }
+    .signup-box p  { margin: 0 auto 28px; }
+    .signup-form {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .signup-form input {
+      flex: 1;
+      min-width: 200px;
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--white);
+      outline: none;
+    }
+    .signup-form input:focus { border-color: var(--gold); }
+    .signup-form input::placeholder { color: rgba(255,255,255,0.3); }
+    .event-types {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) { .event-types { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .event-types { grid-template-columns: 1fr; } }
+    .event-type-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .event-type-card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .event-type-card h4 {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .event-type-card p { font-size: 0.82rem; color: var(--gray); margin: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Broadway Beer Wine & Spirits home">
+        <div class="nav-logo-text">
+          Broadway<br>Beer Wine &amp; Spirits
+          <span>Est. 1986 · Kitsilano</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="https://shop.broadwaybeerwine.ca" class="nav-shop" target="_blank" rel="noopener">Shop</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="events.html" class="active">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="https://shop.broadwaybeerwine.ca" class="nav-shop" target="_blank" rel="noopener">Shop ↗</a>
+    <a href="blog.html">Blog</a>
+    <a href="events.html" class="active">Events</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main class="page-content">
+
+    <section class="page-hero">
+      <p class="section-eyebrow">What's On</p>
+      <h1>Events</h1>
+      <p>Tastings, educational sessions, and the occasional murder mystery. Join us.</p>
+    </section>
+
+    <!-- UPCOMING EVENTS -->
+    <section class="section">
+      <div class="container">
+
+        <div class="events-intro fade-in">
+          <p class="events-section-label">Upcoming</p>
+          <p>We are building out our schedule of tastings and events. Drop your email below to be the first to know when dates go live.</p>
+        </div>
+
+        <!-- Placeholder upcoming list -->
+        <div class="event-list fade-in" style="margin-bottom:64px;">
+          <div class="event-item" style="opacity:0.45;pointer-events:none;">
+            <div class="event-date">
+              <div class="event-date-day">TBA</div>
+              <div class="event-date-month">2025</div>
+            </div>
+            <div class="event-info">
+              <h3>Wine Tasting: Okanagan Picks</h3>
+              <p>A guided tour through some of our favourite BC bottles. Date to be announced.</p>
+            </div>
+            <span class="event-tag">Wine</span>
+          </div>
+          <div class="event-item" style="opacity:0.45;pointer-events:none;">
+            <div class="event-date">
+              <div class="event-date-day">TBA</div>
+              <div class="event-date-month">2025</div>
+            </div>
+            <div class="event-info">
+              <h3>Scotch 101: An Introduction to Single Malts</h3>
+              <p>For the curious newcomer and the seasoned enthusiast alike. Date to be announced.</p>
+            </div>
+            <span class="event-tag">Spirits</span>
+          </div>
+          <div class="event-item" style="opacity:0.45;pointer-events:none;">
+            <div class="event-date">
+              <div class="event-date-day">TBA</div>
+              <div class="event-date-month">2025</div>
+            </div>
+            <div class="event-info">
+              <h3>Murder Mystery Evening</h3>
+              <p>An evening of intrigue, great wine, and suspect characters. Date to be announced.</p>
+            </div>
+            <span class="event-tag">Special</span>
+          </div>
+          <div class="event-item" style="opacity:0.45;pointer-events:none;">
+            <div class="event-date">
+              <div class="event-date-day">TBA</div>
+              <div class="event-date-month">2025</div>
+            </div>
+            <div class="event-info">
+              <h3>Casual Sip &amp; Chat</h3>
+              <p>Low-key Friday evening — no agenda, just good bottles and good people.</p>
+            </div>
+            <span class="event-tag">Casual</span>
+          </div>
+        </div>
+
+        <!-- Event types -->
+        <div class="fade-in" style="margin-bottom:64px;">
+          <p class="events-section-label" style="text-align:center;">What to Expect</p>
+          <div class="event-types">
+            <div class="event-type-card">
+              <div class="icon">🍷</div>
+              <h4>Wine Tastings</h4>
+              <p>Guided pours with context. No pretension, just good wine and honest notes.</p>
+            </div>
+            <div class="event-type-card">
+              <div class="icon">🥃</div>
+              <h4>Spirits Sessions</h4>
+              <p>Single malts, whiskey flights, and spirit deep-dives with our in-house experts.</p>
+            </div>
+            <div class="event-type-card">
+              <div class="icon">🍺</div>
+              <h4>Brewery Meetups</h4>
+              <p>Local BC brewers in the shop, pouring their latest and talking process.</p>
+            </div>
+            <div class="event-type-card">
+              <div class="icon">🔍</div>
+              <h4>Special Events</h4>
+              <p>Murder mysteries, holiday parties, and one-off experiences throughout the year.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signup box -->
+        <div class="signup-box fade-in">
+          <p class="section-eyebrow">Be First to Know</p>
+          <h2>Get on the List</h2>
+          <p>We'll email you when new events are posted — nothing else.</p>
+          <form class="signup-form" action="#" method="post">
+            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
+            <button type="submit" class="btn btn-gold">Notify Me</button>
+          </form>
+        </div>
+
+        <!-- Past events -->
+        <div style="margin-top:96px;">
+          <p class="events-section-label fade-in">Past Events</p>
+          <div class="past-grid">
+            <div class="past-card fade-in">
+              <div class="past-card-img">Photo</div>
+              <div class="past-card-body">
+                <span class="past-label">Past</span>
+                <h3>Opening Tasting — Spring 2025</h3>
+                <p>Our first event of the year. A great evening with great people.</p>
+              </div>
+            </div>
+            <div class="past-card fade-in">
+              <div class="past-card-img">Photo</div>
+              <div class="past-card-body">
+                <span class="past-label">Past</span>
+                <h3>Holiday Gift Guide Night</h3>
+                <p>Staff picks for gifting season. Tastings and wrapping suggestions included.</p>
+              </div>
+            </div>
+            <div class="past-card fade-in">
+              <div class="past-card-img">Photo</div>
+              <div class="past-card-body">
+                <span class="past-label">Past</span>
+                <h3>Okanagan Winery Showcase</h3>
+                <p>Three BC producers, twenty wines, one very good Friday evening.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          Broadway Beer Wine &amp; Spirits
+          <span>Est. 1986 · Kitsilano</span>
+        </div>
+        <p>Not every bottle, the right one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="https://shop.broadwaybeerwine.ca" target="_blank" rel="noopener">Shop ↗</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <address>
+          2538 Broadway W<br>
+          Vancouver, BC<br>
+          V6K 2E7<br><br>
+          Mon–Sun: 10am–11pm
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container" style="max-width:var(--max-width)">
+      <p>&copy; 2025 Broadway Beer Wine &amp; Spirits. All rights reserved.</p>
+      <div class="footer-social" aria-label="Social media">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

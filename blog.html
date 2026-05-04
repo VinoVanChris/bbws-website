@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Broadway Beer Wine & Spirits</title>
+  <meta name="description" content="Tasting notes, staff picks, how-to guides, and stories from the shop. The Broadway Beer Wine & Spirits blog." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .blog-filter {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-btn {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+    .blog-featured {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 768px) {
+      .blog-featured { grid-template-columns: 1fr; }
+    }
+    .blog-card-featured .blog-card-img { height: 320px; }
+    .blog-card-featured .blog-card-body { padding: 28px; }
+    .blog-card-featured h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .blog-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .blog-card-mini {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 16px;
+      background: var(--dark-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+      flex: 1;
+    }
+    .blog-card-mini:hover { border-color: rgba(201,168,76,0.3); }
+    .blog-card-mini .blog-card-img {
+      height: 100%;
+      min-height: 90px;
+      border-bottom: none;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .blog-card-mini .blog-card-body { padding: 16px 16px 16px 0; }
+    .blog-card-mini h3 { font-size: 0.88rem; }
+    .newsletter-bar {
+      background: var(--dark-2);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      padding: 48px;
+      text-align: center;
+      margin-top: 64px;
+    }
+    .newsletter-bar h3 {
+      font-size: clamp(1.6rem,3vw,2.4rem);
+      margin-bottom: 10px;
+    }
+    .newsletter-bar p { margin: 0 auto 28px; }
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .newsletter-form input {
+      flex: 1;
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--white);
+      outline: none;
+    }
+    .newsletter-form input:focus { border-color: var(--gold); }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+    @media (max-width: 480px) {
+      .newsletter-form { flex-direction: column; }
+      .newsletter-bar { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Broadway Beer Wine & Spirits home">
+        <div class="nav-logo-text">
+          Broadway<br>Beer Wine &amp; Spirits
+          <span>Est. 1986 · Kitsilano</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="https://shop.broadwaybeerwine.ca" class="nav-shop" target="_blank" rel="noopener">Shop</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="https://shop.broadwaybeerwine.ca" class="nav-shop" target="_blank" rel="noopener">Shop ↗</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="events.html">Events</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main class="page-content">
+
+    <section class="page-hero">
+      <p class="section-eyebrow">From the Shop</p>
+      <h1>The Blog</h1>
+      <p>Tasting notes, staff picks, how-to guides, and stories from the shelves.</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Filter pills -->
+        <div class="blog-filter fade-in" role="group" aria-label="Filter posts by category">
+          <button class="filter-btn active">All</button>
+          <button class="filter-btn">Wine</button>
+          <button class="filter-btn">Beer</button>
+          <button class="filter-btn">Spirits</button>
+          <button class="filter-btn">Staff Picks</button>
+          <button class="filter-btn">Events</button>
+        </div>
+
+        <!-- Featured + sidebar -->
+        <div class="blog-featured fade-in">
+          <article class="blog-card blog-card-featured">
+            <div class="blog-card-img">Featured Photo</div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">Staff Picks</p>
+              <h3>Our Current Obsessions: What's Flying Off the Shelves This Month</h3>
+              <p>Every month a handful of bottles take on a life of their own in the shop — customers keep asking, we keep reordering. Here's what's capturing our attention right now.</p>
+              <br>
+              <span class="blog-card-date">Post coming soon</span>
+            </div>
+          </article>
+          <div class="blog-sidebar">
+            <article class="blog-card-mini">
+              <div class="blog-card-img">Photo</div>
+              <div class="blog-card-body">
+                <p class="blog-card-tag">Wine</p>
+                <h3>Five BC Wines Worth Stocking This Summer</h3>
+                <span class="blog-card-date">Coming soon</span>
+              </div>
+            </article>
+            <article class="blog-card-mini">
+              <div class="blog-card-img">Photo</div>
+              <div class="blog-card-body">
+                <p class="blog-card-tag">Spirits</p>
+                <h3>The Beginner's Guide to Single Malt Scotch</h3>
+                <span class="blog-card-date">Coming soon</span>
+              </div>
+            </article>
+            <article class="blog-card-mini">
+              <div class="blog-card-img">Photo</div>
+              <div class="blog-card-body">
+                <p class="blog-card-tag">Beer</p>
+                <h3>Local Craft Picks: What's in Our Fridge Right Now</h3>
+                <span class="blog-card-date">Coming soon</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Post grid -->
+        <div class="blog-grid">
+          <article class="blog-card fade-in">
+            <div class="blog-card-img">Photo</div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">Wine</p>
+              <h3>Natural Wine 101: What It Is and Why It Matters</h3>
+              <p>We've stocked natural wine for years. Here's our honest take on what it actually means.</p>
+              <span class="blog-card-date">Coming soon</span>
+            </div>
+          </article>
+          <article class="blog-card fade-in">
+            <div class="blog-card-img">Photo</div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">Spirits</p>
+              <h3>Japanese Whisky: The Bottles We Keep Coming Back To</h3>
+              <p>From accessible to rare, the expressions from Japan that earn their shelf space.</p>
+              <span class="blog-card-date">Coming soon</span>
+            </div>
+          </article>
+          <article class="blog-card fade-in">
+            <div class="blog-card-img">Photo</div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">Beer</p>
+              <h3>The Case for Drinking Local: BC Craft in 2025</h3>
+              <p>Why the province's craft scene has never been stronger — and what to grab right now.</p>
+              <span class="blog-card-date">Coming soon</span>
+            </div>
+          </article>
+          <article class="blog-card fade-in">
+            <div class="blog-card-img">Photo</div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">Wine</p>
+              <h3>How to Build a Cellar on Any Budget</h3>
+              <p>You don't need a dedicated room. You need a plan. Here's ours.</p>
+              <span class="blog-card-date">Coming soon</span>
+            </div>
+          </article>
+          <article class="blog-card fade-in">
+            <div class="blog-card-img">Photo</div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">Spirits</p>
+              <h3>Ask the Staff: Bottles Under $40 We Love Right Now</h3>
+              <p>The value picks our team reaches for when budget matters and quality can't be compromised.</p>
+              <span class="blog-card-date">Coming soon</span>
+            </div>
+          </article>
+          <article class="blog-card fade-in">
+            <div class="blog-card-img">Photo</div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">Events</p>
+              <h3>Recap: Our First Tasting of the Year</h3>
+              <p>What we poured, what surprised us, and who showed up. A look back at a great evening.</p>
+              <span class="blog-card-date">Coming soon</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter-bar fade-in">
+          <p class="section-eyebrow">Stay in the Loop</p>
+          <h3>Get New Posts in Your Inbox</h3>
+          <p>No spam. Just tasting notes, staff picks, and event announcements when we have them.</p>
+          <form class="newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
+            <button type="submit" class="btn btn-gold">Subscribe</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          Broadway Beer Wine &amp; Spirits
+          <span>Est. 1986 · Kitsilano</span>
+        </div>
+        <p>Not every bottle, the right one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="https://shop.broadwaybeerwine.ca" target="_blank" rel="noopener">Shop ↗</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <address>
+          2538 Broadway W<br>
+          Vancouver, BC<br>
+          V6K 2E7<br><br>
+          Mon–Sun: 10am–11pm
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container" style="max-width:var(--max-width)">
+      <p>&copy; 2025 Broadway Beer Wine &amp; Spirits. All rights reserved.</p>
+      <div class="footer-social" aria-label="Social media">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
