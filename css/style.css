@@ -161,7 +161,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 
 /* Logo image version (preferred) */
 .nav-logo img {
-  height: 44px;
+  height: 56px;
   width: auto;
 }
 
