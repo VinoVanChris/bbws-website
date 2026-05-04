@@ -53,6 +53,7 @@ ul { list-style: none; }
 /* --- Typography --- */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
+  font-weight: normal;
   letter-spacing: 0.06em;
   line-height: 1.05;
 }
