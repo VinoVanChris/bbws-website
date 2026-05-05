@@ -853,3 +853,55 @@ p { color: var(--text-muted); max-width: 66ch; }
     transform: none;
   }
 }
+
+/* ============================================
+   Grand Crew Loyalty Block
+   ============================================ */
+.loyalty-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.loyalty-text {
+  max-width: 520px;
+}
+.loyalty-text h2 { margin-bottom: 12px; }
+.loyalty-text p  { margin: 0; }
+.loyalty-stats {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+}
+.loyalty-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.loyalty-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.loyalty-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+.loyalty-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--border);
+}
+@media (max-width: 768px) {
+  .loyalty-block { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .loyalty-stats  { width: 100%; justify-content: flex-start; }
+}
