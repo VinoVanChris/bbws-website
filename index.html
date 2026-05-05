@@ -201,7 +201,7 @@
         posts.slice(0, 3).forEach(p => {
           const a = document.createElement('a');
           a.href = p.url;
-          a.className = 'blog-card fade-in';
+          a.className = 'blog-card fade-in visible';
           a.style.textDecoration = 'none';
           a.innerHTML = `
             <div class="blog-card-img"><img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
