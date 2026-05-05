@@ -141,6 +141,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .nav-inner {
@@ -157,12 +158,15 @@ p { color: var(--text-muted); max-width: 66ch; }
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 /* Logo image version (preferred) */
 .nav-logo img {
   height: 84px;
+  max-height: 84px;
   width: auto;
+  display: block;
 }
 
 /* Text fallback */
