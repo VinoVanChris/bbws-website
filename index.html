@@ -123,34 +123,8 @@
           </div>
           <a href="blog.html" class="btn btn-outline">All Posts</a>
         </div>
-        <div class="blog-grid">
-          <article class="blog-card fade-in">
-            <div class="blog-card-img"><img src="images/cellar-consulting.jpg" alt="BC wines" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-            <div class="blog-card-body">
-              <p class="blog-card-tag">Wine</p>
-              <h3>Five BC Wines Worth Stocking This Summer</h3>
-              <p>The Okanagan is producing some incredible bottles right now. Here are our top picks…</p>
-              <span class="blog-card-date">Coming soon</span>
-            </div>
-          </article>
-          <article class="blog-card fade-in">
-            <div class="blog-card-img"><img src="images/corporate-gifting.jpg" alt="Single malt scotch" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-            <div class="blog-card-body">
-              <p class="blog-card-tag">Spirits</p>
-              <h3>The Beginner's Guide to Single Malt Scotch</h3>
-              <p>Don't let the terminology intimidate you. We break it all down in plain language…</p>
-              <span class="blog-card-date">Coming soon</span>
-            </div>
-          </article>
-          <article class="blog-card fade-in">
-            <div class="blog-card-img"><img src="images/whiskeys.webp" alt="BC craft beer" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-            <div class="blog-card-body">
-              <p class="blog-card-tag">Beer</p>
-              <h3>Local Craft Picks — What's in Our Fridge Right Now</h3>
-              <p>Our current rotation of BC craft tallboys and bombers that we can't stop recommending…</p>
-              <span class="blog-card-date">Coming soon</span>
-            </div>
-          </article>
+        <div class="blog-grid" id="homepage-blog-grid">
+          <!-- Populated from data/posts.json by script below -->
         </div>
       </div>
     </section>
@@ -219,5 +193,27 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    fetch('data/posts.json')
+      .then(r => r.json())
+      .then(posts => {
+        const grid = document.getElementById('homepage-blog-grid');
+        posts.slice(0, 3).forEach(p => {
+          const a = document.createElement('a');
+          a.href = p.url;
+          a.className = 'blog-card fade-in';
+          a.style.textDecoration = 'none';
+          a.innerHTML = `
+            <div class="blog-card-img"><img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">${p.tag}</p>
+              <h3>${p.title}</h3>
+              <p>${p.excerpt}</p>
+              <span class="blog-card-date">${p.date}</span>
+            </div>`;
+          grid.appendChild(a);
+        });
+      });
+  </script>
 </body>
 </html>

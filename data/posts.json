@@ -1,0 +1,65 @@
+[
+  {
+    "slug": "delivery-kitsilano",
+    "url": "blog/delivery-kitsilano.html",
+    "tag": "Shop News",
+    "title": "Wine and Spirits Delivery in Kitsilano: Broadway Beer Wine &amp; Spirits",
+    "excerpt": "Same-day delivery via Uber Eats and DoorDash. Province-wide shipping via Canada Post. Over 1,500 selections — wine, beer, and spirits — from our shop on West Broadway.",
+    "date": "April 21, 2026",
+    "image": "images/blog/delivery-kitsilano.jpg"
+  },
+  {
+    "slug": "malbec-argentina",
+    "url": "blog/malbec-argentina.html",
+    "tag": "Wine",
+    "title": "The Grape France Let Go, and Argentina Made Famous",
+    "excerpt": "Malbec's unlikely journey from the banks of the Lot River to the high-altitude vineyards of Mendoza — and why Argentina did it better.",
+    "date": "April 17, 2026",
+    "image": "images/blog/malbec-argentina.jpg"
+  },
+  {
+    "slug": "bc-wine-month",
+    "url": "blog/bc-wine-month.html",
+    "tag": "BC Wine",
+    "title": "BC Wine in Kitsilano: Why We Stay Local",
+    "excerpt": "The Okanagan is producing some of the most exciting bottles in Canada right now. Here's why we've made BC wine a priority at the shop.",
+    "date": "April 1, 2026",
+    "image": "images/blog/bc-wine-month.jpg"
+  },
+  {
+    "slug": "cabernet-sauvignon-accident",
+    "url": "blog/cabernet-sauvignon-accident.html",
+    "tag": "Wine",
+    "title": "The Scandalous Cabernet Sauvignon: Wine's Greatest \"Oops!\"",
+    "excerpt": "The world's most planted red grape variety was an accident. A cross between Cabernet Franc and Sauvignon Blanc that nobody planned.",
+    "date": "March 3, 2026",
+    "image": "images/blog/cabernet-sauvignon.jpg"
+  },
+  {
+    "slug": "bernard-baudry-chinon",
+    "url": "blog/bernard-baudry-chinon.html",
+    "tag": "Wine",
+    "title": "Bernard Baudry: The Real Deal in Chinon",
+    "excerpt": "He started with a vineyard so small he called it a \"handkerchief.\" Today the Baudry name is shorthand for the gold standard of Cabernet Franc.",
+    "date": "February 2, 2026",
+    "image": "images/blog/bernard-baudry-chinon.jpg"
+  },
+  {
+    "slug": "la-brujula-squid",
+    "url": "blog/la-brujula-squid.html",
+    "tag": "Food &amp; Wine",
+    "title": "A Match Made in Culinary Heaven: La Brújula Squid and Attems Sauvignon Blanc",
+    "excerpt": "Sometimes the best meals require almost zero effort. A pantry tin and an Italian white that were made for each other.",
+    "date": "January 5, 2026",
+    "image": "images/blog/la-brujula-squid.jpg"
+  },
+  {
+    "slug": "skaha-vineyard-equus",
+    "url": "blog/skaha-vineyard-equus.html",
+    "tag": "BC Wine",
+    "title": "The Rich Tapestry of BC's Wine Country: SKAHA Vineyard's Equus 2018",
+    "excerpt": "Sue and Gerry Thygesen's boutique Okanagan winery — ancient soils, indigenous heritage, 250 cases of something special.",
+    "date": "November 28, 2025",
+    "image": "images/blog/skaha-vineyard-equus.jpg"
+  }
+]
