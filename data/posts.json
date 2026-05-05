@@ -72,6 +72,15 @@
     "image": "images/blog/skaha-vineyard-equus.jpg"
   },
   {
+    "slug": "autumn-wines",
+    "url": "blog/autumn-wines.html",
+    "tag": "Seasonal",
+    "title": "Wines to Fall For: A Guide to Perfect Autumn Pours",
+    "excerpt": "As the air turns crisp and the leaves change, it's time to transition your wine choices. Our picks for full-bodied whites, rich blends, and reds that warm the soul.",
+    "date": "Autumn 2023",
+    "image": "images/blog/autumn-wines.jpg"
+  },
+  {
     "slug": "natural-wine-jules-chauvet",
     "url": "blog/natural-wine-jules-chauvet.html",
     "tag": "Natural Wine",
