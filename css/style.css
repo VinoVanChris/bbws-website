@@ -707,14 +707,11 @@ p { color: var(--text-muted); max-width: 66ch; }
    Page Hero (inner pages)
    ============================================ */
 .page-hero {
-  padding: 80px 24px 0;
+  padding: 80px 24px 64px;
   text-align: center;
   background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
 }
-.page-hero > p:last-of-type { padding-bottom: 64px; }
-.page-hero:has(.blog-banner) > p:last-of-type { padding-bottom: 0; }
 .page-hero .section-eyebrow { margin-bottom: 12px; }
 .page-hero h1 { margin-bottom: 16px; }
 .page-hero p  { margin: 0 auto; font-size: 1.05rem; }
