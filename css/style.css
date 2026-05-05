@@ -855,53 +855,92 @@ p { color: var(--text-muted); max-width: 66ch; }
 }
 
 /* ============================================
-   Grand Crew Loyalty Block
+   Grand Crew Loyalty Card
    ============================================ */
-.loyalty-block {
+.loyalty-card {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 1px solid var(--border-gold);
+  border-radius: 16px;
+  padding: 56px 64px;
+  text-align: center;
+  box-shadow: 0 4px 32px rgba(201,168,76,0.08), 0 1px 4px rgba(0,0,0,0.06);
+}
+.loyalty-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.loyalty-card-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  background: var(--gold-bg);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 20px;
+}
+.loyalty-card-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+.loyalty-card-sub {
+  color: var(--text-muted);
+  font-size: 0.97rem;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.loyalty-card-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--border-gold);
+  margin: 32px auto;
+}
+.loyalty-card-stats {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 48px;
-  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
 }
-.loyalty-text {
-  max-width: 520px;
-}
-.loyalty-text h2 { margin-bottom: 12px; }
-.loyalty-text p  { margin: 0; }
-.loyalty-stats {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  flex-shrink: 0;
-}
-.loyalty-stat {
+.loyalty-card-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  gap: 6px;
 }
-.loyalty-number {
+.loyalty-card-number {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2rem, 4vw, 2.8rem);
   color: var(--gold);
   line-height: 1;
   letter-spacing: 0.02em;
 }
-.loyalty-label {
-  font-size: 0.78rem;
+.loyalty-card-label {
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-top: 6px;
 }
-.loyalty-divider {
+.loyalty-card-pip {
   width: 1px;
-  height: 60px;
-  background: var(--border);
+  height: 52px;
+  background: var(--border-gold);
+  flex-shrink: 0;
 }
-@media (max-width: 768px) {
-  .loyalty-block { flex-direction: column; align-items: flex-start; gap: 32px; }
-  .loyalty-stats  { width: 100%; justify-content: flex-start; }
+@media (max-width: 560px) {
+  .loyalty-card { padding: 40px 28px; }
+  .loyalty-card-stats { gap: 24px; }
 }
