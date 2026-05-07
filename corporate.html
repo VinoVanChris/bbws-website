@@ -29,84 +29,7 @@
   <meta name="geo.position" content="49.2639277;-123.1673546" />
   <meta name="ICBM" content="49.2639277, -123.1673546" />
   <!-- ════════════════════════════════════════════════════════════ -->
-  <link rel="stylesheet" href="css/style.css?v=3" />
-  <style>
-    .service-block {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      padding: 80px 0;
-      border-bottom: 1px solid var(--bg-alt);
-    }
-    .service-block:last-of-type { border-bottom: none; }
-    .service-block.reverse { direction: rtl; }
-    .service-block.reverse > * { direction: ltr; }
-    @media (max-width: 768px) {
-      .service-block,
-      .service-block.reverse { grid-template-columns: 1fr; direction: ltr; gap: 32px; padding: 48px 0; }
-    }
-    .service-img {
-      width: 100%;
-      border-radius: 12px;
-      display: block;
-      object-fit: cover;
-      aspect-ratio: 4/3;
-    }
-    .service-content h2 { margin-bottom: 20px; }
-    .service-content p { color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; font-size: 1.05rem; }
-    .service-content p:last-of-type { margin-bottom: 28px; }
-
-    .intro-band {
-      background: var(--bg-alt);
-      padding: 64px 0;
-      text-align: center;
-    }
-    .intro-band p {
-      max-width: 620px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .contact-band {
-      background: var(--bg-card);
-      border-top: 1px solid rgba(0,0,0,0.07);
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-      padding: 80px 0;
-    }
-    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; padding: 48px 0; } }
-    .contact-grid h2 { margin-bottom: 16px; }
-    .contact-grid p { color: var(--text-muted); line-height: 1.7; margin-bottom: 0; }
-
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
-    .form-field { display: flex; flex-direction: column; gap: 6px; }
-    .form-field label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
-    .form-field input,
-    .form-field textarea {
-      background: var(--bg);
-      border: 1px solid rgba(0,0,0,0.15);
-      border-radius: var(--radius);
-      padding: 12px 16px;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      color: var(--text);
-      outline: none;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .form-field input:focus,
-    .form-field textarea:focus { border-color: var(--gold); }
-    .form-field textarea { resize: vertical; min-height: 120px; }
-  </style>
+  <link rel="stylesheet" href="css/style.css?v=4" />
   <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="preload" href="fonts/rousseau-deco.woff2" as="font" type="font/woff2" crossorigin />
@@ -204,14 +127,14 @@
     <!-- Contact Form -->
     <div class="contact-band" id="contact">
       <div class="container">
-        <div class="contact-grid">
+        <div class="corp-contact-grid">
           <div class="fade-in">
             <p class="section-eyebrow">Work With Us</p>
             <h2>Interested in Working Together?</h2>
             <div class="divider"></div>
             <p>Fill out some info and we will be in touch shortly. We can't wait to hear from you.</p>
           </div>
-          <form class="contact-form fade-in" action="https://formspree.io/f/meeraddz" method="POST">
+          <form class="corp-contact-form fade-in" action="https://formspree.io/f/meeraddz" method="POST">
             <div class="form-row">
               <div class="form-field">
                 <label for="first-name">First Name</label>
