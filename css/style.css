@@ -399,7 +399,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #fff;
   margin-bottom: 20px;
   text-align: center;
 }
