@@ -304,7 +304,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('../images/cellar-consulting.jpg') center center / cover no-repeat;
+  background: url('../images/cellar-consulting.webp') center center / cover no-repeat;
 }
 
 .hero-bg::after {
