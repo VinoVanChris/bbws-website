@@ -395,12 +395,13 @@ p { color: var(--text-muted); max-width: 66ch; }
 
 .hero-eyebrow {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
+  color: var(--gold);
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .hero h1 { color: #fff; margin-bottom: 24px; }
