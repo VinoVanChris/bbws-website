@@ -887,6 +887,22 @@ p { color: var(--text-muted); max-width: 66ch; }
 /* ============================================
    Grand Crew Loyalty Card
    ============================================ */
+.loyalty-section {
+  position: relative;
+  background-image: url('../images/loyalty-photo-bkg.webp');
+  background-size: cover;
+  background-position: center;
+}
+.loyalty-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+.loyalty-section .container {
+  position: relative;
+}
+
 .loyalty-card {
   position: relative;
   max-width: 680px;
