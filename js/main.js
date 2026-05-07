@@ -34,3 +34,36 @@ document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
     link.classList.add('active');
   }
 });
+
+// Homepage — render latest blog posts from data/posts.json
+const blogGrid = document.getElementById('homepage-blog-grid');
+if (blogGrid) {
+  fetch('/data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      posts.slice(0, 3).forEach(p => {
+        const a = document.createElement('a');
+        a.href = p.url;
+        a.className = 'blog-card fade-in visible';
+        a.style.textDecoration = 'none';
+        a.innerHTML = `
+          <div class="blog-card-img"><img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
+          <div class="blog-card-body">
+            <p class="blog-card-tag">${p.tag}</p>
+            <h3>${p.title}</h3>
+            <p>${p.excerpt}</p>
+            <span class="blog-card-date">${p.date}</span>
+          </div>`;
+        blogGrid.appendChild(a);
+      });
+    })
+    .catch(() => {}); // fail silently if offline
+}
+
+// Blog index — category filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
