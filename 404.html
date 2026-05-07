@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | Broadway Beer Wine & Spirits</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <style>
+    .not-found {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 64px 24px;
+    }
+    .not-found-inner { max-width: 520px; }
+    .not-found-code {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 20vw, 10rem);
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+    .not-found-inner h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      margin-bottom: 16px;
+    }
+    .not-found-inner p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .not-found-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Broadway Beer Wine & Spirits home">
+        <img src="images/logo.jpg" alt="Broadway Beer Wine &amp; Spirits" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="corporate.html">Corporate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="blog.html">Blog</a>
+    <a href="corporate.html">Corporate</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main class="page-content">
+    <div class="not-found">
+      <div class="not-found-inner fade-in">
+        <div class="not-found-code">404</div>
+        <h1>Wrong Bottle.</h1>
+        <p>That page doesn't exist — but there are plenty of good ones. Head back to the shop or find what you're looking for below.</p>
+        <div class="not-found-links">
+          <a href="index.html" class="btn btn-gold">Back to Home</a>
+          <a href="contact.html" class="btn btn-outline">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Broadway Beer Wine &amp; Spirits
+          <span>Est. 1986 · Kitsilano</span>
+        </div>
+        <p>Not every bottle, the right one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="corporate.html">Corporate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <address>
+          2752 W Broadway<br>
+          Vancouver, BC<br>
+          V6K 2G4<br><br>
+          10am – 11pm, 7 days a week
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/broadwaybeerwineandspirits" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/broadwaybeerwineandspirits" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="blog.html">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container" style="max-width:var(--max-width)">
+      <p>&copy; 2026 Broadway Beer Wine &amp; Spirits. All rights reserved.</p>
+      <div class="footer-social" aria-label="Social media">
+        <a href="https://www.instagram.com/broadwaybeerwineandspirits" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/broadwaybeerwineandspirits" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

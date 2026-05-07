@@ -5,5 +5,8 @@
       "has": [{ "type": "host", "value": "bbws-website.vercel.app" }],
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     }
+  ],
+  "errors": [
+    { "statusCode": 404, "destination": "/404.html" }
   ]
 }
