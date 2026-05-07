@@ -1,0 +1,13 @@
+{
+  "name": "broadway-beer-wine-spirits",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Broadway Beer Wine & Spirits — Kitsilano bottle shop since 1986",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve --quiet"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  }
+}

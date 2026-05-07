@@ -1,67 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blogging from the Bottle: The Inside Pour | Broadway Beer Wine & Spirits</title>
-  <meta name="description" content="Tasting notes, staff picks, food pairings, and stories from the shelves. Blogging from the Bottle: The Inside Pour." />
-
-  <!-- ═══ SEO ═══════════════════════════════════════════════════════ -->
-  <link rel="canonical" href="https://www.broadwaybeerwine.ca/blog.html" />
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.broadwaybeerwine.ca/blog.html" />
-  <meta property="og:site_name" content="Broadway Beer Wine &amp; Spirits" />
-  <meta property="og:locale" content="en_CA" />
-  <meta property="og:title" content="The Inside Pour — Wine, Beer & Spirits Blog | Broadway Beer Wine & Spirits" />
-  <meta property="og:description" content="Tasting notes, staff picks, food pairings, and stories from the shelves at Broadway Beer Wine & Spirits in Kitsilano, Vancouver." />
-  <meta property="og:image" content="https://www.broadwaybeerwine.ca/images/blog/mothers-day.webp" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Inside Pour — Wine, Beer & Spirits Blog | Broadway Beer Wine & Spirits" />
-  <meta name="twitter:description" content="Tasting notes, staff picks, food pairings, and stories from the shelves at Broadway Beer Wine & Spirits in Kitsilano, Vancouver." />
-  <meta name="twitter:image" content="https://www.broadwaybeerwine.ca/images/blog/mothers-day.webp" />
-  <!-- Geo -->
-  <meta name="geo.region" content="CA-BC" />
-  <meta name="geo.placename" content="Vancouver, BC" />
-  <meta name="geo.position" content="49.2639277;-123.1673546" />
-  <meta name="ICBM" content="49.2639277, -123.1673546" />
-  <!-- ════════════════════════════════════════════════════════════ -->
-  <link rel="stylesheet" href="css/style.css?v=4" />
-  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="preload" href="fonts/rousseau-deco.woff2" as="font" type="font/woff2" crossorigin />
-</head>
-<body>
-
-  <nav class="site-nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo" aria-label="Broadway Beer Wine & Spirits home">
-        <img src="images/logo.jpg" alt="Broadway Beer Wine &amp; Spirits" />
-      </a>
-      <ul class="nav-links" role="list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="blog.html" class="active">Blog</a></li>
-        <li><a href="corporate.html">Corporate</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="blog.html" class="active">Blog</a>
-    <a href="corporate.html">Corporate</a>
-    <a href="contact.html">Contact</a>
-  </div>
-
-  <main class="page-content">
+---
+layout: base.njk
+title: "Blogging from the Bottle: The Inside Pour | Broadway Beer Wine & Spirits"
+navPage: blog
+description: "Tasting notes, staff picks, food pairings, and stories from the shelves. Blogging from the Bottle: The Inside Pour."
+canonical: "https://www.broadwaybeerwine.ca/blog.html"
+ogTitle: "The Inside Pour — Wine, Beer & Spirits Blog | Broadway Beer Wine & Spirits"
+ogDescription: "Tasting notes, staff picks, food pairings, and stories from the shelves at Broadway Beer Wine & Spirits in Kitsilano, Vancouver."
+ogImage: "https://www.broadwaybeerwine.ca/images/blog/mothers-day.webp"
+ogImageWidth: 1200
+ogImageHeight: 630
+---
+<main class="page-content">
 
     <section class="page-hero page-hero--photo" style="background-image: url('images/blog/mothers-day.webp');">
       <div class="page-hero-overlay"></div>
@@ -190,58 +139,3 @@
     </section>
 
   </main>
-
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand-name">Broadway Beer Wine &amp; Spirits<span>Est. 1986 · Kitsilano</span></div>
-        <p>Not every bottle, the right one.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="corporate.html">Corporate</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Visit Us</h4>
-        <address>
-          2752 W Broadway<br>
-          Vancouver, BC<br>
-          V6K 2G4<br><br>
-          10am – 11pm, 7 days a week
-        </address>
-      </div>
-      <div class="footer-col">
-        <h4>Connect</h4>
-        <ul>
-          <li><a href="https://www.instagram.com/broadwaybeerwineandspirits" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.facebook.com/broadwaybeerwineandspirits" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="blog.html">Newsletter</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom container" style="max-width:var(--max-width)">
-      <p>&copy; 2026 Broadway Beer Wine &amp; Spirits. All rights reserved.</p>
-      <div class="footer-social" aria-label="Social media">
-        <a href="https://www.instagram.com/broadwaybeerwineandspirits" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
-        <a href="https://www.facebook.com/broadwaybeerwineandspirits" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-  <script>
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-  </script>
-</body>
-</html>
