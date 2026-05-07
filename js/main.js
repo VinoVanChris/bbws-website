@@ -60,10 +60,48 @@ if (blogGrid) {
     .catch(() => {}); // fail silently if offline
 }
 
-// Blog index — category filter buttons
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+// Blog index — category filter
+// Maps specific post tags to the broader filter categories on the buttons
+const tagToCategory = {
+  'Wine':        'Wine',
+  'Natural Wine':'Wine',
+  'BC Wine':     'Wine',
+  'Seasonal':    'Wine',
+  'Beer':        'Beer',
+  'Spirits':     'Spirits',
+  'Food & Wine': 'Food & Wine',
+  'Shop News':   'Shop News',
+  'Gift Guide':  'Shop News',
+};
+
+const filterBtns   = document.querySelectorAll('.filter-btn');
+const blogGrid     = document.getElementById('blog-grid');
+const blogFeatured = document.getElementById('blog-featured');
+const noResults    = document.getElementById('blog-no-results');
+
+if (filterBtns.length && blogGrid) {
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter; // 'all' or a category name
+
+      // Show/hide the featured section (only visible when "All" is selected)
+      if (blogFeatured) blogFeatured.hidden = (filter !== 'all');
+
+      // Filter grid cards
+      const cards = blogGrid.querySelectorAll('.blog-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const category = tagToCategory[card.dataset.tag] || card.dataset.tag || '';
+        const show = filter === 'all' || category === filter;
+        card.hidden = !show;
+        if (show) visible++;
+      });
+
+      // Show empty-state message if nothing matched
+      if (noResults) noResults.hidden = (visible > 0);
+    });
   });
-});
+}

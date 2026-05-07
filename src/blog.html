@@ -26,17 +26,16 @@ ogImageHeight: 630
 
         <!-- Filter pills -->
         <div class="blog-filter fade-in" role="group" aria-label="Filter posts by category">
-          <button class="filter-btn active">All</button>
-          <button class="filter-btn">Wine</button>
-          <button class="filter-btn">Beer</button>
-          <button class="filter-btn">Spirits</button>
-          <button class="filter-btn">Food &amp; Wine</button>
-          <button class="filter-btn">BC Wine</button>
-          <button class="filter-btn">Shop News</button>
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Wine">Wine</button>
+          <button class="filter-btn" data-filter="Beer">Beer</button>
+          <button class="filter-btn" data-filter="Spirits">Spirits</button>
+          <button class="filter-btn" data-filter="Food &amp; Wine">Food &amp; Wine</button>
+          <button class="filter-btn" data-filter="Shop News">Shop News</button>
         </div>
 
         <!-- Featured + sidebar -->
-        <div class="blog-featured fade-in">
+        <div class="blog-featured fade-in" id="blog-featured">
           <a href="blog/mothers-day-2026.html" class="blog-card blog-card-featured" style="text-decoration:none;">
             <div class="blog-card-img"><img src="images/blog/mothers-day.webp" alt="Mother's Day wine and spirits gift guide, Broadway Beer Wine &amp; Spirits, Vancouver" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
             <div class="blog-card-body">
@@ -76,8 +75,8 @@ ogImageHeight: 630
         </div>
 
         <!-- Post grid -->
-        <div class="blog-grid">
-          <a href="blog/bernard-baudry-chinon.html" class="blog-card fade-in" style="text-decoration:none;">
+        <div class="blog-grid" id="blog-grid">
+          <a href="blog/bernard-baudry-chinon.html" class="blog-card fade-in" data-tag="Wine" style="text-decoration:none;">
             <div class="blog-card-img"><img src="images/blog/bernard-baudry-chinon.webp" alt="Bernard Baudry Chinon rouge, Loire Valley wine at Broadway Beer Wine &amp; Spirits" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
             <div class="blog-card-body">
               <p class="blog-card-tag">Wine</p>
@@ -86,7 +85,7 @@ ogImageHeight: 630
               <span class="blog-card-date">February 2, 2026</span>
             </div>
           </a>
-          <a href="blog/la-brujula-squid.html" class="blog-card fade-in" style="text-decoration:none;">
+          <a href="blog/la-brujula-squid.html" class="blog-card fade-in" data-tag="Food &amp; Wine" style="text-decoration:none;">
             <div class="blog-card-img"><img src="images/blog/la-brujula-squid.webp" alt="La Brujula tinned fish wine pairing at Broadway Beer Wine &amp; Spirits Vancouver" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
             <div class="blog-card-body">
               <p class="blog-card-tag">Food &amp; Wine</p>
@@ -95,7 +94,7 @@ ogImageHeight: 630
               <span class="blog-card-date">January 5, 2026</span>
             </div>
           </a>
-          <a href="blog/skaha-vineyard-equus.html" class="blog-card fade-in" style="text-decoration:none;">
+          <a href="blog/skaha-vineyard-equus.html" class="blog-card fade-in" data-tag="BC Wine" style="text-decoration:none;">
             <div class="blog-card-img"><img src="images/blog/skaha-vineyard-equus.webp" alt="BC wine" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
             <div class="blog-card-body">
               <p class="blog-card-tag">BC Wine</p>
@@ -104,7 +103,7 @@ ogImageHeight: 630
               <span class="blog-card-date">November 28, 2025</span>
             </div>
           </a>
-          <a href="blog/autumn-wines.html" class="blog-card fade-in" style="text-decoration:none;">
+          <a href="blog/autumn-wines.html" class="blog-card fade-in" data-tag="Seasonal" style="text-decoration:none;">
             <div class="blog-card-img"><img src="images/blog/autumn-wines.webp" alt="Autumn wine selection at Broadway Beer Wine &amp; Spirits, Kitsilano Vancouver" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
             <div class="blog-card-body">
               <p class="blog-card-tag">Seasonal</p>
@@ -113,7 +112,7 @@ ogImageHeight: 630
               <span class="blog-card-date">Autumn 2023</span>
             </div>
           </a>
-          <a href="blog/natural-wine-jules-chauvet.html" class="blog-card fade-in" style="text-decoration:none;">
+          <a href="blog/natural-wine-jules-chauvet.html" class="blog-card fade-in" data-tag="Natural Wine" style="text-decoration:none;">
             <div class="blog-card-img"><img src="images/blog/natural-wine-jules-chauvet.webp" alt="Natural wine selection at Broadway Beer Wine &amp; Spirits, Kitsilano Vancouver" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
             <div class="blog-card-body">
               <p class="blog-card-tag">Natural Wine</p>
@@ -123,6 +122,8 @@ ogImageHeight: 630
             </div>
           </a>
         </div>
+
+        <p class="blog-no-results" id="blog-no-results" hidden style="text-align:center;padding:48px 0;color:var(--text-muted);font-size:1rem;">No posts in that category yet — check back soon.</p>
 
         <!-- Newsletter -->
         <div class="newsletter-bar fade-in">

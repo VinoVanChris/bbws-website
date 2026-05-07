@@ -1,0 +1,18 @@
+---
+permalink: /data/posts.json
+eleventyExcludeFromCollections: true
+---
+[
+  {%- set posts = collections.post | sort(true, false, "data.publishedTime") %}
+  {%- for post in posts %}
+  {
+    "slug": "{{ post.fileSlug }}",
+    "url": "{{ post.url | replace('/','',1) }}",
+    "tag": "{{ post.data.tag }}",
+    "title": {{ post.data.title | dump | safe }},
+    "excerpt": {{ post.data.excerpt | dump | safe }},
+    "date": "{{ post.data.displayDate }}",
+    "image": "{{ post.data.image }}"
+  }{% if not loop.last %},{% endif %}
+  {%- endfor %}
+]
