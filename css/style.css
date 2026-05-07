@@ -28,6 +28,8 @@
   --text:       #2A2A2A;
   --text-muted: #666666;
   --text-light: #999999;
+  --gray:       #666666;
+  --gray-light: #999999;
 
   --border:     rgba(0, 0, 0, 0.09);
   --border-gold: rgba(201, 168, 76, 0.35);
