@@ -456,6 +456,13 @@ p { color: var(--text-muted); max-width: 66ch; }
 
 .section-header { margin-bottom: 56px; }
 
+.google-review-stars {
+  font-size: 2rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
 .section-eyebrow {
   font-family: var(--font-body);
   font-size: 0.7rem;
