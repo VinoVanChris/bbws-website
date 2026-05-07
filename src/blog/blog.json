@@ -1,1 +1,1 @@
-{ "permalink": "{{ page.filePathStem }}.html", "tags": "post" }
+{ "permalink": "{{ page.filePathStem }}.html", "tags": "post", "sitemapPriority": 0.6, "sitemapChangefreq": "monthly" }

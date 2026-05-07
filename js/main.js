@@ -36,8 +36,8 @@ document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
 });
 
 // Homepage — render latest blog posts from data/posts.json
-const blogGrid = document.getElementById('homepage-blog-grid');
-if (blogGrid) {
+const homepageBlogGrid = document.getElementById('homepage-blog-grid');
+if (homepageBlogGrid) {
   fetch('/data/posts.json')
     .then(r => r.json())
     .then(posts => {
@@ -54,7 +54,7 @@ if (blogGrid) {
             <p>${p.excerpt}</p>
             <span class="blog-card-date">${p.date}</span>
           </div>`;
-        blogGrid.appendChild(a);
+        homepageBlogGrid.appendChild(a);
       });
     })
     .catch(() => {}); // fail silently if offline
