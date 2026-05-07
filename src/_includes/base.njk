@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  {% if robots %}<meta name="robots" content="{{ robots }}" />{% endif %}
+  <meta name="description" content="{{ description }}" />
+
+  <!-- ═══ SEO ═══════════════════════════════════════════════════════ -->
+  <link rel="canonical" href="{{ canonical }}" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="{{ ogType or 'website' }}" />
+  <meta property="og:url" content="{{ canonical }}" />
+  <meta property="og:site_name" content="Broadway Beer Wine &amp; Spirits" />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:title" content="{{ ogTitle or title }}" />
+  <meta property="og:description" content="{{ ogDescription or description }}" />
+  <meta property="og:image" content="{{ ogImage }}" />
+  {% if ogImageWidth %}<meta property="og:image:width" content="{{ ogImageWidth }}" />{% endif %}
+  {% if ogImageHeight %}<meta property="og:image:height" content="{{ ogImageHeight }}" />{% endif %}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ ogTitle or title }}" />
+  <meta name="twitter:description" content="{{ ogDescription or description }}" />
+  <meta name="twitter:image" content="{{ ogImage }}" />
+  <!-- Geo -->
+  <meta name="geo.region" content="CA-BC" />
+  <meta name="geo.placename" content="Vancouver, BC" />
+  <meta name="geo.position" content="49.2639277;-123.1673546" />
+  <meta name="ICBM" content="49.2639277, -123.1673546" />
+  {% if publishedTime %}
+  <meta property="article:published_time" content="{{ publishedTime }}" />
+  <meta property="article:author" content="Broadway Beer Wine &amp; Spirits" />
+  {% endif %}
+  {% if schema %}
+  <script type="application/ld+json">
+  {{ schema | safe }}
+  </script>
+  {% endif %}
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="/css/style.css?v=4" />
+  <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="preload" href="/fonts/rousseau-deco.woff2" as="font" type="font/woff2" crossorigin />
+  {% if preloadHero %}
+  <link rel="preload" href="{{ preloadHero }}" as="image" type="{{ preloadHeroType or 'image/webp' }}" />
+  {% endif %}
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/index.html" class="nav-logo" aria-label="Broadway Beer Wine &amp; Spirits home">
+        <img src="/images/logo.jpg" alt="Broadway Beer Wine &amp; Spirits" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="/index.html"{% if navPage == 'home' %} class="active"{% endif %}>Home</a></li>
+        <li><a href="/about.html"{% if navPage == 'about' %} class="active"{% endif %}>About Us</a></li>
+        <li><a href="/blog.html"{% if navPage == 'blog' %} class="active"{% endif %}>Blog</a></li>
+        <li><a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a></li>
+        <li><a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="/index.html"{% if navPage == 'home' %} class="active"{% endif %}>Home</a>
+    <a href="/about.html"{% if navPage == 'about' %} class="active"{% endif %}>About Us</a>
+    <a href="/blog.html"{% if navPage == 'blog' %} class="active"{% endif %}>Blog</a>
+    <a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a>
+    <a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a>
+  </div>
+
+  {{ content | safe }}
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Broadway Beer Wine &amp; Spirits
+          <span>Est. 1986 · Kitsilano</span>
+        </div>
+        <p>Not every bottle, the right one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/corporate.html">Corporate</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <address>
+          2752 W Broadway<br>
+          Vancouver, BC<br>
+          V6K 2G4<br><br>
+          10am – 11pm, 7 days a week
+        </address>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/broadwaybeerwineandspirits" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/broadwaybeerwineandspirits" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="/blog.html">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container" style="max-width:var(--max-width)">
+      <p>&copy; 2026 Broadway Beer Wine &amp; Spirits. All rights reserved.</p>
+      <div class="footer-social" aria-label="Social media">
+        <a href="https://www.instagram.com/broadwaybeerwineandspirits" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/broadwaybeerwineandspirits" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+
+</body>
+</html>
