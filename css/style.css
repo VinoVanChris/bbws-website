@@ -964,10 +964,11 @@ p { color: var(--text-muted); max-width: 66ch; }
   color: var(--text-muted);
 }
 .loyalty-card-signup {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--text);
   margin: 0 auto;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.01em;
 }
 .loyalty-card-pip {
   width: 1px;
