@@ -323,14 +323,14 @@ p { color: var(--text-muted); max-width: 66ch; }
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 14px);
+  top: 100%;
   left: 0;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   min-width: 160px;
-  padding: 6px 0;
+  padding: 14px 0 6px;
   display: none;
   z-index: 200;
   list-style: none;
