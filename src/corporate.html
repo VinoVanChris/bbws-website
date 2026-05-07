@@ -44,7 +44,7 @@ sitemapLastmod: 2026-05-07
             <div class="divider"></div>
             <p>Recognizing a client, rewarding your team, or sourcing a prize bottle for a special occasion, we'll help you get it right. Broadway Beer Wine &amp; Spirits has been putting together corporate gifts since before most of our current selection existed.</p>
             <p>We know what impresses, what's appropriate for every budget, and what people actually want to receive. Come in and talk to us.</p>
-            <a href="#contact" class="btn btn-gold">Get in Touch</a>
+            <a href="#contact" class="btn btn-gold service-cta" data-service="Corporate Gifting">Get in Touch</a>
           </div>
         </div>
 
@@ -57,7 +57,7 @@ sitemapLastmod: 2026-05-07
             <div class="divider"></div>
             <p>Building a cellar or looking at what you already have with fresh eyes? We'll help you think through what to stock, what to age, and where the gaps are.</p>
             <p>Whether you're starting from scratch or refining an existing collection, we bring 40 years of product knowledge to the conversation.</p>
-            <a href="#contact" class="btn btn-gold">Get in Touch</a>
+            <a href="#contact" class="btn btn-gold service-cta" data-service="Cellar Consulting">Get in Touch</a>
           </div>
         </div>
 
@@ -70,7 +70,7 @@ sitemapLastmod: 2026-05-07
             <div class="divider"></div>
             <p>Leave the beverage side of your event to us. We'll help you select the right wines, beers, and spirits for your crowd and occasion, sort out quantities, and arrange delivery.</p>
             <p>One less thing to manage on the day.</p>
-            <a href="#contact" class="btn btn-gold">Get in Touch</a>
+            <a href="#contact" class="btn btn-gold service-cta" data-service="Event Planning">Get in Touch</a>
           </div>
         </div>
 
@@ -88,6 +88,14 @@ sitemapLastmod: 2026-05-07
             <p>Fill out some info and we will be in touch shortly. We can't wait to hear from you.</p>
           </div>
           <form class="corp-contact-form fade-in" action="https://formspree.io/f/meeraddz" method="POST">
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:12px;">What are you interested in?</p>
+            <div class="subject-pills" role="group" aria-label="Service type" style="margin-bottom:24px;">
+              <button class="subject-pill active" type="button" data-pill-service="Corporate Gifting">Corporate Gifting</button>
+              <button class="subject-pill" type="button" data-pill-service="Cellar Consulting">Cellar Consulting</button>
+              <button class="subject-pill" type="button" data-pill-service="Event Planning">Event Planning</button>
+              <button class="subject-pill" type="button" data-pill-service="Other">Other</button>
+            </div>
+            <input type="hidden" name="service_type" id="corp-service-input" value="Corporate Gifting" />
             <div class="form-row">
               <div class="form-field">
                 <label for="first-name">First Name</label>

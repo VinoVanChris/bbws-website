@@ -60,6 +60,30 @@ if (homepageBlogGrid) {
     .catch(() => {}); // fail silently if offline
 }
 
+// Corporate page — service pill pre-selection
+const corpServiceInput = document.getElementById('corp-service-input');
+if (corpServiceInput) {
+  document.querySelectorAll('.subject-pill[data-pill-service]').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.subject-pill[data-pill-service]').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      corpServiceInput.value = pill.dataset.pillService;
+    });
+  });
+
+  document.querySelectorAll('.service-cta[data-service]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const service = btn.dataset.service;
+      corpServiceInput.value = service;
+      document.querySelectorAll('.subject-pill[data-pill-service]').forEach(p => {
+        p.classList.toggle('active', p.dataset.pillService === service);
+      });
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+}
+
 // Blog index — category filter
 // Maps specific post tags to the broader filter categories on the buttons
 const tagToCategory = {
