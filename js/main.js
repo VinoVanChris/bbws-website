@@ -60,22 +60,6 @@ if (homepageBlogGrid) {
     .catch(() => {}); // fail silently if offline
 }
 
-// Shop nav dropdown
-const shopDropdownBtn = document.querySelector('.nav-dropdown-btn');
-const shopDropdownMenu = document.querySelector('.nav-dropdown-menu');
-if (shopDropdownBtn && shopDropdownMenu) {
-  shopDropdownBtn.addEventListener('click', () => {
-    const isOpen = shopDropdownMenu.classList.toggle('open');
-    shopDropdownBtn.setAttribute('aria-expanded', isOpen);
-  });
-  document.addEventListener('click', e => {
-    if (!shopDropdownBtn.contains(e.target) && !shopDropdownMenu.contains(e.target)) {
-      shopDropdownMenu.classList.remove('open');
-      shopDropdownBtn.setAttribute('aria-expanded', 'false');
-    }
-  });
-}
-
 // Corporate page — service pill pre-selection
 const corpServiceInput = document.getElementById('corp-service-input');
 if (corpServiceInput) {

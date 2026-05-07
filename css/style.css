@@ -277,6 +277,78 @@ p { color: var(--text-muted); max-width: 66ch; }
 .mobile-nav a:hover, .mobile-nav a.active { color: var(--text); }
 .mobile-nav a.nav-shop { color: var(--gold-dark); font-weight: 600; }
 
+/* Mobile nav shop group */
+.mobile-nav-shop-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  padding: 8px 0 0;
+  border-bottom: 1px solid var(--border);
+  display: block;
+}
+.mobile-nav a.mobile-nav-sub { padding-left: 16px; font-size: 0.85rem; }
+
+/* Desktop nav dropdown — hover */
+.nav-dropdown { position: relative; list-style: none; }
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition);
+  position: relative;
+  cursor: default;
+}
+.nav-dropdown-trigger::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+.nav-dropdown:hover .nav-dropdown-trigger { color: var(--text); }
+.nav-dropdown:hover .nav-dropdown-trigger::after { transform: scaleX(1); }
+.nav-dropdown-chevron { transition: transform var(--transition); flex-shrink: 0; }
+.nav-dropdown:hover .nav-dropdown-chevron { transform: rotate(180deg); }
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  min-width: 160px;
+  padding: 6px 0;
+  display: none;
+  z-index: 200;
+  list-style: none;
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition), background var(--transition);
+  white-space: nowrap;
+}
+.nav-dropdown-menu a:hover { color: var(--text); background: var(--bg-alt); }
+
 @media (max-width: 768px) {
   .nav-links     { display: none; }
   .nav-hamburger { display: flex; }

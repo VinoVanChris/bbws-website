@@ -58,18 +58,16 @@
       <ul class="nav-links" role="list">
         <li><a href="/index.html"{% if navPage == 'home' %} class="active"{% endif %}>Home</a></li>
         <li><a href="/about.html"{% if navPage == 'about' %} class="active"{% endif %}>About Us</a></li>
-        <li><a href="/blog.html"{% if navPage == 'blog' %} class="active"{% endif %}>Blog</a></li>
-        <li><a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a></li>
-        <li><a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a></li>
         <li class="nav-dropdown">
-          <button class="nav-dropdown-btn nav-shop" aria-expanded="false" aria-haspopup="true">
-            Shop <svg class="nav-dropdown-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="6"><path d="M1 1l4 4 4-4"/></svg>
-          </button>
+          <a class="nav-dropdown-trigger">Shop <svg class="nav-dropdown-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="6"><path d="M1 1l4 4 4-4"/></svg></a>
           <ul class="nav-dropdown-menu" role="list">
             <li><a href="https://www.ubereats.com/ca/store/broadway-beer-wine-%26-spirits-2752-west-broadway/txYsHr2XVKO1dt6xFUk8pQ" target="_blank" rel="noopener">Uber Eats</a></li>
             <li><a href="https://www.doordash.com/en-CA/convenience/store/broadway-beer-wine-&-spirits-vancouver-39133145/" target="_blank" rel="noopener">DoorDash</a></li>
           </ul>
         </li>
+        <li><a href="/blog.html"{% if navPage == 'blog' %} class="active"{% endif %}>Blog</a></li>
+        <li><a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a></li>
+        <li><a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
