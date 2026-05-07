@@ -963,6 +963,12 @@ p { color: var(--text-muted); max-width: 66ch; }
   text-transform: uppercase;
   color: var(--text-muted);
 }
+.loyalty-card-signup {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 auto;
+  letter-spacing: 0.03em;
+}
 .loyalty-card-pip {
   width: 1px;
   height: 52px;
