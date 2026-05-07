@@ -6,7 +6,8 @@
 
 @font-face {
   font-family: 'Rousseau Deco';
-  src: url('../fonts/rousseau-deco.ttf') format('truetype');
+  src: url('../fonts/rousseau-deco.woff2') format('woff2'),
+       url('../fonts/rousseau-deco.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
