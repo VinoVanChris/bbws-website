@@ -29,6 +29,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 // Mark active nav link
 const currentPath = window.location.pathname.replace(/\/$/, '') || '/index.html';
 document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
+  if (!link.href) return;
   const linkPath = new URL(link.href).pathname.replace(/\/$/, '');
   if (linkPath === currentPath || (currentPath.endsWith('index.html') && linkPath === '')) {
     link.classList.add('active');
