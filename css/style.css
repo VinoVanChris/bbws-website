@@ -142,7 +142,6 @@ p { color: var(--text-muted); max-width: 66ch; }
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  overflow: hidden;
 }
 
 .nav-inner {
