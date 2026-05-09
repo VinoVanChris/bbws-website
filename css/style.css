@@ -451,6 +451,23 @@ p { color: var(--text-muted); max-width: 66ch; }
 }
 
 /* ============================================
+   Full-width photo strip
+   ============================================ */
+.full-width-photo {
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+}
+.full-width-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+@media (max-width: 600px) { .full-width-photo { height: 280px; } }
+
+/* ============================================
    Sections
    ============================================ */
 .section { padding: var(--section-pad); }
