@@ -1426,6 +1426,26 @@ p { color: var(--text-muted); max-width: 66ch; }
   color: var(--text-muted);
   line-height: 1.7;
 }
+.client-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.client-logos img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: opacity var(--transition), filter var(--transition);
+}
+.client-logos img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
 
 .contact-band {
   background: var(--bg-card);
