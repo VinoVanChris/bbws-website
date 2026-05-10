@@ -1440,6 +1440,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   object-fit: contain;
   filter: grayscale(100%);
   opacity: 0.6;
+  mix-blend-mode: multiply;
   transition: opacity var(--transition), filter var(--transition);
 }
 .client-logos img:hover {
