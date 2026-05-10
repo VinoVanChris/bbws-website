@@ -169,6 +169,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   max-height: 84px;
   width: auto;
   display: block;
+  mix-blend-mode: multiply;
 }
 
 /* Text fallback */
