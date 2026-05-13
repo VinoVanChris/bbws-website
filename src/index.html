@@ -102,8 +102,32 @@ sitemapLastmod: 2026-05-07
       </div>
     </section>
 
-    <!-- ===== 3 FEATURES ===== -->
+    <!-- ===== FEATURED BOTTLE ===== -->
+    {% if featured.enabled %}
     <section class="section section-alt">
+      <div class="container">
+        <div class="grid-2" style="align-items:center;gap:56px;">
+          <div class="fade-in" style="position:relative;">
+            <a href="{{ featured.url }}" target="_blank" rel="noopener">
+              <img src="{{ featured.image }}" alt="{{ featured.imageAlt }}" loading="lazy" style="width:100%;height:480px;object-fit:cover;border-radius:12px;display:block;" />
+            </a>
+          </div>
+          <div class="fade-in">
+            <p class="section-eyebrow">{{ featured.tag }}</p>
+            <h2>{{ featured.name }}</h2>
+            <p style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:4px 0 20px;">{{ featured.subtitle }}</p>
+            <div class="divider"></div>
+            <p>{{ featured.description }}</p>
+            <p style="font-size:1.5rem;font-weight:600;color:var(--gold);margin:24px 0 28px;">{{ featured.price }} <span style="font-size:0.85rem;font-weight:400;color:var(--text-muted);">· {{ featured.volume }}</span></p>
+            <a href="{{ featured.url }}" target="_blank" rel="noopener" class="btn btn-gold">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ===== 3 FEATURES ===== -->
+    <section class="section">
       <div class="container">
         <div class="section-header text-center fade-in">
           <p class="section-eyebrow">What We Do</p>
