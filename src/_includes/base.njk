@@ -61,6 +61,7 @@
         <li class="nav-dropdown">
           <a class="nav-dropdown-trigger">Order Online <svg class="nav-dropdown-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="6"><path d="M1 1l4 4 4-4"/></svg></a>
           <ul class="nav-dropdown-menu" role="list">
+            <li><a href="/delivery.html"{% if navPage == 'delivery' %} class="active"{% endif %}>Delivery Info</a></li>
             <li><a href="https://www.ubereats.com/ca/store/broadway-beer-wine-%26-spirits-2752-west-broadway/txYsHr2XVKO1dt6xFUk8pQ" target="_blank" rel="noopener">Uber Eats</a></li>
             <li><a href="https://www.doordash.com/en-CA/convenience/store/broadway-beer-wine-&-spirits-vancouver-39133145/" target="_blank" rel="noopener">DoorDash</a></li>
           </ul>
@@ -81,6 +82,7 @@
     <a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a>
     <a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a>
     <span class="mobile-nav-shop-label">Order Online</span>
+    <a href="/delivery.html"{% if navPage == 'delivery' %} class="active"{% endif %} class="mobile-nav-sub">Delivery Info</a>
     <a href="https://www.ubereats.com/ca/store/broadway-beer-wine-%26-spirits-2752-west-broadway/txYsHr2XVKO1dt6xFUk8pQ" target="_blank" rel="noopener" class="mobile-nav-sub">Uber Eats</a>
     <a href="https://www.doordash.com/en-CA/convenience/store/broadway-beer-wine-&-spirits-vancouver-39133145/" target="_blank" rel="noopener" class="mobile-nav-sub">DoorDash</a>
   </div>
@@ -101,6 +103,7 @@
         <ul>
           <li><a href="/index.html">Home</a></li>
           <li><a href="/about.html">About</a></li>
+          <li><a href="/delivery.html">Delivery</a></li>
           <li><a href="/blog.html">Blog</a></li>
           <li><a href="/corporate.html">Corporate</a></li>
           <li><a href="/contact.html">Contact</a></li>
