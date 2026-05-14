@@ -1968,6 +1968,52 @@ p { color: var(--text-muted); max-width: 66ch; }
   padding: 0;
 }
 .som-restart:hover { color: var(--text); }
+
+/* Carousel */
+.som-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.som-carousel-dots {
+  display: flex;
+  gap: 6px;
+}
+.som-carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  transition: background 0.2s;
+}
+.som-carousel-dot.active {
+  background: var(--gold);
+}
+.som-carousel-arrow {
+  background: none;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.som-carousel-arrow:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.som-carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 @media (max-width: 420px) {
   .som-card { width: calc(100vw - 32px); right: 16px; }
   .som-trigger { right: 16px; bottom: 16px; }
