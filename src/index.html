@@ -131,9 +131,6 @@ sitemapLastmod: 2026-05-07
             </div>
             {% endif %}
             <p>{{ featured.description }}</p>
-            {% if featured.type %}
-            <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:20px 0 0;">{{ featured.type }} &nbsp;·&nbsp; {{ featured.proof }}% ABV &nbsp;·&nbsp; {{ featured.age }}</p>
-            {% endif %}
             <p style="font-size:1.5rem;font-weight:600;color:var(--gold);margin:20px 0 28px;">{{ featured.price }} <span style="font-size:0.85rem;font-weight:400;color:var(--text-muted);">· {{ featured.volume }}</span></p>
             <a href="{{ featured.url }}" target="_blank" rel="noopener" class="btn btn-gold">Shop Now</a>
           </div>
