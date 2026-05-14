@@ -128,24 +128,25 @@ sitemapLastmod: 2026-05-07
         {% if featured.aroma %}
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:48px;padding-top:40px;border-top:1px solid rgba(0,0,0,0.08);">
           <div>
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" style="width:32px;height:32px;margin-bottom:12px;display:block;">
-              <path d="M9 21 Q7 16 9 11 Q11 6 9 3"/>
-              <path d="M15 21 Q13 16 15 11 Q17 6 15 3"/>
+            <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="width:100%;height:10px;display:block;margin-bottom:14px;">
+              <rect x="0" y="4" width="100" height="2" rx="1" fill="rgba(0,0,0,0.08)"/>
+              <rect x="0" y="1" width="{{ featured.aromaLevel }}" height="8" rx="4" fill="var(--gold)"/>
             </svg>
             <p class="section-eyebrow" style="margin-bottom:10px;">Aroma</p>
             <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.aroma }}</p>
           </div>
           <div>
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;margin-bottom:12px;display:block;">
-              <path d="M12 3 L6 14 a6 6 0 0 0 12 0 Z"/>
+            <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="width:100%;height:10px;display:block;margin-bottom:14px;">
+              <rect x="0" y="4" width="100" height="2" rx="1" fill="rgba(0,0,0,0.08)"/>
+              <rect x="0" y="1" width="{{ featured.flavorLevel }}" height="8" rx="4" fill="var(--gold)"/>
             </svg>
             <p class="section-eyebrow" style="margin-bottom:10px;">Flavour</p>
             <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.flavor }}</p>
           </div>
           <div>
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" style="width:32px;height:32px;margin-bottom:12px;display:block;">
-              <path d="M2 10 Q5 5 8 10 Q11 15 14 10 Q17 5 22 10"/>
-              <path d="M2 16 Q5 11 8 16 Q11 21 14 16 Q17 11 22 16" stroke-opacity="0.35"/>
+            <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="width:100%;height:10px;display:block;margin-bottom:14px;">
+              <rect x="0" y="4" width="100" height="2" rx="1" fill="rgba(0,0,0,0.08)"/>
+              <rect x="0" y="1" width="{{ featured.finishLevel }}" height="8" rx="4" fill="var(--gold)"/>
             </svg>
             <p class="section-eyebrow" style="margin-bottom:10px;">Finish</p>
             <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.finish }}</p>
