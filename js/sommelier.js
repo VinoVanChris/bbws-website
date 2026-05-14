@@ -607,7 +607,6 @@ function somRenderBottles(bottles) {
         ${b.price ? `<span class="som-bottle-price">${b.price}</span>` : '<span></span>'}
         <div class="som-bottle-links">
           <a href="${b.shopUrl}" target="_blank" rel="noopener" class="som-btn-primary">Shop</a>
-          ${b.learnUrl ? `<a href="${b.learnUrl}" class="som-btn-secondary">Read</a>` : ''}
         </div>
       </div>
     </div>
