@@ -3,7 +3,7 @@
    Swap SOM.filter() for Claude API + Bottlecapps inventory when live.
    ─────────────────────────────────────────────────────────────────── */
 
-const SOM_ENABLED = false; // set to true to activate
+const SOM_ENABLED = true; // set to false to deactivate
 
 const SOM = {
 
