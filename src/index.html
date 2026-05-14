@@ -118,10 +118,29 @@ sitemapLastmod: 2026-05-07
             <p style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:4px 0 20px;">{{ featured.subtitle }}</p>
             <div class="divider"></div>
             <p>{{ featured.description }}</p>
-            <p style="font-size:1.5rem;font-weight:600;color:var(--gold);margin:24px 0 28px;">{{ featured.price }} <span style="font-size:0.85rem;font-weight:400;color:var(--text-muted);">· {{ featured.volume }}</span></p>
+            {% if featured.type %}
+            <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:20px 0 0;">{{ featured.type }} &nbsp;·&nbsp; {{ featured.proof }}% ABV &nbsp;·&nbsp; {{ featured.age }}</p>
+            {% endif %}
+            <p style="font-size:1.5rem;font-weight:600;color:var(--gold);margin:20px 0 28px;">{{ featured.price }} <span style="font-size:0.85rem;font-weight:400;color:var(--text-muted);">· {{ featured.volume }}</span></p>
             <a href="{{ featured.url }}" target="_blank" rel="noopener" class="btn btn-gold">Shop Now</a>
           </div>
         </div>
+        {% if featured.aroma %}
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:48px;padding-top:40px;border-top:1px solid rgba(0,0,0,0.08);">
+          <div>
+            <p class="section-eyebrow" style="margin-bottom:10px;">Aroma</p>
+            <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.aroma }}</p>
+          </div>
+          <div>
+            <p class="section-eyebrow" style="margin-bottom:10px;">Flavour</p>
+            <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.flavor }}</p>
+          </div>
+          <div>
+            <p class="section-eyebrow" style="margin-bottom:10px;">Finish</p>
+            <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.finish }}</p>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </section>
     {% endif %}
