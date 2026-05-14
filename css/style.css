@@ -1399,7 +1399,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 .service-block:last-of-type { border-bottom: none; }
 .service-block.reverse { direction: rtl; }
 .service-block.reverse > * { direction: ltr; }
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .service-block,
   .service-block.reverse { grid-template-columns: 1fr; direction: ltr; gap: 32px; padding: 48px 0; }
 }
