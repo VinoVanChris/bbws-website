@@ -85,6 +85,18 @@ if (corpServiceInput) {
   });
 }
 
+// Click-out conversion tracking — Uber Eats & DoorDash
+// Replace with Bottlecapps purchase event once shop integration is live
+document.querySelectorAll('a[href*="ubereats.com"], a[href*="doordash.com"]').forEach(link => {
+  link.addEventListener('click', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', {
+        'send_to': 'AW-970988484/BkdzCIHUxpoYEMS3gM8D'
+      });
+    }
+  });
+});
+
 // Blog index — category filter
 // Maps specific post tags to the broader filter categories on the buttons
 const tagToCategory = {
