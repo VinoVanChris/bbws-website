@@ -128,26 +128,23 @@ sitemapLastmod: 2026-05-07
         {% if featured.aroma %}
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:48px;padding-top:40px;border-top:1px solid rgba(0,0,0,0.08);">
           <div>
-            <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="width:100%;height:10px;display:block;margin-bottom:14px;">
-              <rect x="0" y="4" width="100" height="2" rx="1" fill="rgba(0,0,0,0.08)"/>
-              <rect x="0" y="1" width="{{ featured.aromaLevel }}" height="8" rx="4" fill="var(--gold)"/>
-            </svg>
+            <div style="height:10px;border:1.5px solid rgba(0,0,0,0.2);border-radius:5px;overflow:hidden;margin-bottom:14px;">
+              <div style="height:100%;width:{{ featured.aromaLevel }}%;background:var(--gold);"></div>
+            </div>
             <p class="section-eyebrow" style="margin-bottom:10px;">Aroma</p>
             <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.aroma }}</p>
           </div>
           <div>
-            <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="width:100%;height:10px;display:block;margin-bottom:14px;">
-              <rect x="0" y="4" width="100" height="2" rx="1" fill="rgba(0,0,0,0.08)"/>
-              <rect x="0" y="1" width="{{ featured.flavorLevel }}" height="8" rx="4" fill="var(--gold)"/>
-            </svg>
+            <div style="height:10px;border:1.5px solid rgba(0,0,0,0.2);border-radius:5px;overflow:hidden;margin-bottom:14px;">
+              <div style="height:100%;width:{{ featured.flavorLevel }}%;background:var(--gold);"></div>
+            </div>
             <p class="section-eyebrow" style="margin-bottom:10px;">Flavour</p>
             <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.flavor }}</p>
           </div>
           <div>
-            <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="width:100%;height:10px;display:block;margin-bottom:14px;">
-              <rect x="0" y="4" width="100" height="2" rx="1" fill="rgba(0,0,0,0.08)"/>
-              <rect x="0" y="1" width="{{ featured.finishLevel }}" height="8" rx="4" fill="var(--gold)"/>
-            </svg>
+            <div style="height:10px;border:1.5px solid rgba(0,0,0,0.2);border-radius:5px;overflow:hidden;margin-bottom:14px;">
+              <div style="height:100%;width:{{ featured.finishLevel }}%;background:var(--gold);"></div>
+            </div>
             <p class="section-eyebrow" style="margin-bottom:10px;">Finish</p>
             <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.6;margin:0;">{{ featured.finish }}</p>
           </div>
