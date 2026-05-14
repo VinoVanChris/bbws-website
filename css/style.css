@@ -1154,7 +1154,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   border-radius: 12px;
   overflow: hidden;
 }
-.team-card img { width: 100%; height: auto; display: block; }
+.team-card img { width: 100%; height: 380px; object-fit: cover; object-position: top; display: block; }
 .team-card-body { padding: 28px; }
 .team-card-body h3 { font-size: 1.3rem; margin-bottom: 4px; }
 .team-card-role {
