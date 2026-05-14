@@ -193,12 +193,7 @@ function somRenderStep() {
         </button>
       `).join('')}
     </div>
-    <div class="som-nav">
-      <button class="som-back" ${somStep === 0 ? 'style="visibility:hidden"' : ''}>Back</button>
-      <button class="som-next" ${!somAnswers[step.key] ? 'disabled' : ''}>
-        ${somStep === total - 1 ? 'Find My Bottle &rarr;' : 'Next &rarr;'}
-      </button>
-    </div>
+    ${somStep > 0 ? `<div class="som-nav"><button class="som-back">Back</button></div>` : ''}
   `;
 
   body.querySelectorAll('.som-choice').forEach(btn => {
@@ -206,17 +201,15 @@ function somRenderStep() {
       somAnswers[step.key] = btn.dataset.value;
       body.querySelectorAll('.som-choice').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
-      body.querySelector('.som-next').disabled = false;
+      setTimeout(() => {
+        if (somStep < SOM.steps.length - 1) {
+          somStep++;
+          somRenderStep();
+        } else {
+          somRenderResult();
+        }
+      }, 180);
     });
-  });
-
-  body.querySelector('.som-next').addEventListener('click', () => {
-    if (somStep < SOM.steps.length - 1) {
-      somStep++;
-      somRenderStep();
-    } else {
-      somRenderResult();
-    }
   });
 
   const back = body.querySelector('.som-back');
