@@ -117,6 +117,19 @@ sitemapLastmod: 2026-05-07
             <h2>{{ featured.name }}</h2>
             <p style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:4px 0 20px;">{{ featured.subtitle }}</p>
             <div class="divider"></div>
+            {% if featured.scores and featured.scores.length %}
+            <div style="display:flex;gap:28px;flex-wrap:wrap;margin-bottom:24px;">
+              {% for s in featured.scores %}
+              <div>
+                <div style="display:flex;align-items:baseline;gap:4px;">
+                  <span style="font-size:1.6rem;font-weight:700;color:var(--gold);line-height:1;">{{ s.score }}</span>
+                  <span style="font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);">pts</span>
+                </div>
+                <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin:3px 0 0;">{{ s.source }}</p>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
             <p>{{ featured.description }}</p>
             {% if featured.type %}
             <p style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:20px 0 0;">{{ featured.type }} &nbsp;·&nbsp; {{ featured.proof }}% ABV &nbsp;·&nbsp; {{ featured.age }}</p>
