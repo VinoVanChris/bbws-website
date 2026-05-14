@@ -3,6 +3,8 @@
    Swap SOM.filter() for Claude API + Bottlecapps inventory when live.
    ─────────────────────────────────────────────────────────────────── */
 
+const SOM_ENABLED = false; // set to true to activate
+
 const SOM = {
 
   // ── Quiz steps ────────────────────────────────────────────────
@@ -457,7 +459,7 @@ function somBuild() {
   trigger.setAttribute('aria-label', 'Ask Chris — Virtual Sommelier');
   trigger.innerHTML = `
     <img class="som-trigger-avatar" src="/images/about/Chris-Reid.webp" alt="Christopher Reid" />
-    <span class="som-trigger-label">Ask Chris</span>
+    <span class="som-trigger-label">Som</span>
   `;
 
   const card = document.createElement('div');
@@ -614,4 +616,4 @@ function somRenderBottles(bottles) {
 }
 
 // ── Init ──────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', somBuild);
+document.addEventListener('DOMContentLoaded', () => { if (SOM_ENABLED) somBuild(); });
