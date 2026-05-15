@@ -10,6 +10,16 @@ const CORP_STEPS = {
 
   gifting: [
     {
+      key: 'gifttype',
+      question: 'What kind of gift are you looking for?',
+      choices: [
+        { label: 'A bottle or bottles',             value: 'bottle'   },
+        { label: 'Gift boxes with wine & food',     value: 'giftbox'  },
+        { label: 'Both — a mix of options',         value: 'both'     },
+        { label: 'Not sure yet, help me decide',    value: 'unsure'   },
+      ]
+    },
+    {
       key: 'quantity',
       question: 'How many people are you gifting?',
       choices: [
