@@ -719,17 +719,13 @@ p { color: var(--text-muted); max-width: 66ch; }
 .contact-detail { display: flex; gap: 16px; align-items: flex-start; }
 
 .contact-detail-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--gold-bg);
-  border: 1px solid var(--border-gold);
-  border-radius: 8px;
+  width: 28px;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  font-size: 1.1rem;
+  color: var(--gold);
 }
+.contact-detail-icon svg { width: 22px; height: 22px; display: block; }
 
 .contact-detail-text strong {
   display: block;
