@@ -1,6 +1,6 @@
 /* Broadway Beer Wine & Spirits — Som Homepage Intake
    General intake widget embedded in "What Sets Us Apart" section.
-   Four funnels: Corporate Order, Find a Bottle, Party/Event, Question.
+   Five funnels: Gift, Find a Bottle, Party/Event, Corporate, Something Else.
    Fires to Formspree → Chris & Jason. No API required.
    ──────────────────────────────────────────────────────────────── */
 
@@ -9,34 +9,44 @@ const SOM_HOME_ENABLED = true;
 // ── Branch question sets ──────────────────────────────────────
 const HOME_STEPS = {
 
-  corporate: [
+  gift: [
     {
-      key: 'gifttype',
-      question: 'What do you need?',
+      key: 'recipient',
+      question: 'Who is it for?',
       choices: [
-        { label: 'Bottles',                     value: 'bottles'  },
-        { label: 'Gift boxes with wine & food',  value: 'giftbox'  },
-        { label: 'A mix of both',               value: 'both'     },
-        { label: 'Not sure yet',                value: 'unsure'   },
+        { label: 'Partner or spouse',  value: 'partner'   },
+        { label: 'Friend',             value: 'friend'    },
+        { label: 'Parent or family',   value: 'family'    },
+        { label: 'Colleague or client', value: 'colleague' },
       ]
     },
     {
-      key: 'quantity',
-      question: 'How many people?',
+      key: 'occasion',
+      question: "What's the occasion?",
       choices: [
-        { label: 'Just a few',           value: 'few'    },
-        { label: 'A team (10–50)',        value: 'team'   },
-        { label: 'Company-wide (50+)',   value: 'large'  },
-        { label: 'Just one special one', value: 'one'    },
+        { label: 'Birthday',      value: 'birthday'     },
+        { label: 'Anniversary',   value: 'anniversary'  },
+        { label: 'Housewarming',  value: 'housewarming' },
+        { label: 'Thank you',     value: 'thankyou'     },
+      ]
+    },
+    {
+      key: 'drink',
+      question: 'What do they usually drink?',
+      choices: [
+        { label: 'Red wine',   value: 'red'      },
+        { label: 'White wine', value: 'white'    },
+        { label: 'Bubbles',    value: 'bubbles'  },
+        { label: 'Spirits',    value: 'spirits'  },
       ]
     },
     {
       key: 'budget',
-      question: 'Budget per person?',
+      question: "What's your budget?",
       choices: [
         { label: 'Under $50',   value: 'under50'  },
         { label: '$50 to $100', value: '50-100'   },
-        { label: '$100+',       value: '100+'     },
+        { label: '$100 to $200', value: '100-200' },
         { label: 'Open budget', value: 'open'     },
       ]
     },
@@ -53,10 +63,10 @@ const HOME_STEPS = {
       key: 'budget',
       question: 'Any idea on budget?',
       choices: [
-        { label: 'Under $50',   value: 'under50' },
-        { label: '$50 to $100', value: '50-100'  },
-        { label: '$100 to $200', value: '100-200' },
-        { label: 'No idea yet', value: 'open'    },
+        { label: 'Under $50',    value: 'under50'  },
+        { label: '$50 to $100',  value: '50-100'   },
+        { label: '$100 to $200', value: '100-200'  },
+        { label: 'No idea yet',  value: 'open'     },
       ]
     },
   ],
@@ -83,6 +93,16 @@ const HOME_STEPS = {
       ]
     },
     {
+      key: 'budget',
+      question: 'Budget range?',
+      choices: [
+        { label: 'Under $500',    value: 'under500' },
+        { label: '$500 to $2,000', value: '500-2k'  },
+        { label: '$2,000+',       value: '2k+'      },
+        { label: 'Open budget',   value: 'open'     },
+      ]
+    },
+    {
       key: 'timeline',
       question: 'When is it?',
       choices: [
@@ -94,21 +114,56 @@ const HOME_STEPS = {
     },
   ],
 
-  question: [
+  corporate: [
+    {
+      key: 'gifttype',
+      question: 'What do you need?',
+      choices: [
+        { label: 'Bottles',                    value: 'bottles' },
+        { label: 'Gift boxes with wine & food', value: 'giftbox' },
+        { label: 'A mix of both',              value: 'both'    },
+        { label: 'Not sure yet',               value: 'unsure'  },
+      ]
+    },
+    {
+      key: 'quantity',
+      question: 'How many people?',
+      choices: [
+        { label: 'Just a few',          value: 'few'   },
+        { label: 'A team (10–50)',       value: 'team'  },
+        { label: 'Company-wide (50+)',  value: 'large'  },
+        { label: 'One special bottle',  value: 'one'    },
+      ]
+    },
+    {
+      key: 'budget',
+      question: 'Budget per person?',
+      choices: [
+        { label: 'Under $50',   value: 'under50' },
+        { label: '$50 to $100', value: '50-100'  },
+        { label: '$100+',       value: '100+'    },
+        { label: 'Open budget', value: 'open'    },
+      ]
+    },
+  ],
+
+  other: [
     {
       key: 'message',
       type: 'text',
-      question: "What's on your mind?",
-      placeholder: 'Ask us anything — we will get back to you.',
+      question: "What can we help with?",
+      placeholder: 'Tell us what you are looking for and we will get back to you.',
     },
   ],
+
 };
 
 const HOME_SERVICE_LABEL = {
-  corporate: 'Corporate Order',
+  gift:      'Personal Gift',
   bottle:    'Find a Specific Bottle',
   event:     'Party / Event',
-  question:  'General Question',
+  corporate: 'Corporate Order',
+  other:     'General Inquiry',
 };
 
 // ── State ─────────────────────────────────────────────────────
@@ -142,10 +197,11 @@ function homeRenderService() {
   body.innerHTML = `
     <p class="som-question">How can we help?</p>
     <div class="som-choices">
-      <button class="som-choice" data-value="corporate">Corporate Order</button>
+      <button class="som-choice" data-value="gift">A gift for someone</button>
       <button class="som-choice" data-value="bottle">Looking for a specific bottle</button>
       <button class="som-choice" data-value="event">Planning a party or event</button>
-      <button class="som-choice" data-value="question">Got a question</button>
+      <button class="som-choice" data-value="corporate">Corporate order</button>
+      <button class="som-choice" data-value="other">Something else</button>
     </div>
   `;
 
@@ -165,7 +221,6 @@ function homeRenderBranchStep() {
   const steps = HOME_STEPS[homeAnswers.service];
   const step  = steps[homeBranchStep];
   const total = steps.length + 1;
-
   const isText = step.type === 'text';
 
   body.innerHTML = `
@@ -176,7 +231,7 @@ function homeRenderBranchStep() {
     </div>
     <p class="som-question">${step.question}</p>
     ${isText ? `
-      <div class="som-field" style="margin-bottom:8px;">
+      <div class="som-field" style="margin-bottom:10px;">
         <textarea class="som-input" id="home-text-input" rows="3"
           placeholder="${step.placeholder}"></textarea>
       </div>
@@ -205,12 +260,8 @@ function homeRenderBranchStep() {
       homeAnswers[step.key] = val;
       homeAdvance(steps);
     });
-    // Also allow Enter+Shift for newline, plain Enter to advance
     document.getElementById('home-text-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        next.click();
-      }
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); next.click(); }
     });
   } else {
     body.querySelectorAll('.som-choice').forEach(btn => {
@@ -305,7 +356,6 @@ async function homeSubmit() {
   const steps = HOME_STEPS[homeAnswers.service];
 
   const lines = [`Som Intake — ${serviceLabel}`, ``];
-
   steps.forEach(s => {
     const key = s.key.charAt(0).toUpperCase() + s.key.slice(1);
     if (s.type === 'text') {
@@ -315,7 +365,6 @@ async function homeSubmit() {
       lines.push(`${key}: ${choice ? choice.label : '—'}`);
     }
   });
-
   if (phone) lines.push(`Phone: ${phone}`);
 
   try {
