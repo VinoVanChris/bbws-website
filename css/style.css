@@ -2011,6 +2011,10 @@ p { color: var(--text-muted); max-width: 66ch; }
   box-shadow: 0 8px 48px rgba(0,0,0,0.12);
   overflow: hidden;
 }
+.som-embed--fill {
+  max-width: 100%;
+  margin: 0;
+}
 .som-embed-header {
   background: var(--text);
   padding: 22px 28px;
