@@ -135,12 +135,54 @@ const CORP_STEPS = {
       ]
     },
   ],
+
+  monthly: [
+    {
+      key: 'size',
+      question: 'How big is the team?',
+      choices: [
+        { label: 'Small (5–15 people)',   value: 'small'  },
+        { label: 'Medium (16–30 people)', value: 'medium' },
+        { label: 'Larger (30+ people)',   value: 'large'  },
+      ]
+    },
+    {
+      key: 'focus',
+      question: 'What does the team drink?',
+      choices: [
+        { label: 'Mostly wine',         value: 'wine'      },
+        { label: 'Beer and wine',       value: 'beer-wine' },
+        { label: 'Spirits and cocktails', value: 'spirits' },
+        { label: 'A bit of everything', value: 'mixed'     },
+      ]
+    },
+    {
+      key: 'budget',
+      question: 'Monthly budget?',
+      choices: [
+        { label: 'Under $300',       value: 'under300' },
+        { label: '$300 to $600',     value: '300-600'  },
+        { label: '$600 to $1,200',   value: '600-1200' },
+        { label: 'Open — let\'s talk', value: 'open'   },
+      ]
+    },
+    {
+      key: 'day',
+      question: 'Preferred delivery day?',
+      choices: [
+        { label: 'Friday',    value: 'friday'   },
+        { label: 'Thursday',  value: 'thursday' },
+        { label: 'Flexible',  value: 'flexible' },
+      ]
+    },
+  ],
 };
 
 const CORP_SERVICE_LABEL = {
   gifting: 'Corporate Gifting',
   cellar:  'Cellar Consulting',
   event:   'Event Planning',
+  monthly: 'Monthly Drinks Delivery',
 };
 
 // ── State ─────────────────────────────────────────────────────
@@ -177,6 +219,7 @@ function corpRenderService() {
       <button class="som-choice" data-value="gifting">Corporate Gifting</button>
       <button class="som-choice" data-value="cellar">Cellar Consulting</button>
       <button class="som-choice" data-value="event">Event Planning</button>
+      <button class="som-choice" data-value="monthly">Monthly Drinks Delivery</button>
     </div>
   `;
 
