@@ -95,12 +95,33 @@ const HOME_STEPS = {
     {
       key: 'budget',
       question: 'Budget range?',
-      choices: [
-        { label: 'Under $500',    value: 'under500' },
-        { label: '$500 to $2,000', value: '500-2k'  },
-        { label: '$2,000+',       value: '2k+'      },
-        { label: 'Open budget',   value: 'open'     },
-      ]
+      choices: (answers) => {
+        const g = answers.guests;
+        if (g === 'small')  return [ // under 25
+          { label: 'Under $750',          value: 'under750' },
+          { label: '$750 to $2,000',      value: '750-2k'   },
+          { label: '$2,000 to $4,000',    value: '2k-4k'    },
+          { label: 'Open budget',         value: 'open'     },
+        ];
+        if (g === 'medium') return [ // 25–75
+          { label: 'Under $2,000',        value: 'under2k'  },
+          { label: '$2,000 to $5,000',    value: '2k-5k'    },
+          { label: '$5,000 to $10,000',   value: '5k-10k'   },
+          { label: 'Open budget',         value: 'open'     },
+        ];
+        if (g === 'large')  return [ // 75–150
+          { label: 'Under $4,000',        value: 'under4k'  },
+          { label: '$4,000 to $10,000',   value: '4k-10k'   },
+          { label: '$10,000 to $20,000',  value: '10k-20k'  },
+          { label: 'Open budget',         value: 'open'     },
+        ];
+        return [                          // 150+
+          { label: 'Under $8,000',        value: 'under8k'  },
+          { label: '$8,000 to $20,000',   value: '8k-20k'   },
+          { label: '$20,000+',            value: '20k+'     },
+          { label: 'Open budget',         value: 'open'     },
+        ];
+      }
     },
     {
       key: 'timeline',
@@ -221,7 +242,8 @@ function homeRenderBranchStep() {
   const steps = HOME_STEPS[homeAnswers.service];
   const step  = steps[homeBranchStep];
   const total = steps.length + 1;
-  const isText = step.type === 'text';
+  const isText  = step.type === 'text';
+  const choices = !isText && (typeof step.choices === 'function' ? step.choices(homeAnswers) : step.choices);
 
   body.innerHTML = `
     <div class="som-progress">
@@ -241,7 +263,7 @@ function homeRenderBranchStep() {
       </button>
     ` : `
       <div class="som-choices">
-        ${step.choices.map(c => `
+        ${choices.map(c => `
           <button class="som-choice ${homeAnswers[step.key] === c.value ? 'selected' : ''}"
                   data-value="${c.value}">${c.label}</button>
         `).join('')}
