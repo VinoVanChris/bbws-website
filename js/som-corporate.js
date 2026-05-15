@@ -1,9 +1,9 @@
-/* Broadway Beer Wine & Spirits — Som Corporate Intake
-   Conversational intake for Corporate Gifting, Cellar Consulting, Event Planning.
+/* Broadway Beer Wine & Spirits — Som Corporate Intake (embedded)
+   Renders inline above the service blocks on corporate.html.
    Gathers brief, collects contact info, fires to Formspree → Chris & Jason.
    ──────────────────────────────────────────────────────────────────────────── */
 
-const CORP_ENABLED = true; // set to false to hide
+const CORP_ENABLED = true;
 
 // ── Branch question sets ──────────────────────────────────────
 const CORP_STEPS = {
@@ -13,10 +13,10 @@ const CORP_STEPS = {
       key: 'quantity',
       question: 'How many people are you gifting?',
       choices: [
-        { label: 'Just one special bottle',   value: 'one'    },
-        { label: 'A small group (2–10)',       value: 'small'  },
-        { label: 'A larger team (11–50)',      value: 'medium' },
-        { label: 'Company-wide (50+)',         value: 'large'  },
+        { label: 'Just one special bottle',  value: 'one'    },
+        { label: 'A small group (2–10)',      value: 'small'  },
+        { label: 'A larger team (11–50)',     value: 'medium' },
+        { label: 'Company-wide (50+)',        value: 'large'  },
       ]
     },
     {
@@ -33,19 +33,19 @@ const CORP_STEPS = {
       key: 'budget',
       question: 'Budget per bottle?',
       choices: [
-        { label: 'Under $50',    value: 'under50'  },
-        { label: '$50 to $100', value: '50-100'   },
-        { label: '$100 to $200', value: '100-200' },
-        { label: 'Open budget',  value: 'open'     },
+        { label: 'Under $50',     value: 'under50'  },
+        { label: '$50 to $100',   value: '50-100'   },
+        { label: '$100 to $200',  value: '100-200'  },
+        { label: 'Open budget',   value: 'open'     },
       ]
     },
     {
       key: 'timeline',
       question: 'When do you need it?',
       choices: [
-        { label: 'This week',          value: 'urgent'   },
-        { label: 'Within the month',   value: 'month'    },
-        { label: '1 to 2 months out',  value: 'later'    },
+        { label: 'This week',           value: 'urgent'   },
+        { label: 'Within the month',    value: 'month'    },
+        { label: '1 to 2 months out',   value: 'later'    },
         { label: 'Just planning ahead', value: 'planning' },
       ]
     },
@@ -56,10 +56,10 @@ const CORP_STEPS = {
       key: 'start',
       question: 'Where are you starting from?',
       choices: [
-        { label: 'Building from scratch',      value: 'scratch' },
-        { label: 'Refining what I have',       value: 'refine'  },
-        { label: 'Setting up an office bar',   value: 'office'  },
-        { label: 'One significant purchase',   value: 'single'  },
+        { label: 'Building from scratch',    value: 'scratch' },
+        { label: 'Refining what I have',     value: 'refine'  },
+        { label: 'Setting up an office bar', value: 'office'  },
+        { label: 'One significant purchase', value: 'single'  },
       ]
     },
     {
@@ -75,10 +75,10 @@ const CORP_STEPS = {
       key: 'budget',
       question: 'Budget range?',
       choices: [
-        { label: 'Under $2,000',       value: 'under2k' },
-        { label: '$2,000 to $10,000',  value: '2k-10k'  },
-        { label: '$10,000+',           value: '10k+'    },
-        { label: "Let's talk first",   value: 'tbd'     },
+        { label: 'Under $2,000',      value: 'under2k' },
+        { label: '$2,000 to $10,000', value: '2k-10k'  },
+        { label: '$10,000+',          value: '10k+'    },
+        { label: "Let's talk first",  value: 'tbd'     },
       ]
     },
   ],
@@ -118,10 +118,10 @@ const CORP_STEPS = {
       key: 'timeline',
       question: 'When is the event?',
       choices: [
-        { label: 'This week',      value: 'urgent'   },
-        { label: 'This month',     value: 'month'    },
-        { label: '1 to 3 months out', value: 'later' },
-        { label: 'Further out',    value: 'planning' },
+        { label: 'This week',         value: 'urgent'   },
+        { label: 'This month',        value: 'month'    },
+        { label: '1 to 3 months out', value: 'later'    },
+        { label: 'Further out',       value: 'planning' },
       ]
     },
   ],
@@ -134,54 +134,33 @@ const CORP_SERVICE_LABEL = {
 };
 
 // ── State ─────────────────────────────────────────────────────
-let corpOpen       = false;
 let corpBranchStep = 0;
 let corpAnswers    = {};
 
-// ── Build DOM ─────────────────────────────────────────────────
+// ── Build embedded card ───────────────────────────────────────
 function corpBuild() {
-  const trigger = document.createElement('div');
-  trigger.className = 'som-trigger';
-  trigger.id = 'somc-trigger';
-  trigger.setAttribute('aria-label', 'Som — Corporate Intake');
-  trigger.innerHTML = `
-    <img class="som-trigger-avatar" src="/images/about/Chris-Reid.webp" alt="Christopher Reid" />
-    <span class="som-trigger-label">Som</span>
-  `;
+  const mount = document.getElementById('som-corp-embed');
+  if (!mount) return;
 
-  const card = document.createElement('div');
-  card.className = 'som-card';
-  card.id = 'somc-card';
-  card.setAttribute('role', 'dialog');
-  card.innerHTML = `
-    <div class="som-card-header">
-      <img src="/images/about/Chris-Reid.webp" alt="Christopher Reid" />
-      <div>
-        <h4>Christopher Reid</h4>
-        <p>Broadway Sommelier &nbsp;·&nbsp; WSET</p>
+  mount.innerHTML = `
+    <div class="som-embed">
+      <div class="som-embed-header">
+        <img src="/images/about/Chris-Reid.webp" alt="Christopher Reid" />
+        <div>
+          <h4>Christopher Reid</h4>
+          <p>Broadway Sommelier &nbsp;·&nbsp; WSET</p>
+        </div>
       </div>
-      <button class="som-close" id="somc-close" aria-label="Close">&times;</button>
+      <div class="som-embed-body" id="som-corp-body"></div>
     </div>
-    <div class="som-card-body" id="somc-body"></div>
   `;
-
-  document.body.appendChild(trigger);
-  document.body.appendChild(card);
-
-  trigger.addEventListener('click', corpToggle);
-  document.getElementById('somc-close').addEventListener('click', corpToggle);
 
   corpRenderService();
 }
 
-function corpToggle() {
-  corpOpen = !corpOpen;
-  document.getElementById('somc-card').classList.toggle('open', corpOpen);
-}
-
 // ── Step 0 — service selection ────────────────────────────────
 function corpRenderService() {
-  const body = document.getElementById('somc-body');
+  const body = document.getElementById('som-corp-body');
   body.innerHTML = `
     <p class="som-question">What can we help you with?</p>
     <div class="som-choices">
@@ -203,10 +182,10 @@ function corpRenderService() {
 
 // ── Branch steps ──────────────────────────────────────────────
 function corpRenderBranchStep() {
-  const body  = document.getElementById('somc-body');
+  const body  = document.getElementById('som-corp-body');
   const steps = CORP_STEPS[corpAnswers.service];
   const step  = steps[corpBranchStep];
-  const total = steps.length + 1; // +1 for contact step
+  const total = steps.length + 1;
 
   body.innerHTML = `
     <div class="som-progress">
@@ -244,13 +223,13 @@ function corpRenderBranchStep() {
 
   body.querySelector('.som-back').addEventListener('click', () => {
     if (corpBranchStep > 0) { corpBranchStep--; corpRenderBranchStep(); }
-    else { corpRenderService(); }
+    else corpRenderService();
   });
 }
 
 // ── Contact step ──────────────────────────────────────────────
 function corpRenderContact() {
-  const body  = document.getElementById('somc-body');
+  const body  = document.getElementById('som-corp-body');
   const steps = CORP_STEPS[corpAnswers.service];
   const total = steps.length + 1;
 
@@ -260,7 +239,7 @@ function corpRenderContact() {
         `<div class="som-progress-dot active"></div>`
       ).join('')}
     </div>
-    <div class="som-results-hd" style="margin-bottom:16px;">
+    <div class="som-results-hd" style="margin-bottom:18px;">
       <p class="som-results-label">Almost done.</p>
       <p class="som-results-meta">Who should we get back to?</p>
     </div>
@@ -359,13 +338,13 @@ async function corpSubmit() {
 
 // ── Thank you ─────────────────────────────────────────────────
 function corpRenderThankYou(fname) {
-  const body = document.getElementById('somc-body');
+  const body = document.getElementById('som-corp-body');
   body.innerHTML = `
-    <div style="text-align:center;padding:16px 0 8px;">
-      <div style="width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:#fff;font-size:1.3rem;">&#10003;</div>
+    <div style="text-align:center;padding:24px 0 16px;">
+      <div style="width:48px;height:48px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;color:#fff;font-size:1.4rem;">&#10003;</div>
       <p class="som-results-label">Got it, ${fname}.</p>
-      <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;margin-top:10px;">We will be in touch shortly. If you need something sooner, give us a call or come in.</p>
-      <p style="font-size:0.9rem;font-weight:700;color:var(--gold);margin-top:18px;">604-734-8543</p>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;margin-top:12px;max-width:34ch;margin-left:auto;margin-right:auto;">We will be in touch shortly. If you need something sooner, give us a call or come in.</p>
+      <p style="font-size:0.95rem;font-weight:700;color:var(--gold);margin-top:20px;">604-734-8543</p>
     </div>
   `;
 }
