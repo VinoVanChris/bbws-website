@@ -364,9 +364,9 @@ async function corpSubmit() {
   if (notes) lines.push(``, `Notes: ${notes}`);
 
   try {
-    const res = await fetch('/api/contact', {
+    const res = await fetch('https://formspree.io/f/mojrgdnq', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         service_type: serviceLabel,
         first_name:   fname,
