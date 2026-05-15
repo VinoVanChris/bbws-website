@@ -471,7 +471,7 @@ function somBuild() {
       <img src="/images/about/Chris-Reid.webp" alt="Christopher Reid" />
       <div>
         <h4>Christopher Reid</h4>
-        <p>Broadway Sommelier &nbsp;·&nbsp; WSET</p>
+        <p>20 Year Industry Vet &nbsp;·&nbsp; WSET</p>
       </div>
       <button class="som-close" id="som-close" aria-label="Close">&times;</button>
     </div>
