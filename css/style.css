@@ -1366,20 +1366,20 @@ p { color: var(--text-muted); max-width: 66ch; }
   flex-wrap: wrap;
   margin-top: 8px;
 }
-.social-link {
+.social-icon-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  color: var(--gray);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  padding: 8px 16px;
-  transition: all 0.2s ease;
-}
-.social-link:hover {
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   color: var(--gold);
-  border-color: rgba(201,168,76,0.4);
+  border: 1px solid rgba(201,168,76,0.35);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.social-icon-link:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: var(--gold);
 }
 
 /* ============================================
