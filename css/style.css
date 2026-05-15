@@ -2002,6 +2002,51 @@ p { color: var(--text-muted); max-width: 66ch; }
 .som-btn-primary { background: var(--gold); color: #fff; }
 .som-btn-secondary { border: 1.5px solid rgba(0,0,0,0.15); color: var(--text-muted); }
 
+/* Contact fields inside Som */
+.som-fields { display: flex; flex-direction: column; gap: 10px; }
+.som-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.som-field { display: flex; flex-direction: column; gap: 4px; }
+.som-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.som-label-optional { font-weight: 400; text-transform: none; letter-spacing: 0; }
+.som-input {
+  padding: 9px 12px;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+.som-input:focus { outline: none; border-color: var(--gold); }
+.som-input::placeholder { color: rgba(0,0,0,0.28); }
+textarea.som-input { resize: none; line-height: 1.5; }
+.som-error {
+  font-size: 0.75rem;
+  color: #c0392b;
+  margin-top: 6px;
+}
+.som-submit-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /* Empty state */
 .som-empty {
   padding: 24px 0;
