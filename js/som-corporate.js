@@ -321,9 +321,9 @@ async function corpSubmit() {
   if (notes) lines.push(``, `Notes: ${notes}`);
 
   try {
-    const res = await fetch('https://formspree.io/f/meeraddz', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         service_type: serviceLabel,
         first_name:   fname,
@@ -336,7 +336,7 @@ async function corpSubmit() {
     if (res.ok) {
       corpRenderThankYou(fname);
     } else {
-      throw new Error('Formspree error');
+      throw new Error('Send error');
     }
   } catch (e) {
     btn.textContent = 'Send to Chris & Jason';

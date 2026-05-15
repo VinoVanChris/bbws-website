@@ -390,9 +390,9 @@ async function homeSubmit() {
   if (phone) lines.push(`Phone: ${phone}`);
 
   try {
-    const res = await fetch('https://formspree.io/f/meeraddz', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         service_type: serviceLabel,
         first_name:   fname,
@@ -405,7 +405,7 @@ async function homeSubmit() {
     if (res.ok) {
       homeRenderThankYou(fname);
     } else {
-      throw new Error('Formspree error');
+      throw new Error('Send error');
     }
   } catch (e) {
     btn.textContent = 'Send to Chris & Jason';
