@@ -1605,7 +1605,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 /* ============================================
    Blog Posts (shared)
    ============================================ */
-.post-header { max-width: 760px; margin: 0 auto 48px; }
+.post-header { max-width: 760px; margin: 0 auto 36px; }
 .post-body   { max-width: 760px; margin: 0 auto; }
 .post-body h2 { margin: 40px 0 16px; }
 .post-body p  { margin-bottom: 20px; line-height: 1.75; }
@@ -1632,7 +1632,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 48px;
+  margin-bottom: 28px;
 }
 .back-link:hover { color: var(--gold); }
 
