@@ -36,27 +36,80 @@ document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
   }
 });
 
-// Homepage — render latest blog posts from data/posts.json
+// Shared blog post fetch — drives homepage grid and blog index page
 const homepageBlogGrid = document.getElementById('homepage-blog-grid');
-if (homepageBlogGrid) {
+const blogIndexFeatured = document.getElementById('blog-featured');
+const blogIndexGrid     = document.getElementById('blog-grid');
+
+if (homepageBlogGrid || blogIndexFeatured || blogIndexGrid) {
   fetch('/data/posts.json')
     .then(r => r.json())
     .then(posts => {
-      posts.slice(0, 3).forEach(p => {
-        const a = document.createElement('a');
-        a.href = p.url;
-        a.className = 'blog-card fade-in visible';
-        a.style.textDecoration = 'none';
-        a.innerHTML = `
-          <div class="blog-card-img"><img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
-          <div class="blog-card-body">
-            <p class="blog-card-tag">${p.tag}</p>
-            <h3>${p.title}</h3>
-            <p>${p.excerpt}</p>
-            <span class="blog-card-date">${p.date}</span>
-          </div>`;
-        homepageBlogGrid.appendChild(a);
-      });
+
+      // ── Homepage: latest 3 posts ───────────────────────────────
+      if (homepageBlogGrid) {
+        posts.slice(0, 3).forEach(p => {
+          const a = document.createElement('a');
+          a.href = p.url;
+          a.className = 'blog-card fade-in visible';
+          a.style.textDecoration = 'none';
+          a.innerHTML = `
+            <div class="blog-card-img"><img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">${p.tag}</p>
+              <h3>${p.title}</h3>
+              <p>${p.excerpt}</p>
+              <span class="blog-card-date">${p.date}</span>
+            </div>`;
+          homepageBlogGrid.appendChild(a);
+        });
+      }
+
+      // ── Blog index: featured block (post 0 large, posts 1-3 mini) ──
+      if (blogIndexFeatured && posts.length > 0) {
+        const f = posts[0];
+        const sidebar = posts.slice(1, 4).map(p => `
+          <a href="${p.url}" class="blog-card-mini" style="text-decoration:none;">
+            <div class="blog-card-img"><img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">${p.tag}</p>
+              <h3>${p.title}</h3>
+              <span class="blog-card-date">${p.date}</span>
+            </div>
+          </a>`).join('');
+        blogIndexFeatured.innerHTML = `
+          <a href="${f.url}" class="blog-card blog-card-featured" style="text-decoration:none;">
+            <div class="blog-card-img"><img src="${f.image}" alt="${f.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="eager" /></div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">${f.tag}</p>
+              <h3>${f.title}</h3>
+              <p>${f.excerpt}</p>
+              <span class="blog-card-date">${f.date}</span>
+            </div>
+          </a>
+          <div class="blog-sidebar">${sidebar}</div>`;
+      }
+
+      // ── Blog index: remaining posts in grid ────────────────────
+      if (blogIndexGrid && posts.length > 4) {
+        posts.slice(4).forEach(p => {
+          const a = document.createElement('a');
+          a.href = p.url;
+          a.className = 'blog-card fade-in';
+          a.dataset.tag = p.tag;
+          a.style.textDecoration = 'none';
+          a.innerHTML = `
+            <div class="blog-card-img"><img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" /></div>
+            <div class="blog-card-body">
+              <p class="blog-card-tag">${p.tag}</p>
+              <h3>${p.title}</h3>
+              <p>${p.excerpt}</p>
+              <span class="blog-card-date">${p.date}</span>
+            </div>`;
+          blogIndexGrid.appendChild(a);
+        });
+      }
+
     })
     .catch(() => {}); // fail silently if offline
 }
