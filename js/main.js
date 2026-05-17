@@ -114,6 +114,37 @@ if (homepageBlogGrid || blogIndexFeatured || blogIndexGrid) {
     .catch(() => {}); // fail silently if offline
 }
 
+// ── Related posts — populated on blog post pages ───────────────
+const relatedSection = document.getElementById('blog-related-posts');
+const relatedGrid    = document.getElementById('blog-related-grid');
+
+if (relatedSection && relatedGrid) {
+  fetch('/data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      const currentPath = window.location.pathname;
+      const others = posts.filter(p => !currentPath.endsWith(p.url));
+      const picks  = others.slice(0, 3);
+      if (!picks.length) return;
+
+      picks.forEach(p => {
+        const a = document.createElement('a');
+        a.href = p.url;
+        a.style.cssText = 'display:block;text-decoration:none;background:var(--bg);border:1px solid rgba(0,0,0,0.08);border-radius:var(--radius);overflow:hidden;transition:border-color 0.2s;';
+        a.innerHTML = `
+          <img src="/${p.image}" alt="${p.title}" style="width:100%;height:160px;object-fit:cover;display:block;" loading="lazy" />
+          <div style="padding:16px 20px;">
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;">${p.tag}</p>
+            <p style="font-size:0.95rem;font-weight:600;color:var(--text);margin:0;line-height:1.4;">${p.title}</p>
+          </div>`;
+        relatedGrid.appendChild(a);
+      });
+
+      relatedSection.hidden = false;
+    })
+    .catch(() => {});
+}
+
 // Corporate page — service pill pre-selection
 const corpServiceInput = document.getElementById('corp-service-input');
 if (corpServiceInput) {

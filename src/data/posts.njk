@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
     "slug": "{{ post.fileSlug }}",
     "url": "{{ post.url | replace('/','',1) }}",
     "tag": "{{ post.data.tag }}",
-    "title": {{ post.data.title | dump | safe }},
+    "title": {{ (post.data.postTitle if post.data.postTitle else post.data.title) | dump | safe }},
     "excerpt": {{ post.data.excerpt | dump | safe }},
     "date": "{{ post.data.displayDate }}",
     "image": "{{ post.data.image }}"

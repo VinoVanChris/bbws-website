@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title }}</title>
+  <title>{% if postTitle %}{{ postTitle }} | Broadway Beer Wine &amp; Spirits{% else %}{{ title }}{% endif %}</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-970988484"></script>
   <script>
@@ -41,7 +41,36 @@
   <meta property="article:published_time" content="{{ publishedTime }}" />
   <meta property="article:author" content="Broadway Beer Wine &amp; Spirits" />
   {% endif %}
-  {% if schema %}
+  {% if postTitle and ogType == 'article' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ postTitle | dump | safe }},
+    "description": {{ description | dump | safe }},
+    "datePublished": "{{ publishedTime | truncate(10, true, '') }}",
+    "url": {{ canonical | dump | safe }},
+    "image": {{ ogImage | dump | safe }},
+    "author": {
+      "@type": "Organization",
+      "name": "Broadway Beer Wine & Spirits",
+      "url": "https://www.broadwaybeerwine.ca"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Broadway Beer Wine & Spirits",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.broadwaybeerwine.ca/images/logo.jpg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ canonical | dump | safe }}
+    }
+  }
+  </script>
+  {% elif schema %}
   <script type="application/ld+json">
   {{ schema | safe }}
   </script>
@@ -96,6 +125,20 @@
   </div>
 
   {{ content | safe }}
+
+  {% if postTitle and ogType == 'article' %}
+  <!-- ===== RELATED POSTS (populated by main.js from posts.json) ===== -->
+  <section id="blog-related-posts" style="background:var(--bg-alt);padding:48px 0;" hidden>
+    <div class="container" style="max-width:var(--max-width)">
+      <p class="section-eyebrow" style="margin-bottom:12px;">Keep Reading</p>
+      <h3 style="margin-bottom:28px;font-size:1.4rem;">More from the Blog</h3>
+      <div id="blog-related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;"></div>
+      <div style="margin-top:28px;">
+        <a href="/blog.html" class="btn btn-outline">All Posts</a>
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
