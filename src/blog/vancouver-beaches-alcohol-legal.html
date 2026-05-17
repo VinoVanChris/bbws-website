@@ -1,0 +1,205 @@
+---
+layout: base.njk
+title: "It's Legal. Bring a Bottle. | Broadway Beer Wine & Spirits"
+navPage: blog
+description: "Alcohol is now legal on Vancouver's beaches. Here's what travels well from our Kitsilano shop — and a map of every approved location."
+canonical: "https://www.broadwaybeerwine.ca/blog/vancouver-beaches-alcohol-legal.html"
+ogType: article
+ogDescription: "Alcohol is now legal on Vancouver's beaches. Cans, rosé, sparkling — here's what to bring, and a map of every approved spot."
+ogImage: "https://www.broadwaybeerwine.ca/images/blog/delivery-kitsilano.webp"
+ogImageWidth: 1200
+ogImageHeight: 630
+publishedTime: "2026-05-17T00:00:00+00:00"
+preloadHero: ../images/blog/delivery-kitsilano.webp
+preloadHeroType: image/webp
+schema: |
+  {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "It's Legal. Bring a Bottle.",
+      "description": "Alcohol is now legal on Vancouver's beaches. Here's what travels well from our Kitsilano shop — and a map of every approved location.",
+      "datePublished": "2026-05-17",
+      "url": "https://www.broadwaybeerwine.ca/blog/vancouver-beaches-alcohol-legal.html",
+      "image": "https://www.broadwaybeerwine.ca/images/blog/delivery-kitsilano.webp",
+      "author": {
+        "@type": "Organization",
+        "name": "Broadway Beer Wine & Spirits",
+        "url": "https://www.broadwaybeerwine.ca"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Broadway Beer Wine & Spirits",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.broadwaybeerwine.ca/images/logo.jpg"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.broadwaybeerwine.ca/blog/vancouver-beaches-alcohol-legal.html"
+      }
+    }
+tag: "Shop News"
+displayDate: "May 17, 2026"
+image: "images/blog/delivery-kitsilano.webp"
+excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly, of course. But legally. Here's what to bring — and a map of every approved spot."
+---
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE=" crossorigin=""></script>
+
+<main class="page-content">
+    <section class="section" style="padding-top: calc(var(--nav-height) + 64px);">
+      <div class="container">
+        <a href="../blog.html" class="back-link">← All Posts</a>
+
+        <div class="post-header fade-in">
+          <span class="post-tag">Shop News</span>
+          <h1>It's Legal. Bring a Bottle.</h1>
+          <p class="post-meta">May 17, 2026 &nbsp;·&nbsp; Chris Reid</p>
+        </div>
+
+        <div class="fade-in" style="margin-bottom:48px;">
+          <img src="../images/blog/delivery-kitsilano.webp" alt="Broadway Beer Wine &amp; Spirits, Kitsilano — drinks for the beach" style="width:100%;height:440px;object-fit:cover;border-radius:12px;display:block;" loading="lazy" />
+        </div>
+
+        <div class="post-body fade-in">
+
+          <p>As of today, you can drink alcohol on Vancouver's beaches. Responsibly, of course. But legally.</p>
+          <p>That is a sentence that would have landed very differently a few years ago.</p>
+          <p>Kits Beach is four blocks from our front door. We have been waiting for this one.</p>
+
+          <h2>Where You Can Go</h2>
+          <p>The map below shows every approved beach and park in Vancouver. The gold pin is us.</p>
+
+        </div>
+
+        <!-- ── Interactive Map ── -->
+        <div class="fade-in" style="margin:32px 0 48px;">
+          <div id="beach-map" style="width:100%;height:480px;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);"></div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px;">Approved locations per the Vancouver Park Board. No glass on the sand — cans or plastic cups only. Keep it reasonable.</p>
+        </div>
+
+        <div class="post-body fade-in">
+
+          <p>If you are heading down this weekend, here is what actually travels well:</p>
+
+          <h2>Cans</h2>
+          <p>The obvious choice for a reason. No glass on the beach, nothing to carry back, easy to keep cold. We have a full wall of craft tallboys — local BC breweries, imports, RTDs — and the fridge is stocked. Come in and point at what looks good.</p>
+
+          <h2>Rosé</h2>
+          <p>If you are bringing a bag and a cooler, a bottle of rosé is the move. Cold, dry, easy to share. We have been recommending the Clos du Soleil Lumière ($29.99) and the Painted Rock ($39.99) lately — both BC, both excellent in the sun. A half-bottle fits in most tote bags.</p>
+
+          <h2>Sparkling</h2>
+          <p>A 375ml of something bubbly goes a long way between two people on a warm afternoon. We have the Taittinger Brut Réserve at $56.99 in the half-bottle format. It sounds extravagant for the beach. It is not extravagant for the beach. It is exactly right for the beach.</p>
+
+          <h2>A Few Things Worth Knowing</h2>
+          <p>Glass is still not permitted on the sand — cans, plastic cups, or a soft flask if you are doing wine. Keep it reasonable. The rule exists because enough people pushed for it. Do not be the reason they take it away.</p>
+
+          <p>We are at 2752 West Broadway. Open today. The beach is a ten-minute walk.</p>
+          <p>It is a good day to be in Kitsilano.</p>
+
+          <div style="margin-top:48px; padding-top:32px; border-top:1px solid var(--bg-alt);">
+            <a href="../delivery.html" class="btn btn-gold">Order for Delivery</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Related Posts -->
+  <section style="background:var(--bg-alt);padding:48px 0;">
+    <div class="container" style="max-width:var(--max-width)">
+      <p class="section-eyebrow" style="margin-bottom:12px;">Keep Reading</p>
+      <h3 style="margin-bottom:28px;font-size:1.4rem;">More from the Blog</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+        <a href="delivery-kitsilano.html" style="display:block;text-decoration:none;background:var(--bg);border:1px solid rgba(0,0,0,0.08);border-radius:var(--radius);overflow:hidden;transition:border-color 0.2s;">
+          <img src="../images/blog/delivery-kitsilano.webp" alt="Liquor Delivery in Kitsilano" style="width:100%;height:160px;object-fit:cover;display:block;" loading="lazy" />
+          <div style="padding:16px 20px;">
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;">Shop News</p>
+            <p style="font-size:0.95rem;font-weight:600;color:var(--text);margin:0;line-height:1.4;">Wine &amp; Spirits Delivery in Kitsilano</p>
+          </div>
+        </a>
+        <a href="bc-wine-month.html" style="display:block;text-decoration:none;background:var(--bg);border:1px solid rgba(0,0,0,0.08);border-radius:var(--radius);overflow:hidden;transition:border-color 0.2s;">
+          <img src="../images/blog/bc-wine-month.webp" alt="BC Wine in Kitsilano" style="width:100%;height:160px;object-fit:cover;display:block;" loading="lazy" />
+          <div style="padding:16px 20px;">
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;">BC Wine</p>
+            <p style="font-size:0.95rem;font-weight:600;color:var(--text);margin:0;line-height:1.4;">BC Wine in Kitsilano: Why We Stay Local</p>
+          </div>
+        </a>
+        <a href="mothers-day-2026.html" style="display:block;text-decoration:none;background:var(--bg);border:1px solid rgba(0,0,0,0.08);border-radius:var(--radius);overflow:hidden;transition:border-color 0.2s;">
+          <img src="../images/blog/mothers-day.webp" alt="Mother's Day Gift Guide" style="width:100%;height:160px;object-fit:cover;display:block;" loading="lazy" />
+          <div style="padding:16px 20px;">
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;">Gift Guide</p>
+            <p style="font-size:0.95rem;font-weight:600;color:var(--text);margin:0;line-height:1.4;">Mother's Day Gift Guide 2026</p>
+          </div>
+        </a>
+      </div>
+      <div style="margin-top:28px;">
+        <a href="../blog.html" class="btn btn-outline">All Posts</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function() {
+  // Gold marker SVG
+  function makeIcon(isStore) {
+    const color = isStore ? '#c9a84c' : '#2d6a2d';
+    const stroke = isStore ? '#a07832' : '#1a4a1a';
+    const size   = isStore ? 36 : 28;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="${size}" height="${size * 1.5}">
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 24 12 24S24 21 24 12C24 5.373 18.627 0 12 0z"
+            fill="${color}" stroke="${stroke}" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="5" fill="white" opacity="0.9"/>
+    </svg>`;
+    return L.divIcon({
+      html: svg,
+      className: '',
+      iconSize:   [size, size * 1.5],
+      iconAnchor: [size / 2, size * 1.5],
+      popupAnchor:[0, -(size * 1.5)],
+    });
+  }
+
+  const beaches = [
+    { name: 'Kitsilano Beach',    lat: 49.2738, lng: -123.1532, note: 'Cans & soft flasks only. No glass on the sand.' },
+    { name: 'English Bay Beach',  lat: 49.2843, lng: -123.1444, note: 'Cans & soft flasks only. No glass on the sand.' },
+    { name: 'Sunset Beach',       lat: 49.2771, lng: -123.1391, note: 'Cans & soft flasks only. No glass on the sand.' },
+    { name: 'Second Beach',       lat: 49.2963, lng: -123.1447, note: 'Stanley Park. Cans & soft flasks only.' },
+    { name: 'Third Beach',        lat: 49.3027, lng: -123.1516, note: 'Stanley Park. Cans & soft flasks only.' },
+    { name: 'Jericho Beach',      lat: 49.2744, lng: -123.1972, note: 'Cans & soft flasks only. No glass on the sand.' },
+    { name: 'Locarno Beach',      lat: 49.2753, lng: -123.2094, note: 'Cans & soft flasks only. No glass on the sand.' },
+    { name: 'Spanish Banks',      lat: 49.2747, lng: -123.2214, note: 'Cans & soft flasks only. No glass on the sand.' },
+    { name: 'Trout Lake Park',    lat: 49.2490, lng: -123.0707, note: 'Park — no sand rule. Drink responsibly.' },
+    { name: 'Hadden Park',        lat: 49.2739, lng: -123.1454, note: 'Park — no sand rule. Drink responsibly.' },
+  ];
+
+  const store = { name: 'Broadway Beer Wine & Spirits', lat: 49.2639, lng: -123.1674, note: '2752 W Broadway · Open daily 10am–11pm' };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const map = L.map('beach-map', {
+      center: [49.272, -123.155],
+      zoom: 13,
+      zoomControl: true,
+      scrollWheelZoom: false,
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19,
+    }).addTo(map);
+
+    beaches.forEach(function(b) {
+      L.marker([b.lat, b.lng], { icon: makeIcon(false) })
+        .addTo(map)
+        .bindPopup(`<strong style="font-size:0.9rem;">${b.name}</strong><br><span style="font-size:0.8rem;color:#555;">${b.note}</span>`);
+    });
+
+    L.marker([store.lat, store.lng], { icon: makeIcon(true) })
+      .addTo(map)
+      .bindPopup(`<strong style="font-size:0.9rem;color:#c9a84c;">${store.name}</strong><br><span style="font-size:0.8rem;color:#555;">${store.note}</span>`)
+      .openPopup();
+  });
+})();
+</script>
