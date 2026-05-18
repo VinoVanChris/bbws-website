@@ -1679,7 +1679,13 @@ p { color: var(--text-muted); max-width: 66ch; }
 .pairing-card-logo img[src*="maenam"]       { height: 40px; }
 .pairing-card-logo img[src*="annalena"]     { height: 62px; }
 .pairing-card-logo img[src*="au-comptoir"]  { height: 25px; }
-.pairing-card-logo img[src*="folke"]        { height: 100px; opacity: 0.78; }
+.pairing-card-logo img[src*="folke"] {
+  height: 100px;
+  filter: none;          /* keep the gold — grayscale destroys this logo */
+  mix-blend-mode: normal;
+  opacity: 0.85;
+}
+.pairing-card:hover .pairing-card-logo img[src*="folke"] { opacity: 1; }
 .pairing-card-logo img[src*="painted-ship"] { height: 84px; }
 .pairing-card-logo img[src*="boulevard"]    { height: 88px; opacity: 0.78; }
 .pairing-card:hover .pairing-card-logo img {
