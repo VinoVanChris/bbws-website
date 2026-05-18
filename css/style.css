@@ -1661,7 +1661,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 96px;
+  height: 104px;
   margin: -8px 0 18px;
   text-decoration: none;
 }
@@ -1678,10 +1678,10 @@ p { color: var(--text-muted); max-width: 66ch; }
    different shapes and ink densities */
 .pairing-card-logo img[src*="maenam"]       { height: 40px; }
 .pairing-card-logo img[src*="annalena"]     { height: 62px; }
-.pairing-card-logo img[src*="au-comptoir"]  { height: 36px; }
-.pairing-card-logo img[src*="folke"]        { height: 92px; }
+.pairing-card-logo img[src*="au-comptoir"]  { height: 25px; }
+.pairing-card-logo img[src*="folke"]        { height: 100px; opacity: 0.78; }
 .pairing-card-logo img[src*="painted-ship"] { height: 84px; }
-.pairing-card-logo img[src*="boulevard"]    { height: 76px; }
+.pairing-card-logo img[src*="boulevard"]    { height: 88px; opacity: 0.78; }
 .pairing-card:hover .pairing-card-logo img {
   filter: grayscale(0%);
   opacity: 1;
