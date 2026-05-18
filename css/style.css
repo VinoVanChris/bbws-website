@@ -1683,9 +1683,8 @@ p { color: var(--text-muted); max-width: 66ch; }
   height: 100px;
   filter: none;          /* keep the gold — grayscale destroys this logo */
   mix-blend-mode: normal;
-  opacity: 0.85;
+  opacity: 1;
 }
-.pairing-card:hover .pairing-card-logo img[src*="folke"] { opacity: 1; }
 .pairing-card-logo img[src*="painted-ship"] { height: 84px; }
 .pairing-card-logo img[src*="boulevard"]    { height: 88px; opacity: 0.78; }
 .pairing-card:hover .pairing-card-logo img {
