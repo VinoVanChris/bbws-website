@@ -95,7 +95,7 @@ if (homepageBlogGrid || blogIndexFeatured || blogIndexGrid) {
         posts.slice(4).forEach(p => {
           const a = document.createElement('a');
           a.href = p.url;
-          a.className = 'blog-card fade-in';
+          a.className = 'blog-card fade-in visible';
           a.dataset.tag = p.tag;
           a.style.textDecoration = 'none';
           a.innerHTML = `
