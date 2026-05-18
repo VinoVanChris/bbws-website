@@ -1745,7 +1745,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-light);
-  margin: 20px 0 10px;
+  margin: 32px 0 10px;
 }
 .pairing-bottles ul {
   list-style: none;
