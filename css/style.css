@@ -1475,6 +1475,12 @@ p { color: var(--text-muted); max-width: 66ch; }
   filter: grayscale(0%);
   opacity: 1;
 }
+.restaurant-logos { margin-top: 28px; gap: 40px; }
+.restaurant-logos img { height: 56px; }
+@media (max-width: 640px) {
+  .restaurant-logos { gap: 28px; }
+  .restaurant-logos img { height: 40px; }
+}
 
 .contact-band {
   background: var(--bg-card);
