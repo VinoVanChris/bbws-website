@@ -1738,6 +1738,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 }
 .pairing-bottles {
   margin-top: 0;
+  padding-top: 28px;
 }
 .pairing-bottles-label {
   font-size: 0.7rem;
@@ -1745,7 +1746,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-light);
-  margin: 32px 0 10px;
+  margin: 0 0 10px;
 }
 .pairing-bottles ul {
   list-style: none;
