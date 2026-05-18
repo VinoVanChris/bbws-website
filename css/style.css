@@ -1681,9 +1681,6 @@ p { color: var(--text-muted); max-width: 66ch; }
 .pairing-card-logo img[src*="au-comptoir"]  { height: 25px; }
 .pairing-card-logo img[src*="folke"] {
   height: 100px;
-  filter: none;          /* keep the gold — grayscale destroys this logo */
-  mix-blend-mode: normal;
-  opacity: 1;
 }
 .pairing-card-logo img[src*="painted-ship"] { height: 84px; }
 .pairing-card-logo img[src*="boulevard"]    { height: 88px; opacity: 0.78; }
