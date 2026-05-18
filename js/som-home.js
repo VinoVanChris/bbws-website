@@ -1,4 +1,4 @@
-/* Broadway Beer Wine & Spirits — Som Homepage Intake
+/* Broadway Beer Wine & Spirits - Som Homepage Intake
    General intake widget embedded in "What Sets Us Apart" section.
    Five funnels: Gift, Find a Bottle, Party/Event, Corporate, Something Else.
    Fires to Formspree → Chris & Jason. No API required.
@@ -103,13 +103,13 @@ const HOME_STEPS = {
           { label: '$2,000 to $4,000',    value: '2k-4k'    },
           { label: 'Open budget',         value: 'open'     },
         ];
-        if (g === 'medium') return [ // 25–75
+        if (g === 'medium') return [ // 25-75
           { label: 'Under $2,000',        value: 'under2k'  },
           { label: '$2,000 to $5,000',    value: '2k-5k'    },
           { label: '$5,000 to $10,000',   value: '5k-10k'   },
           { label: 'Open budget',         value: 'open'     },
         ];
-        if (g === 'large')  return [ // 75–150
+        if (g === 'large')  return [ // 75-150
           { label: 'Under $4,000',        value: 'under4k'  },
           { label: '$4,000 to $10,000',   value: '4k-10k'   },
           { label: '$10,000 to $20,000',  value: '10k-20k'  },
@@ -151,7 +151,7 @@ const HOME_STEPS = {
       question: 'How many people?',
       choices: [
         { label: 'Just a few',          value: 'few'   },
-        { label: 'A team (10–50)',       value: 'team'  },
+        { label: 'A team (10-50)',       value: 'team'  },
         { label: 'Company-wide (50+)',  value: 'large'  },
         { label: 'One special bottle',  value: 'one'    },
       ]
@@ -212,7 +212,7 @@ function homeSomBuild() {
   homeRenderService();
 }
 
-// ── Step 0 — service selection ────────────────────────────────
+// ── Step 0 - service selection ────────────────────────────────
 function homeRenderService() {
   const body = document.getElementById('som-home-body');
   body.innerHTML = `
@@ -377,14 +377,14 @@ async function homeSubmit() {
   const serviceLabel = HOME_SERVICE_LABEL[homeAnswers.service];
   const steps = HOME_STEPS[homeAnswers.service];
 
-  const lines = [`Som Intake — ${serviceLabel}`, ``];
+  const lines = [`Som Intake - ${serviceLabel}`, ``];
   steps.forEach(s => {
     const key = s.key.charAt(0).toUpperCase() + s.key.slice(1);
     if (s.type === 'text') {
-      lines.push(`${key}: ${homeAnswers[s.key] || '—'}`);
+      lines.push(`${key}: ${homeAnswers[s.key] || '-'}`);
     } else {
       const choice = s.choices.find(c => c.value === homeAnswers[s.key]);
-      lines.push(`${key}: ${choice ? choice.label : '—'}`);
+      lines.push(`${key}: ${choice ? choice.label : '-'}`);
     }
   });
   if (phone) lines.push(`Phone: ${phone}`);

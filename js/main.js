@@ -1,4 +1,4 @@
-/* Broadway Beer Wine & Spirits — Main JS */
+/* Broadway Beer Wine & Spirits - Main JS */
 
 // Mobile nav toggle
 const hamburger = document.getElementById('hamburger');
@@ -15,6 +15,30 @@ if (hamburger && mobileNav) {
   document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
       mobileNav.classList.remove('open');
+    }
+  });
+}
+
+// Nav dropdown — keyboard / click toggle (CSS handles hover for pointer users)
+const navDropdownTrigger = document.querySelector('.nav-dropdown-trigger');
+const navDropdownLi      = document.querySelector('.nav-dropdown');
+if (navDropdownTrigger && navDropdownLi) {
+  navDropdownTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = navDropdownLi.classList.toggle('open');
+    navDropdownTrigger.setAttribute('aria-expanded', isOpen);
+  });
+  document.addEventListener('click', (e) => {
+    if (!navDropdownLi.contains(e.target)) {
+      navDropdownLi.classList.remove('open');
+      navDropdownTrigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+  navDropdownTrigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      navDropdownLi.classList.remove('open');
+      navDropdownTrigger.setAttribute('aria-expanded', 'false');
+      navDropdownTrigger.focus();
     }
   });
 }
@@ -36,7 +60,7 @@ document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
   }
 });
 
-// Shared blog post fetch — drives homepage grid and blog index page
+// Shared blog post fetch - drives homepage grid and blog index page
 const homepageBlogGrid = document.getElementById('homepage-blog-grid');
 const blogIndexFeatured = document.getElementById('blog-featured');
 const blogIndexGrid     = document.getElementById('blog-grid');
@@ -114,7 +138,7 @@ if (homepageBlogGrid || blogIndexFeatured || blogIndexGrid) {
     .catch(() => {}); // fail silently if offline
 }
 
-// ── Related posts — populated on blog post pages ───────────────
+// ── Related posts - populated on blog post pages ───────────────
 const relatedSection = document.getElementById('blog-related-posts');
 const relatedGrid    = document.getElementById('blog-related-grid');
 
@@ -145,7 +169,7 @@ if (relatedSection && relatedGrid) {
     .catch(() => {});
 }
 
-// Corporate page — service pill pre-selection
+// Corporate page - service pill pre-selection
 const corpServiceInput = document.getElementById('corp-service-input');
 if (corpServiceInput) {
   document.querySelectorAll('.subject-pill[data-pill-service]').forEach(pill => {
@@ -169,7 +193,7 @@ if (corpServiceInput) {
   });
 }
 
-// Click-out conversion tracking — Uber Eats & DoorDash
+// Click-out conversion tracking - Uber Eats & DoorDash
 // Replace with Bottlecapps purchase event once shop integration is live
 document.querySelectorAll('a[href*="ubereats.com"], a[href*="doordash.com"]').forEach(link => {
   link.addEventListener('click', () => {
@@ -181,7 +205,7 @@ document.querySelectorAll('a[href*="ubereats.com"], a[href*="doordash.com"]').fo
   });
 });
 
-// Blog index — category filter
+// Blog index - category filter
 // Maps specific post tags to the broader filter categories on the buttons
 const tagToCategory = {
   'Wine':        'Wine',

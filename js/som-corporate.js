@@ -1,4 +1,4 @@
-/* Broadway Beer Wine & Spirits — Som Corporate Intake (embedded)
+/* Broadway Beer Wine & Spirits - Som Corporate Intake (embedded)
    Renders inline above the service blocks on corporate.html.
    Gathers brief, collects contact info, fires to Formspree → Chris & Jason.
    ──────────────────────────────────────────────────────────────────────────── */
@@ -15,7 +15,7 @@ const CORP_STEPS = {
       choices: [
         { label: 'A bottle or bottles',             value: 'bottle'   },
         { label: 'Gift boxes with wine & food',     value: 'giftbox'  },
-        { label: 'Both — a mix of options',         value: 'both'     },
+        { label: 'Both, a mix of options',          value: 'both'     },
         { label: 'Not sure yet, help me decide',    value: 'unsure'   },
       ]
     },
@@ -24,8 +24,8 @@ const CORP_STEPS = {
       question: 'How many people are you gifting?',
       choices: [
         { label: 'Just one special bottle',  value: 'one'    },
-        { label: 'A small group (2–10)',      value: 'small'  },
-        { label: 'A larger team (11–50)',     value: 'medium' },
+        { label: 'A small group (2-10)',      value: 'small'  },
+        { label: 'A larger team (11-50)',     value: 'medium' },
         { label: 'Company-wide (50+)',        value: 'large'  },
       ]
     },
@@ -141,8 +141,8 @@ const CORP_STEPS = {
       key: 'size',
       question: 'How big is the team?',
       choices: [
-        { label: 'Small (5–15 people)',   value: 'small'  },
-        { label: 'Medium (16–30 people)', value: 'medium' },
+        { label: 'Small (5-15 people)',   value: 'small'  },
+        { label: 'Medium (16-30 people)', value: 'medium' },
         { label: 'Larger (30+ people)',   value: 'large'  },
       ]
     },
@@ -163,7 +163,7 @@ const CORP_STEPS = {
         { label: 'Under $300',       value: 'under300' },
         { label: '$300 to $600',     value: '300-600'  },
         { label: '$600 to $1,200',   value: '600-1200' },
-        { label: 'Open — let\'s talk', value: 'open'   },
+        { label: "Open, let's talk",   value: 'open'   },
       ]
     },
     {
@@ -210,7 +210,7 @@ function corpBuild() {
   corpRenderService();
 }
 
-// ── Step 0 — service selection ────────────────────────────────
+// ── Step 0 - service selection ────────────────────────────────
 function corpRenderService() {
   const body = document.getElementById('som-corp-body');
   body.innerHTML = `
@@ -352,12 +352,12 @@ async function corpSubmit() {
   const steps = CORP_STEPS[corpAnswers.service];
 
   const lines = [
-    `Som Corporate Intake — ${serviceLabel}`,
+    `Som Corporate Intake - ${serviceLabel}`,
     ``,
     ...steps.map(s => {
       const choice = s.choices.find(c => c.value === corpAnswers[s.key]);
       const key = s.key.charAt(0).toUpperCase() + s.key.slice(1);
-      return `${key}: ${choice ? choice.label : '—'}`;
+      return `${key}: ${choice ? choice.label : '-'}`;
     }),
   ];
   if (phone) lines.push(`Phone: ${phone}`);

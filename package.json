@@ -13,7 +13,5 @@
     "html-minifier-terser": "^7.2.0",
     "terser": "^5.47.0"
   },
-  "dependencies": {
-    "resend": "^6.12.3"
-  }
+  "dependencies": {}
 }

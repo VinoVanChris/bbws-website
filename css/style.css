@@ -7,6 +7,7 @@
 @font-face {
   font-family: 'Rousseau Deco';
   src: url('../fonts/rousseau-deco.woff2') format('woff2'),
+       url('../fonts/rousseau-deco.woff') format('woff'),
        url('../fonts/rousseau-deco.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -128,6 +129,27 @@ p { color: var(--text-muted); max-width: 66ch; }
   background: var(--gold);
   color: #fff;
 }
+
+/* ============================================
+   Skip to content (a11y)
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  z-index: 2000;
+  padding: 10px 18px;
+  background: var(--text);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 8px; outline: 2px solid var(--gold); outline-offset: 2px; }
 
 /* ============================================
    Navigation
@@ -298,6 +320,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   display: flex;
   align-items: center;
   gap: 4px;
+  font-family: inherit;
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -305,7 +328,10 @@ p { color: var(--text-muted); max-width: 66ch; }
   color: var(--text-muted);
   transition: color var(--transition);
   position: relative;
-  cursor: default;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
 }
 .nav-dropdown-trigger::after {
   content: '';
@@ -318,10 +344,14 @@ p { color: var(--text-muted); max-width: 66ch; }
   transform: scaleX(0);
   transition: transform var(--transition);
 }
-.nav-dropdown:hover .nav-dropdown-trigger { color: var(--text); }
-.nav-dropdown:hover .nav-dropdown-trigger::after { transform: scaleX(1); }
+.nav-dropdown:hover .nav-dropdown-trigger,
+.nav-dropdown-trigger:focus-visible,
+.nav-dropdown.open .nav-dropdown-trigger { color: var(--text); }
+.nav-dropdown:hover .nav-dropdown-trigger::after,
+.nav-dropdown.open .nav-dropdown-trigger::after { transform: scaleX(1); }
 .nav-dropdown-chevron { transition: transform var(--transition); flex-shrink: 0; }
-.nav-dropdown:hover .nav-dropdown-chevron { transform: rotate(180deg); }
+.nav-dropdown:hover .nav-dropdown-chevron,
+.nav-dropdown.open .nav-dropdown-chevron { transform: rotate(180deg); }
 
 .nav-dropdown-menu {
   position: absolute;
@@ -337,7 +367,8 @@ p { color: var(--text-muted); max-width: 66ch; }
   z-index: 200;
   list-style: none;
 }
-.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu { display: block; }
 .nav-dropdown-menu a {
   display: block;
   padding: 10px 20px;
