@@ -1657,6 +1657,23 @@ p { color: var(--text-muted); max-width: 66ch; }
   box-shadow: 0 12px 28px rgba(0,0,0,0.06);
 }
 .section-alt .pairing-card { background: #fff; }
+/* Take-out card food photo */
+.pairing-card-photo {
+  margin: -32px -28px 22px;
+  height: 160px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+}
+.pairing-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+  max-width: 100%;
+}
+
 .pairing-card-logo {
   display: flex;
   align-items: center;
@@ -1765,6 +1782,8 @@ p { color: var(--text-muted); max-width: 66ch; }
 }
 .pairing-bottle span { color: var(--text-muted); }
 .pairing-bottle a { color: var(--gold); text-decoration: underline; }
+.pairing-card-meta a { color: var(--gold); text-decoration: none; }
+.pairing-card-meta a:hover { text-decoration: underline; }
 
 /* Homepage band linking to pairings */
 .pairings-promo {
@@ -1852,6 +1871,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 .pairing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 32px 0; }
 @media (max-width: 580px) { .pairing-grid { grid-template-columns: 1fr; } }
 .pairing-card { background: var(--bg-card); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 24px; }
+.pairing-card .pairing-card-photo { margin: -24px -24px 20px; }
 .pairing-card h3 { margin: 0 0 10px; font-size: 1rem; }
 .pairing-card p { font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.65; }
 
