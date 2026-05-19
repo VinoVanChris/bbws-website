@@ -67,7 +67,7 @@ ul { list-style: none; }
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: normal;
-  color: var(--text);
+  color: var(--red);
   letter-spacing: 0.06em;
   line-height: 1.05;
 }
