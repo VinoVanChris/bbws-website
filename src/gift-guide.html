@@ -1,0 +1,278 @@
+---
+layout: base.njk
+title: "Host Gift Guide | Broadway Beer Wine & Spirits"
+navPage: giftguide
+description: "The right bottle for every host and every budget. Curated picks from our Kitsilano shop, from $21.99 to a proper splurge."
+canonical: "https://www.broadwaybeerwine.ca/gift-guide.html"
+ogTitle: "The Host Gift Guide"
+ogDescription: "Showing up empty-handed is not an option. Showing up with the wrong bottle is almost worse. Here are our picks, by budget."
+ogImage: "https://www.broadwaybeerwine.ca/images/bbw-bottles.webp"
+ogImageWidth: 2500
+ogImageHeight: 1395
+ogType: article
+publishedTime: "2026-05-18T00:00:00+00:00"
+preloadHero: ../images/bbw-bottles.webp
+preloadHeroType: image/webp
+sitemapPriority: 0.85
+sitemapChangefreq: weekly
+---
+<style>
+/* ── Host Gift Guide styles ─────────────────────────────── */
+.gift-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.gift-filter-btn {
+  padding: 10px 24px;
+  border: 1.5px solid rgba(201,168,76,0.35);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.gift-filter-btn:hover,
+.gift-filter-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #1a1208;
+}
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.gift-card {
+  background: var(--bg);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.gift-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
+}
+.gift-card[data-tier="low"] { border-top: 3px solid #8aab6e; }
+.gift-card[data-tier="mid"] { border-top: 3px solid var(--gold); }
+.gift-card[data-tier="high"] { border-top: 3px solid #b07040; }
+.gift-tier-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.gift-card[data-tier="low"]  .gift-tier-tag { color: #6a9050; }
+.gift-card[data-tier="mid"]  .gift-tier-tag { color: var(--gold); }
+.gift-card[data-tier="high"] .gift-tier-tag { color: #a06030; }
+.gift-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.gift-type {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.gift-reason {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+.gift-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.gift-price span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 6px;
+}
+.gift-cta-band {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  text-align: center;
+  margin-top: 56px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.gift-cta-band p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  .gift-grid { grid-template-columns: 1fr; }
+  .gift-cta-band { padding: 28px 24px; }
+}
+</style>
+
+<main class="page-content">
+
+  <section class="page-hero page-hero--photo" style="background-image: url('images/bbw-bottles.webp');">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="section-eyebrow">Guides</p>
+      <h1>The Host Gift Guide</h1>
+      <p>Showing up empty-handed is not an option. Showing up with the wrong bottle is almost worse.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 56px;">
+    <div class="container">
+
+      <div class="section-header text-center fade-in" style="margin-bottom: 40px;">
+        <p class="section-eyebrow">Filter by Budget</p>
+        <div class="gift-filters">
+          <button class="gift-filter-btn active" data-filter="all">All</button>
+          <button class="gift-filter-btn" data-filter="low">Under $25</button>
+          <button class="gift-filter-btn" data-filter="mid">$25 to $45</button>
+          <button class="gift-filter-btn" data-filter="high">$45 and up</button>
+        </div>
+      </div>
+
+      <!-- ── BOTTLE PICKS ─────────────────────────────────────────
+           When the Bottlecapps API is connected, replace this static
+           block with a live feed keyed to the same data structure:
+           { name, type, reason, price, tier, situation }
+      ─────────────────────────────────────────────────────────── -->
+      <div class="gift-grid fade-in" id="gift-grid">
+
+        <!-- UNDER $25 ── -->
+
+        <div class="gift-card" data-tier="low">
+          <div class="gift-tier-tag">Under $25</div>
+          <div class="gift-name">Road 13 Honest John's Red</div>
+          <div class="gift-type">BC Red · Okanagan</div>
+          <p class="gift-reason">A crowd-friendly Okanagan blend that punches well above its price. Good with food, good without. The kind of bottle that disappears fast at a dinner party.</p>
+          <div class="gift-price">$23.99 <span>750ml</span></div>
+        </div>
+
+        <div class="gift-card" data-tier="low">
+          <div class="gift-tier-tag">Under $25</div>
+          <div class="gift-name">Gray Monk Pinot Gris</div>
+          <div class="gift-type">BC White · Okanagan</div>
+          <p class="gift-reason">A reliable, approachable Okanagan white with stone fruit and a clean finish. Works as an aperitif or at the table. Always a safe call.</p>
+          <div class="gift-price">$21.99 <span>750ml</span></div>
+        </div>
+
+        <!-- $25 TO $45 ── -->
+
+        <div class="gift-card" data-tier="mid">
+          <div class="gift-tier-tag">$25 to $45</div>
+          <div class="gift-name">Joie Farm A Noble Blend</div>
+          <div class="gift-type">BC White · Okanagan</div>
+          <p class="gift-reason">An aromatic, textured white from one of the Okanagan's most consistent producers. Works with almost any food and impresses anyone who knows BC wine.</p>
+          <div class="gift-price">$29.99 <span>750ml</span></div>
+        </div>
+
+        <div class="gift-card" data-tier="mid">
+          <div class="gift-tier-tag">$25 to $45</div>
+          <div class="gift-name">Whispering Angel Rosé</div>
+          <div class="gift-type">Provence Rosé · France</div>
+          <p class="gift-reason">The rosé everyone recognizes. Pale, dry, elegant. Safe in the best possible way. If you do not know what they drink, this is the answer.</p>
+          <div class="gift-price">$32.99 <span>750ml</span></div>
+        </div>
+
+        <div class="gift-card" data-tier="mid">
+          <div class="gift-tier-tag">$25 to $45</div>
+          <div class="gift-name">Tantalus Riesling</div>
+          <div class="gift-type">BC White · Okanagan</div>
+          <p class="gift-reason">One of BC's most celebrated whites. Off-dry, precise, with the kind of depth that makes people ask what they are drinking. A real conversation starter.</p>
+          <div class="gift-price">$30.99 <span>750ml</span></div>
+        </div>
+
+        <div class="gift-card" data-tier="mid">
+          <div class="gift-tier-tag">$25 to $45</div>
+          <div class="gift-name">Averill Creek Pinot Noir</div>
+          <div class="gift-type">BC Red · Vancouver Island</div>
+          <p class="gift-reason">Vancouver Island Pinot with a beautiful label and the wine to back it up. Food-friendly, elegant, and genuinely exciting for anyone who follows BC wine.</p>
+          <div class="gift-price">$34.99 <span>750ml</span></div>
+        </div>
+
+        <!-- $45 AND UP ── -->
+
+        <div class="gift-card" data-tier="high">
+          <div class="gift-tier-tag">$45 and up</div>
+          <div class="gift-name">Painted Rock Syrah</div>
+          <div class="gift-type">BC Red · Skaha Bench</div>
+          <p class="gift-reason">Skaha Bench Syrah from one of the Okanagan's most respected estates. Serious, structured, and the kind of bottle the host will set aside for a special occasion. It lands.</p>
+          <div class="gift-price">$55.99 <span>750ml</span></div>
+        </div>
+
+        <div class="gift-card" data-tier="high">
+          <div class="gift-tier-tag">$45 and up</div>
+          <div class="gift-name">Glenfiddich 14 Bourbon Barrel</div>
+          <div class="gift-type">Single Malt Scotch · Speyside</div>
+          <p class="gift-reason">For hosts who pour whisky. A 14-year Speyside finished in ex-bourbon casks, rich and approachable. Scored 95 points. A proper bottle that reads as a real gift.</p>
+          <div class="gift-price">$89.99 <span>750ml</span></div>
+        </div>
+
+        <div class="gift-card" data-tier="high">
+          <div class="gift-tier-tag">$45 and up</div>
+          <div class="gift-name">Redbreast 12</div>
+          <div class="gift-type">Single Pot Still Irish Whiskey</div>
+          <p class="gift-reason">The benchmark Irish single pot still. Rich, complex, and universally admired by anyone who knows whiskey. If they are into it, they will know exactly what this is.</p>
+          <div class="gift-price">$94.99 <span>750ml</span></div>
+        </div>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="gift-cta-band fade-in">
+        <p>Not sure which one to bring? Come in and tell us who you are going to and what the occasion is. We will point you in the right direction in about thirty seconds.</p>
+        <a href="/contact.html" class="btn btn-gold">Find Us</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  const btns = document.querySelectorAll('.gift-filter-btn');
+  const cards = document.querySelectorAll('.gift-card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.tier === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
