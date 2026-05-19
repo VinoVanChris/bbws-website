@@ -1,0 +1,666 @@
+---
+layout: base.njk
+title: "Party Planner | Broadway Beer Wine & Spirits"
+navPage: party
+description: "Tell SOM how many guests, how many hours, and what kind of party. We'll build your shopping list."
+canonical: "https://www.broadwaybeerwine.ca/party.html"
+ogTitle: "The Party Planner — How Much Do You Need?"
+ogDescription: "Tell SOM about your party. Get a shopping list, a PDF, and the confidence to walk into the shop knowing exactly what you need."
+ogImage: "https://www.broadwaybeerwine.ca/images/cellar-consulting.webp"
+ogImageWidth: 1200
+ogImageHeight: 630
+sitemapPriority: 0.85
+sitemapChangefreq: monthly
+sitemapLastmod: 2026-05-18
+---
+<style>
+/* ── Party Planner page styles ─────────────────────────────── */
+.party-form-card {
+  background: var(--bg);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--radius);
+  padding: 40px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.party-field { margin-bottom: 32px; }
+.party-field:last-child { margin-bottom: 0; }
+.party-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 14px;
+}
+.guest-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: fit-content;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.guest-btn {
+  background: none;
+  border: none;
+  width: 44px;
+  height: 44px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text);
+  transition: background var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.guest-btn:hover { background: rgba(201,168,76,0.1); }
+#guest-count {
+  width: 72px;
+  height: 44px;
+  text-align: center;
+  border: none;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg);
+  -moz-appearance: textfield;
+}
+#guest-count::-webkit-inner-spin-button,
+#guest-count::-webkit-outer-spin-button { -webkit-appearance: none; }
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.btn-choice {
+  padding: 9px 18px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 40px;
+  background: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-choice:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+.btn-choice.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #1a1208;
+  font-weight: 600;
+}
+.toast-toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.toggle-track:before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--transition);
+}
+.toggle-switch input:checked + .toggle-track { background: var(--gold); }
+.toggle-switch input:checked + .toggle-track:before { transform: translateX(20px); }
+.toggle-label { font-size: 0.92rem; color: var(--text); cursor: pointer; }
+
+/* ── Results ──────────────────────────────────────────────── */
+#som-results {
+  max-width: 720px;
+  margin: 40px auto 0;
+  display: none;
+}
+.som-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.som-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #1a1208;
+  flex-shrink: 0;
+}
+.som-says {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.som-says strong { color: var(--text); }
+.shopping-list {
+  background: var(--bg);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.shopping-list-header {
+  background: rgba(201,168,76,0.08);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.shopping-list-header span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.list-item:last-child { border-bottom: none; }
+.list-item-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.list-item-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.list-item-qty {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+  margin-left: 16px;
+}
+.som-note {
+  background: rgba(201,168,76,0.06);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.party-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── Print styles ─────────────────────────────────────────── */
+@media print {
+  .site-nav, .mobile-nav, .site-footer,
+  .party-form-card, .party-actions,
+  .page-hero, .intro-band, #recalc-btn,
+  .section-header, .som-header { display: none !important; }
+
+  body { background: #fff; }
+
+  #som-results {
+    display: block !important;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #c9a84c;
+  }
+
+  .print-header-name {
+    font-family: 'Rousseau Deco', serif;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+  }
+  .print-header-sub {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 4px;
+  }
+  .print-header-right {
+    text-align: right;
+    font-size: 0.78rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .print-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1a1a1a;
+  }
+
+  .shopping-list {
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+  .shopping-list-header { background: #f5f0e8; }
+  .list-item-qty { color: #c9a84c; }
+
+  .som-note {
+    border-left-color: #c9a84c;
+    background: #faf8f3;
+  }
+
+  .print-footer {
+    display: block !important;
+    margin-top: 32px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd;
+    font-size: 0.75rem;
+    color: #999;
+    text-align: center;
+  }
+}
+
+/* Hide print-only elements on screen */
+.print-header, .print-footer { display: none; }
+
+@media (max-width: 600px) {
+  .party-form-card { padding: 24px; }
+}
+</style>
+
+<main class="page-content">
+
+  <!-- HERO -->
+  <section class="page-hero page-hero--photo" style="background-image: url('images/cellar-consulting.webp');">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="section-eyebrow">The Party Planner</p>
+      <h1>Tell SOM About Your Party</h1>
+      <p>Guests, hours, occasion. SOM does the math and hands you a list. Walk into the shop knowing exactly what you need.</p>
+    </div>
+  </section>
+
+  <!-- INTRO BAND -->
+  <div class="intro-band">
+    <div class="container">
+      <p style="font-size:1.1rem;font-style:italic;margin-bottom:0;max-width:680px;margin-left:auto;margin-right:auto;">
+        Running short at a party is awkward. Over-buying is expensive. SOM finds the middle ground, then lets you print the list or send it to yourself.
+      </p>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <section class="section">
+    <div class="container">
+
+      <div class="section-header text-center fade-in">
+        <p class="section-eyebrow">Step One</p>
+        <h2>About Your Party</h2>
+        <div class="divider" style="margin:16px auto 0;"></div>
+      </div>
+
+      <div class="party-form-card fade-in" style="margin-top:36px;">
+
+        <!-- Guests -->
+        <div class="party-field">
+          <label class="party-label" for="guest-count">How many guests?</label>
+          <div class="guest-input-wrap">
+            <button class="guest-btn" id="guest-minus" aria-label="Fewer guests" type="button">−</button>
+            <input type="number" id="guest-count" value="20" min="2" max="200" />
+            <button class="guest-btn" id="guest-plus" aria-label="More guests" type="button">+</button>
+          </div>
+        </div>
+
+        <!-- Hours -->
+        <div class="party-field">
+          <span class="party-label">How long is the party?</span>
+          <div class="btn-group" id="hours-group">
+            <button class="btn-choice" data-value="2" type="button">2 hours</button>
+            <button class="btn-choice active" data-value="3" type="button">3 hours</button>
+            <button class="btn-choice" data-value="4" type="button">4 hours</button>
+            <button class="btn-choice" data-value="5" type="button">5 hours</button>
+            <button class="btn-choice" data-value="6" type="button">6+ hours</button>
+          </div>
+        </div>
+
+        <!-- Occasion -->
+        <div class="party-field">
+          <span class="party-label">What's the occasion?</span>
+          <div class="btn-group" id="occasion-group">
+            <button class="btn-choice active" data-value="dinner" type="button">Dinner Party</button>
+            <button class="btn-choice" data-value="garden" type="button">Garden Party</button>
+            <button class="btn-choice" data-value="cocktail" type="button">Cocktail Party</button>
+            <button class="btn-choice" data-value="birthday" type="button">Birthday</button>
+            <button class="btn-choice" data-value="holiday" type="button">Holiday Gathering</button>
+          </div>
+        </div>
+
+        <!-- Vibe -->
+        <div class="party-field">
+          <span class="party-label">What's the crowd like?</span>
+          <div class="btn-group" id="vibe-group">
+            <button class="btn-choice active" data-value="wine" type="button">Wine crowd</button>
+            <button class="btn-choice" data-value="balanced" type="button">Mixed</button>
+            <button class="btn-choice" data-value="beer" type="button">Beer crowd</button>
+            <button class="btn-choice" data-value="spirits" type="button">Cocktail crowd</button>
+          </div>
+        </div>
+
+        <!-- Toast -->
+        <div class="party-field">
+          <span class="party-label">Any toasts or speeches?</span>
+          <div class="toast-toggle-wrap">
+            <label class="toggle-switch">
+              <input type="checkbox" id="toast-toggle" />
+              <span class="toggle-track"></span>
+            </label>
+            <span class="toggle-label" id="toast-label">No — skip the sparkling</span>
+          </div>
+        </div>
+
+        <button class="btn btn-gold" id="calculate-btn" type="button" style="width:100%;justify-content:center;margin-top:8px;">
+          Ask SOM
+        </button>
+
+      </div>
+
+      <!-- RESULTS -->
+      <div id="som-results">
+
+        <!-- Print-only header -->
+        <div class="print-header">
+          <div>
+            <div class="print-header-name">Broadway Beer Wine &amp; Spirits</div>
+            <div class="print-header-sub">2752 W Broadway, Vancouver &nbsp;·&nbsp; broadwaybeerwine.ca &nbsp;·&nbsp; Open daily 10am–11pm</div>
+          </div>
+          <div class="print-header-right">
+            <div class="print-title" id="print-title"></div>
+            <div id="print-meta"></div>
+          </div>
+        </div>
+
+        <!-- SOM header -->
+        <div class="som-header">
+          <div class="som-avatar">SOM</div>
+          <p class="som-says" id="som-intro"></p>
+        </div>
+
+        <!-- Shopping list -->
+        <div class="shopping-list">
+          <div class="shopping-list-header">
+            <span>Your Shopping List</span>
+            <span id="list-summary"></span>
+          </div>
+          <div id="list-items"></div>
+        </div>
+
+        <!-- SOM note -->
+        <div class="som-note" id="som-note"></div>
+
+        <!-- Actions -->
+        <div class="party-actions">
+          <button class="btn btn-gold" type="button" onclick="window.print()">Print / Save as PDF</button>
+          <a class="btn btn-outline" id="email-btn" href="#">Email to Myself</a>
+          <button class="btn btn-outline" id="recalc-btn" type="button">Recalculate</button>
+        </div>
+
+        <!-- Print-only footer -->
+        <div class="print-footer">
+          Built with SOM at broadwaybeerwine.ca/party.html &nbsp;·&nbsp; Come in and we'll help you pick the right bottles for every item on this list.
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+
+  // ── Button group helpers ────────────────────────────────────
+  function setupGroup(id) {
+    const group = document.getElementById(id);
+    group.querySelectorAll('.btn-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.btn-choice').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  }
+  setupGroup('hours-group');
+  setupGroup('occasion-group');
+  setupGroup('vibe-group');
+
+  // ── Guest counter ───────────────────────────────────────────
+  const guestInput = document.getElementById('guest-count');
+  document.getElementById('guest-minus').addEventListener('click', () => {
+    const v = parseInt(guestInput.value) || 10;
+    if (v > 2) guestInput.value = v - (v <= 20 ? 1 : 5);
+  });
+  document.getElementById('guest-plus').addEventListener('click', () => {
+    const v = parseInt(guestInput.value) || 10;
+    guestInput.value = v + (v < 20 ? 1 : 5);
+  });
+
+  // ── Toast toggle label ──────────────────────────────────────
+  const toastToggle = document.getElementById('toast-toggle');
+  const toastLabel  = document.getElementById('toast-label');
+  toastToggle.addEventListener('change', () => {
+    toastLabel.textContent = toastToggle.checked
+      ? 'Yes — add sparkling for the toast'
+      : 'No — skip the sparkling';
+  });
+
+  // ── Calculation ─────────────────────────────────────────────
+  function getActive(groupId) {
+    return document.querySelector('#' + groupId + ' .btn-choice.active').dataset.value;
+  }
+
+  function calculate() {
+    const guests  = Math.max(2, parseInt(guestInput.value) || 20);
+    const hours   = parseInt(getActive('hours-group'));
+    const occasion = getActive('occasion-group');
+    const vibe    = getActive('vibe-group');
+    const toast   = toastToggle.checked;
+
+    // Consumption rate (drinks/person/hour) by occasion
+    const rates = { dinner: 1.0, garden: 1.25, cocktail: 1.5, birthday: 1.3, holiday: 1.1 };
+    const rate  = rates[occasion] || 1.2;
+
+    // Total drinks with 15% buffer
+    const total = Math.ceil(guests * hours * rate * 1.15);
+
+    // Split by vibe (wine%, beer%, spirits%)
+    const splits = {
+      wine:     [0.65, 0.20, 0.15],
+      balanced: [0.40, 0.38, 0.22],
+      beer:     [0.20, 0.60, 0.20],
+      spirits:  [0.22, 0.18, 0.60],
+    };
+    const [wp, bp, sp] = splits[vibe] || splits.balanced;
+
+    const wineDrinks    = Math.ceil(total * wp);
+    const beerDrinks    = Math.ceil(total * bp);
+    const spiritDrinks  = Math.ceil(total * sp);
+
+    // Wine split: slightly more red at dinner, more white at summer parties
+    const redShare = (occasion === 'dinner' || occasion === 'holiday') ? 0.55 : 0.45;
+    const wineBottles  = Math.ceil(wineDrinks / 5);
+    const redBottles   = Math.ceil(wineBottles * redShare);
+    const whiteBottles = Math.ceil(wineBottles * (1 - redShare));
+
+    // Beer (cans)
+    const beerUnits = beerDrinks;
+
+    // Spirits (750ml bottle ≈ 16 × 1.5oz pours)
+    const spiritBottles = Math.max(0, Math.ceil(spiritDrinks / 16));
+
+    // Toast sparkling (6 flutes per bottle for a proper toast pour)
+    const sparklingBottles = toast ? Math.ceil(guests / 6) : 0;
+
+    return {
+      guests, hours, occasion, vibe, toast,
+      total, redBottles, whiteBottles, beerUnits, spiritBottles, sparklingBottles
+    };
+  }
+
+  // ── Labels ──────────────────────────────────────────────────
+  const occasionLabels = {
+    dinner: 'dinner party', garden: 'garden party',
+    cocktail: 'cocktail party', birthday: 'birthday',
+    holiday: 'holiday gathering'
+  };
+  const vibeLabels = {
+    wine: 'wine crowd', balanced: 'mixed crowd',
+    beer: 'beer crowd', spirits: 'cocktail crowd'
+  };
+
+  const spiritSubs = {
+    spirits: 'Whisky, gin, rum — spirits-forward crowd. Have mixers and ice ready.',
+    cocktail: 'One or two house bottles plus a full mixer setup.',
+    balanced: 'A solid base spirit for those who want a mixed drink.',
+    wine: 'Light spirits presence — just in case.',
+  };
+
+  const somNotes = {
+    dinner:   'For a seated dinner, pace yourself on the top-up. People drink more slowly when eating. The red and white split should cover most menus — if you know the courses, come in and we can get more specific.',
+    garden:   'Garden parties tend to go longer than planned and thirst runs higher in the sun. The beer quantity is your safety net. Ice is not optional.',
+    cocktail: 'Cocktail parties move fast in the first hour and slow right down after. Front-load your spirits and have the mixers ready before anyone arrives. Sparkling at the door sets the right tone.',
+    birthday: 'Birthdays are unpredictable. The buffer is built in. If the party runs long, beer and spirits will carry you — wine tends to run out first.',
+    holiday:  'Holiday gatherings reward having more white and sparkling than you think you need. People graze, they toast, and the mood calls for it.',
+  };
+
+  // ── Render results ──────────────────────────────────────────
+  function render(r) {
+    const oLabel = occasionLabels[r.occasion];
+    const vLabel = vibeLabels[r.vibe];
+
+    document.getElementById('som-intro').innerHTML =
+      `For <strong>${r.guests} guests</strong> over <strong>${r.hours} hours</strong> — a ${oLabel} with a ${vLabel}. Here's what I'd put on the list.`;
+
+    document.getElementById('list-summary').textContent =
+      `${r.guests} guests · ${r.hours}h · ~${r.total} drinks`;
+
+    const items = [];
+
+    if (r.redBottles > 0) items.push({
+      name: 'Red Wine',
+      sub: 'Full-bodied or medium — ask us for current picks in the $20–35 range',
+      qty: `${r.redBottles} bottle${r.redBottles !== 1 ? 's' : ''}`
+    });
+    if (r.whiteBottles > 0) items.push({
+      name: 'White Wine',
+      sub: 'Crisp and crowd-friendly — a Sauvignon Blanc or Pinot Gris works for almost everyone',
+      qty: `${r.whiteBottles} bottle${r.whiteBottles !== 1 ? 's' : ''}`
+    });
+    if (r.sparklingBottles > 0) items.push({
+      name: 'Sparkling — Toast',
+      sub: 'Prosecco or Cava at this size. No one needs Champagne for a group toast.',
+      qty: `${r.sparklingBottles} bottle${r.sparklingBottles !== 1 ? 's' : ''}`
+    });
+    if (r.beerUnits > 0) items.push({
+      name: 'Beer',
+      sub: 'Mix of lager and something with a bit more character — we have the wall for it',
+      qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
+    });
+    if (r.spiritBottles > 0) items.push({
+      name: 'Spirits',
+      sub: spiritSubs[r.vibe] || 'A base spirit and a mixer go a long way.',
+      qty: `${r.spiritBottles} bottle${r.spiritBottles !== 1 ? 's' : ''}`
+    });
+    items.push({
+      name: 'Non-Alcoholic',
+      sub: 'Sparkling water, soft drinks, juice — always underestimated',
+      qty: 'Don\'t forget'
+    });
+
+    document.getElementById('list-items').innerHTML = items.map(item => `
+      <div class="list-item">
+        <div>
+          <div class="list-item-name">${item.name}</div>
+          <div class="list-item-sub">${item.sub}</div>
+        </div>
+        <div class="list-item-qty">${item.qty}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('som-note').textContent = somNotes[r.occasion] || '';
+
+    // Print meta
+    document.getElementById('print-title').textContent =
+      `${r.guests} Guests · ${r.hours} Hours · ${occasionLabels[r.occasion].replace(/^\w/, c => c.toUpperCase())}`;
+    document.getElementById('print-meta').textContent =
+      `Built ${new Date().toLocaleDateString('en-CA', {year:'numeric',month:'long',day:'numeric'})}`;
+
+    // Email link
+    const subject = encodeURIComponent(`Party Shopping List — Broadway Beer Wine & Spirits`);
+    const body = encodeURIComponent(
+      `Here's the list SOM built for my ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
+      items.filter(i => i.qty !== "Don't forget")
+           .map(i => `• ${i.name}: ${i.qty}`).join('\n') +
+      `\n• Non-Alcoholic: Don't forget` +
+      `\n\nSOM's note: ${somNotes[r.occasion] || ''}` +
+      `\n\nBuilt at broadwaybeerwine.ca/party.html` +
+      `\nBroadway Beer Wine & Spirits — 2752 W Broadway, Vancouver. Open daily 10am–11pm.`
+    );
+    document.getElementById('email-btn').href = `mailto:?subject=${subject}&body=${body}`;
+
+    document.getElementById('som-results').style.display = 'block';
+    document.getElementById('som-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── Bind buttons ────────────────────────────────────────────
+  document.getElementById('calculate-btn').addEventListener('click', () => {
+    render(calculate());
+  });
+
+  document.getElementById('recalc-btn').addEventListener('click', () => {
+    document.getElementById('som-results').style.display = 'none';
+    document.querySelector('.party-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+})();
+</script>
