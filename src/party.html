@@ -250,6 +250,10 @@ sitemapLastmod: 2026-05-18
   flex-shrink: 0;
   letter-spacing: 0.02em;
 }
+.list-item-qty--reminder {
+  background: var(--red);
+  color: #fff;
+}
 .som-note {
   margin: 0;
   padding: 20px 32px;
@@ -257,8 +261,8 @@ sitemapLastmod: 2026-05-18
   line-height: 1.7;
   color: var(--text-muted);
   border-bottom: 1px solid rgba(0,0,0,0.06);
-  border-left: 3px solid var(--gold);
-  background: rgba(201,168,76,0.04);
+  border-left: 3px solid var(--red);
+  background: rgba(161,25,29,0.03);
 }
 .food-suggestions {
   padding: 20px 32px;
@@ -424,6 +428,7 @@ sitemapLastmod: 2026-05-18
   }
   .shopping-list-header { background: #f5f0e8; }
   .list-item-qty { color: #c9a84c; }
+  .list-item-qty--reminder { color: #a1191d; }
 
   .som-note {
     border-left-color: #c9a84c;
@@ -823,7 +828,7 @@ sitemapLastmod: 2026-05-18
           <div class="list-item-name">${item.name}</div>
           <div class="list-item-sub">${item.sub}</div>
         </div>
-        <div class="list-item-qty">${item.qty}</div>
+        <div class="list-item-qty${item.qty === "Don't forget" ? ' list-item-qty--reminder' : ''}">${item.qty}</div>
       </div>
     `).join('');
 
