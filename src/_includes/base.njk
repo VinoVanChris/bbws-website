@@ -106,7 +106,13 @@
           </ul>
         </li>
         <li><a href="/blog.html"{% if navPage == 'blog' %} class="active"{% endif %}>Blog</a></li>
-        <li><a href="/pairings.html"{% if navPage == 'pairings' %} class="active"{% endif %}>Pairings</a></li>
+        <li class="nav-dropdown">
+          <button type="button" class="nav-dropdown-trigger{% if navPage == 'pairings' or navPage == 'guide' %} active{% endif %}" aria-expanded="false" aria-haspopup="true" aria-controls="nav-guide-menu">The Guide <svg class="nav-dropdown-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+          <ul id="nav-guide-menu" class="nav-dropdown-menu" role="list">
+            <li><a href="/pairings.html"{% if navPage == 'pairings' %} class="active"{% endif %}>The Pairing</a></li>
+            <li><a href="/blog/vancouver-beaches-alcohol-legal.html"{% if navPage == 'guide' %} class="active"{% endif %}>Pack the Cooler</a></li>
+          </ul>
+        </li>
         <li><a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a></li>
         <li><a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a></li>
       </ul>
@@ -119,7 +125,9 @@
     <a href="/index.html"{% if navPage == 'home' %} class="active"{% endif %}>Home</a>
     <a href="/about.html"{% if navPage == 'about' %} class="active"{% endif %}>About</a>
     <a href="/blog.html"{% if navPage == 'blog' %} class="active"{% endif %}>Blog</a>
-    <a href="/pairings.html"{% if navPage == 'pairings' %} class="active"{% endif %}>Pairings</a>
+    <span class="mobile-nav-shop-label">The Guide</span>
+    <a href="/pairings.html"{% if navPage == 'pairings' %} class="active"{% endif %} class="mobile-nav-sub">The Pairing</a>
+    <a href="/blog/vancouver-beaches-alcohol-legal.html"{% if navPage == 'guide' %} class="active"{% endif %} class="mobile-nav-sub">Pack the Cooler</a>
     <a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a>
     <a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a>
     <span class="mobile-nav-shop-label">Order Online</span>
