@@ -15,6 +15,79 @@ sitemapPriority: 0.7
 sitemapChangefreq: monthly
 sitemapLastmod: 2026-05-18
 ---
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+<style>
+.map-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  margin-top: 32px;
+}
+.map-info-card {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.1);
+  padding: 14px 16px;
+  z-index: 1000;
+  min-width: 220px;
+  max-width: 270px;
+  font-family: var(--font-body);
+}
+.map-info-name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.97rem;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.map-info-addr {
+  font-size: 0.78rem;
+  color: #5f6368;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.map-info-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.map-info-score {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #202124;
+}
+.map-info-stars { color: #f59e0b; font-size: 0.85rem; letter-spacing: -1px; }
+.map-info-reviews { font-size: 0.78rem; color: #1a73e8; }
+.map-info-actions {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 10px;
+}
+.map-info-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e8f0fe;
+  color: #1a73e8;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.map-info-btn:hover { background: #d2e3fc; }
+.map-info-btn--dir { background: #1a73e8; color: #fff; }
+.map-info-btn--dir:hover { background: #1557b0; }
+</style>
 <main class="page-content">
 
     <section class="page-hero page-hero--photo" style="background-image: url('images/friends.webp');">
@@ -81,19 +154,51 @@ sitemapLastmod: 2026-05-18
             </div>
 
             <!-- Map -->
-            <div style="margin-top:32px;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2603.4!2d-123.1699295!3d49.2639277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548673ac470bb717:0x6b13d185c600f182!2sBroadway+Beer+Wine+%26+Spirits!5e0!3m2!1sen!2sca!4v1715000000000"
-                width="100%"
-                height="280"
-                style="display:block;border:0;filter:sepia(25%) saturate(80%) brightness(103%);"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Broadway Beer Wine &amp; Spirits location map"
-              ></iframe>
+            <div class="map-wrap">
+              <div id="contact-map" style="width:100%;height:360px;position:relative;z-index:0;"></div>
+              <div class="map-info-card">
+                <div class="map-info-name">Broadway Beer Wine &amp; Spirits</div>
+                <div class="map-info-addr">2752 W Broadway<br>Vancouver, BC V6K 2G4</div>
+                <div class="map-info-meta">
+                  <span class="map-info-score">4.7</span>
+                  <span class="map-info-stars">★★★★★</span>
+                  <span class="map-info-reviews">(90+)</span>
+                </div>
+                <div class="map-info-actions">
+                  <a href="https://maps.app.goo.gl/eV6J9rsufSkazVSk7" target="_blank" rel="noopener" class="map-info-btn" title="Open in Google Maps" aria-label="Open in Google Maps">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M11 3h6v6M17 3l-9 9M8 5H4a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1v-4"/></svg>
+                  </a>
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=Broadway+Beer+Wine+%26+Spirits&destination_place_id=ChIJF7cLRKxzhlQRgg_AwMUd0ms" target="_blank" rel="noopener" class="map-info-btn map-info-btn--dir" title="Get directions" aria-label="Get directions">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M10.5 3.5L17 10l-6.5 6.5M3 10h14"/></svg>
+                  </a>
+                </div>
+              </div>
             </div>
-            <a href="https://maps.app.goo.gl/eV6J9rsufSkazVSk7" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:0.8rem;color:var(--text-muted);text-decoration:none;">View on Google Maps ↗</a>
+            <script>
+            (function() {
+              document.addEventListener('DOMContentLoaded', function() {
+                var map = L.map('contact-map', {
+                  center: [49.2639, -123.1674],
+                  zoom: 16,
+                  zoomControl: false,
+                  scrollWheelZoom: false,
+                });
+                L.control.zoom({ position: 'bottomright' }).addTo(map);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+                  subdomains: 'abcd',
+                  maxZoom: 19,
+                }).addTo(map);
+                var pin = L.divIcon({
+                  html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="30" height="45"><path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 24 12 24S24 21 24 12C24 5.373 18.627 0 12 0z" fill="#a1191d"/><circle cx="12" cy="12" r="5" fill="white" opacity="0.9"/></svg>',
+                  className: '',
+                  iconSize: [30, 45],
+                  iconAnchor: [15, 45],
+                });
+                L.marker([49.2639, -123.1674], { icon: pin }).addTo(map);
+              });
+            })();
+            </script>
 
           </div>
 
