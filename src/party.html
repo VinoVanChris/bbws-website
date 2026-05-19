@@ -407,6 +407,7 @@ sitemapLastmod: 2026-05-18
             <button class="btn-choice" data-value="balanced" type="button">Mixed</button>
             <button class="btn-choice" data-value="beer" type="button">Beer crowd</button>
             <button class="btn-choice" data-value="spirits" type="button">Cocktail crowd</button>
+            <button class="btn-choice" data-value="fullbar" type="button">Full Bar</button>
           </div>
         </div>
 
@@ -548,6 +549,7 @@ sitemapLastmod: 2026-05-18
       balanced: [0.40, 0.38, 0.22],
       beer:     [0.20, 0.60, 0.20],
       spirits:  [0.22, 0.18, 0.60],
+      fullbar:  [0.30, 0.25, 0.45],
     };
     const [wp, bp, sp] = splits[vibe] || splits.balanced;
 
@@ -584,7 +586,7 @@ sitemapLastmod: 2026-05-18
   };
   const vibeLabels = {
     wine: 'wine crowd', balanced: 'mixed crowd',
-    beer: 'beer crowd', spirits: 'cocktail crowd'
+    beer: 'beer crowd', spirits: 'cocktail crowd', fullbar: 'full bar'
   };
 
   const spiritSubs = {
@@ -592,6 +594,7 @@ sitemapLastmod: 2026-05-18
     cocktail: 'One or two house bottles plus a full mixer setup.',
     balanced: 'A solid base spirit for those who want a mixed drink.',
     wine: 'Light spirits presence. Just in case.',
+    fullbar: 'For smaller groups, 375ml formats and RTDs go a long way. Come in and we can build a compact bar that covers everything without committing to full bottles of everything.',
   };
 
   const foodSuggestions = {
