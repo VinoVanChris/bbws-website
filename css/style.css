@@ -786,7 +786,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 }
 .contact-form-body {
   display: grid;
-  grid-template-columns: 1fr 200px;
+  grid-template-columns: 1fr 250px;
   gap: 48px;
   align-items: center;
 }
@@ -798,7 +798,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 }
 .contact-form-icon img {
   width: 100%;
-  max-width: 180px;
+  max-width: 225px;
   height: auto;
   display: block;
 }
