@@ -224,6 +224,22 @@ sitemapLastmod: 2026-05-18
   color: var(--text-muted);
   margin-bottom: 28px;
 }
+.food-suggestions {
+  margin-bottom: 28px;
+}
+.food-suggestions-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 10px;
+}
+.food-suggestions-items {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
 .party-actions {
   display: flex;
   gap: 12px;
@@ -445,6 +461,12 @@ sitemapLastmod: 2026-05-18
         <!-- SOM note -->
         <div class="som-note" id="som-note"></div>
 
+        <!-- Food suggestions -->
+        <div class="food-suggestions" id="food-suggestions">
+          <div class="food-suggestions-label">Something to Eat</div>
+          <div class="food-suggestions-items" id="food-items"></div>
+        </div>
+
         <!-- Actions -->
         <div class="party-actions">
           <button class="btn btn-gold" type="button" onclick="window.print()">Print / Save as PDF</button>
@@ -572,6 +594,15 @@ sitemapLastmod: 2026-05-18
     wine: 'Light spirits presence. Just in case.',
   };
 
+  const foodSuggestions = {
+    dinner:   'Charcuterie, cheese board, bread, olives',
+    garden:   'Fruit, dips, skewers, something light off the grill',
+    cocktail: 'Olives, nuts, small bites, something salty',
+    birthday: 'Whatever the guest of honour wants, plus cake',
+    holiday:  'Cheese board, crackers, cured meats, something warm',
+    sports:   'Nachos, sliders, wings, chips, dip',
+  };
+
   const somNotes = {
     dinner:   'For a seated dinner, pace yourself on the top-up. People drink more slowly when eating. The red and white split should cover most menus. If you know the courses, come in and we can get more specific.',
     garden:   'Garden parties tend to go longer than planned and thirst runs higher in the sun. The beer quantity is your safety net. Ice is not optional.',
@@ -636,6 +667,7 @@ sitemapLastmod: 2026-05-18
     `).join('');
 
     document.getElementById('som-note').textContent = somNotes[r.occasion] || '';
+    document.getElementById('food-items').textContent = foodSuggestions[r.occasion] || '';
 
     // Print meta
     document.getElementById('print-title').textContent =
@@ -651,6 +683,7 @@ sitemapLastmod: 2026-05-18
            .map(i => `• ${i.name}: ${i.qty}`).join('\n') +
       `\n• Non-Alcoholic: Don't forget` +
       `\n\nNote: ${somNotes[r.occasion] || ''}` +
+      `\n\nSomething to eat: ${foodSuggestions[r.occasion] || ''}` +
       `\n\nBuilt at broadwaybeerwine.ca/party.html` +
       `\nBroadway Beer Wine & Spirits, 2752 W Broadway, Vancouver. Open daily 10am-11pm.`
     );
