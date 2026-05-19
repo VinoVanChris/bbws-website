@@ -4,7 +4,7 @@ title: "Party Planner | Broadway Beer Wine & Spirits"
 navPage: party
 description: "Tell us how many guests, how many hours, and what kind of party. We'll build your shopping list."
 canonical: "https://www.broadwaybeerwine.ca/party.html"
-ogTitle: "The Party Planner — How Much Do You Need?"
+ogTitle: "The Party Planner: How Much Do You Need?"
 ogDescription: "Tell us about your party. Get a shopping list, a PDF, and the confidence to walk into the shop knowing exactly what you need."
 ogImage: "https://www.broadwaybeerwine.ca/images/event-shot.webp"
 ogImageWidth: 1200
@@ -330,7 +330,7 @@ sitemapLastmod: 2026-05-18
   <div class="intro-band">
     <div class="container">
       <p style="font-size:1.1rem;font-style:italic;margin-bottom:0;max-width:680px;margin-left:auto;margin-right:auto;">
-        Running short is awkward. Over-buying is expensive. Tell us the details and we'll find the middle ground — then let you print the list or send it to yourself.
+        Running short is awkward. Over-buying is expensive. Tell us the details and we'll find the middle ground. Then print the list or send it to yourself.
       </p>
     </div>
   </div>
@@ -400,7 +400,7 @@ sitemapLastmod: 2026-05-18
               <input type="checkbox" id="toast-toggle" />
               <span class="toggle-track"></span>
             </label>
-            <span class="toggle-label" id="toast-label">No — skip the sparkling</span>
+            <span class="toggle-label" id="toast-label">No, skip the sparkling</span>
           </div>
         </div>
 
@@ -417,7 +417,7 @@ sitemapLastmod: 2026-05-18
         <div class="print-header">
           <div>
             <div class="print-header-name">Broadway Beer Wine &amp; Spirits</div>
-            <div class="print-header-sub">2752 W Broadway, Vancouver &nbsp;·&nbsp; broadwaybeerwine.ca &nbsp;·&nbsp; Open daily 10am–11pm</div>
+            <div class="print-header-sub">2752 W Broadway, Vancouver &nbsp;·&nbsp; broadwaybeerwine.ca &nbsp;·&nbsp; Open daily 10am-11pm</div>
           </div>
           <div class="print-header-right">
             <div class="print-title" id="print-title"></div>
@@ -495,8 +495,8 @@ sitemapLastmod: 2026-05-18
   const toastLabel  = document.getElementById('toast-label');
   toastToggle.addEventListener('change', () => {
     toastLabel.textContent = toastToggle.checked
-      ? 'Yes — add sparkling for the toast'
-      : 'No — skip the sparkling';
+      ? 'Yes, add sparkling for the toast'
+      : 'No, skip the sparkling';
   });
 
   // ── Calculation ─────────────────────────────────────────────
@@ -564,17 +564,17 @@ sitemapLastmod: 2026-05-18
   };
 
   const spiritSubs = {
-    spirits: 'Whisky, gin, rum — spirits-forward crowd. Have mixers and ice ready.',
+    spirits: 'Whisky, gin, rum. Spirits-forward crowd. Have mixers and ice ready.',
     cocktail: 'One or two house bottles plus a full mixer setup.',
     balanced: 'A solid base spirit for those who want a mixed drink.',
-    wine: 'Light spirits presence — just in case.',
+    wine: 'Light spirits presence. Just in case.',
   };
 
   const somNotes = {
-    dinner:   'For a seated dinner, pace yourself on the top-up. People drink more slowly when eating. The red and white split should cover most menus — if you know the courses, come in and we can get more specific.',
+    dinner:   'For a seated dinner, pace yourself on the top-up. People drink more slowly when eating. The red and white split should cover most menus. If you know the courses, come in and we can get more specific.',
     garden:   'Garden parties tend to go longer than planned and thirst runs higher in the sun. The beer quantity is your safety net. Ice is not optional.',
     cocktail: 'Cocktail parties move fast in the first hour and slow right down after. Front-load your spirits and have the mixers ready before anyone arrives. Sparkling at the door sets the right tone.',
-    birthday: 'Birthdays are unpredictable. The buffer is built in. If the party runs long, beer and spirits will carry you — wine tends to run out first.',
+    birthday: 'Birthdays are unpredictable. The buffer is built in. If the party runs long, beer and spirits will carry you. Wine tends to run out first.',
     holiday:  'Holiday gatherings reward having more white and sparkling than you think you need. People graze, they toast, and the mood calls for it.',
   };
 
@@ -584,7 +584,7 @@ sitemapLastmod: 2026-05-18
     const vLabel = vibeLabels[r.vibe];
 
     document.getElementById('som-intro').innerHTML =
-      `For <strong>${r.guests} guests</strong> over <strong>${r.hours} hours</strong> — a ${oLabel} with a ${vLabel}. Here's what I'd put on the list.`;
+      `<strong>${r.guests} guests</strong>, <strong>${r.hours} hours</strong>, ${oLabel}, ${vLabel}. Here is your list.`;
 
     document.getElementById('list-summary').textContent =
       `${r.guests} guests · ${r.hours}h · ~${r.total} drinks`;
@@ -593,22 +593,22 @@ sitemapLastmod: 2026-05-18
 
     if (r.redBottles > 0) items.push({
       name: 'Red Wine',
-      sub: 'Full-bodied or medium — ask us for current picks in the $20–35 range',
+      sub: 'Full-bodied or medium. Ask us for current picks in the $20-35 range.',
       qty: `${r.redBottles} bottle${r.redBottles !== 1 ? 's' : ''}`
     });
     if (r.whiteBottles > 0) items.push({
       name: 'White Wine',
-      sub: 'Crisp and crowd-friendly — a Sauvignon Blanc or Pinot Gris works for almost everyone',
+      sub: 'Crisp and crowd-friendly. A Sauvignon Blanc or Pinot Gris works for almost everyone.',
       qty: `${r.whiteBottles} bottle${r.whiteBottles !== 1 ? 's' : ''}`
     });
     if (r.sparklingBottles > 0) items.push({
-      name: 'Sparkling — Toast',
+      name: 'Sparkling (Toast)',
       sub: 'Prosecco or Cava at this size. No one needs Champagne for a group toast.',
       qty: `${r.sparklingBottles} bottle${r.sparklingBottles !== 1 ? 's' : ''}`
     });
     if (r.beerUnits > 0) items.push({
       name: 'Beer',
-      sub: 'Mix of lager and something with a bit more character — we have the wall for it',
+      sub: 'Mix of lager and something with a bit more character. We have the wall for it.',
       qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
     });
     if (r.spiritBottles > 0) items.push({
@@ -618,7 +618,7 @@ sitemapLastmod: 2026-05-18
     });
     items.push({
       name: 'Non-Alcoholic',
-      sub: 'Sparkling water, soft drinks, juice — always underestimated',
+      sub: 'Sparkling water, soft drinks, juice. Always underestimated.',
       qty: 'Don\'t forget'
     });
 
@@ -641,15 +641,15 @@ sitemapLastmod: 2026-05-18
       `Built ${new Date().toLocaleDateString('en-CA', {year:'numeric',month:'long',day:'numeric'})}`;
 
     // Email link
-    const subject = encodeURIComponent(`Party Shopping List — Broadway Beer Wine & Spirits`);
+    const subject = encodeURIComponent(`Party Shopping List - Broadway Beer Wine & Spirits`);
     const body = encodeURIComponent(
-      `My party shopping list — ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
+      `My party shopping list: ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
       items.filter(i => i.qty !== "Don't forget")
            .map(i => `• ${i.name}: ${i.qty}`).join('\n') +
       `\n• Non-Alcoholic: Don't forget` +
       `\n\nNote: ${somNotes[r.occasion] || ''}` +
       `\n\nBuilt at broadwaybeerwine.ca/party.html` +
-      `\nBroadway Beer Wine & Spirits — 2752 W Broadway, Vancouver. Open daily 10am–11pm.`
+      `\nBroadway Beer Wine & Spirits, 2752 W Broadway, Vancouver. Open daily 10am-11pm.`
     );
     document.getElementById('email-btn').href = `mailto:?subject=${subject}&body=${body}`;
 
