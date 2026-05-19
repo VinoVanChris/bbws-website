@@ -780,9 +780,13 @@ p { color: var(--text-muted); max-width: 66ch; }
 
 .contact-form {
   background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius);
   padding: 40px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.08), 0 2px 8px rgba(0,0,0,0.06);
 }
 .contact-form-body {
   display: grid;
