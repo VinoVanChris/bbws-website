@@ -742,9 +742,9 @@ p { color: var(--text-muted); max-width: 66ch; }
    ============================================ */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: 1fr 1.6fr;
   gap: 64px;
-  align-items: start;
+  align-items: stretch;
 }
 @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 

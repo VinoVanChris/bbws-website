@@ -101,6 +101,7 @@ sitemapLastmod: 2026-05-18
 
     <section class="section">
       <div class="container">
+        <!-- Top row: info left, map right -->
         <div class="contact-grid">
 
           <!-- Left: Info -->
@@ -153,9 +154,12 @@ sitemapLastmod: 2026-05-18
               </div>
             </div>
 
-            <!-- Map -->
-            <div class="map-wrap">
-              <div id="contact-map" style="width:100%;height:360px;position:relative;z-index:0;"></div>
+          </div>
+
+          <!-- Right: Map -->
+          <div class="fade-in">
+            <div class="map-wrap" style="margin-top:0;height:100%;min-height:420px;">
+              <div id="contact-map" style="width:100%;height:100%;min-height:420px;position:relative;z-index:0;"></div>
               <div class="map-info-card">
                 <div class="map-info-name">Broadway Beer Wine &amp; Spirits</div>
                 <div class="map-info-addr">2752 W Broadway<br>Vancouver, BC V6K 2G4</div>
@@ -196,52 +200,53 @@ sitemapLastmod: 2026-05-18
               });
             })();
             </script>
-
           </div>
 
-          <!-- Right: Form -->
-          <div class="contact-form fade-in">
-            <p class="section-eyebrow" style="margin-bottom:16px;">Send a Message</p>
+        </div>
 
-            <p style="font-size:0.85rem;color:var(--gray);margin-bottom:20px;">What's this about?</p>
-            <div class="subject-pills" role="group" aria-label="Message subject">
-              <button class="subject-pill active" type="button">General</button>
-              <button class="subject-pill" type="button">Corporate Gifting</button>
-              <button class="subject-pill" type="button">Cellar Consulting</button>
-              <button class="subject-pill" type="button">Events</button>
-              <button class="subject-pill" type="button">Other</button>
+        <!-- Form below -->
+        <div class="contact-form fade-in" style="margin-top:56px;">
+          <p class="section-eyebrow" style="margin-bottom:16px;">Send a Message</p>
+
+          <p style="font-size:0.85rem;color:var(--gray);margin-bottom:20px;">What's this about?</p>
+          <div class="subject-pills" role="group" aria-label="Message subject">
+            <button class="subject-pill active" type="button">General</button>
+            <button class="subject-pill" type="button">Corporate Gifting</button>
+            <button class="subject-pill" type="button">Cellar Consulting</button>
+            <button class="subject-pill" type="button">Events</button>
+            <button class="subject-pill" type="button">Other</button>
+          </div>
+
+          <form action="https://formspree.io/f/mojrgdnq" method="POST" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name" placeholder="Jane" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name" placeholder="Smith" autocomplete="family-name" />
+              </div>
             </div>
-
-            <form action="https://formspree.io/f/mojrgdnq" method="POST" novalidate>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="first-name">First Name</label>
-                  <input type="text" id="first-name" name="first_name" placeholder="Jane" required autocomplete="given-name" />
-                </div>
-                <div class="form-group">
-                  <label for="last-name">Last Name</label>
-                  <input type="text" id="last-name" name="last_name" placeholder="Smith" autocomplete="family-name" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email" />
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone (optional)</label>
-                <input type="tel" id="phone" name="phone" placeholder="+1 (604) 000-0000" autocomplete="tel" />
-              </div>
-              <div class="form-group">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1 (604) 000-0000" autocomplete="tel" />
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="grid-column:1/-1;">
                 <label for="message">Message</label>
                 <textarea id="message" name="message" placeholder="Tell us what you're looking for…" required></textarea>
               </div>
-              <button type="submit" class="btn btn-gold" style="width:100%;">Send Message</button>
-              <p style="font-size:0.75rem;color:var(--gray);margin-top:12px;text-align:center;max-width:none;">
-                We typically respond within one business day.
-              </p>
-            </form>
-          </div>
-
+            </div>
+            <button type="submit" class="btn btn-gold" style="width:100%;">Send Message</button>
+            <p style="font-size:0.75rem;color:var(--gray);margin-top:12px;text-align:center;max-width:none;">
+              We typically respond within one business day.
+            </p>
+          </form>
         </div>
       </div>
     </section>
