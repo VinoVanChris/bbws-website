@@ -1714,9 +1714,9 @@ p { color: var(--text-muted); max-width: 66ch; }
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 .pairing-card-head h3 {
-  font-size: 1.4rem;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
   margin: 0 0 6px;
-  line-height: 1.15;
+  line-height: 1.1;
 }
 .pairing-card-head h3 a {
   color: inherit;
@@ -1875,7 +1875,7 @@ p { color: var(--text-muted); max-width: 66ch; }
 @media (max-width: 580px) { .pairing-grid { grid-template-columns: 1fr; } }
 .pairing-card { background: var(--bg-card); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; padding: 24px; }
 .pairing-card .pairing-card-photo { margin: -24px -24px 20px; }
-.pairing-card h3 { margin: 0 0 10px; font-size: 1rem; }
+.post-body .pairing-card h3 { margin: 0 0 10px; font-size: 1rem; }
 .pairing-card p { font-size: 0.88rem; color: var(--text-muted); margin: 0; line-height: 1.65; }
 
 /* Blog Posts — tasting notes (skaha-vineyard-equus) */
