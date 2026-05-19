@@ -2,10 +2,10 @@
 layout: base.njk
 title: "Party Planner | Broadway Beer Wine & Spirits"
 navPage: party
-description: "Tell SOM how many guests, how many hours, and what kind of party. We'll build your shopping list."
+description: "Tell us how many guests, how many hours, and what kind of party. We'll build your shopping list."
 canonical: "https://www.broadwaybeerwine.ca/party.html"
 ogTitle: "The Party Planner — How Much Do You Need?"
-ogDescription: "Tell SOM about your party. Get a shopping list, a PDF, and the confidence to walk into the shop knowing exactly what you need."
+ogDescription: "Tell us about your party. Get a shopping list, a PDF, and the confidence to walk into the shop knowing exactly what you need."
 ogImage: "https://www.broadwaybeerwine.ca/images/event-shot.webp"
 ogImageWidth: 1200
 ogImageHeight: 630
@@ -316,8 +316,8 @@ sitemapLastmod: 2026-05-18
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <p class="section-eyebrow">The Party Planner</p>
-      <h1>Tell SOM About Your Party</h1>
-      <p>Guests, hours, occasion. SOM does the math and hands you a list. Walk into the shop knowing exactly what you need.</p>
+      <h1>Tell Us About Your Party</h1>
+      <p>Guests, hours, occasion. We'll do the math and hand you a list. Walk into the shop knowing exactly what you need.</p>
     </div>
   </section>
 
@@ -325,7 +325,7 @@ sitemapLastmod: 2026-05-18
   <div class="intro-band">
     <div class="container">
       <p style="font-size:1.1rem;font-style:italic;margin-bottom:0;max-width:680px;margin-left:auto;margin-right:auto;">
-        Running short at a party is awkward. Over-buying is expensive. SOM finds the middle ground, then lets you print the list or send it to yourself.
+        Running short is awkward. Over-buying is expensive. Tell us the details and we'll find the middle ground — then let you print the list or send it to yourself.
       </p>
     </div>
   </div>
@@ -400,7 +400,7 @@ sitemapLastmod: 2026-05-18
         </div>
 
         <button class="btn btn-gold" id="calculate-btn" type="button" style="width:100%;justify-content:center;margin-top:8px;">
-          Ask SOM
+          Build My List
         </button>
 
       </div>
@@ -447,7 +447,7 @@ sitemapLastmod: 2026-05-18
 
         <!-- Print-only footer -->
         <div class="print-footer">
-          Built with SOM at broadwaybeerwine.ca/party.html &nbsp;·&nbsp; Come in and we'll help you pick the right bottles for every item on this list.
+          broadwaybeerwine.ca/party.html &nbsp;·&nbsp; Come in and we'll help you pick the right bottles for every item on this list.
         </div>
 
       </div>
@@ -638,11 +638,11 @@ sitemapLastmod: 2026-05-18
     // Email link
     const subject = encodeURIComponent(`Party Shopping List — Broadway Beer Wine & Spirits`);
     const body = encodeURIComponent(
-      `Here's the list SOM built for my ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
+      `My party shopping list — ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
       items.filter(i => i.qty !== "Don't forget")
            .map(i => `• ${i.name}: ${i.qty}`).join('\n') +
       `\n• Non-Alcoholic: Don't forget` +
-      `\n\nSOM's note: ${somNotes[r.occasion] || ''}` +
+      `\n\nNote: ${somNotes[r.occasion] || ''}` +
       `\n\nBuilt at broadwaybeerwine.ca/party.html` +
       `\nBroadway Beer Wine & Spirits — 2752 W Broadway, Vancouver. Open daily 10am–11pm.`
     );
