@@ -259,6 +259,78 @@ sitemapLastmod: 2026-05-18
   border-radius: 100px;
   padding: 5px 14px;
 }
+/* ── Results banner ───────────────────────────────────────── */
+.results-banner {
+  position: relative;
+  background: #1a1208;
+  padding: 40px 40px 36px;
+  text-align: center;
+  overflow: hidden;
+}
+.results-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.results-banner-badge {
+  position: relative;
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 100px;
+  padding: 5px 16px;
+  margin-bottom: 28px;
+}
+.results-banner-stats {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.results-banner-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.results-banner-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.results-banner-occasion {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.results-banner-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.results-banner-pip {
+  width: 1px;
+  height: 52px;
+  background: rgba(201,168,76,0.25);
+  flex-shrink: 0;
+}
+@media (max-width: 520px) {
+  .results-banner { padding: 32px 20px 28px; }
+  .results-banner-stats { gap: 20px; }
+  .results-banner-pip { height: 36px; }
+}
+
 .party-actions {
   display: flex;
   gap: 12px;
@@ -271,7 +343,7 @@ sitemapLastmod: 2026-05-18
   .site-nav, .mobile-nav, .site-footer,
   .party-form-card, .party-actions,
   .page-hero, .intro-band, #recalc-btn,
-  .section-header, .som-header { display: none !important; }
+  .section-header, .som-header, .results-banner { display: none !important; }
 
   body { background: #fff; }
 
@@ -464,6 +536,27 @@ sitemapLastmod: 2026-05-18
           </div>
         </div>
 
+        <!-- Results banner -->
+        <div class="results-banner">
+          <div class="results-banner-badge">Party Planner</div>
+          <div class="results-banner-stats">
+            <div class="results-banner-stat">
+              <span class="results-banner-number" id="banner-guests"></span>
+              <span class="results-banner-label">Guests</span>
+            </div>
+            <div class="results-banner-pip"></div>
+            <div class="results-banner-stat">
+              <span class="results-banner-number" id="banner-hours"></span>
+              <span class="results-banner-label">Hours</span>
+            </div>
+            <div class="results-banner-pip"></div>
+            <div class="results-banner-stat">
+              <span class="results-banner-number results-banner-occasion" id="banner-occasion"></span>
+              <span class="results-banner-label">Occasion</span>
+            </div>
+          </div>
+        </div>
+
         <!-- SOM header -->
         <div class="som-header">
           <div class="som-avatar"><img src="/images/chris-reid.webp" alt="Chris Reid" /></div>
@@ -639,6 +732,10 @@ sitemapLastmod: 2026-05-18
   function render(r) {
     const oLabel = occasionLabels[r.occasion];
     const vLabel = vibeLabels[r.vibe];
+
+    document.getElementById('banner-guests').textContent = r.guests;
+    document.getElementById('banner-hours').textContent = r.hours;
+    document.getElementById('banner-occasion').textContent = oLabel;
 
     document.getElementById('som-intro').innerHTML =
       `<strong>${r.guests} guests</strong>, <strong>${r.hours} hours</strong>, ${oLabel}, ${vLabel}. Here is your list.`;
