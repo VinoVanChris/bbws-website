@@ -206,47 +206,53 @@ sitemapLastmod: 2026-05-18
 
         <!-- Form below -->
         <div class="contact-form fade-in" style="margin-top:56px;">
-          <p class="section-eyebrow" style="margin-bottom:16px;">Send a Message</p>
+          <div class="contact-form-body">
+            <div class="contact-form-content">
+              <p class="section-eyebrow" style="margin-bottom:16px;">Send a Message</p>
 
-          <p style="font-size:0.85rem;color:var(--gray);margin-bottom:20px;">What's this about?</p>
-          <div class="subject-pills" role="group" aria-label="Message subject">
-            <button class="subject-pill active" type="button">General</button>
-            <button class="subject-pill" type="button">Corporate Gifting</button>
-            <button class="subject-pill" type="button">Cellar Consulting</button>
-            <button class="subject-pill" type="button">Events</button>
-            <button class="subject-pill" type="button">Other</button>
+              <p style="font-size:0.85rem;color:var(--gray);margin-bottom:20px;">What's this about?</p>
+              <div class="subject-pills" role="group" aria-label="Message subject">
+                <button class="subject-pill active" type="button">General</button>
+                <button class="subject-pill" type="button">Corporate Gifting</button>
+                <button class="subject-pill" type="button">Cellar Consulting</button>
+                <button class="subject-pill" type="button">Events</button>
+                <button class="subject-pill" type="button">Other</button>
+              </div>
+
+              <form action="https://formspree.io/f/mojrgdnq" method="POST" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="first_name" placeholder="Jane" required autocomplete="given-name" />
+                  </div>
+                  <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last_name" placeholder="Smith" autocomplete="family-name" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone (optional)</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+1 (604) 000-0000" autocomplete="tel" />
+                </div>
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" placeholder="Tell us what you're looking for…" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-gold" style="width:100%;">Send Message</button>
+                <p style="font-size:0.75rem;color:var(--gray);margin-top:12px;text-align:center;max-width:none;">
+                  We typically respond within one business day.
+                </p>
+              </form>
+            </div>
+
+            <div class="contact-form-icon">
+              <img src="/images/icon-lg.webp" alt="Broadway Beer Wine &amp; Spirits" />
+            </div>
           </div>
-
-          <form action="https://formspree.io/f/mojrgdnq" method="POST" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="first-name">First Name</label>
-                <input type="text" id="first-name" name="first_name" placeholder="Jane" required autocomplete="given-name" />
-              </div>
-              <div class="form-group">
-                <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" name="last_name" placeholder="Smith" autocomplete="family-name" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email" />
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone (optional)</label>
-              <input type="tel" id="phone" name="phone" placeholder="+1 (604) 000-0000" autocomplete="tel" />
-            </div>
-            <div class="form-row">
-              <div class="form-group" style="grid-column:1/-1;">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Tell us what you're looking for…" required></textarea>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-gold" style="width:100%;">Send Message</button>
-            <p style="font-size:0.75rem;color:var(--gray);margin-top:12px;text-align:center;max-width:none;">
-              We typically respond within one business day.
-            </p>
-          </form>
         </div>
       </div>
     </section>

@@ -784,6 +784,28 @@ p { color: var(--text-muted); max-width: 66ch; }
   border-radius: 12px;
   padding: 40px;
 }
+.contact-form-body {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 48px;
+  align-items: center;
+}
+.contact-form-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+}
+.contact-form-icon img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  display: block;
+}
+@media (max-width: 700px) {
+  .contact-form-body { grid-template-columns: 1fr; }
+  .contact-form-icon { display: none; }
+}
 
 .form-row {
   display: grid;
