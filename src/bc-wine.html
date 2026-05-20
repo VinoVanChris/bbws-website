@@ -179,6 +179,7 @@ sitemapLastmod: 2026-05-19
         <button class="btn-choice" data-region="naramata" type="button">Naramata / Okanagan Falls</button>
         <button class="btn-choice" data-region="kelowna" type="button">Kelowna</button>
         <button class="btn-choice" data-region="similkameen" type="button">Similkameen</button>
+        <button class="btn-choice" data-region="fraser" type="button">Fraser Valley</button>
         <button class="btn-choice" data-region="islands" type="button">Gulf Islands</button>
         <button class="btn-choice" data-region="island" type="button">Vancouver Island</button>
       </div>
@@ -213,8 +214,14 @@ sitemapLastmod: 2026-05-19
 
             <div class="region-blurb" data-region="similkameen">
               <h2>Similkameen Valley</h2>
-              <p>BC's smallest wine region and one of its most interesting. The valley runs east-west through the Cascade Mountains west of the Okanagan, with extreme diurnal temperature swings and gravelly alluvial soils that stress the vines in the best possible way. Organic farming is widespread here. Clos du Soleil, Orofino, and Whispering Horse are the three reasons to pay attention to Cawston.</p>
+              <p>BC's smallest wine region and one of its most interesting. The valley runs east-west through the Cascade Mountains west of the Okanagan, with extreme diurnal temperature swings and gravelly alluvial soils that stress the vines in the best possible way. Organic farming is widespread here. Clos du Soleil and Orofino are two compelling reasons to pay attention to Cawston.</p>
               <div class="region-blurb-wineries" id="wineries-similkameen"></div>
+            </div>
+
+            <div class="region-blurb" data-region="fraser">
+              <h2>Fraser Valley</h2>
+              <p>Less than two hours from Vancouver, the Fraser Valley is an emerging wine region with a cooler, wetter climate than the Okanagan. The focus is on hardy varietals and estate-grown fruit that reflects the valley's rich agricultural land. Whispering Horse, in Yarrow near Chilliwack, is making some of BC's more unusual whites from their Vedder Mountain vineyard.</p>
+              <div class="region-blurb-wineries" id="wineries-fraser"></div>
             </div>
 
             <div class="region-blurb" data-region="islands">
@@ -293,6 +300,7 @@ sitemapLastmod: 2026-05-19
     naramata:    { center: [49.40, -119.59], zoom: 11 },
     kelowna:     { center: [49.87, -119.52], zoom: 11 },
     similkameen: { center: [49.22, -119.76], zoom: 12 },
+    fraser:      { center: [49.15, -121.97], zoom: 11 },
     islands:     { center: [48.83, -123.50], zoom: 10 },
     island:      { center: [48.72, -123.68], zoom: 10 },
   };
@@ -332,10 +340,12 @@ sitemapLastmod: 2026-05-19
     { name:'Mission Hill Family Estate', region:'kelowna', lat:49.845, lng:-119.636, url:'https://missionhillwinery.com', note:'West Kelowna. The winery that put BC on the international map. Reserve Meritage and Chardonnay are solid.' },
     { name:'Quails\' Gate Winery', region:'kelowna', lat:49.840, lng:-119.634, url:'https://quailsgate.com', note:'West Kelowna. Old Vines Foch is the one to know. Field &amp; Flight Pinot Noir and Rosé round out the range.' },
 
-    /* ── Similkameen — corrected to Cawston / Keremeos area ── */
+    /* ── Similkameen — Cawston / Keremeos area ─────────────── */
     { name:'Clos du Soleil', region:'similkameen', lat:49.218, lng:-119.726, url:'https://closdusoleil.ca', note:'Cawston. The Lumière rosé and Signature Bordeaux blend are two of the best bottles coming out of BC right now.' },
     { name:'Orofino Vineyards', region:'similkameen', lat:49.222, lng:-119.735, url:'https://orofinovineyards.com', note:'Cawston. Gamay, Red Bridge Red, and the Washington Series Cinsault are worth having. Low-intervention, high character.' },
-    { name:'Whispering Horse Winery', region:'similkameen', lat:49.215, lng:-119.741, url:'https://whisperinghorse.ca', note:'Cawston. La Crescent, Pinot Gris, and a rare Pet Nat L\'Acadie. Small production, genuinely distinctive wines.' },
+
+    /* ── Fraser Valley ──────────────────────────────────────── */
+    { name:'Whispering Horse Winery', region:'fraser', lat:49.072, lng:-121.985, url:'https://www.whisperinghorsewinery.com', note:'Yarrow, Chilliwack. Estate-grown Fraser Valley fruit. La Crescent, Pinot Gris, and a Pet Nat Acadie — genuinely distinctive.' },
 
     /* ── Gulf Islands ───────────────────────────────────────── */
     { name:'A Sunday in August', region:'islands', lat:48.840, lng:-123.500, url:'https://asundayinaugust.com', note:'Salt Spring Island. Natural winemaking, estate-grown fruit. The Carbonic Orange and Gulf Island Vermouth are both in store.' },
