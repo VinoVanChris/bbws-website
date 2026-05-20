@@ -585,14 +585,25 @@ SOM.whisky = (function() {
         '<p class="wcp-hover-hint">Hover a dot to preview. Click to lock.</p>';
     }
 
-    // Back button -- clears bottle lock and returns to group state
+    // Back button -- behaviour depends on current state:
+    //   bottle view  → back to group (keep current region filter)
+    //   group view   → back to all (reset to all dots + group buttons)
     var backBtn = panel.querySelector('#wcp-back, .wcp-back');
     if (backBtn) {
       backBtn.addEventListener('click', function() {
-        compassState.bottle = null;
-        compassState.locked = false;
-        updateDotLock(null);
-        renderRight();
+        if (compassState.bottle) {
+          // Backing out of a locked bottle -- stay in current group
+          compassState.bottle = null;
+          compassState.locked = false;
+          updateDotLock(null);
+          renderRight();
+        } else {
+          // Backing out of a region group -- go all the way to all
+          compassState = { group: 'all', bottle: null, locked: false };
+          updateDotLock(null);
+          renderDots(null);
+          renderRight();
+        }
       });
     }
 
