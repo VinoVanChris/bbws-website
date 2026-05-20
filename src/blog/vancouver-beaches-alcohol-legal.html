@@ -24,13 +24,14 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
 .beach-map-wrap {
   position: relative;
   display: flex;
+  height: 480px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.08);
 }
 #beach-map {
   flex: 1;
-  height: 480px;
+  min-width: 0;
   border-radius: 0;
   border: none;
 }
@@ -38,7 +39,7 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   width: 256px;
   flex-shrink: 0;
   background: #fff;
-  overflow-y: auto;
+  overflow: hidden;
   border-left: 1px solid rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
@@ -52,6 +53,26 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: #888;
+}
+.beach-panel-store {
+  flex-shrink: 0;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px 16px;
+  border: none;
+  border-bottom: 2px solid rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.06);
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.beach-panel-store:hover { background: rgba(201,168,76,0.13); }
+.beach-panel-store.active { background: rgba(201,168,76,0.18); }
+#beach-list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 .beach-chip {
   display: block;
@@ -72,6 +93,7 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   color: #2d6a2d;
   display: block;
 }
+.beach-chip-name.store { color: #c9a84c; }
 .beach-chip-desc {
   font-size: 0.71rem;
   color: #888;
@@ -80,9 +102,9 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   line-height: 1.4;
 }
 @media (max-width: 700px) {
-  .beach-map-wrap { flex-direction: column; }
+  .beach-map-wrap { flex-direction: column; height: auto; }
   #beach-map { height: 320px; }
-  .beach-panel { width: 100%; border-left: none; border-top: 1px solid rgba(0,0,0,0.08); max-height: 240px; }
+  .beach-panel { width: 100%; border-left: none; border-top: 1px solid rgba(0,0,0,0.08); height: 240px; }
 }
 </style>
 
@@ -213,7 +235,7 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
       markerByName[b.name] = marker;
     });
 
-    L.marker([store.lat, store.lng], { icon: makeIcon(true) })
+    const storeMarker = L.marker([store.lat, store.lng], { icon: makeIcon(true) })
       .addTo(map)
       .bindPopup(`<strong style="font-size:0.9rem;color:#c9a84c;">${store.name}</strong><br><span style="font-size:0.8rem;color:#555;">${store.note}</span>`)
       .openPopup();
@@ -221,6 +243,20 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
     // ── Beach list panel ──────────────────────────────────────────────
     const listEl = document.getElementById('beach-list');
     let activeChip = null;
+
+    // ── Pinned store chip (above beach list) ──────────────────────────
+    const storeSection = document.querySelector('.beach-panel');
+    const storeBtn = document.createElement('button');
+    storeBtn.className = 'beach-panel-store';
+    storeBtn.innerHTML = `<span class="beach-chip-name store">★ Broadway Beer Wine &amp; Spirits</span><span class="beach-chip-desc">2752 W Broadway · We&rsquo;re here</span>`;
+    storeBtn.addEventListener('click', function() {
+      if (activeChip) activeChip.classList.remove('active');
+      storeBtn.classList.add('active');
+      activeChip = storeBtn;
+      map.flyTo([store.lat, store.lng], 15, { duration: 0.6 });
+      map.once('moveend', function() { storeMarker.openPopup(); });
+    });
+    storeSection.insertBefore(storeBtn, listEl);
 
     beaches.forEach(function(b) {
       const btn = document.createElement('button');
