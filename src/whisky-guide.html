@@ -61,11 +61,12 @@ schema: |
   </section>
 
   <!-- ===== FLAVOUR COMPASS ===== -->
-  <section class="section section-alt" id="whisky-compass" style="padding-top:40px;padding-bottom:40px;">
-    <div class="container" style="max-width:var(--max-width)">
+  <section class="whisky-compass-section" id="whisky-compass">
+    <div class="whisky-compass-section-overlay"></div>
+    <div class="container" style="max-width:var(--max-width);position:relative;z-index:1;">
       <div class="section-header fade-in" style="margin-bottom:24px;">
-        <p class="section-eyebrow">Orientation</p>
-        <h2>The Flavour Compass.</h2>
+        <p class="section-eyebrow" style="color:var(--gold);">Orientation</p>
+        <h2 style="color:#fff;">The Flavour Compass.</h2>
         <div class="divider"></div>
       </div>
 
@@ -86,7 +87,7 @@ schema: |
         <div class="whisky-compass-right" id="whisky-compass-right"></div>
       </div>
     </div>
-  </section>
+  </section><!-- end whisky-compass-section -->
 
   <!-- ===== COLLECTIONS ===== -->
   <section class="section" id="whisky-collections" style="padding-top:40px;padding-bottom:40px;">
