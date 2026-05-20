@@ -590,10 +590,10 @@ SOM.whisky = (function() {
   }
 
   // Phase 2: regionIds comes from Bottlecapps inventory filter
+  // Only updates innerHTML -- listeners are attached once via initDotListeners()
   function renderDots(regionIds) {
     var dotsEl = document.getElementById('whisky-compass-dots');
     if (!dotsEl) return;
-
     dotsEl.innerHTML = W.bottles.filter(function(b) {
       if (!b.inStock) return false;
       if (!regionIds) return true;
@@ -606,9 +606,14 @@ SOM.whisky = (function() {
            + ' style="left:' + left + '%;top:' + top + '%;background:' + col + ';"'
            + ' data-id="' + b.id + '" aria-label="' + b.name + '"></button>';
     }).join('');
+  }
 
+  // Attached once on init -- event delegation on the persistent container
+  function initDotListeners() {
+    var dotsEl = document.getElementById('whisky-compass-dots');
+    if (!dotsEl) return;
     dotsEl.addEventListener('mouseenter', function(e) {
-      if (compassState.locked) return; // locked -- hover does nothing
+      if (compassState.locked) return;
       if (!e.target.classList.contains('whisky-compass-dot')) return;
       var b = W.bottles.find(function(x) { return x.id === e.target.dataset.id; });
       if (!b) return;
@@ -616,7 +621,7 @@ SOM.whisky = (function() {
       renderRight();
     }, true);
     dotsEl.addEventListener('mouseleave', function(e) {
-      if (compassState.locked) return; // locked -- hover does nothing
+      if (compassState.locked) return;
       if (!e.target.classList.contains('whisky-compass-dot')) return;
       compassState.bottle = null;
       renderRight();
@@ -626,7 +631,7 @@ SOM.whisky = (function() {
       if (!dot) return;
       var b = W.bottles.find(function(x) { return x.id === dot.dataset.id; });
       if (!b) return;
-      // Toggle: clicking same locked dot unlocks; clicking any other dot locks it
+      // Same dot again = unlock; any other dot = lock it
       if (compassState.locked && compassState.bottle && compassState.bottle.id === b.id) {
         compassState.bottle = null;
         compassState.locked = false;
@@ -687,6 +692,7 @@ SOM.whisky = (function() {
   W.fetchInventory().then(function() {
     renderRegionGrid();
     renderDots(null);
+    initDotListeners(); // attach once -- renderDots() only updates innerHTML
     renderRight();
     renderCollections();
     renderEducation();
