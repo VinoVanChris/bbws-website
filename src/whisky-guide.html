@@ -276,7 +276,7 @@ SOM.whisky = (function() {
     japan:       { label:'Japan',      group:'world',    colour:'#A1191D', character:'Refined, Balanced, Subtle',      body:'Japanese whisky took Scotland\'s traditions and made them precise. Expect incredible balance, restraint, and complexity. Hibiki and Yamazaki have become some of the most sought-after bottles in the world.' },
     ireland:     { label:'Ireland',    group:'world',    colour:'#2d7a6f', character:'Smooth, Triple-Distilled, Approachable', body:'Triple distillation gives Irish whiskey a lightness and smoothness that Scotch rarely matches. Jameson is the entry point, but Redbreast and Green Spot are where the real depth lives.' },
     america:     { label:'America',    group:'world',    colour:'#b87333', character:'Vanilla, Oak, Sweet Spice',      body:'Bourbon must be made in America, aged in new charred oak, and be at least 51% corn. The result is a sweeter, richer spirit. Rye swaps the corn for spice. Both are endlessly versatile.' },
-    canada:      { label:'Canada',     group:'world',    colour:'#b87333', character:'Light, Rye-Forward, Versatile', body:'Canadian whisky has quietly improved enormously. Rye-forward and approachable, it punches above its price point. Lot 40 is the bottle that converted a generation of Canadians to take their own whisky seriously.' }
+    canada:      { label:'Canada',     group:'world',    colour:'#b87333', character:'Rye-Forward, Craft, Diverse', body:'Canadian whisky has quietly built a serious case for itself. From big Ontario rye producers to craft distilleries in BC and Alberta, the range is broader than most drinkers expect. Lot 40 started the conversation. Shelter Point and Okanagan Spirits are where BC production is heading.' }
   };
 
   // ── BOTTLES ────────────────────────────────────────────────────
@@ -439,11 +439,56 @@ SOM.whisky = (function() {
       flavour:'Rye spice, vanilla, dried fruit, light oak',
       finish:'Medium, warming, rye-forward',
       tags:['gateway','enthusiast'],  note:'100% rye, made the old way. Lot 40 is the bottle that showed Canada what serious Canadian whisky could taste like.',                inStock:true },
-    { id:'forty-creek',       name:'Forty Creek Barrel Select',producer:'Forty Creek Distillery',      region:'canada',      peat:0,  body:4,  tier:'entry',
+    { id:'forty-creek',          name:'Forty Creek Barrel Select',     producer:'Forty Creek Distillery',   region:'canada',      peat:0,  body:4,  tier:'entry',
       aroma:'Light grain, vanilla, honey, gentle spice',
       flavour:'Smooth grain, honey, vanilla, gentle spice',
       finish:'Short, clean, pleasant',
-      tags:['gateway'],               note:'Three grains, three casks, blended by one of Canada\'s most celebrated distillers. Light, approachable, and honestly made.',         inStock:true }
+      tags:['gateway'],               note:'Three grains, three casks, blended by one of Canada\'s most celebrated distillers. Light, approachable, and honestly made.',         inStock:true },
+    { id:'crown-royal',           name:'Crown Royal',                   producer:'Crown Royal Distillery',   region:'canada',      peat:0,  body:4,  tier:'entry',
+      aroma:'Vanilla, light oak, grain, subtle dried fruit',
+      flavour:'Smooth corn and rye, vanilla, caramel, gentle oak',
+      finish:'Short to medium, clean, sweet',
+      tags:['gateway'],               note:'The benchmark Canadian blended whisky. Light, smooth, and dependable. The purple bag is half the reason it ends up on every gift list.',  inStock:true },
+    { id:'crown-royal-rye',       name:'Crown Royal Northern Harvest Rye', producer:'Crown Royal Distillery', region:'canada',    peat:0,  body:5,  tier:'mid',
+      aroma:'Rye spice, vanilla, dried apricot, gentle oak',
+      flavour:'Bold rye spice, stone fruit, vanilla, warming spice',
+      finish:'Medium-long, spicy, satisfying',
+      tags:['enthusiast'],            note:'Named World Whisky of the Year by Jim Murray in 2016. Rye-forward, complex, and serious value at the price.',                           inStock:true },
+    { id:'canadian-club-12',      name:'Canadian Club 12',              producer:'Hiram Walker & Sons',      region:'canada',      peat:0,  body:3,  tier:'entry',
+      aroma:'Light rye, vanilla, cereal grain, hint of oak',
+      flavour:'Smooth and light, gentle rye spice, vanilla',
+      finish:'Clean, medium, easy',
+      tags:['gateway'],               note:'Twelve years in oak gives Canadian Club real depth for the price. Light and approachable, a reliable foundation for cocktails or for sipping.',  inStock:true },
+    { id:'wisers-deluxe',         name:"J.P. Wiser's Deluxe",           producer:'Corby Spirit and Wine',    region:'canada',      peat:0,  body:4,  tier:'entry',
+      aroma:'Vanilla, light rye, caramel, mild oak',
+      flavour:'Smooth, lightly spiced rye, caramel, biscuit',
+      finish:'Short, clean, light sweetness',
+      tags:['gateway'],               note:'Widely available and genuinely well-made for the price. A staple Canadian whisky that delivers every time.',                             inStock:true },
+    { id:'pike-creek-10',         name:'Pike Creek 10',                  producer:'Corby Spirit and Wine',    region:'canada',      peat:0,  body:6,  tier:'mid',
+      aroma:'Rum barrel sweetness, vanilla, toasted oak, tropical fruit',
+      flavour:'Rich rum barrel, vanilla, caramel, gentle spice',
+      finish:'Warm, long, sweet oak',
+      tags:['enthusiast','gift'],     note:'Finished in rum casks, Pike Creek develops a richness that punches well above its price. One of the more interesting Canadian whiskies on the shelf.',  inStock:true },
+    { id:'bearface-triple-oak',   name:'Bearface Triple Oak',            producer:'Bearface Whisky',          region:'canada',      peat:0,  body:6,  tier:'mid',
+      aroma:'Toasted oak, vanilla, dried fruit, light caramel',
+      flavour:'Rich oak, dark fruit, cinnamon, butterscotch',
+      finish:'Long, warming, lingering vanilla',
+      tags:['gift','enthusiast'],     note:'Matured in three different cask types, Bearface delivers layers that most Canadian whiskies do not attempt. A serious bottle at a fair price.',  inStock:true },
+    { id:'alberta-dark-horse',    name:'Alberta Premium Dark Horse',     producer:'Alberta Distillers',       region:'canada',      peat:0,  body:7,  tier:'mid',
+      aroma:'Bold rye, dark fruit, oak, vanilla, cinnamon',
+      flavour:'Rich rye spice, dark cherry, leather, butterscotch',
+      finish:'Long, warming, rye-driven',
+      tags:['enthusiast'],            note:'High-rye Alberta Premium pushed through sherry and bourbon cask finishing. One of the boldest Canadian whiskies made. Converts sceptics.',  inStock:true },
+    { id:'shelter-point-sm',      name:'Shelter Point Single Malt',      producer:'Shelter Point Distillery', region:'canada',      peat:0,  body:6,  tier:'mid',
+      aroma:'Coastal air, honey, light oak, green apple, malt',
+      flavour:'Malt, apple, honey, gentle vanilla, coastal note',
+      finish:'Medium, clean, lightly sweet',
+      tags:['enthusiast','gift'],     note:'Made on Vancouver Island from estate-grown barley, Shelter Point is one of BC\'s most celebrated craft whiskies. Serious single malt, local roots.',  inStock:true },
+    { id:'okanagan-laird',        name:'Okanagan Spirits Laird of Fintry', producer:'Okanagan Spirits',       region:'canada',      peat:0,  body:7,  tier:'premium',
+      aroma:'Rich oak, dried fruit, honey, baking spice, vanilla',
+      flavour:'Dense dried fruit, dark chocolate, warming spice, sherry',
+      finish:'Long, complex, warming',
+      tags:['gift','celebration'],    note:'Aged in Okanagan wine casks and bourbon barrels, the Laird of Fintry is BC\'s most decorated whisky. A genuinely world-class Canadian expression.',  inStock:true }
   ];
 
   // ── COLLECTIONS ────────────────────────────────────────────────
@@ -813,7 +858,7 @@ document.addEventListener('DOMContentLoaded', function() {
     japan:       { center:[39.00, 138.00],  zoom:5  },
     ireland:     { center:[53.50, -7.50],   zoom:7  },
     america:     { center:[37.80, -85.50],  zoom:7  },
-    canada:      { center:[43.30, -81.00],  zoom:7  },
+    canada:      { center:[52.50, -100.00], zoom:4  },
   };
 
   // ── Distillery data (name, coords, story, bottles) ───────────
@@ -900,12 +945,27 @@ document.addEventListener('DOMContentLoaded', function() {
       desc:'One of the few Kentucky distilleries using two different mash bills and five yeast strains, producing ten distinct bourbon recipes. A distillery that rewards exploration and the source of many highly regarded rye expressions.',
       bottles:['bulleit-rye'] },
     // Canada
-    { name:'Forty Creek',      region:'canada',      lat:43.199, lng:-79.576, founded:1992,
+    { name:'Forty Creek',         region:'canada', lat:43.199, lng:-79.576, founded:1992,
       desc:'Founded by former winemaker John Hall in Grimsby, Ontario, Forty Creek helped reshape the reputation of Canadian whisky. Distilled in small batches from separate grain recipes, it consistently exceeds expectations at its price point.',
       bottles:['forty-creek'] },
-    { name:'Hiram Walker',     region:'canada',      lat:42.317, lng:-83.034, founded:1858,
-      desc:'One of the largest distilleries in North America, on the shore of the Detroit River in Windsor, Ontario. Home to Canadian Club and Lot 40, it has been a cornerstone of Canadian whisky production for more than 160 years.',
-      bottles:['lot-40'] },
+    { name:'Hiram Walker & Sons', region:'canada', lat:42.317, lng:-83.034, founded:1858,
+      desc:'One of the largest distilleries in North America, on the shore of the Detroit River in Windsor, Ontario. Home to Canadian Club, Lot 40, J.P. Wiser\'s, and Pike Creek, it has been a cornerstone of Canadian whisky for more than 160 years.',
+      bottles:['lot-40','canadian-club-12','wisers-deluxe','pike-creek-10'] },
+    { name:'Crown Royal Distillery', region:'canada', lat:51.575, lng:-96.990, founded:1939,
+      desc:'Built in Gimli, Manitoba on the western shore of Lake Winnipeg, Crown Royal was established by Seagram in 1939 to honour the royal visit of King George VI. It is now one of the best-selling Canadian whiskies in the world.',
+      bottles:['crown-royal','crown-royal-rye'] },
+    { name:'Alberta Distillers',  region:'canada', lat:51.048, lng:-114.061, founded:1946,
+      desc:'Alberta Distillers in Calgary produces some of the purest expressions of rye whisky in Canada, using 100% rye mash. Alberta Premium and its Dark Horse expression have earned genuine international recognition from whisky critics.',
+      bottles:['alberta-dark-horse'] },
+    { name:'Highwood Distillers', region:'canada', lat:50.583, lng:-113.873, founded:1974,
+      desc:'Located in High River, Alberta, Highwood is one of Canada\'s most prolific craft-oriented producers. Home to the Bearface Triple Oak programme, it has attracted serious attention from whisky drinkers looking beyond the mainstream.',
+      bottles:['bearface-triple-oak'] },
+    { name:'Shelter Point Distillery', region:'canada', lat:50.019, lng:-125.247, founded:2011,
+      desc:'Set on a 380-acre working farm on Vancouver Island, Shelter Point is BC\'s pioneering craft single malt distillery. Using estate-grown barley and Pacific coastal air, it produces whisky that stands alongside anything Scotland makes at a comparable age.',
+      bottles:['shelter-point-sm'] },
+    { name:'Okanagan Spirits',    region:'canada', lat:50.267, lng:-119.272, founded:2004,
+      desc:'BC\'s original craft distillery, founded in Vernon in 2004 and now operating across the Okanagan Valley. Okanagan Spirits has built its reputation on the Laird of Fintry whisky, aged in local wine casks for extraordinary depth and complexity.',
+      bottles:['okanagan-laird'] },
   ];
 
   var COLORS = {
