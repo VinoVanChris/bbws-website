@@ -130,12 +130,13 @@ schema: |
 .wmap-popup-wrap .leaflet-popup-tip-container { margin-top:-1px; }
 .wmap-popup-wrap .leaflet-popup-tip { box-shadow:none; }
 @media (max-width:640px) {
-  .wmap-wrap { overflow:visible; border-radius:var(--radius) var(--radius) 0 0; }
+  .wmap-wrap { display:flex; flex-direction:column; gap:16px; height:auto; overflow:visible; border:none; border-radius:0; }
+  .wmap-map-wrap { height:320px; border-radius:var(--radius); overflow:hidden; border:1px solid rgba(0,0,0,0.08); }
   #whisky-world-map { height:320px; }
   .wmap-panel {
     position:static; width:100%; max-width:100%; height:auto;
-    border-left:none; border-top:1px solid var(--border-gold);
-    border-radius:0 0 var(--radius) var(--radius); box-shadow:none; backdrop-filter:none;
+    border-left:none; border-top:none; border:1px solid var(--border-gold);
+    border-radius:var(--radius); box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
   }
 }
 </style>
@@ -162,7 +163,9 @@ schema: |
       </div>
 
       <div class="wmap-wrap">
-        <div id="whisky-world-map"></div>
+        <div class="wmap-map-wrap">
+          <div id="whisky-world-map"></div>
+        </div>
 
         <aside class="wmap-panel" aria-label="Whisky region details">
           <div class="wmap-back-bar" id="wmap-back-bar" hidden>

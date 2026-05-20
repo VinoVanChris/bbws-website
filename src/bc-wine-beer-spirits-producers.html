@@ -163,7 +163,8 @@ sitemapLastmod: 2026-05-20
 
 /* Mobile: panel stacks below map */
 @media (max-width: 640px) {
-  .map-region-wrap { overflow: visible; border-radius: var(--radius) var(--radius) 0 0; }
+  .map-region-wrap { display: flex; flex-direction: column; gap: 16px; height: auto; overflow: visible; border: none; border-radius: 0; }
+  .bc-map-wrap { height: 360px; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
   #bc-wine-map { height: 360px; }
   .region-panel {
     position: static;
@@ -171,8 +172,9 @@ sitemapLastmod: 2026-05-20
     max-width: 100%;
     height: auto;
     border-left: none;
-    border-top: 1px solid var(--border-gold);
-    border-radius: 0 0 var(--radius) var(--radius);
+    border-top: none;
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius);
     box-shadow: none;
     backdrop-filter: none;
   }
@@ -277,7 +279,9 @@ sitemapLastmod: 2026-05-20
 
       <!-- Map + persistent region panel -->
       <div class="map-region-wrap fade-in">
-        <div id="bc-wine-map"></div>
+        <div class="bc-map-wrap">
+          <div id="bc-wine-map"></div>
+        </div>
 
         <aside class="region-panel" id="region-panel" aria-label="Region details">
 
