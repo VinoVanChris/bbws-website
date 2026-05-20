@@ -70,44 +70,20 @@ schema: |
       </div>
 
       <div class="whisky-compass-card fade-in">
-        <!-- Filter row: full width -->
-        <div class="whisky-compass-filter" id="whisky-compass-filter">
-          <button class="whisky-filter-btn active" data-region="all" type="button">All</button>
-        </div>
-        <!-- Body: plot + info -->
-        <div class="whisky-compass-body">
-          <!-- Left: compass plot -->
-          <div class="whisky-compass-left">
-            <div class="whisky-compass-container" id="whisky-compass">
-              <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
-              <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
-              <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
-              <div class="whisky-compass-label whisky-compass-label--right">Bold</div>
-              <div class="whisky-compass-xaxis"></div>
-              <div class="whisky-compass-yaxis"></div>
-              <div class="whisky-compass-dots" id="whisky-compass-dots"></div>
-            </div>
-          </div>
-          <!-- Right: info panel -->
-          <div class="whisky-compass-right">
-            <div class="whisky-compass-default" id="whisky-compass-default">
-              <p class="whisky-compass-hint">Hover a dot to explore.</p>
-              <div class="whisky-compass-legend">
-                <div class="wcl-item"><span class="wcl-dot" style="background:#c9a84c;"></span>Scotland</div>
-                <div class="wcl-item"><span class="wcl-dot" style="background:#A1191D;"></span>Japan</div>
-                <div class="wcl-item"><span class="wcl-dot" style="background:#2d7a6f;"></span>Ireland</div>
-                <div class="wcl-item"><span class="wcl-dot" style="background:#b87333;"></span>America &amp; Canada</div>
-              </div>
-              <p class="whisky-compass-hint-sub">Plotted by peat level (vertical) and body weight (horizontal).</p>
-            </div>
-            <div class="whisky-compass-info" id="whisky-compass-tooltip" hidden>
-              <span class="whisky-info-region" id="wct-region"></span>
-              <strong class="whisky-info-name" id="wct-name"></strong>
-              <span class="whisky-info-tier" id="wct-tier"></span>
-              <p class="whisky-info-note" id="wct-note"></p>
-            </div>
+        <!-- Left: compass plot -->
+        <div class="whisky-compass-left">
+          <div class="whisky-compass-container" id="whisky-compass">
+            <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
+            <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
+            <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
+            <div class="whisky-compass-label whisky-compass-label--right">Bold</div>
+            <div class="whisky-compass-xaxis"></div>
+            <div class="whisky-compass-yaxis"></div>
+            <div class="whisky-compass-dots" id="whisky-compass-dots"></div>
           </div>
         </div>
+        <!-- Right: state-driven panel (JS renders) -->
+        <div class="whisky-compass-right" id="whisky-compass-right"></div>
       </div>
     </div>
   </section>
@@ -392,13 +368,85 @@ SOM.whisky = (function() {
     document.getElementById('whisky-region-panel').hidden = true;
   });
 
-  // ── FLAVOUR COMPASS ──────────────────────────────────────────
-  // Phase 2: regionIds array comes from Bottlecapps inventory filter
+  // ── COMPASS STATE MACHINE ────────────────────────────────────
+  var GROUPS = [
+    { key:'all',      label:'All',      regions: null },
+    { key:'scotland', label:'Scotland', regions: SCOTCH },
+    { key:'japan',    label:'Japan',    regions: ['japan'] },
+    { key:'ireland',  label:'Ireland',  regions: ['ireland'] },
+    { key:'america',  label:'America',  regions: ['america'] },
+    { key:'canada',   label:'Canada',   regions: ['canada'] }
+  ];
+
+  var compassState = { group: 'all', bottle: null };
+
+  function renderRight() {
+    var panel = document.getElementById('whisky-compass-right');
+    if (!panel) return;
+
+    if (compassState.bottle) {
+      var b = compassState.bottle;
+      var r = W.regions[b.region];
+      panel.innerHTML =
+        (compassState.group !== 'all'
+          ? '<button class="wcp-back" id="wcp-back" type="button">← Back</button>'
+          : '') +
+        '<span class="whisky-info-region">' + (r ? r.label : '') + '</span>' +
+        '<strong class="whisky-info-name">' + b.name + '</strong>' +
+        '<span class="whisky-info-tier">' + b.tier + '</span>' +
+        '<p class="whisky-info-note">' + b.note + '</p>';
+    } else if (compassState.group === 'all') {
+      var btns = GROUPS.map(function(g) {
+        return '<button class="wcp-group-btn" data-key="' + g.key + '" type="button">' + g.label + '</button>';
+      }).join('');
+      panel.innerHTML =
+        '<p class="wcp-prompt">Select a region or hover a dot.</p>' +
+        '<div class="wcp-group-btns">' + btns + '</div>';
+      panel.querySelector('.wcp-group-btns').addEventListener('click', function(e) {
+        var btn = e.target.closest('.wcp-group-btn');
+        if (!btn) return;
+        selectGroup(btn.dataset.key);
+      });
+    } else {
+      var grp = GROUPS.find(function(g) { return g.key === compassState.group; });
+      var r2  = compassState.group !== 'scotland'
+                  ? W.regions[compassState.group]
+                  : null; // Scotland is a multi-region group
+      panel.innerHTML =
+        '<button class="wcp-back" id="wcp-back" type="button">← All</button>' +
+        '<span class="wcp-region-label">' + (grp ? grp.label : '') + '</span>' +
+        (r2
+          ? '<p class="wcp-region-char">' + r2.character + '</p>' +
+            '<p class="wcp-region-body">' + r2.body + '</p>'
+          : '<p class="wcp-region-body">Six distilling regions, each with a distinct character. Filter by Islay, Speyside, Highlands, Islands, Campbeltown, or Lowlands using the individual region names after selecting Scotland.</p>'
+        ) +
+        '<p class="wcp-hover-hint">Hover a dot for bottle details.</p>';
+    }
+
+    // Back button
+    var backBtn = panel.querySelector('#wcp-back, .wcp-back');
+    if (backBtn) {
+      backBtn.addEventListener('click', function() {
+        compassState = { group: 'all', bottle: null };
+        renderDots(null);
+        renderRight();
+      });
+    }
+  }
+
+  function selectGroup(key) {
+    compassState = { group: key, bottle: null };
+    var grp = GROUPS.find(function(g) { return g.key === key; });
+    renderDots(grp ? grp.regions : null);
+    renderRight();
+  }
+
+  // Phase 2: regionIds comes from Bottlecapps inventory filter
   function renderDots(regionIds) {
     var dotsEl = document.getElementById('whisky-compass-dots');
     if (!dotsEl) return;
 
-    var html = W.bottles.filter(function(b) {
+    dotsEl.innerHTML = W.bottles.filter(function(b) {
       if (!b.inStock) return false;
       if (!regionIds) return true;
       return regionIds.indexOf(b.region) !== -1;
@@ -411,72 +459,29 @@ SOM.whisky = (function() {
            + ' data-id="' + b.id + '" aria-label="' + b.name + '"></button>';
     }).join('');
 
-    dotsEl.innerHTML = html;
-
     dotsEl.addEventListener('mouseenter', function(e) {
-      if (e.target.classList.contains('whisky-compass-dot')) showTooltip(e.target.dataset.id);
+      if (!e.target.classList.contains('whisky-compass-dot')) return;
+      var b = W.bottles.find(function(x) { return x.id === e.target.dataset.id; });
+      if (!b) return;
+      compassState.bottle = b;
+      renderRight();
     }, true);
     dotsEl.addEventListener('mouseleave', function(e) {
-      if (e.target.classList.contains('whisky-compass-dot')) hideTooltip();
+      if (!e.target.classList.contains('whisky-compass-dot')) return;
+      compassState.bottle = null;
+      renderRight();
     }, true);
     dotsEl.addEventListener('click', function(e) {
       var dot = e.target.closest('.whisky-compass-dot');
-      if (dot) showTooltip(dot.dataset.id);
+      if (!dot) return;
+      var b = W.bottles.find(function(x) { return x.id === dot.dataset.id; });
+      if (!b) return;
+      compassState.bottle = b;
+      renderRight();
     });
   }
 
-  function showTooltip(id) {
-    var b = W.bottles.find(function(x) { return x.id === id; });
-    if (!b) return;
-    document.getElementById('wct-name').textContent   = b.name;
-    document.getElementById('wct-region').textContent = W.regions[b.region] ? W.regions[b.region].label : '';
-    document.getElementById('wct-tier').textContent   = b.tier;
-    document.getElementById('wct-note').textContent   = b.note;
-    document.getElementById('whisky-compass-tooltip').hidden  = false;
-    document.getElementById('whisky-compass-default').hidden  = true;
-  }
-
-  function hideTooltip() {
-    document.getElementById('whisky-compass-tooltip').hidden  = true;
-    document.getElementById('whisky-compass-default').hidden  = false;
-  }
-
-  // ── COMPASS FILTERS ──────────────────────────────────────────
-  function initCompassFilters() {
-    var wrap = document.getElementById('whisky-compass-filter');
-    if (!wrap) return;
-
-    var groups = [
-      { key:'scotland', label:'Scotland',  regions: SCOTCH },
-      { key:'japan',    label:'Japan',     regions: ['japan'] },
-      { key:'ireland',  label:'Ireland',   regions: ['ireland'] },
-      { key:'america',  label:'America',   regions: ['america'] },
-      { key:'canada',   label:'Canada',    regions: ['canada'] }
-    ];
-
-    groups.forEach(function(g) {
-      var btn = document.createElement('button');
-      btn.className    = 'whisky-filter-btn';
-      btn.type         = 'button';
-      btn.textContent  = g.label;
-      btn.dataset.key  = g.key;
-      wrap.appendChild(btn);
-    });
-
-    wrap.addEventListener('click', function(e) {
-      var btn = e.target.closest('.whisky-filter-btn');
-      if (!btn) return;
-      wrap.querySelectorAll('.whisky-filter-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      var key = btn.dataset.key || 'all';
-      if (key === 'all') {
-        renderDots(null);
-      } else {
-        var grp = groups.find(function(g) { return g.key === key; });
-        renderDots(grp ? grp.regions : null);
-      }
-    });
-  }
+  function initCompassFilters() { /* filters now live in renderRight() */ }
 
   // ── COLLECTIONS ──────────────────────────────────────────────
   function renderCollections() {

@@ -2651,22 +2651,11 @@ textarea.som-input { resize: none; line-height: 1.5; }
 /* Flavour compass */
 .whisky-compass-card {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
   background: var(--bg-card);
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 12px;
   overflow: hidden;
-}
-.whisky-compass-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(0,0,0,0.07);
-}
-.whisky-compass-body {
-  display: flex;
-  align-items: stretch;
 }
 .whisky-compass-left {
   flex: 0 0 auto;
@@ -2675,26 +2664,12 @@ textarea.som-input { resize: none; line-height: 1.5; }
 }
 .whisky-compass-right {
   flex: 1;
-  padding: 18px 20px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 0;
 }
-.whisky-filter-btn {
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: #fff;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: background 0.18s, border-color 0.18s, color 0.18s;
-  color: var(--text-muted);
-}
-.whisky-filter-btn:hover { border-color: var(--gold); color: var(--text); }
-.whisky-filter-btn.active { background: var(--gold); border-color: var(--gold); color: #fff; }
 
 .whisky-compass-container {
   position: relative;
@@ -2750,40 +2725,74 @@ textarea.som-input { resize: none; line-height: 1.5; }
   outline: none;
 }
 
-/* Right panel */
-.whisky-compass-default { }
-.whisky-compass-hint {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 12px;
-}
-.whisky-compass-legend {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  margin-bottom: 14px;
-}
-.wcl-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-.wcl-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 1.5px solid #fff;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
-}
-.whisky-compass-hint-sub {
+/* Right panel -- state-driven */
+.wcp-prompt {
   font-size: 0.75rem;
   color: var(--text-muted);
-  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.wcp-group-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.wcp-group-btn {
+  text-align: left;
+  background: none;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.wcp-group-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.07); color: var(--gold); }
+.wcp-group-btn[data-key="all"] { color: var(--text-muted); font-weight: 500; }
+.wcp-back {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: color 0.15s;
+}
+.wcp-back:hover { color: var(--text); }
+.wcp-region-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.wcp-region-char {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.wcp-region-body {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+.wcp-hover-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.7;
   margin: 0;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 8px;
 }
 .whisky-compass-info { }
 .whisky-info-region {
