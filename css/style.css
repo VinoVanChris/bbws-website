@@ -788,28 +788,6 @@ p { color: var(--text-muted); max-width: 66ch; }
   margin-right: auto;
   box-shadow: 0 8px 32px rgba(201,168,76,0.08), 0 2px 8px rgba(0,0,0,0.06);
 }
-.contact-form-body {
-  display: grid;
-  grid-template-columns: 1fr 250px;
-  gap: 48px;
-  align-items: center;
-}
-.contact-form-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.9;
-}
-.contact-form-icon img {
-  width: 100%;
-  max-width: 225px;
-  height: auto;
-  display: block;
-}
-@media (max-width: 700px) {
-  .contact-form-body { grid-template-columns: 1fr; }
-  .contact-form-icon { display: none; }
-}
 
 .form-row {
   display: grid;
