@@ -2512,3 +2512,315 @@ textarea.som-input { resize: none; line-height: 1.5; }
   .som-card { width: calc(100vw - 32px); right: 16px; }
   .som-trigger { right: 16px; bottom: 16px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   WHISKY GUIDE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hero */
+.whisky-hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+}
+.whisky-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(10,6,2,0.82) 0%, rgba(10,6,2,0.55) 55%, rgba(10,6,2,0.25) 100%);
+}
+.whisky-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 80px 48px 72px;
+  max-width: 640px;
+}
+@media (max-width: 640px) {
+  .whisky-hero-content { padding: 64px 24px 56px; }
+  .whisky-hero { min-height: 420px; }
+}
+
+/* Region grid */
+.whisky-region-group { margin-bottom: 36px; }
+.whisky-region-group-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.whisky-region-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.whisky-region-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.09);
+  border-radius: 10px;
+  padding: 18px 22px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  min-width: 160px;
+  flex: 1 1 160px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.whisky-region-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
+}
+.whisky-region-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--text);
+  display: block;
+}
+.whisky-region-char {
+  font-size: 0.75rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  display: block;
+}
+.whisky-region-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 28px;
+  transition: color 0.2s;
+}
+.whisky-region-back:hover { color: var(--text); }
+.whisky-region-bottles-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.whisky-bottle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.whisky-bottle-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.whisky-bottle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.whisky-bottle-top strong { font-size: 0.95rem; }
+.whisky-bottle-tier {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.whisky-bottle-tier--entry   { background: #f0ece4; color: #7a6a4a; }
+.whisky-bottle-tier--mid     { background: rgba(201,168,76,0.15); color: #8a6e1a; }
+.whisky-bottle-tier--premium { background: var(--gold); color: #fff; }
+.whisky-bottle-tier--luxury  { background: var(--red); color: #fff; }
+.whisky-bottle-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+/* Flavour compass */
+.whisky-compass-wrap { margin-top: 40px; }
+.whisky-compass-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.whisky-filter-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+  color: var(--text-muted);
+}
+.whisky-filter-btn:hover { border-color: var(--gold); color: var(--text); }
+.whisky-filter-btn.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+.whisky-compass-container {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+}
+.whisky-compass-xaxis {
+  position: absolute;
+  left: 7%; right: 7%;
+  top: 50%;
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+}
+.whisky-compass-yaxis {
+  position: absolute;
+  top: 7%; bottom: 7%;
+  left: 50%;
+  width: 1px;
+  background: rgba(0,0,0,0.1);
+}
+.whisky-compass-label {
+  position: absolute;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.whisky-compass-label--top    { top: 10px; left: 50%; transform: translateX(-50%); }
+.whisky-compass-label--bottom { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.whisky-compass-label--left   { left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+.whisky-compass-label--right  { right: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+.whisky-compass-dots { position: absolute; inset: 0; }
+.whisky-compass-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  padding: 0;
+}
+.whisky-compass-dot:hover,
+.whisky-compass-dot:focus {
+  transform: translate(-50%, -50%) scale(1.7);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  z-index: 2;
+  outline: none;
+}
+.whisky-compass-tooltip {
+  background: var(--text);
+  color: #fff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.whisky-compass-tooltip strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+.whisky-compass-tooltip span   { display: block; font-size: 0.8rem; }
+#wct-region { color: var(--gold); margin-bottom: 8px; }
+#wct-note   { color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+/* Collections */
+.whisky-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.whisky-collection-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 12px;
+  padding: 28px 24px;
+}
+.whisky-collection-icon {
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.whisky-collection-label {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+.whisky-collection-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+.whisky-collection-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 16px;
+}
+.whisky-collection-list li {
+  font-size: 0.85rem;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  color: var(--text-muted);
+}
+.whisky-collection-list li:last-child { border-bottom: none; }
+
+/* Education accordion */
+.whisky-education-list {
+  max-width: 720px;
+  margin: 48px auto 0;
+}
+.whisky-edu-item {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.whisky-edu-q {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 22px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.whisky-edu-q:hover { color: var(--gold); }
+.whisky-edu-chevron {
+  flex-shrink: 0;
+  transition: transform 0.2s;
+  color: var(--gold);
+}
+.whisky-edu-q.open .whisky-edu-chevron { transform: rotate(180deg); }
+.whisky-edu-a {
+  padding-bottom: 20px;
+}
+.whisky-edu-a p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}

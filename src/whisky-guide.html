@@ -1,0 +1,591 @@
+---
+layout: base.njk
+title: "Whisky Guide | Broadway Beer Wine & Spirits"
+navPage: guide
+description: "A guide to whisky regions, flavour profiles, and bottle recommendations from Broadway Beer Wine & Spirits in Kitsilano, Vancouver."
+canonical: "https://www.broadwaybeerwine.ca/whisky-guide.html"
+ogType: website
+ogTitle: "Whisky Guide | Broadway Beer Wine & Spirits"
+ogDescription: "Explore whisky by region, flavour, and occasion. Scotch, Japanese, Irish, American and more — curated by the team at Broadway Beer Wine & Spirits."
+ogImage: "https://www.broadwaybeerwine.ca/images/whiskeys.webp"
+ogImageWidth: 1200
+ogImageHeight: 630
+preloadHero: /images/whiskeys.webp
+preloadHeroType: image/webp
+schema: |
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Whisky Guide",
+    "description": "A guide to whisky regions, flavour profiles, and bottle recommendations.",
+    "url": "https://www.broadwaybeerwine.ca/whisky-guide.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Broadway Beer Wine & Spirits",
+      "url": "https://www.broadwaybeerwine.ca"
+    }
+  }
+---
+
+<main class="page-content">
+
+  <!-- ===== HERO ===== -->
+  <section class="whisky-hero" style="background-image:url('/images/whiskeys.webp');">
+    <div class="whisky-hero-overlay"></div>
+    <div class="whisky-hero-content fade-in">
+      <p class="section-eyebrow" style="color:var(--gold);margin-bottom:16px;">The Guide</p>
+      <h1 style="color:#fff;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.1;margin-bottom:20px;">Whisky.<br>Know What You're Drinking.</h1>
+      <p style="color:rgba(255,255,255,0.8);font-size:1.05rem;max-width:520px;line-height:1.7;margin-bottom:0;">Region, flavour, occasion. Whether you are buying your first bottle or your forty-first, this guide is your reference.</p>
+    </div>
+  </section>
+
+  <!-- ===== REGIONS ===== -->
+  <section class="section" id="whisky-regions">
+    <div class="container" style="max-width:var(--max-width)">
+      <div class="section-header fade-in">
+        <p class="section-eyebrow">Start Here</p>
+        <h2>Find Your Region.</h2>
+        <div class="divider"></div>
+        <p style="max-width:56ch;margin:0 auto;">Every whisky tells you where it is from the moment you open the bottle. Click a region to explore its character and the bottles we carry.</p>
+      </div>
+
+      <div class="whisky-region-grid fade-in" id="whisky-region-grid">
+        <!-- JS rendered -->
+      </div>
+
+      <div class="whisky-region-panel fade-in" id="whisky-region-panel" hidden>
+        <button class="whisky-region-back" id="whisky-region-back" type="button">← All Regions</button>
+        <div id="whisky-region-panel-inner"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FLAVOUR COMPASS ===== -->
+  <section class="section section-alt" id="whisky-compass">
+    <div class="container" style="max-width:var(--max-width)">
+      <div class="section-header fade-in">
+        <p class="section-eyebrow">Orientation</p>
+        <h2>The Flavour Compass.</h2>
+        <div class="divider"></div>
+        <p style="max-width:56ch;margin:0 auto;">Every bottle mapped by how it tastes. Hover or tap a dot to identify the whisky. Filter by region using the buttons below.</p>
+      </div>
+
+      <div class="whisky-compass-wrap fade-in">
+        <div class="whisky-compass-filter" id="whisky-compass-filter">
+          <button class="whisky-filter-btn active" data-region="all" type="button">All</button>
+          <!-- JS adds region buttons -->
+        </div>
+
+        <div class="whisky-compass-container" id="whisky-compass">
+          <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
+          <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
+          <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
+          <div class="whisky-compass-label whisky-compass-label--right">Bold</div>
+          <div class="whisky-compass-xaxis"></div>
+          <div class="whisky-compass-yaxis"></div>
+          <div class="whisky-compass-dots" id="whisky-compass-dots">
+            <!-- JS rendered -->
+          </div>
+        </div>
+
+        <div class="whisky-compass-tooltip" id="whisky-compass-tooltip" hidden>
+          <strong id="wct-name"></strong>
+          <span id="wct-region"></span>
+          <span id="wct-note"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COLLECTIONS ===== -->
+  <section class="section" id="whisky-collections">
+    <div class="container" style="max-width:var(--max-width)">
+      <div class="section-header fade-in">
+        <p class="section-eyebrow">Curated</p>
+        <h2>Bottles for Every Occasion.</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="whisky-collections-grid fade-in" id="whisky-collections-grid">
+        <!-- JS rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section class="section section-alt" id="whisky-education">
+    <div class="container" style="max-width:var(--max-width)">
+      <div class="section-header fade-in">
+        <p class="section-eyebrow">Know More</p>
+        <h2>The Essentials.</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="whisky-education-list fade-in" id="whisky-education-list">
+        <!-- JS rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section" style="text-align:center;">
+    <div class="container" style="max-width:var(--max-width)">
+      <p class="section-eyebrow">In Store</p>
+      <h2 style="margin-bottom:16px;">Still Not Sure?<br>Ask Us.</h2>
+      <p style="max-width:48ch;margin:0 auto 32px;color:var(--text-muted);">Our staff have tasted most of what is on the shelf. Come in and we will find you the right bottle.</p>
+      <a href="/contact.html" class="btn btn-gold">Visit Us in Kitsilano</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+//  SOM WHISKY DATA LAYER
+//  Phase 1: static curated data
+//  Phase 2: augment with Bottlecapps API
+//    - Replace inStock flags via SOM.fetchInventory()
+//    - Add url deep-links to product pages
+//    - Personalise collections for Grand Crew members
+// ══════════════════════════════════════════════════════════════════
+
+window.SOM = window.SOM || {};
+
+SOM.whisky = (function() {
+
+  // ── REGIONS ────────────────────────────────────────────────────
+  var regions = {
+    islay:       { label:'Islay',       group:'scotland', colour:'#c9a84c', character:'Peated, Coastal, Medicinal',    body:'The smoke island. Islay malts are defined by peat, sea salt, and iodine. They are an acquired taste that becomes a passion. Once you go Islay, it is hard to go back.' },
+    speyside:    { label:'Speyside',    group:'scotland', colour:'#c9a84c', character:'Fruity, Sweet, Elegant',         body:'The most populated whisky region in Scotland and the benchmark for approachable single malt. Speyside is fruit-forward, often with vanilla, apple, and honey. The gateway for most serious drinkers.' },
+    highlands:   { label:'Highlands',  group:'scotland', colour:'#c9a84c', character:'Diverse, Robust, Heathery',      body:'Scotland\'s largest region covers enormous ground and enormous variety. Expect dried fruit, honey, and a little spice. Some Highland malts have a gentle coastal or peated edge; others are pure orchard fruit.' },
+    islands:     { label:'Islands',    group:'scotland', colour:'#c9a84c', character:'Maritime, Smoky, Complex',       body:'Orkney, Skye, Jura, Mull. Island malts share a coastal salinity and often some peat, but each island has its own personality. Highland Park and Talisker are the flagship names.' },
+    campbeltown: { label:'Campbeltown',group:'scotland', colour:'#c9a84c', character:'Briny, Oily, Deep',              body:'Once the whisky capital of the world, now home to only a handful of distilleries. What remains is extraordinary. Springbank in particular is one of the most talked-about distilleries on earth.' },
+    lowlands:    { label:'Lowlands',   group:'scotland', colour:'#c9a84c', character:'Light, Grassy, Gentle',          body:'Triple-distilled and unpeated, Lowland malts are the lightest Scotches made. Delicate, floral, and easy to drink, they are a brilliant introduction to single malt without the intensity.' },
+    japan:       { label:'Japan',      group:'world',    colour:'#A1191D', character:'Refined, Balanced, Subtle',      body:'Japanese whisky took Scotland\'s traditions and made them precise. Expect incredible balance, restraint, and complexity. Hibiki and Yamazaki have become some of the most sought-after bottles in the world.' },
+    ireland:     { label:'Ireland',    group:'world',    colour:'#2d7a6f', character:'Smooth, Triple-Distilled, Approachable', body:'Triple distillation gives Irish whiskey a lightness and smoothness that Scotch rarely matches. Jameson is the entry point, but Redbreast and Green Spot are where the real depth lives.' },
+    america:     { label:'America',    group:'world',    colour:'#b87333', character:'Vanilla, Oak, Sweet Spice',      body:'Bourbon must be made in America, aged in new charred oak, and be at least 51% corn. The result is a sweeter, richer spirit. Rye swaps the corn for spice. Both are endlessly versatile.' },
+    canada:      { label:'Canada',     group:'world',    colour:'#b87333', character:'Light, Rye-Forward, Versatile', body:'Canadian whisky has quietly improved enormously. Rye-forward and approachable, it punches above its price point. Lot 40 is the bottle that converted a generation of Canadians to take their own whisky seriously.' }
+  };
+
+  // ── BOTTLES ────────────────────────────────────────────────────
+  // peat: 0 (none) to 10 (extreme)
+  // body: 0 (very light) to 10 (very rich/full)
+  // inStock: Phase 2 -- replaced by Bottlecapps API call
+  var bottles = [
+    // ISLAY
+    { id:'ardbeg-10',         name:'Ardbeg 10',                region:'islay',       peat:10, body:6,  tier:'mid',     tags:['enthusiast','peated'],          note:'The most intense Islay on the shelf. Pure peat, barbecue smoke, and surprising citrus underneath. Uncompromising.',                inStock:true },
+    { id:'laphroaig-10',      name:'Laphroaig 10',             region:'islay',       peat:9,  body:6,  tier:'mid',     tags:['enthusiast','peated'],          note:'Medicinal, seaweed, bonfire. Laphroaig is the one people either love immediately or take years to understand.',                  inStock:true },
+    { id:'lagavulin-16',      name:'Lagavulin 16',             region:'islay',       peat:9,  body:8,  tier:'premium', tags:['gift','enthusiast','peated'],   note:'The gold standard of Islay. Long, smoky, profoundly complex with dried fruit and dark chocolate underneath. Worth every dollar.', inStock:true },
+    { id:'bowmore-12',        name:'Bowmore 12',               region:'islay',       peat:5,  body:6,  tier:'mid',     tags:['gateway','peated'],             note:'The approachable Islay. Enough smoke to be interesting, enough fruit to be welcoming. A great first step into peated whisky.',    inStock:true },
+    { id:'bruichladdich-cl',  name:'Bruichladdich Classic Laddie', region:'islay',   peat:1,  body:5,  tier:'mid',     tags:['gateway','unpeated'],           note:'Unpeated Islay -- the terroir without the smoke. Floral, citrus, and complex in a way that surprises most people.',               inStock:true },
+    // SPEYSIDE
+    { id:'glenfiddich-12',    name:'Glenfiddich 12',           region:'speyside',    peat:1,  body:4,  tier:'entry',   tags:['gateway'],                      note:'The world\'s best-selling single malt for a reason. Pear, apple, light vanilla. Reliable, honest, and a genuine gateway bottle.',  inStock:true },
+    { id:'balvenie-12',       name:'Balvenie Doublewood 12',   region:'speyside',    peat:1,  body:7,  tier:'mid',     tags:['gift','gateway'],               note:'Finished in sherry casks for extra richness. Honey, dried fruit, and a warmth that makes it endlessly giftable.',                  inStock:true },
+    { id:'macallan-12-sherry',name:'Macallan 12 Sherry Oak',   region:'speyside',    peat:1,  body:9,  tier:'premium', tags:['gift','celebration'],           note:'Rich, sherried, with dried fruit, ginger, and chocolate. The bottle everyone recognises. Worth the price.',                        inStock:true },
+    { id:'aberlour-12',       name:'Aberlour 12',              region:'speyside',    peat:2,  body:7,  tier:'mid',     tags:['gift','enthusiast'],            note:'Underrated Speyside. Double-cask matured, with ripe red fruit, spice, and a long finish. Brilliant value at the price.',            inStock:true },
+    { id:'glenlivet-12',      name:'The Glenlivet 12',         region:'speyside',    peat:0,  body:3,  tier:'entry',   tags:['gateway'],                      note:'Light, floral, and easy. The Glenlivet is the reliable crowd-pleaser. Great for introducing someone to single malt.',              inStock:true },
+    // HIGHLANDS
+    { id:'glenmorangie-10',   name:'Glenmorangie Original 10', region:'highlands',   peat:1,  body:4,  tier:'entry',   tags:['gateway','gift'],               note:'Tall stills produce a delicate, floral spirit. Peach, vanilla, honey. Consistently excellent and approachable for everyone.',       inStock:true },
+    { id:'dalmore-12',        name:'Dalmore 12',               region:'highlands',   peat:1,  body:8,  tier:'mid',     tags:['gift'],                         note:'Rich, chocolate, orange marmalade, and sherry. The Dalmore is a Highland heavyweight that impresses every time.',                  inStock:true },
+    { id:'oban-14',           name:'Oban 14',                  region:'highlands',   peat:3,  body:7,  tier:'mid',     tags:['gift','enthusiast'],            note:'A coastal Highland malt with a gentle maritime edge. Sea salt, dried fruit, and a little smoke. A brilliantly balanced bottle.',   inStock:true },
+    // ISLANDS
+    { id:'talisker-10',       name:'Talisker 10',              region:'islands',     peat:6,  body:7,  tier:'mid',     tags:['enthusiast','peated'],          note:'Isle of Skye in a glass. Peppery, maritime, with smoked meat and a long warming finish. One of the great island malts.',           inStock:true },
+    { id:'highland-park-12',  name:'Highland Park 12',         region:'islands',     peat:4,  body:6,  tier:'mid',     tags:['gift','enthusiast'],            note:'Orkney\'s finest. Heather, honey, a little smoke, and remarkable balance. The most approachable of the smoky malts.',               inStock:true },
+    // CAMPBELTOWN
+    { id:'springbank-10',     name:'Springbank 10',            region:'campbeltown', peat:3,  body:7,  tier:'mid',     tags:['enthusiast','deep-cut'],        note:'One of the most talked-about distilleries in the world. Briny, oily, with fruit and peat in perfect tension. Worth seeking out.',  inStock:true },
+    // LOWLANDS
+    { id:'auchentoshan-3w',   name:'Auchentoshan Three Wood',  region:'lowlands',    peat:0,  body:5,  tier:'mid',     tags:['gateway','gift'],               note:'Triple-distilled, triple-cask finished. Dried fruits, toffee, and a whisper of spice. The gentlest Scotch on the shelf.',           inStock:true },
+    // JAPAN
+    { id:'suntory-toki',      name:'Suntory Toki',             region:'japan',       peat:1,  body:4,  tier:'entry',   tags:['gateway'],                      note:'Light, clean, and built for a highball. Suntory Toki is the best introduction to Japanese whisky at the price.',                    inStock:true },
+    { id:'hibiki-harmony',    name:'Hibiki Harmony',           region:'japan',       peat:1,  body:6,  tier:'premium', tags:['gift','celebration'],           note:'The pinnacle of Japanese blended whisky. Honey, rose, orange peel. Extraordinary balance and one of the most beautiful bottles made.', inStock:true },
+    { id:'nikka-barrel',      name:'Nikka From the Barrel',    region:'japan',       peat:2,  body:9,  tier:'mid',     tags:['enthusiast','deep-cut'],        note:'Bottled at cask strength, intensely rich, with spice and dried fruit. Nikka is Japan\'s answer to a serious dram. Remarkable.',    inStock:true },
+    { id:'yamazaki-12',       name:'Yamazaki 12',              region:'japan',       peat:2,  body:7,  tier:'premium', tags:['gift','celebration'],           note:'The bottle that put Japanese whisky on the world map. Peach, pineapple, coconut, and subtle oak. Genuinely special.',               inStock:true },
+    // IRELAND
+    { id:'jameson',           name:'Jameson',                  region:'ireland',     peat:0,  body:3,  tier:'entry',   tags:['gateway'],                      note:'The world introduction to Irish whiskey. Light, smooth, with toasted wood and grain. The reliable and universal crowd-pleaser.',      inStock:true },
+    { id:'redbreast-12',      name:'Redbreast 12',             region:'ireland',     peat:0,  body:7,  tier:'mid',     tags:['gift','enthusiast'],            note:'The benchmark Irish single pot still. Fruit cake, spice, and a richness that rivals aged Speyside. Serious whiskey.',               inStock:true },
+    { id:'green-spot',        name:'Green Spot',               region:'ireland',     peat:0,  body:5,  tier:'mid',     tags:['enthusiast','deep-cut'],        note:'A single pot still classic from the Mitchell family. Orchard fruit, spice, and a creaminess that is uniquely Irish.',               inStock:true },
+    // AMERICA
+    { id:'buffalo-trace',     name:'Buffalo Trace',            region:'america',     peat:0,  body:5,  tier:'entry',   tags:['gateway'],                      note:'One of the most awarded distilleries in the world. Vanilla, caramel, and spice. Buffalo Trace is the perfect entry into bourbon.',  inStock:true },
+    { id:'woodford-reserve',  name:'Woodford Reserve',         region:'america',     peat:0,  body:7,  tier:'mid',     tags:['gift'],                         note:'Complex, smooth, and beautifully balanced. Dried fruit, vanilla, toasted oak. The go-to bourbon gift bottle.',                       inStock:true },
+    { id:'angels-envy',       name:'Angel\'s Envy',            region:'america',     peat:0,  body:7,  tier:'mid',     tags:['gift'],                         note:'Finished in port wine barrels for an unusual richness and sweetness. The bourbon for people who think they don\'t like bourbon.',    inStock:true },
+    { id:'bulleit-rye',       name:'Bulleit Rye',              region:'america',     peat:0,  body:5,  tier:'entry',   tags:['gateway'],                      note:'High rye content means big spice -- black pepper, dried herbs, and a dry finish. Great for cocktails or on its own.',               inStock:true },
+    // CANADA
+    { id:'lot-40',            name:'Lot 40',                   region:'canada',      peat:0,  body:5,  tier:'entry',   tags:['gateway','enthusiast'],         note:'100% rye, made the old way. Lot 40 is the bottle that showed Canada what serious Canadian whisky could taste like.',                inStock:true },
+    { id:'forty-creek',       name:'Forty Creek Barrel Select',region:'canada',      peat:0,  body:4,  tier:'entry',   tags:['gateway'],                      note:'Three grains, three casks, blended by one of Canada\'s most celebrated distillers. Light, approachable, and honestly made.',         inStock:true }
+  ];
+
+  // ── COLLECTIONS ────────────────────────────────────────────────
+  var collections = [
+    {
+      id:    'gift',
+      label: 'The Gift',
+      icon:  '◈',
+      desc:  'Impressive bottles that land well whether the recipient is a novice or a connoisseur. These are the ones people remember.',
+      ids:   ['lagavulin-16','macallan-12-sherry','hibiki-harmony','yamazaki-12','highland-park-12','woodford-reserve','dalmore-12','redbreast-12']
+    },
+    {
+      id:    'gateway',
+      label: 'The Gateway',
+      icon:  '◇',
+      desc:  'Never tried whisky before, or know someone who hasn\'t? These bottles are approachable, honest, and genuinely good.',
+      ids:   ['glenfiddich-12','glenmorangie-10','bowmore-12','glenlivet-12','suntory-toki','buffalo-trace','jameson','auchentoshan-3w']
+    },
+    {
+      id:    'deep-cut',
+      label: 'The Deep Cut',
+      icon:  '◆',
+      desc:  'For the enthusiast who already knows the classics. These bottles reward curiosity and start good conversations.',
+      ids:   ['springbank-10','nikka-barrel','green-spot','ardbeg-10','aberlour-12','lot-40','oban-14','bruichladdich-cl']
+    },
+    {
+      id:    'celebration',
+      label: 'The Celebration',
+      icon:  '◉',
+      desc:  'When the occasion deserves something genuinely special. Open these with intention.',
+      ids:   ['macallan-12-sherry','hibiki-harmony','yamazaki-12','lagavulin-16']
+    }
+  ];
+
+  // ── EDUCATION ──────────────────────────────────────────────────
+  var education = [
+    {
+      q: 'What does age statement mean?',
+      a: 'The number on the label is the youngest whisky in the bottle. A 12-year Scotch has spent at least 12 years in oak cask. Age matters, but it is not the whole story. A well-made 10-year can outperform a carelessly made 18-year. What you are paying for is the decision to hold the spirit that long.'
+    },
+    {
+      q: 'What is the difference between single malt and blended?',
+      a: 'Single malt comes from one distillery, made entirely from malted barley. Blended Scotch combines malt whisky with grain whisky from multiple distilleries. Blends are not inferior -- Hibiki Harmony is a blend and one of the finest whiskies made. The distinction is about style and the distiller\'s intention, not quality.'
+    },
+    {
+      q: 'What do cask types do to the whisky?',
+      a: 'Whisky is born clear and colourless. Everything it becomes -- colour, most of its flavour -- comes from the cask. Ex-bourbon casks (the most common) give vanilla, coconut, and light fruit. Sherry casks bring dried fruit, chocolate, and spice. Port casks add sweetness and red fruit. A finish in a different cask type is a deliberate layer added near the end of maturation.'
+    },
+    {
+      q: 'How do I actually taste whisky?',
+      a: 'Neat first, with a few drops of room-temperature water if you like. Smell it before you taste it -- the nose tells you most of what you need to know. Take a small sip, let it sit on your tongue, then swallow slowly and pay attention to the finish. Ice is fine if you enjoy it, but it closes down the aromatics and numbs the palate. Highballs (whisky and sparkling water) are a legitimate, delicious way to drink good whisky.'
+    },
+    {
+      q: 'What is peat and why does it matter?',
+      a: 'Peat is partially decomposed organic matter cut from the Scottish boglands. When used to dry malted barley over a fire, it imparts a smoky, medicinal character to the spirit. Phenol parts per million (PPM) measures peat intensity. Glenlivet is near zero. Ardbeg is around 55 PPM. Not everyone loves peat, but those who do tend to love it deeply.'
+    },
+    {
+      q: 'Is Japanese whisky the same as Scotch?',
+      a: 'Japanese distillers learned from Scotland, and the production methods overlap significantly. But Japanese whisky has its own identity: a precision and restraint that is distinctly Japanese. Unlike Scotch, Japan has no longstanding legal requirement that whisky be made from Japanese ingredients -- though this is changing. The best Japanese whiskies are world-class by any measure.'
+    }
+  ];
+
+  // ══════════════════════════════════════════════════════════════
+  //  SOM API HOOK (Phase 2)
+  //  When Bottlecapps API is available:
+  //    SOM.whisky.fetchInventory() will update inStock flags
+  //    and add product URLs to each bottle object
+  // ══════════════════════════════════════════════════════════════
+  function fetchInventory() {
+    // Phase 2: replace with Bottlecapps API call
+    // return fetch('/api/bottlecapps/inventory')
+    //   .then(r => r.json())
+    //   .then(data => {
+    //     bottles.forEach(b => {
+    //       var match = data.find(p => p.sku === b.id || p.name === b.name);
+    //       if (match) { b.inStock = match.inStock; b.url = match.url; }
+    //     });
+    //   });
+    return Promise.resolve(); // Phase 1: all in stock
+  }
+
+  function getBottlesByRegion(regionId) {
+    return bottles.filter(function(b) { return b.region === regionId && b.inStock; });
+  }
+
+  function getBottlesByCollection(collectionId) {
+    var col = collections.find(function(c) { return c.id === collectionId; });
+    if (!col) return [];
+    return col.ids.map(function(id) { return bottles.find(function(b) { return b.id === id; }); }).filter(Boolean);
+  }
+
+  return { regions: regions, bottles: bottles, collections: collections, education: education, fetchInventory: fetchInventory, getBottlesByRegion: getBottlesByRegion, getBottlesByCollection: getBottlesByCollection };
+})();
+
+
+// ══════════════════════════════════════════════════════════════════
+//  UI RENDERING
+// ══════════════════════════════════════════════════════════════════
+
+(function() {
+  var W = SOM.whisky;
+  var activeRegion = null;
+
+  // ── REGION GRID ─────────────────────────────────────────────
+  function renderRegionGrid() {
+    var grid = document.getElementById('whisky-region-grid');
+    if (!grid) return;
+    var scotlandRegions = ['islay','speyside','highlands','islands','campbeltown','lowlands'];
+    var worldRegions    = ['japan','ireland','america','canada'];
+
+    var html = '<div class="whisky-region-group"><p class="whisky-region-group-label">Scotland</p><div class="whisky-region-row">';
+    scotlandRegions.forEach(function(id) {
+      var r = W.regions[id];
+      html += '<button class="whisky-region-card" data-region="' + id + '" type="button">'
+            + '<span class="whisky-region-name">' + r.label + '</span>'
+            + '<span class="whisky-region-char">' + r.character + '</span>'
+            + '</button>';
+    });
+    html += '</div></div>';
+    html += '<div class="whisky-region-group"><p class="whisky-region-group-label">World</p><div class="whisky-region-row">';
+    worldRegions.forEach(function(id) {
+      var r = W.regions[id];
+      html += '<button class="whisky-region-card" data-region="' + id + '" type="button">'
+            + '<span class="whisky-region-name">' + r.label + '</span>'
+            + '<span class="whisky-region-char">' + r.character + '</span>'
+            + '</button>';
+    });
+    html += '</div></div>';
+    grid.innerHTML = html;
+
+    grid.querySelectorAll('.whisky-region-card').forEach(function(btn) {
+      btn.addEventListener('click', function() { openRegion(btn.dataset.region); });
+    });
+  }
+
+  function openRegion(id) {
+    var r = W.regions[id];
+    var bottles = W.getBottlesByRegion(id);
+    var grid = document.getElementById('whisky-region-grid');
+    var panel = document.getElementById('whisky-region-panel');
+    var inner = document.getElementById('whisky-region-panel-inner');
+
+    var bottleHtml = bottles.map(function(b) {
+      return '<div class="whisky-bottle-card">'
+           + '<div class="whisky-bottle-top">'
+           + '<strong>' + b.name + '</strong>'
+           + '<span class="whisky-bottle-tier whisky-bottle-tier--' + b.tier + '">' + b.tier + '</span>'
+           + '</div>'
+           + '<p>' + b.note + '</p>'
+           + '</div>';
+    }).join('');
+
+    inner.innerHTML = '<div class="whisky-region-detail">'
+      + '<p class="section-eyebrow" style="margin-bottom:8px;">' + r.character + '</p>'
+      + '<h3 style="font-size:1.8rem;margin-bottom:16px;">' + r.label + '</h3>'
+      + '<p style="color:var(--text-muted);line-height:1.7;max-width:60ch;margin-bottom:32px;">' + r.body + '</p>'
+      + '<p class="whisky-region-bottles-label">Bottles We Carry</p>'
+      + '<div class="whisky-bottle-grid">' + bottleHtml + '</div>'
+      + '</div>';
+
+    grid.hidden = true;
+    panel.hidden = false;
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'whisky-region-back') {
+      document.getElementById('whisky-region-grid').hidden = false;
+      document.getElementById('whisky-region-panel').hidden = true;
+    }
+  });
+
+  // ── FLAVOUR COMPASS ──────────────────────────────────────────
+  function renderCompass(filterRegion) {
+    var dotsEl = document.getElementById('whisky-compass-dots');
+    if (!dotsEl) return;
+    var html = '';
+    W.bottles.forEach(function(b) {
+      if (!b.inStock) return;
+      if (filterRegion && filterRegion !== 'all' && b.region !== filterRegion) return;
+      var left = (b.body / 10 * 86 + 7).toFixed(1);
+      var top  = ((1 - b.peat / 10) * 86 + 7).toFixed(1);
+      var col  = W.regions[b.region] ? W.regions[b.region].colour : '#c9a84c';
+      html += '<button class="whisky-compass-dot" type="button"'
+            + ' style="left:' + left + '%;top:' + top + '%;background:' + col + ';"'
+            + ' data-id="' + b.id + '"'
+            + ' aria-label="' + b.name + '">'
+            + '</button>';
+    });
+    dotsEl.innerHTML = html;
+
+    dotsEl.querySelectorAll('.whisky-compass-dot').forEach(function(dot) {
+      dot.addEventListener('mouseenter', function() { showTooltip(dot); });
+      dot.addEventListener('focus',      function() { showTooltip(dot); });
+      dot.addEventListener('mouseleave', hideTooltip);
+      dot.addEventListener('blur',       hideTooltip);
+      dot.addEventListener('click',      function() { showTooltip(dot); });
+    });
+  }
+
+  function showTooltip(dot) {
+    var b = W.bottles.find(function(x) { return x.id === dot.dataset.id; });
+    if (!b) return;
+    var tt = document.getElementById('whisky-compass-tooltip');
+    document.getElementById('wct-name').textContent   = b.name;
+    document.getElementById('wct-region').textContent = W.regions[b.region] ? W.regions[b.region].label : '';
+    document.getElementById('wct-note').textContent   = b.note;
+    tt.hidden = false;
+  }
+
+  function hideTooltip() {
+    document.getElementById('whisky-compass-tooltip').hidden = true;
+  }
+
+  function renderCompassFilters() {
+    var wrap = document.getElementById('whisky-compass-filter');
+    if (!wrap) return;
+    var groups = [
+      { id:'scotland', label:'Scotland', regions:['islay','speyside','highlands','islands','campbeltown','lowlands'] },
+      { id:'japan',    label:'Japan',    regions:['japan'] },
+      { id:'ireland',  label:'Ireland',  regions:['ireland'] },
+      { id:'america',  label:'America',  regions:['america'] },
+      { id:'canada',   label:'Canada',   regions:['canada'] }
+    ];
+    groups.forEach(function(g) {
+      var btn = document.createElement('button');
+      btn.className = 'whisky-filter-btn';
+      btn.dataset.region = g.regions[0];
+      btn.type = 'button';
+      btn.textContent = g.label;
+      wrap.appendChild(btn);
+    });
+    wrap.querySelectorAll('.whisky-filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        wrap.querySelectorAll('.whisky-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var region = btn.dataset.region;
+        if (region === 'all') {
+          renderCompass(null);
+        } else {
+          // filter to all scotch regions if 'scotland' clicked
+          if (region === 'islay') {
+            renderCompass(null); // show all scotland -- handled below
+          }
+          renderCompass(region);
+        }
+      });
+    });
+    // Scotland button shows all scotch regions
+    wrap.querySelectorAll('.whisky-filter-btn').forEach(function(btn) {
+      if (btn.dataset.region !== 'all') {
+        btn.addEventListener('click', function() {
+          var scotchRegions = ['islay','speyside','highlands','islands','campbeltown','lowlands'];
+          var isScotch = scotchRegions.indexOf(btn.dataset.region) !== -1;
+          if (isScotch) {
+            renderCompassMulti(scotchRegions);
+          }
+        }, true);
+      }
+    });
+  }
+
+  // Simpler approach -- just filter by single region or all
+  function renderCompassMulti(regionIds) {
+    var dotsEl = document.getElementById('whisky-compass-dots');
+    if (!dotsEl) return;
+    var html = '';
+    W.bottles.forEach(function(b) {
+      if (!b.inStock) return;
+      if (regionIds && regionIds.indexOf(b.region) === -1) return;
+      var left = (b.body / 10 * 86 + 7).toFixed(1);
+      var top  = ((1 - b.peat / 10) * 86 + 7).toFixed(1);
+      var col  = W.regions[b.region] ? W.regions[b.region].colour : '#c9a84c';
+      html += '<button class="whisky-compass-dot" type="button"'
+            + ' style="left:' + left + '%;top:' + top + '%;background:' + col + ';"'
+            + ' data-id="' + b.id + '"'
+            + ' aria-label="' + b.name + '">'
+            + '</button>';
+    });
+    dotsEl.innerHTML = html;
+    dotsEl.querySelectorAll('.whisky-compass-dot').forEach(function(dot) {
+      dot.addEventListener('mouseenter', function() { showTooltip(dot); });
+      dot.addEventListener('focus',      function() { showTooltip(dot); });
+      dot.addEventListener('mouseleave', hideTooltip);
+      dot.addEventListener('blur',       hideTooltip);
+      dot.addEventListener('click',      function() { showTooltip(dot); });
+    });
+  }
+
+  // ── COLLECTIONS ──────────────────────────────────────────────
+  function renderCollections() {
+    var grid = document.getElementById('whisky-collections-grid');
+    if (!grid) return;
+    var html = '';
+    W.collections.forEach(function(col) {
+      var bottles = W.getBottlesByCollection(col.id);
+      var bottleList = bottles.map(function(b) {
+        return '<li>' + b.name + '</li>';
+      }).join('');
+      html += '<div class="whisky-collection-card">'
+            + '<div class="whisky-collection-icon">' + col.icon + '</div>'
+            + '<h3 class="whisky-collection-label">' + col.label + '</h3>'
+            + '<p class="whisky-collection-desc">' + col.desc + '</p>'
+            + '<ul class="whisky-collection-list">' + bottleList + '</ul>'
+            + '</div>';
+    });
+    grid.innerHTML = html;
+  }
+
+  // ── EDUCATION ────────────────────────────────────────────────
+  function renderEducation() {
+    var list = document.getElementById('whisky-education-list');
+    if (!list) return;
+    var html = W.education.map(function(item, i) {
+      return '<div class="whisky-edu-item">'
+           + '<button class="whisky-edu-q" type="button" aria-expanded="false" aria-controls="whisky-edu-a-' + i + '">'
+           + item.q
+           + '<svg class="whisky-edu-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>'
+           + '</button>'
+           + '<div class="whisky-edu-a" id="whisky-edu-a-' + i + '" hidden>'
+           + '<p>' + item.a + '</p>'
+           + '</div>'
+           + '</div>';
+    }).join('');
+    list.innerHTML = html;
+
+    list.querySelectorAll('.whisky-edu-q').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        var answerId = btn.getAttribute('aria-controls');
+        document.getElementById(answerId).hidden = expanded;
+        btn.classList.toggle('open', !expanded);
+      });
+    });
+  }
+
+  // ── COMPASS FILTER (simplified) ─────────────────────────────
+  function initCompassFilter() {
+    var wrap = document.getElementById('whisky-compass-filter');
+    if (!wrap) return;
+    var scotchRegions = ['islay','speyside','highlands','islands','campbeltown','lowlands'];
+
+    // Add Scotland group button
+    ['scotland','japan','ireland','america','canada'].forEach(function(group) {
+      var btn = document.createElement('button');
+      btn.className = 'whisky-filter-btn';
+      btn.type = 'button';
+      btn.textContent = group.charAt(0).toUpperCase() + group.slice(1);
+      btn.dataset.group = group;
+      wrap.appendChild(btn);
+    });
+
+    wrap.querySelectorAll('.whisky-filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        wrap.querySelectorAll('.whisky-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var group = btn.dataset.group || 'all';
+        if (group === 'all') {
+          renderCompass(null);
+        } else if (group === 'scotland') {
+          renderCompassMulti(scotchRegions);
+        } else {
+          renderCompass(group);
+        }
+      });
+    });
+  }
+
+  // ── INIT ─────────────────────────────────────────────────────
+  W.fetchInventory().then(function() {
+    renderRegionGrid();
+    renderCompass(null);
+    initCompassFilter();
+    renderCollections();
+    renderEducation();
+  });
+
+})();
+</script>
