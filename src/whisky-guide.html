@@ -73,7 +73,7 @@ schema: |
       <div class="whisky-compass-card fade-in">
         <!-- Left: compass plot -->
         <div class="whisky-compass-left">
-          <div class="whisky-compass-container" id="whisky-compass">
+          <div class="whisky-compass-container" id="whisky-compass-plot">
             <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
             <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
             <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
@@ -502,6 +502,22 @@ SOM.whisky = (function() {
   // locked: true when user has clicked a dot -- hover won't override until unlocked
   var compassState = { group: 'all', bottle: null, locked: false };
 
+  // Sync compass plot height to the right panel's natural content height.
+  // CSS nested-flex stretch doesn't reliably propagate in this layout, so we
+  // reset the compass to its minimum, let the card reflow, then measure and match.
+  function syncCompassHeight() {
+    var plot = document.getElementById('whisky-compass-plot');
+    var card = document.querySelector('.whisky-compass-card');
+    if (!plot || !card) return;
+    plot.style.height = ''; // reset to min-height so card reflows naturally
+    requestAnimationFrame(function() {
+      // offsetHeight forces a sync layout after the reset -- gives us the
+      // natural card height driven by whichever side is taller
+      var cardH = card.offsetHeight;
+      plot.style.height = Math.max(210, cardH - 28) + 'px'; // 28 = 14px top + 14px bottom padding
+    });
+  }
+
   function updateDotLock(bottleId) {
     document.querySelectorAll('.whisky-compass-dot').forEach(function(dot) {
       dot.classList.toggle('whisky-compass-dot--locked', !!bottleId && dot.dataset.id === bottleId);
@@ -579,6 +595,9 @@ SOM.whisky = (function() {
         renderRight();
       });
     }
+
+    // Sync compass height to match right panel content
+    requestAnimationFrame(syncCompassHeight);
   }
 
   function selectGroup(key) {
