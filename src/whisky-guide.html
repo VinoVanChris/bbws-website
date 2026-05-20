@@ -117,6 +117,18 @@ schema: |
   font-size:0.72rem; font-weight:600; padding:4px 10px !important; border-radius:4px !important;
   box-shadow:0 2px 8px rgba(0,0,0,0.22) !important; }
 .wmap-tip::before { border-top-color:rgba(20,14,8,0.88) !important; }
+/* ── Leaflet popup card ─────────────────────────────────────── */
+.wmap-popup-wrap .leaflet-popup-content-wrapper {
+  border-radius:10px; box-shadow:0 6px 28px rgba(0,0,0,0.18);
+  border:1px solid rgba(201,168,76,0.2); padding:0; overflow:hidden;
+}
+.wmap-popup-wrap .leaflet-popup-content { margin:0; padding:0; width:228px !important; }
+.wmap-popup-wrap .leaflet-popup-close-button {
+  color:rgba(0,0,0,0.35) !important; top:8px !important; right:10px !important;
+  font-size:18px !important; line-height:1 !important; z-index:1;
+}
+.wmap-popup-wrap .leaflet-popup-tip-container { margin-top:-1px; }
+.wmap-popup-wrap .leaflet-popup-tip { box-shadow:none; }
 @media (max-width:640px) {
   .wmap-wrap { overflow:visible; border-radius:var(--radius) var(--radius) 0 0; }
   #whisky-world-map { height:320px; }
@@ -982,6 +994,43 @@ document.addEventListener('DOMContentLoaded', function() {
     return 'rgba('+r+','+g+','+b+','+a+')';
   }
 
+  // Build Leaflet popup HTML for a distillery
+  function wmapPopup(d, col) {
+    var r = W.regions[d.region];
+    var btls = d.bottles.map(function(id) {
+      return W.bottles.find(function(b) { return b.id === id; });
+    }).filter(Boolean);
+
+    var shortDesc = d.desc || '';
+    if (shortDesc.length > 130) shortDesc = shortDesc.substring(0, 130).replace(/\s\S*$/, '') + '…';
+
+    var bottlesHtml = btls.length
+      ? '<div style="padding:8px 14px 12px;border-top:1px solid rgba(0,0,0,0.06);">' +
+        '<p style="font-size:0.58rem;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:#aaa;margin:0 0 6px;">Bottles We Carry</p>' +
+        btls.map(function(b) {
+          return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;">' +
+            '<span style="font-size:0.74rem;font-weight:500;color:#1a120a;">' + b.name + '</span>' +
+            '<span style="font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;' +
+              'color:#8a6e1a;background:rgba(201,168,76,0.14);padding:2px 6px;border-radius:20px;white-space:nowrap;margin-left:6px;">' +
+              b.tier + '</span></div>';
+        }).join('') +
+        '</div>'
+      : '';
+
+    return '<div style="font-family:inherit;">' +
+      '<div style="background:linear-gradient(135deg,' + rgba(col,0.1) + ',' + rgba(col,0.26) + ');padding:14px 14px 11px;">' +
+        '<p style="font-size:0.58rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:' + col + ';margin:0 0 4px;">' +
+          (r ? r.label : d.region) + (d.founded ? ' &middot; Est. ' + d.founded : '') +
+        '</p>' +
+        '<strong style="font-size:0.94rem;line-height:1.2;display:block;color:#1a120a;">' + d.name + '</strong>' +
+      '</div>' +
+      '<div style="padding:10px 14px 10px;">' +
+        '<p style="font-size:0.74rem;line-height:1.6;color:#666;margin:0;">' + shortDesc + '</p>' +
+      '</div>' +
+      bottlesHtml +
+      '</div>';
+  }
+
   // ── Init map ──────────────────────────────────────────────────
   var map = L.map('whisky-world-map', {
     center: VIEWS.all.center, zoom: VIEWS.all.zoom,
@@ -1002,10 +1051,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     marker.bindTooltip(d.name, { direction:'top', offset:[0,-10], className:'wmap-tip' });
+    marker.bindPopup(wmapPopup(d, col), { maxWidth:228, className:'wmap-popup-wrap' });
 
     marker.on('click', function() {
       activeRegion = d.region;
-      showDistillery(i);
+      showDistillery(i, false); // popup opens automatically via bindPopup
     });
 
     markers.push(marker);
@@ -1104,12 +1154,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     detail.querySelectorAll('.wmap-dist-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        showDistillery(parseInt(btn.dataset.idx, 10));
+        showDistillery(parseInt(btn.dataset.idx, 10), true);
       });
     });
   }
 
-  function showDistillery(idx) {
+  // openPopup: true = from panel (fly to distillery + open popup), false = from dot click
+  function showDistillery(idx, openPopup) {
     panelState = 'distillery';
     activeDist = idx;
 
@@ -1150,8 +1201,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setBackLabel(r ? r.label : 'Region');
     document.querySelector('.wmap-body').scrollTop = 0;
 
-    var v = VIEWS[d.region] || VIEWS.all;
-    map.flyTo(v.center, v.zoom, { duration:0.6 });
+    if (openPopup) {
+      // From panel list: fly to distillery coords and open popup after fly
+      map.flyTo([d.lat, d.lng], 10, { duration:0.6 });
+      setTimeout(function() { markers[idx].openPopup(); }, 700);
+    } else {
+      // From dot click: Leaflet opens popup automatically; just keep region in view
+      var v = VIEWS[d.region] || VIEWS.all;
+      map.flyTo(v.center, v.zoom, { duration:0.6 });
+    }
     styleMarkers(d.region, idx);
   }
 
