@@ -325,13 +325,10 @@ p { color: var(--text-muted); max-width: 66ch; }
   padding: 20px 24px;
   border-bottom: 1px solid var(--border-gold);
 }
-.nav-drawer-wordmark {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  line-height: 1.4;
+.nav-drawer-logo img {
+  height: 48px;
+  width: auto;
+  display: block;
 }
 .nav-drawer-close {
   display: flex;
