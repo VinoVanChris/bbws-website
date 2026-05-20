@@ -298,19 +298,19 @@ sitemapLastmod: 2026-05-18
 <!-- ===== AGE GATE ===== -->
 <style>
   .age-gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(10,6,2,0.97);backdrop-filter:blur(4px);}
-  .age-gate-card{background:#0f0a03;border:1px solid rgba(201,168,76,0.35);border-radius:14px;padding:52px 44px 44px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.7);}
-  .age-gate-logo{width:140px;margin:0 auto 28px;display:block;}
+  .age-gate-card{background:#221a0a;border:1px solid rgba(201,168,76,0.55);border-radius:14px;padding:52px 44px 44px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.8);}
+  .age-gate-logo{width:150px;margin:0 auto 28px;display:block;filter:brightness(0) invert(1);}
   .age-gate-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#c9a84c;margin-bottom:14px;}
-  .age-gate-heading{font-family:'Rousseau Deco',Georgia,serif;font-size:1.75rem;color:#f5efe6;margin-bottom:14px;line-height:1.25;}
-  .age-gate-body{font-size:0.9rem;color:rgba(245,239,230,0.65);line-height:1.65;margin-bottom:32px;}
+  .age-gate-heading{font-family:'Rousseau Deco',Georgia,serif;font-size:1.75rem;color:#f5efe6;margin-bottom:16px;line-height:1.25;}
+  .age-gate-body{font-size:0.92rem;color:rgba(245,239,230,0.82);line-height:1.7;margin-bottom:32px;}
   .age-gate-btns{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
-  .age-gate-enter{background:#c9a84c;color:#0f0a03;border:none;border-radius:6px;padding:14px 28px;font-size:0.95rem;font-weight:700;letter-spacing:0.04em;cursor:pointer;transition:background 0.15s;}
+  .age-gate-enter{background:#c9a84c;color:#1a1000;border:none;border-radius:6px;padding:15px 28px;font-size:0.95rem;font-weight:700;letter-spacing:0.04em;cursor:pointer;transition:background 0.15s;}
   .age-gate-enter:hover{background:#d9b85c;}
-  .age-gate-exit{background:none;border:1px solid rgba(245,239,230,0.2);border-radius:6px;padding:13px 28px;font-size:0.88rem;color:rgba(245,239,230,0.45);cursor:pointer;transition:border-color 0.15s,color 0.15s;}
-  .age-gate-exit:hover{border-color:rgba(245,239,230,0.4);color:rgba(245,239,230,0.65);}
-  .age-gate-legal{font-size:0.72rem;color:rgba(245,239,230,0.3);line-height:1.6;}
-  .age-gate-legal a{color:rgba(245,239,230,0.4);text-decoration:underline;}
-  .age-gate-sorry{color:rgba(245,239,230,0.55);font-size:0.92rem;line-height:1.7;margin:0;}
+  .age-gate-exit{background:rgba(245,239,230,0.06);border:1px solid rgba(245,239,230,0.3);border-radius:6px;padding:14px 28px;font-size:0.88rem;color:rgba(245,239,230,0.7);cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s;}
+  .age-gate-exit:hover{background:rgba(245,239,230,0.1);border-color:rgba(245,239,230,0.5);color:#f5efe6;}
+  .age-gate-legal{font-size:0.72rem;color:rgba(245,239,230,0.4);line-height:1.6;}
+  .age-gate-legal a{color:rgba(201,168,76,0.7);text-decoration:underline;}
+  .age-gate-sorry{color:rgba(245,239,230,0.75);font-size:0.92rem;line-height:1.7;margin:0;}
 </style>
 <div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-heading">
   <div class="age-gate-card" id="age-gate-card">
