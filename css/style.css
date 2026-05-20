@@ -485,6 +485,115 @@ p { color: var(--text-muted); max-width: 66ch; }
 }
 
 /* ============================================
+   Hero Carousel
+   ============================================ */
+.hero-carousel { padding: 0; }
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+.hero-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.hero-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.55) 100%);
+}
+.hero-slide .hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  padding: 48px 24px;
+}
+
+/* Slide 3: Kopke -- no overlay, text bottom-left */
+.hero-slide--light .hero-slide-overlay { display: none; }
+.hero-slide-bottle-text {
+  position: absolute;
+  bottom: 72px;
+  left: 56px;
+  z-index: 2;
+  text-align: left;
+}
+.hero-bottle-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #3a2a1a;
+  margin: 0 0 8px;
+  opacity: 0.75;
+}
+.hero-bottle-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: #1a1000;
+  margin: 0 0 4px;
+  line-height: 1.15;
+}
+.hero-bottle-sub {
+  font-size: 0.82rem;
+  color: #4a3820;
+  margin: 0 0 20px;
+  letter-spacing: 0.04em;
+}
+.hero-bottle-cta {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1000;
+  border-bottom: 1.5px solid #c9a84c;
+  padding-bottom: 2px;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.hero-bottle-cta:hover { color: #c9a84c; }
+
+/* Carousel dots */
+.hero-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.3s;
+}
+.hero-dot.active {
+  background: var(--gold);
+  transform: scale(1.25);
+}
+
+@media (max-width: 600px) {
+  .hero-slide-bottle-text { left: 28px; bottom: 64px; }
+  .hero-bottle-name { font-size: 1.4rem; }
+}
+
+/* ============================================
    Full-width photo strip
    ============================================ */
 .full-width-photo {

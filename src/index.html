@@ -64,21 +64,58 @@ sitemapLastmod: 2026-05-18
 ---
 <main class="page-content">
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content fade-in">
-        <p class="hero-eyebrow">Est. 1986 &nbsp;·&nbsp; Kitsilano, Vancouver</p>
-        <h1>Kitsilano's<br><span>Bottle Shop</span><br>Since 1986</h1>
-        <p class="hero-tagline">Not every bottle, the right one.</p>
-        <div class="hero-cta">
-          <a href="about.html" class="btn btn-outline-white">Our Story</a>
+    <!-- ===== HERO CAROUSEL ===== -->
+    <section class="hero hero-carousel" id="hero-carousel" aria-label="Hero carousel">
+
+      <!-- Slide 1: The Shop -->
+      <div class="hero-slide active" style="background-image:url('/images/cellar-consulting.webp');">
+        <div class="hero-slide-overlay"></div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Est. 1986 &nbsp;·&nbsp; Kitsilano, Vancouver</p>
+          <h1>Kitsilano's<br><span>Bottle Shop</span><br>Since 1986</h1>
+          <p class="hero-tagline">Not every bottle, the right one.</p>
+          <div class="hero-cta">
+            <a href="about.html" class="btn btn-outline-white">Our Story</a>
+          </div>
         </div>
       </div>
+
+      <!-- Slide 2: BC Producers -->
+      <div class="hero-slide" style="background-image:url('/images/okanagan-winery.webp');">
+        <div class="hero-slide-overlay"></div>
+        <div class="hero-content">
+          <p class="hero-eyebrow" style="color:var(--gold);">BC Grown &nbsp;·&nbsp; Local Pride</p>
+          <h1 style="color:#fff;">99 BC<br><span>Producers.</span><br>One Shop.</h1>
+          <p class="hero-tagline">From the Gulf Islands to the South Okanagan. Mapped by region.</p>
+          <div class="hero-cta">
+            <a href="/bc-wine-beer-spirits-producers.html" class="btn btn-gold">Explore the Map</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Kopke LBV -->
+      <div class="hero-slide hero-slide--light" style="background-image:url('/images/kopke-lbv-2018.webp');">
+        <div class="hero-slide-bottle-text">
+          <p class="hero-bottle-eyebrow">Featured &nbsp;·&nbsp; Porto</p>
+          <p class="hero-bottle-name">Kopke L.B.V. 2018</p>
+          <p class="hero-bottle-sub">Late Bottled Vintage Port</p>
+          <a href="/delivery.html" class="hero-bottle-cta">Shop Now &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div class="hero-dots" aria-hidden="true">
+        <button class="hero-dot active" data-slide="0"></button>
+        <button class="hero-dot" data-slide="1"></button>
+        <button class="hero-dot" data-slide="2"></button>
+      </div>
+
+      <!-- Scroll indicator (slide 1 only) -->
       <div class="hero-scroll" aria-hidden="true">
         <div class="hero-scroll-line"></div>
         <span>Scroll</span>
       </div>
+
     </section>
 
     <!-- ===== WHAT SETS US APART ===== -->
@@ -351,6 +388,40 @@ sitemapLastmod: 2026-05-18
 
   </main>
 <script src="/js/som-home.js"></script>
+<script>
+  (function() {
+    var slides = document.querySelectorAll('.hero-slide');
+    var dots   = document.querySelectorAll('.hero-dot');
+    var current = 0;
+    var timer;
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() { goTo(current + 1); }
+
+    function startTimer() { timer = setInterval(next, 6000); }
+    function resetTimer()  { clearInterval(timer); startTimer(); }
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(dot.dataset.slide));
+        resetTimer();
+      });
+    });
+
+    var carousel = document.getElementById('hero-carousel');
+    carousel.addEventListener('mouseenter', function() { clearInterval(timer); });
+    carousel.addEventListener('mouseleave', startTimer);
+
+    startTimer();
+  })();
+</script>
 
 <!-- ===== AGE GATE ===== -->
 <style>
