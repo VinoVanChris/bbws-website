@@ -7,7 +7,7 @@ eleventyExcludeFromCollections: true
   {%- for page in collections.sitemap | sort(true, false, "data.sitemapPriority") %}
   <url>
     <loc>{{ page.data.canonical }}</loc>
-    <lastmod>{{ (page.data.publishedTime or page.data.sitemapLastmod) | isoDate }}</lastmod>
+    <lastmod>{{ (page.data.sitemapLastmod or page.data.publishedTime) | isoDate }}</lastmod>
     <changefreq>{{ page.data.sitemapChangefreq or "monthly" }}</changefreq>
     <priority>{{ page.data.sitemapPriority | round(1) }}</priority>
   </url>
