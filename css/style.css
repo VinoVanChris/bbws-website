@@ -2678,6 +2678,8 @@ textarea.som-input { resize: none; line-height: 1.5; }
   flex: 0 0 auto;
   padding: 14px;
   border-right: 1px solid rgba(0,0,0,0.09);
+  display: flex;
+  align-items: center; /* center compass vertically when right panel grows */
 }
 .whisky-compass-right {
   flex: 1;
@@ -2740,6 +2742,11 @@ textarea.som-input { resize: none; line-height: 1.5; }
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   z-index: 2;
   outline: none;
+}
+.whisky-compass-dot--locked {
+  transform: translate(-50%, -50%) scale(1.9);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.9), 0 2px 10px rgba(0,0,0,0.4);
+  z-index: 3;
 }
 
 /* Right panel -- state-driven */
@@ -2825,7 +2832,13 @@ textarea.som-input { resize: none; line-height: 1.5; }
   display: block;
   font-size: 1.05rem;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+}
+.whisky-info-producer {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
 }
 .whisky-info-tier {
   display: inline-block;
@@ -2844,6 +2857,33 @@ textarea.som-input { resize: none; line-height: 1.5; }
   color: var(--text-muted);
   line-height: 1.65;
   margin: 0;
+}
+/* Locked bottle -- tasting detail */
+.whisky-info-tasting {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 12px;
+}
+.whisky-info-row { font-size: 0.82rem; line-height: 1.55; color: var(--text-muted); }
+.whisky-info-label {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+.whisky-info-click-hint {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 8px;
 }
 @media (max-width: 600px) {
   .whisky-compass-body { flex-direction: column; }

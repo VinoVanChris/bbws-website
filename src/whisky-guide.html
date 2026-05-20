@@ -163,45 +163,165 @@ SOM.whisky = (function() {
   // inStock: Phase 2 -- replaced by Bottlecapps API call
   var bottles = [
     // ISLAY
-    { id:'ardbeg-10',         name:'Ardbeg 10',                region:'islay',       peat:10, body:6,  tier:'mid',     tags:['enthusiast','peated'],          note:'The most intense Islay on the shelf. Pure peat, barbecue smoke, and surprising citrus underneath. Uncompromising.',                inStock:true },
-    { id:'laphroaig-10',      name:'Laphroaig 10',             region:'islay',       peat:9,  body:6,  tier:'mid',     tags:['enthusiast','peated'],          note:'Medicinal, seaweed, bonfire. Laphroaig is the one people either love immediately or take years to understand.',                  inStock:true },
-    { id:'lagavulin-16',      name:'Lagavulin 16',             region:'islay',       peat:9,  body:8,  tier:'premium', tags:['gift','enthusiast','peated'],   note:'The gold standard of Islay. Long, smoky, profoundly complex with dried fruit and dark chocolate underneath. Worth every dollar.', inStock:true },
-    { id:'bowmore-12',        name:'Bowmore 12',               region:'islay',       peat:5,  body:6,  tier:'mid',     tags:['gateway','peated'],             note:'The approachable Islay. Enough smoke to be interesting, enough fruit to be welcoming. A great first step into peated whisky.',    inStock:true },
-    { id:'bruichladdich-cl',  name:'Bruichladdich Classic Laddie', region:'islay',   peat:1,  body:5,  tier:'mid',     tags:['gateway','unpeated'],           note:'Unpeated Islay -- the terroir without the smoke. Floral, citrus, and complex in a way that surprises most people.',               inStock:true },
+    { id:'ardbeg-10',         name:'Ardbeg 10',                producer:'Ardbeg Distillery',           region:'islay',       peat:10, body:6,  tier:'mid',
+      aroma:'Tar, smoked lemon, seaweed, vanilla underneath',
+      flavour:'Intense smoke, espresso, dark chocolate, citrus',
+      finish:'Long, smoky, sweet coastal fade',
+      tags:['enthusiast','peated'],   note:'The most intense Islay on the shelf. Pure peat, barbecue smoke, and surprising citrus underneath. Uncompromising.',                inStock:true },
+    { id:'laphroaig-10',      name:'Laphroaig 10',             producer:'Laphroaig Distillery',        region:'islay',       peat:9,  body:6,  tier:'mid',
+      aroma:'Seaweed, iodine, bonfire smoke, sweet vanilla',
+      flavour:'Medicinal smoke, brine, raw peat, vanilla',
+      finish:'Long, dry, medicinal, warming',
+      tags:['enthusiast','peated'],   note:'Medicinal, seaweed, bonfire. Laphroaig is the one people either love immediately or take years to understand.',                  inStock:true },
+    { id:'lagavulin-16',      name:'Lagavulin 16',             producer:'Lagavulin Distillery',        region:'islay',       peat:9,  body:8,  tier:'premium',
+      aroma:'Deep peat smoke, dried fruit, sherry, coffee',
+      flavour:'Rich smoke, dried fig, leather, dark chocolate',
+      finish:'Very long, smoky, sea salt and dark fruit',
+      tags:['gift','enthusiast','peated'], note:'The gold standard of Islay. Long, smoky, profoundly complex with dried fruit and dark chocolate underneath. Worth every dollar.', inStock:true },
+    { id:'bowmore-12',        name:'Bowmore 12',               producer:'Bowmore Distillery',          region:'islay',       peat:5,  body:6,  tier:'mid',
+      aroma:'Light smoke, heather honey, lemon, sea air',
+      flavour:'Gentle peat, citrus, honey, mild brine',
+      finish:'Medium, warm, lightly smoky',
+      tags:['gateway','peated'],      note:'The approachable Islay. Enough smoke to be interesting, enough fruit to be welcoming. A great first step into peated whisky.',    inStock:true },
+    { id:'bruichladdich-cl',  name:'Bruichladdich Classic Laddie', producer:'Bruichladdich Distillery', region:'islay',  peat:1,  body:5,  tier:'mid',
+      aroma:'Floral, citrus zest, green apple, fresh cereal',
+      flavour:'Barley, lemon, stone fruit, light oak',
+      finish:'Clean, dry, medium-long',
+      tags:['gateway','unpeated'],    note:'Unpeated Islay -- the terroir without the smoke. Floral, citrus, and complex in a way that surprises most people.',               inStock:true },
     // SPEYSIDE
-    { id:'glenfiddich-12',    name:'Glenfiddich 12',           region:'speyside',    peat:1,  body:4,  tier:'entry',   tags:['gateway'],                      note:'The world\'s best-selling single malt for a reason. Pear, apple, light vanilla. Reliable, honest, and a genuine gateway bottle.',  inStock:true },
-    { id:'balvenie-12',       name:'Balvenie Doublewood 12',   region:'speyside',    peat:1,  body:7,  tier:'mid',     tags:['gift','gateway'],               note:'Finished in sherry casks for extra richness. Honey, dried fruit, and a warmth that makes it endlessly giftable.',                  inStock:true },
-    { id:'macallan-12-sherry',name:'Macallan 12 Sherry Oak',   region:'speyside',    peat:1,  body:9,  tier:'premium', tags:['gift','celebration'],           note:'Rich, sherried, with dried fruit, ginger, and chocolate. The bottle everyone recognises. Worth the price.',                        inStock:true },
-    { id:'aberlour-12',       name:'Aberlour 12',              region:'speyside',    peat:2,  body:7,  tier:'mid',     tags:['gift','enthusiast'],            note:'Underrated Speyside. Double-cask matured, with ripe red fruit, spice, and a long finish. Brilliant value at the price.',            inStock:true },
-    { id:'glenlivet-12',      name:'The Glenlivet 12',         region:'speyside',    peat:0,  body:3,  tier:'entry',   tags:['gateway'],                      note:'Light, floral, and easy. The Glenlivet is the reliable crowd-pleaser. Great for introducing someone to single malt.',              inStock:true },
+    { id:'glenfiddich-12',    name:'Glenfiddich 12',           producer:'William Grant & Sons',        region:'speyside',    peat:1,  body:4,  tier:'entry',
+      aroma:'Fresh pear, apple, light vanilla, hint of oak',
+      flavour:'Pear, citrus, subtle oak, honey',
+      finish:'Crisp, clean, medium',
+      tags:['gateway'],               note:'The world\'s best-selling single malt for a reason. Pear, apple, light vanilla. Reliable, honest, and a genuine gateway bottle.',  inStock:true },
+    { id:'balvenie-12',       name:'Balvenie Doublewood 12',   producer:'The Balvenie Distillery',     region:'speyside',    peat:1,  body:7,  tier:'mid',
+      aroma:'Honey, dried fruit, vanilla, toasted malt',
+      flavour:'Honey, nutmeg, cinnamon, sherry richness',
+      finish:'Long, sweet, gently warming',
+      tags:['gift','gateway'],        note:'Finished in sherry casks for extra richness. Honey, dried fruit, and a warmth that makes it endlessly giftable.',                  inStock:true },
+    { id:'macallan-12-sherry',name:'Macallan 12 Sherry Oak',   producer:'The Macallan Distillery',    region:'speyside',    peat:1,  body:9,  tier:'premium',
+      aroma:'Sherry, dried fruit, ginger, dark chocolate',
+      flavour:'Rich dried fruit, warming spice, chocolate, orange peel',
+      finish:'Long, warming, dried fig and cinnamon',
+      tags:['gift','celebration'],    note:'Rich, sherried, with dried fruit, ginger, and chocolate. The bottle everyone recognises. Worth the price.',                        inStock:true },
+    { id:'aberlour-12',       name:'Aberlour 12',              producer:'Aberlour Distillery',         region:'speyside',    peat:2,  body:7,  tier:'mid',
+      aroma:'Red apple, toffee, malt, cinnamon',
+      flavour:'Ripe red fruit, spice, hazelnut, sherry',
+      finish:'Medium-long, fruit-forward, warm',
+      tags:['gift','enthusiast'],     note:'Underrated Speyside. Double-cask matured, with ripe red fruit, spice, and a long finish. Brilliant value at the price.',            inStock:true },
+    { id:'glenlivet-12',      name:'The Glenlivet 12',         producer:'The Glenlivet Distillery',   region:'speyside',    peat:0,  body:3,  tier:'entry',
+      aroma:'Floral, citrus blossom, peach, light vanilla',
+      flavour:'Sweet stone fruit, floral notes, light oak',
+      finish:'Clean, short, fruity',
+      tags:['gateway'],               note:'Light, floral, and easy. The Glenlivet is the reliable crowd-pleaser. Great for introducing someone to single malt.',              inStock:true },
     // HIGHLANDS
-    { id:'glenmorangie-10',   name:'Glenmorangie Original 10', region:'highlands',   peat:1,  body:4,  tier:'entry',   tags:['gateway','gift'],               note:'Tall stills produce a delicate, floral spirit. Peach, vanilla, honey. Consistently excellent and approachable for everyone.',       inStock:true },
-    { id:'dalmore-12',        name:'Dalmore 12',               region:'highlands',   peat:1,  body:8,  tier:'mid',     tags:['gift'],                         note:'Rich, chocolate, orange marmalade, and sherry. The Dalmore is a Highland heavyweight that impresses every time.',                  inStock:true },
-    { id:'oban-14',           name:'Oban 14',                  region:'highlands',   peat:3,  body:7,  tier:'mid',     tags:['gift','enthusiast'],            note:'A coastal Highland malt with a gentle maritime edge. Sea salt, dried fruit, and a little smoke. A brilliantly balanced bottle.',   inStock:true },
+    { id:'glenmorangie-10',   name:'Glenmorangie Original 10', producer:'Glenmorangie Distillery',    region:'highlands',   peat:1,  body:4,  tier:'entry',
+      aroma:'Peach, vanilla, citrus blossom, honey',
+      flavour:'Peach, vanilla, cream, subtle oak',
+      finish:'Medium, clean, fruit-forward',
+      tags:['gateway','gift'],        note:'Tall stills produce a delicate, floral spirit. Peach, vanilla, honey. Consistently excellent and approachable for everyone.',       inStock:true },
+    { id:'dalmore-12',        name:'Dalmore 12',               producer:'The Dalmore Distillery',     region:'highlands',   peat:1,  body:8,  tier:'mid',
+      aroma:'Orange marmalade, chocolate, sherry, dried fruit',
+      flavour:'Rich chocolate, orange, dried fruit, cinnamon',
+      finish:'Long, warm, chocolate-driven',
+      tags:['gift'],                  note:'Rich, chocolate, orange marmalade, and sherry. The Dalmore is a Highland heavyweight that impresses every time.',                  inStock:true },
+    { id:'oban-14',           name:'Oban 14',                  producer:'Oban Distillery',            region:'highlands',   peat:3,  body:7,  tier:'mid',
+      aroma:'Sea salt, dried fruit, light smoke, honey',
+      flavour:'Brine, dried fruit, gentle peat, citrus',
+      finish:'Long, maritime, warming',
+      tags:['gift','enthusiast'],     note:'A coastal Highland malt with a gentle maritime edge. Sea salt, dried fruit, and a little smoke. A brilliantly balanced bottle.',   inStock:true },
     // ISLANDS
-    { id:'talisker-10',       name:'Talisker 10',              region:'islands',     peat:6,  body:7,  tier:'mid',     tags:['enthusiast','peated'],          note:'Isle of Skye in a glass. Peppery, maritime, with smoked meat and a long warming finish. One of the great island malts.',           inStock:true },
-    { id:'highland-park-12',  name:'Highland Park 12',         region:'islands',     peat:4,  body:6,  tier:'mid',     tags:['gift','enthusiast'],            note:'Orkney\'s finest. Heather, honey, a little smoke, and remarkable balance. The most approachable of the smoky malts.',               inStock:true },
+    { id:'talisker-10',       name:'Talisker 10',              producer:'Talisker Distillery',        region:'islands',     peat:6,  body:7,  tier:'mid',
+      aroma:'Black pepper, smoked fish, sea salt, iodine',
+      flavour:'Black pepper, smoked meat, maritime salt, dried fruit',
+      finish:'Long, peppery, warming',
+      tags:['enthusiast','peated'],   note:'Isle of Skye in a glass. Peppery, maritime, with smoked meat and a long warming finish. One of the great island malts.',           inStock:true },
+    { id:'highland-park-12',  name:'Highland Park 12',         producer:'Highland Park Distillery',   region:'islands',     peat:4,  body:6,  tier:'mid',
+      aroma:'Heather honey, light smoke, dried fruit, vanilla',
+      flavour:'Heather honey, gentle peat, vanilla, citrus',
+      finish:'Long, balanced, slightly smoky',
+      tags:['gift','enthusiast'],     note:'Orkney\'s finest. Heather, honey, a little smoke, and remarkable balance. The most approachable of the smoky malts.',               inStock:true },
     // CAMPBELTOWN
-    { id:'springbank-10',     name:'Springbank 10',            region:'campbeltown', peat:3,  body:7,  tier:'mid',     tags:['enthusiast','deep-cut'],        note:'One of the most talked-about distilleries in the world. Briny, oily, with fruit and peat in perfect tension. Worth seeking out.',  inStock:true },
+    { id:'springbank-10',     name:'Springbank 10',            producer:'Springbank Distillery',      region:'campbeltown', peat:3,  body:7,  tier:'mid',
+      aroma:'Brine, vanilla, green apple, light peat',
+      flavour:'Oily, briny, stone fruit, gentle smoke',
+      finish:'Long, complex, drying',
+      tags:['enthusiast','deep-cut'], note:'One of the most talked-about distilleries in the world. Briny, oily, with fruit and peat in perfect tension. Worth seeking out.',  inStock:true },
     // LOWLANDS
-    { id:'auchentoshan-3w',   name:'Auchentoshan Three Wood',  region:'lowlands',    peat:0,  body:5,  tier:'mid',     tags:['gateway','gift'],               note:'Triple-distilled, triple-cask finished. Dried fruits, toffee, and a whisper of spice. The gentlest Scotch on the shelf.',           inStock:true },
+    { id:'auchentoshan-3w',   name:'Auchentoshan Three Wood',  producer:'Auchentoshan Distillery',    region:'lowlands',    peat:0,  body:5,  tier:'mid',
+      aroma:'Dried fruit, toffee, sherry, light oak',
+      flavour:'Marzipan, toffee, red fruit, gentle spice',
+      finish:'Medium-long, sweet, gently warming',
+      tags:['gateway','gift'],        note:'Triple-distilled, triple-cask finished. Dried fruits, toffee, and a whisper of spice. The gentlest Scotch on the shelf.',           inStock:true },
     // JAPAN
-    { id:'suntory-toki',      name:'Suntory Toki',             region:'japan',       peat:1,  body:4,  tier:'entry',   tags:['gateway'],                      note:'Light, clean, and built for a highball. Suntory Toki is the best introduction to Japanese whisky at the price.',                    inStock:true },
-    { id:'hibiki-harmony',    name:'Hibiki Harmony',           region:'japan',       peat:1,  body:6,  tier:'premium', tags:['gift','celebration'],           note:'The pinnacle of Japanese blended whisky. Honey, rose, orange peel. Extraordinary balance and one of the most beautiful bottles made.', inStock:true },
-    { id:'nikka-barrel',      name:'Nikka From the Barrel',    region:'japan',       peat:2,  body:9,  tier:'mid',     tags:['enthusiast','deep-cut'],        note:'Bottled at cask strength, intensely rich, with spice and dried fruit. Nikka is Japan\'s answer to a serious dram. Remarkable.',    inStock:true },
-    { id:'yamazaki-12',       name:'Yamazaki 12',              region:'japan',       peat:2,  body:7,  tier:'premium', tags:['gift','celebration'],           note:'The bottle that put Japanese whisky on the world map. Peach, pineapple, coconut, and subtle oak. Genuinely special.',               inStock:true },
+    { id:'suntory-toki',      name:'Suntory Toki',             producer:'Suntory',                    region:'japan',       peat:1,  body:4,  tier:'entry',
+      aroma:'Green apple, honey, light cereal, subtle oak',
+      flavour:'Apple, honey, vanilla, gentle spice',
+      finish:'Clean, short, refreshing',
+      tags:['gateway'],               note:'Light, clean, and built for a highball. Suntory Toki is the best introduction to Japanese whisky at the price.',                    inStock:true },
+    { id:'hibiki-harmony',    name:'Hibiki Harmony',           producer:'Suntory',                    region:'japan',       peat:1,  body:6,  tier:'premium',
+      aroma:'Rose petals, honey, orange peel, subtle wood',
+      flavour:'Honey, orange blossom, white chocolate, delicate oak',
+      finish:'Long, silky, elegant',
+      tags:['gift','celebration'],    note:'The pinnacle of Japanese blended whisky. Honey, rose, orange peel. Extraordinary balance and one of the most beautiful bottles made.', inStock:true },
+    { id:'nikka-barrel',      name:'Nikka From the Barrel',    producer:'Nikka Whisky',               region:'japan',       peat:2,  body:9,  tier:'mid',
+      aroma:'Rich dried fruit, caramel, spice, toasted oak',
+      flavour:'Dark fruit, chocolate, pepper, vanilla richness',
+      finish:'Long, warm, intensely spiced',
+      tags:['enthusiast','deep-cut'], note:'Bottled at cask strength, intensely rich, with spice and dried fruit. Nikka is Japan\'s answer to a serious dram. Remarkable.',    inStock:true },
+    { id:'yamazaki-12',       name:'Yamazaki 12',              producer:'Suntory',                    region:'japan',       peat:2,  body:7,  tier:'premium',
+      aroma:'Peach, pineapple, coconut, subtle oak',
+      flavour:'Tropical fruit, vanilla, honey, light spice',
+      finish:'Long, smooth, fruit-forward',
+      tags:['gift','celebration'],    note:'The bottle that put Japanese whisky on the world map. Peach, pineapple, coconut, and subtle oak. Genuinely special.',               inStock:true },
     // IRELAND
-    { id:'jameson',           name:'Jameson',                  region:'ireland',     peat:0,  body:3,  tier:'entry',   tags:['gateway'],                      note:'The world introduction to Irish whiskey. Light, smooth, with toasted wood and grain. The reliable and universal crowd-pleaser.',      inStock:true },
-    { id:'redbreast-12',      name:'Redbreast 12',             region:'ireland',     peat:0,  body:7,  tier:'mid',     tags:['gift','enthusiast'],            note:'The benchmark Irish single pot still. Fruit cake, spice, and a richness that rivals aged Speyside. Serious whiskey.',               inStock:true },
-    { id:'green-spot',        name:'Green Spot',               region:'ireland',     peat:0,  body:5,  tier:'mid',     tags:['enthusiast','deep-cut'],        note:'A single pot still classic from the Mitchell family. Orchard fruit, spice, and a creaminess that is uniquely Irish.',               inStock:true },
+    { id:'jameson',           name:'Jameson',                  producer:'Irish Distillers',           region:'ireland',     peat:0,  body:3,  tier:'entry',
+      aroma:'Light grain, toasted wood, floral, vanilla',
+      flavour:'Smooth grain, vanilla, light spice, subtle fruit',
+      finish:'Short, clean, easy',
+      tags:['gateway'],               note:'The world introduction to Irish whiskey. Light, smooth, with toasted wood and grain. The reliable and universal crowd-pleaser.',      inStock:true },
+    { id:'redbreast-12',      name:'Redbreast 12',             producer:'Irish Distillers',           region:'ireland',     peat:0,  body:7,  tier:'mid',
+      aroma:'Fruit cake, sherry, spice, toasted oak',
+      flavour:'Rich fruit, marzipan, warming spice, sherry',
+      finish:'Long, warming, lingering fruit',
+      tags:['gift','enthusiast'],     note:'The benchmark Irish single pot still. Fruit cake, spice, and a richness that rivals aged Speyside. Serious whiskey.',               inStock:true },
+    { id:'green-spot',        name:'Green Spot',               producer:'Mitchell & Son',             region:'ireland',     peat:0,  body:5,  tier:'mid',
+      aroma:'Green apple, fresh barley, vanilla, light spice',
+      flavour:'Orchard fruit, cream, gentle spice, light oak',
+      finish:'Medium, creamy, gently spiced',
+      tags:['enthusiast','deep-cut'], note:'A single pot still classic from the Mitchell family. Orchard fruit, spice, and a creaminess that is uniquely Irish.',               inStock:true },
     // AMERICA
-    { id:'buffalo-trace',     name:'Buffalo Trace',            region:'america',     peat:0,  body:5,  tier:'entry',   tags:['gateway'],                      note:'One of the most awarded distilleries in the world. Vanilla, caramel, and spice. Buffalo Trace is the perfect entry into bourbon.',  inStock:true },
-    { id:'woodford-reserve',  name:'Woodford Reserve',         region:'america',     peat:0,  body:7,  tier:'mid',     tags:['gift'],                         note:'Complex, smooth, and beautifully balanced. Dried fruit, vanilla, toasted oak. The go-to bourbon gift bottle.',                       inStock:true },
-    { id:'angels-envy',       name:'Angel\'s Envy',            region:'america',     peat:0,  body:7,  tier:'mid',     tags:['gift'],                         note:'Finished in port wine barrels for an unusual richness and sweetness. The bourbon for people who think they don\'t like bourbon.',    inStock:true },
-    { id:'bulleit-rye',       name:'Bulleit Rye',              region:'america',     peat:0,  body:5,  tier:'entry',   tags:['gateway'],                      note:'High rye content means big spice -- black pepper, dried herbs, and a dry finish. Great for cocktails or on its own.',               inStock:true },
+    { id:'buffalo-trace',     name:'Buffalo Trace',            producer:'Buffalo Trace Distillery',   region:'america',     peat:0,  body:5,  tier:'entry',
+      aroma:'Vanilla, caramel, mint, light oak',
+      flavour:'Caramel, vanilla, dried fruit, hint of anise',
+      finish:'Medium, smooth, warm',
+      tags:['gateway'],               note:'One of the most awarded distilleries in the world. Vanilla, caramel, and spice. Buffalo Trace is the perfect entry into bourbon.',  inStock:true },
+    { id:'woodford-reserve',  name:'Woodford Reserve',         producer:'Brown-Forman',               region:'america',     peat:0,  body:7,  tier:'mid',
+      aroma:'Dried fruit, vanilla, toasted oak, chocolate',
+      flavour:'Dried fruit, vanilla, warming spice, mahogany',
+      finish:'Long, warm, complex',
+      tags:['gift'],                  note:'Complex, smooth, and beautifully balanced. Dried fruit, vanilla, toasted oak. The go-to bourbon gift bottle.',                       inStock:true },
+    { id:'angels-envy',       name:'Angel\'s Envy',            producer:"Angel's Envy",               region:'america',     peat:0,  body:7,  tier:'mid',
+      aroma:'Port wine sweetness, dried cherry, vanilla, light oak',
+      flavour:'Rich dried fruit, cherry, vanilla, caramel',
+      finish:'Long, sweet, port-influenced',
+      tags:['gift'],                  note:'Finished in port wine barrels for an unusual richness and sweetness. The bourbon for people who think they don\'t like bourbon.',    inStock:true },
+    { id:'bulleit-rye',       name:'Bulleit Rye',              producer:'Bulleit / Four Roses',        region:'america',     peat:0,  body:5,  tier:'entry',
+      aroma:'Dried herbs, pepper, toasted oak, light fruit',
+      flavour:'Black pepper, spice, dried fruit, light caramel',
+      finish:'Dry, spiced, medium-long',
+      tags:['gateway'],               note:'High rye content means big spice -- black pepper, dried herbs, and a dry finish. Great for cocktails or on its own.',               inStock:true },
     // CANADA
-    { id:'lot-40',            name:'Lot 40',                   region:'canada',      peat:0,  body:5,  tier:'entry',   tags:['gateway','enthusiast'],         note:'100% rye, made the old way. Lot 40 is the bottle that showed Canada what serious Canadian whisky could taste like.',                inStock:true },
-    { id:'forty-creek',       name:'Forty Creek Barrel Select',region:'canada',      peat:0,  body:4,  tier:'entry',   tags:['gateway'],                      note:'Three grains, three casks, blended by one of Canada\'s most celebrated distillers. Light, approachable, and honestly made.',         inStock:true }
+    { id:'lot-40',            name:'Lot 40',                   producer:'Corby Spirit and Wine',       region:'canada',      peat:0,  body:5,  tier:'entry',
+      aroma:'Fresh rye grain, pepper, vanilla, light floral',
+      flavour:'Rye spice, vanilla, dried fruit, light oak',
+      finish:'Medium, warming, rye-forward',
+      tags:['gateway','enthusiast'],  note:'100% rye, made the old way. Lot 40 is the bottle that showed Canada what serious Canadian whisky could taste like.',                inStock:true },
+    { id:'forty-creek',       name:'Forty Creek Barrel Select',producer:'Forty Creek Distillery',      region:'canada',      peat:0,  body:4,  tier:'entry',
+      aroma:'Light grain, vanilla, honey, gentle spice',
+      flavour:'Smooth grain, honey, vanilla, gentle spice',
+      finish:'Short, clean, pleasant',
+      tags:['gateway'],               note:'Three grains, three casks, blended by one of Canada\'s most celebrated distillers. Light, approachable, and honestly made.',         inStock:true }
   ];
 
   // ── COLLECTIONS ────────────────────────────────────────────────
@@ -379,7 +499,14 @@ SOM.whisky = (function() {
     { key:'canada',   label:'Canada',   regions: ['canada'] }
   ];
 
-  var compassState = { group: 'all', bottle: null };
+  // locked: true when user has clicked a dot -- hover won't override until unlocked
+  var compassState = { group: 'all', bottle: null, locked: false };
+
+  function updateDotLock(bottleId) {
+    document.querySelectorAll('.whisky-compass-dot').forEach(function(dot) {
+      dot.classList.toggle('whisky-compass-dot--locked', !!bottleId && dot.dataset.id === bottleId);
+    });
+  }
 
   function renderRight() {
     var panel = document.getElementById('whisky-compass-right');
@@ -388,14 +515,32 @@ SOM.whisky = (function() {
     if (compassState.bottle) {
       var b = compassState.bottle;
       var r = W.regions[b.region];
-      panel.innerHTML =
-        (compassState.group !== 'all'
-          ? '<button class="wcp-back" id="wcp-back" type="button">← Back</button>'
-          : '') +
-        '<span class="whisky-info-region">' + (r ? r.label : '') + '</span>' +
-        '<strong class="whisky-info-name">' + b.name + '</strong>' +
-        '<span class="whisky-info-tier">' + b.tier + '</span>' +
-        '<p class="whisky-info-note">' + b.note + '</p>';
+      if (compassState.locked) {
+        // Full tasting detail (click-locked)
+        panel.innerHTML =
+          '<button class="wcp-back" id="wcp-back" type="button">← Back</button>' +
+          '<span class="whisky-info-region">' + (r ? r.label : '') + '</span>' +
+          '<strong class="whisky-info-name">' + b.name + '</strong>' +
+          '<span class="whisky-info-producer">' + (b.producer || '') + '</span>' +
+          '<span class="whisky-info-tier">' + b.tier + '</span>' +
+          '<div class="whisky-info-tasting">' +
+            '<div class="whisky-info-row"><span class="whisky-info-label">Aroma</span>' + (b.aroma || '') + '</div>' +
+            '<div class="whisky-info-row"><span class="whisky-info-label">Flavour</span>' + (b.flavour || '') + '</div>' +
+            '<div class="whisky-info-row"><span class="whisky-info-label">Finish</span>' + (b.finish || '') + '</div>' +
+          '</div>' +
+          '<p class="whisky-info-click-hint">Click the dot again to dismiss.</p>';
+      } else {
+        // Hover preview (quick look)
+        panel.innerHTML =
+          (compassState.group !== 'all'
+            ? '<button class="wcp-back" id="wcp-back" type="button">← Back</button>'
+            : '') +
+          '<span class="whisky-info-region">' + (r ? r.label : '') + '</span>' +
+          '<strong class="whisky-info-name">' + b.name + '</strong>' +
+          '<span class="whisky-info-tier">' + b.tier + '</span>' +
+          '<p class="whisky-info-note">' + b.note + '</p>' +
+          '<p class="whisky-info-click-hint">Click dot for full tasting notes.</p>';
+      }
     } else if (compassState.group === 'all') {
       var btns = GROUPS.map(function(g) {
         return '<button class="wcp-group-btn" data-key="' + g.key + '" type="button">' + g.label + '</button>';
@@ -419,24 +564,26 @@ SOM.whisky = (function() {
         (r2
           ? '<p class="wcp-region-char">' + r2.character + '</p>' +
             '<p class="wcp-region-body">' + r2.body + '</p>'
-          : '<p class="wcp-region-body">Six distilling regions, each with a distinct character. Filter by Islay, Speyside, Highlands, Islands, Campbeltown, or Lowlands using the individual region names after selecting Scotland.</p>'
+          : '<p class="wcp-region-body">Six distilling regions, each with a distinct character. Hover a dot to preview a bottle, click to see full tasting notes.</p>'
         ) +
-        '<p class="wcp-hover-hint">Hover a dot for bottle details.</p>';
+        '<p class="wcp-hover-hint">Hover a dot to preview. Click to lock.</p>';
     }
 
-    // Back button
+    // Back button -- clears bottle lock and returns to group state
     var backBtn = panel.querySelector('#wcp-back, .wcp-back');
     if (backBtn) {
       backBtn.addEventListener('click', function() {
-        compassState = { group: 'all', bottle: null };
-        renderDots(null);
+        compassState.bottle = null;
+        compassState.locked = false;
+        updateDotLock(null);
         renderRight();
       });
     }
   }
 
   function selectGroup(key) {
-    compassState = { group: key, bottle: null };
+    compassState = { group: key, bottle: null, locked: false };
+    updateDotLock(null);
     var grp = GROUPS.find(function(g) { return g.key === key; });
     renderDots(grp ? grp.regions : null);
     renderRight();
@@ -461,6 +608,7 @@ SOM.whisky = (function() {
     }).join('');
 
     dotsEl.addEventListener('mouseenter', function(e) {
+      if (compassState.locked) return; // locked -- hover does nothing
       if (!e.target.classList.contains('whisky-compass-dot')) return;
       var b = W.bottles.find(function(x) { return x.id === e.target.dataset.id; });
       if (!b) return;
@@ -468,6 +616,7 @@ SOM.whisky = (function() {
       renderRight();
     }, true);
     dotsEl.addEventListener('mouseleave', function(e) {
+      if (compassState.locked) return; // locked -- hover does nothing
       if (!e.target.classList.contains('whisky-compass-dot')) return;
       compassState.bottle = null;
       renderRight();
@@ -477,8 +626,18 @@ SOM.whisky = (function() {
       if (!dot) return;
       var b = W.bottles.find(function(x) { return x.id === dot.dataset.id; });
       if (!b) return;
-      compassState.bottle = b;
-      renderRight();
+      // Toggle: clicking same locked dot unlocks; clicking any other dot locks it
+      if (compassState.locked && compassState.bottle && compassState.bottle.id === b.id) {
+        compassState.bottle = null;
+        compassState.locked = false;
+        updateDotLock(null);
+        renderRight();
+      } else {
+        compassState.bottle = b;
+        compassState.locked = true;
+        updateDotLock(b.id);
+        renderRight();
+      }
     });
   }
 
