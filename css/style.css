@@ -514,6 +514,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   z-index: 1;
   padding: 48px 24px;
 }
