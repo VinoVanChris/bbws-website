@@ -510,6 +510,8 @@ p { color: var(--text-muted); max-width: 66ch; }
 .hero-slide .hero-content {
   position: absolute;
   inset: 0;
+  max-width: none;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
