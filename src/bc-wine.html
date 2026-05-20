@@ -20,47 +20,111 @@ sitemapLastmod: 2026-05-19
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
-#bc-wine-map {
-  width: 100%;
-  height: 540px;
+/* Map + panel wrapper */
+.map-region-wrap {
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.08);
+}
+#bc-wine-map {
+  width: 100%;
+  height: 560px;
+  display: block;
   position: relative;
   z-index: 0;
 }
-.region-blurb {
-  display: none;
-  margin-top: 40px;
-  padding-top: 40px;
-  border-top: 1px solid var(--border-gold);
+/* Sliding panel overlay */
+.region-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 340px;
+  max-width: 90%;
+  height: 100%;
+  background: rgba(252,250,246,0.97);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-left: 1px solid var(--border-gold);
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 400;
+  box-shadow: -6px 0 32px rgba(0,0,0,0.13);
 }
+.region-panel.visible {
+  transform: translateX(0);
+}
+.region-panel-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: var(--bg-alt);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition);
+  z-index: 10;
+}
+.region-panel-close:hover { background: var(--gold); color: #1a1208; }
+.region-panel-body {
+  padding: 28px 24px 32px;
+}
+.region-blurb { display: none; }
 .region-blurb.active { display: block; }
-.region-blurb h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 16px; }
-.region-blurb > p { max-width: 68ch; line-height: 1.75; }
+.region-blurb h2 { font-size: clamp(1.2rem, 2.2vw, 1.55rem); margin-bottom: 14px; padding-right: 24px; }
+.region-blurb > p { font-size: 0.83rem; line-height: 1.75; color: var(--text-muted); }
 .region-blurb-wineries {
-  margin-top: 28px;
+  margin-top: 22px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 .region-winery-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text);
-  background: var(--bg-alt);
+  background: #fff;
   border: 1px solid var(--border-gold);
   border-radius: 100px;
-  padding: 6px 14px;
+  padding: 5px 12px;
   text-decoration: none;
   transition: all var(--transition);
 }
 .region-winery-chip:hover { background: var(--gold); color: #1a1208; border-color: var(--gold); }
+/* Mobile: panel below map */
+@media (max-width: 640px) {
+  .map-region-wrap { overflow: visible; }
+  #bc-wine-map { height: 380px; border-radius: var(--radius) var(--radius) 0 0; }
+  .region-panel {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    transform: none;
+    border-left: none;
+    border-top: 1px solid var(--border-gold);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: none;
+    display: none;
+    backdrop-filter: none;
+  }
+  .region-panel.visible { display: block; }
+  .region-panel-close { display: none; }
+}
 .bc-producers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -119,53 +183,54 @@ sitemapLastmod: 2026-05-19
         <button class="btn-choice" data-region="island" type="button">Vancouver Island</button>
       </div>
 
-      <!-- Map -->
-      <div id="bc-wine-map" class="fade-in"></div>
+      <!-- Map + sliding region panel -->
+      <div class="map-region-wrap fade-in">
+        <div id="bc-wine-map"></div>
 
-      <!-- Region write-ups -->
-      <div id="region-writeups">
+        <aside class="region-panel" id="region-panel" aria-label="Region details">
+          <button class="region-panel-close" id="region-panel-close" aria-label="Close region panel" type="button">
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+          </button>
+          <div class="region-panel-body">
 
-        <div class="region-blurb active fade-in" data-region="all">
-          <h2>BC Wine Country</h2>
-          <p>British Columbia produces wine across six distinct regions, each shaped by different geography, climate, and soil. The South Okanagan is where the big reds come from — desert conditions, long growing seasons, concentrated fruit. Move north toward Kelowna and Okanagan Lake moderates everything, giving winemakers more range. The Similkameen runs west of the Okanagan through the Cascades, small in size but serious in quality. The Gulf Islands and Vancouver Island are cooler, maritime, and better suited to whites, aromatics, and Pinot Noir. Select a region to zoom in on the wineries we carry.</p>
-        </div>
+            <div class="region-blurb" data-region="oliver">
+              <h2>Oliver / Osoyoos</h2>
+              <p>The south end of the Okanagan, where the landscape turns to semi-desert. Canada's only true desert sits just south of Osoyoos, and the growing conditions here are unlike anywhere else in the country. Long, hot days. Cool nights. Soils ranging from sandy loam on the Black Sage Bench to clay and gravel on the Golden Mile. This is where BC's most serious reds come from — Syrah, Cabernet Franc, Merlot-based blends that can age a decade or more.</p>
+              <div class="region-blurb-wineries" id="wineries-oliver"></div>
+            </div>
 
-        <div class="region-blurb" data-region="oliver">
-          <h2>Oliver / Osoyoos</h2>
-          <p>The south end of the Okanagan, where the landscape turns to semi-desert. Canada's only true desert sits just south of Osoyoos, and the growing conditions here are unlike anywhere else in the country. Long, hot days. Cool nights. Soils ranging from sandy loam on the Black Sage Bench to clay and gravel on the Golden Mile. This is where BC's most serious reds come from — Syrah, Cabernet Franc, Merlot-based blends that can age a decade or more. If you want to understand what BC red wine is capable of, start here.</p>
-          <div class="region-blurb-wineries" id="wineries-oliver"></div>
-        </div>
+            <div class="region-blurb" data-region="naramata">
+              <h2>Naramata / Okanagan Falls</h2>
+              <p>Naramata Bench runs north from Penticton along the east shore of Okanagan Lake, producing wines with more tension and freshness than the south — elegant reds, whites with real structure, and some of the better rosé in the province. Okanagan Falls, just south, sits at the head of Skaha Lake and has quietly become one of the most interesting clusters of small producers in BC.</p>
+              <div class="region-blurb-wineries" id="wineries-naramata"></div>
+            </div>
 
-        <div class="region-blurb" data-region="naramata">
-          <h2>Naramata / Okanagan Falls</h2>
-          <p>Naramata Bench runs north from Penticton along the east shore of Okanagan Lake, producing wines with more tension and freshness than the south — elegant reds, whites with real structure, and some of the better rosé in the province. Okanagan Falls, just south, sits at the head of Skaha Lake and has quietly become one of the most interesting clusters of small producers in BC. Dirty Laundry sits north in Summerland, where the lake's moderating effect is strongest.</p>
-          <div class="region-blurb-wineries" id="wineries-naramata"></div>
-        </div>
+            <div class="region-blurb" data-region="kelowna">
+              <h2>Kelowna</h2>
+              <p>The commercial heart of BC wine country, but some of the oldest vineyards in the province are here. Okanagan Lake moderates temperatures in both directions, giving Kelowna the range to produce everything from sparkling to late-harvest. Organic farming is increasingly common. Tantalus and Sperling are the ones we keep coming back to.</p>
+              <div class="region-blurb-wineries" id="wineries-kelowna"></div>
+            </div>
 
-        <div class="region-blurb" data-region="kelowna">
-          <h2>Kelowna</h2>
-          <p>The commercial heart of BC wine country, but some of the oldest vineyards in the province are here. Okanagan Lake moderates temperatures in both directions, giving Kelowna the range to produce everything from sparkling to late-harvest. The East Kelowna bench has a concentration of serious estate producers. West Kelowna, across the bridge, is where Mission Hill and Quails' Gate put BC wine on the international map. Organic farming is increasingly common. Tantalus and Sperling are the ones we keep coming back to.</p>
-          <div class="region-blurb-wineries" id="wineries-kelowna"></div>
-        </div>
+            <div class="region-blurb" data-region="similkameen">
+              <h2>Similkameen Valley</h2>
+              <p>BC's smallest wine region and one of its most interesting. The valley runs east-west through the Cascade Mountains west of the Okanagan, with extreme diurnal temperature swings and gravelly alluvial soils that stress the vines in the best possible way. Organic farming is widespread here. Clos du Soleil, Orofino, and Whispering Horse are the three reasons to pay attention to Cawston.</p>
+              <div class="region-blurb-wineries" id="wineries-similkameen"></div>
+            </div>
 
-        <div class="region-blurb" data-region="similkameen">
-          <h2>Similkameen Valley</h2>
-          <p>BC's smallest wine region and one of its most interesting. The valley runs east-west through the Cascade Mountains west of the Okanagan, with extreme diurnal temperature swings and gravelly alluvial soils that stress the vines in the best possible way. Organic farming is widespread here. Clos du Soleil has done as much as anyone to establish what this region can do. Orofino and Whispering Horse are two more reasons to pay attention to Cawston.</p>
-          <div class="region-blurb-wineries" id="wineries-similkameen"></div>
-        </div>
+            <div class="region-blurb" data-region="islands">
+              <h2>Gulf Islands</h2>
+              <p>Cool, maritime, and producing small quantities from boutique estate producers. The growing conditions are the opposite of the Okanagan — less heat, more rainfall, shorter seasons. The wines lean toward aromatic whites, skin-contact styles, and natural winemaking. A Sunday in August, out of Salt Spring Island, is exactly the kind of producer this region attracts.</p>
+              <div class="region-blurb-wineries" id="wineries-islands"></div>
+            </div>
 
-        <div class="region-blurb" data-region="islands">
-          <h2>Gulf Islands</h2>
-          <p>Cool, maritime, and producing small quantities from a cluster of boutique estate producers. The growing conditions are the opposite of the Okanagan — less heat, more rainfall, shorter seasons. The wines lean toward aromatic whites, skin-contact styles, and natural winemaking. A Sunday in August, out of Salt Spring Island, is exactly the kind of producer this region attracts: small farming operation, natural methods, genuinely distinctive wine unlike anything from the mainland.</p>
-          <div class="region-blurb-wineries" id="wineries-islands"></div>
-        </div>
+            <div class="region-blurb" data-region="island">
+              <h2>Vancouver Island</h2>
+              <p>The Cowichan Valley, just north of Victoria, is the most established sub-region. The climate is maritime, which means white wines and Pinot Noir are the natural strengths. Averill Creek makes some of the most serious wine coming off the island. Blue Grouse has been at it for decades. The island is also home to some of BC's best distilleries.</p>
+              <div class="region-blurb-wineries" id="wineries-island"></div>
+            </div>
 
-        <div class="region-blurb" data-region="island">
-          <h2>Vancouver Island</h2>
-          <p>The Cowichan Valley, just north of Victoria, is the most established sub-region. The climate is maritime and the seasons are shorter than the Okanagan, which means white wines and Pinot Noir are the natural strengths. Averill Creek makes some of the most serious wine coming off the island. Blue Grouse, also in the Cowichan Valley, has been at it for decades. The island is also home to some of BC's best distilleries — Shelter Point, Ampersand, and Macaloney's are all within a short drive of each other.</p>
-          <div class="region-blurb-wineries" id="wineries-island"></div>
-        </div>
-
+          </div>
+        </aside>
       </div>
 
       <!-- BC Distilleries + Breweries -->
@@ -324,6 +389,29 @@ sitemapLastmod: 2026-05-19
       container.appendChild(chip);
     });
 
+    const panel = document.getElementById('region-panel');
+    const closeBtn = document.getElementById('region-panel-close');
+
+    function openPanel(region) {
+      document.querySelectorAll('.region-blurb').forEach(function(el) {
+        el.classList.toggle('active', el.dataset.region === region);
+      });
+      panel.classList.add('visible');
+    }
+
+    function closePanel() {
+      panel.classList.remove('visible');
+      document.querySelectorAll('.region-blurb').forEach(function(el) { el.classList.remove('active'); });
+      document.querySelectorAll('.btn-choice[data-region]').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.region === 'all');
+      });
+      const r = regions.all;
+      map.flyTo(r.center, r.zoom, { duration: 0.8 });
+      markers.forEach(function(m) { m.addTo(map); });
+    }
+
+    closeBtn.addEventListener('click', closePanel);
+
     /* Region switching */
     document.querySelectorAll('.btn-choice[data-region]').forEach(function(btn) {
       btn.addEventListener('click', function() {
@@ -334,9 +422,12 @@ sitemapLastmod: 2026-05-19
         markers.forEach(function(m) {
           if (region === 'all' || m._wineryRegion === region) { m.addTo(map); } else { m.remove(); }
         });
-        document.querySelectorAll('.region-blurb').forEach(function(el) {
-          el.classList.toggle('active', el.dataset.region === region);
-        });
+        if (region === 'all') {
+          panel.classList.remove('visible');
+          document.querySelectorAll('.region-blurb').forEach(function(el) { el.classList.remove('active'); });
+        } else {
+          openPanel(region);
+        }
       });
     });
   });
