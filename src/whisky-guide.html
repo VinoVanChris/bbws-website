@@ -547,6 +547,11 @@ SOM.whisky = (function() {
       flavour:'Apple, honey, vanilla, gentle spice',
       finish:'Clean, short, refreshing',
       tags:['gateway'],               note:'Light, clean, and built for a highball. Suntory Toki is the best introduction to Japanese whisky at the price.',                    inStock:true },
+    { id:'hibiki-harmony',    name:'Hibiki Japanese Harmony',  producer:'Suntory',                    region:'japan',       peat:1,  body:6,  tier:'mid',
+      aroma:'Rose, lychee, candied orange, sandalwood, light honey',
+      flavour:'Orchard fruit, honey, subtle oak, delicate floral spice',
+      finish:'Long, silky, gently fading floral sweetness',
+      tags:['gift','celebration'],    note:'One of the most beautiful whiskies made anywhere in the world. Suntory blends up to ten malt and grain whiskies for Hibiki Harmony -- silky, floral, and genuinely exceptional.',  inStock:true },
     // ── AMERICA ──────────────────────────────────────────────────────
     { id:'woodford-reserve',  name:'Woodford Reserve',         producer:'Brown-Forman',               region:'america',     peat:0,  body:7,  tier:'mid',
       aroma:'Dried fruit, vanilla, toasted oak, chocolate',
@@ -678,7 +683,7 @@ SOM.whisky = (function() {
       label: 'The Gift',
       icon:  '◈',
       desc:  'Impressive bottles that land well whether the recipient is a novice or a connoisseur. These are the ones people remember.',
-      ids:   ['lagavulin-16','macallan-12-sherry','dalmore-15','glenmorangie-18','highland-park-12','woodford-reserve','redbreast-12','glenfarclas-12']
+      ids:   ['lagavulin-16','macallan-12-sherry','hibiki-harmony','dalmore-15','glenmorangie-18','highland-park-12','woodford-reserve','redbreast-12']
     },
     {
       id:    'gateway',
@@ -699,7 +704,7 @@ SOM.whisky = (function() {
       label: 'The Celebration',
       icon:  '◉',
       desc:  'When the occasion deserves something genuinely special. Open these with intention.',
-      ids:   ['macallan-12-sherry','dalmore-15','glenmorangie-18','lagavulin-16']
+      ids:   ['macallan-12-sherry','hibiki-harmony','dalmore-15','glenmorangie-18','lagavulin-16']
     }
   ];
 
@@ -1172,7 +1177,7 @@ document.addEventListener('DOMContentLoaded', function() {
     { name:'Suntory Yamazaki', region:'japan',       lat:34.881, lng:135.671, founded:1923,
       img:'/images/distilleries/yamazaki.webp',
       desc:'Japan\'s first malt whisky distillery, built by Shinjiro Torii in the forested foothills outside Kyoto. Yamazaki pioneered Japanese whisky and remains its flagship -- home of Suntory Toki, the ideal introduction to Japanese style.',
-      bottles:['suntory-toki'] },
+      bottles:['suntory-toki','hibiki-harmony'] },
     // ── America ──────────────────────────────────────────────────
     { name:'Woodford Reserve', region:'america',     lat:38.022, lng:-84.760, founded:1812,
       img:'/images/distilleries/woodford-reserve.webp',
