@@ -43,12 +43,24 @@ sitemapLastmod: 2026-05-19
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-left: 1px solid var(--border-gold);
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   z-index: 400;
   box-shadow: -6px 0 32px rgba(0,0,0,0.13);
+  display: flex;
+  flex-direction: column;
 }
-.region-panel-body { padding: 24px 22px 32px; }
+.region-panel-back-bar {
+  flex-shrink: 0;
+  padding: 14px 22px 12px;
+  border-bottom: 1px solid var(--border-gold);
+  background: rgba(252,250,246,0.97);
+}
+.region-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 22px 32px;
+}
 
 /* Region nav list (default panel state) */
 .region-nav-eyebrow {
@@ -268,6 +280,15 @@ sitemapLastmod: 2026-05-19
         <div id="bc-wine-map"></div>
 
         <aside class="region-panel" id="region-panel" aria-label="Region details">
+
+          <!-- Pinned back button (detail state only) -->
+          <div class="region-panel-back-bar" id="region-back-bar" hidden>
+            <button class="region-panel-back" id="region-panel-back" type="button">
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M7 1L3 5l4 4"/></svg>
+              All Regions
+            </button>
+          </div>
+
           <div class="region-panel-body">
 
             <!-- Nav list (default state) -->
@@ -285,10 +306,6 @@ sitemapLastmod: 2026-05-19
 
             <!-- Detail view (hidden until region selected) -->
             <div id="region-detail-wrap" hidden>
-              <button class="region-panel-back" id="region-panel-back" type="button">
-                <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M7 1L3 5l4 4"/></svg>
-                All Regions
-              </button>
 
               <div class="region-detail" data-region="oliver">
                 <h2>Oliver / Osoyoos</h2>
@@ -653,11 +670,14 @@ sitemapLastmod: 2026-05-19
 
     const regionNav = document.getElementById('region-nav');
     const detailWrap = document.getElementById('region-detail-wrap');
+    const backBar = document.getElementById('region-back-bar');
     const backBtn = document.getElementById('region-panel-back');
 
     function showDetail(region) {
       regionNav.hidden = true;
       detailWrap.hidden = false;
+      backBar.hidden = false;
+      document.getElementById('region-panel-body') && (document.querySelector('.region-panel-body').scrollTop = 0);
       document.querySelectorAll('.region-detail').forEach(function(el) {
         el.classList.toggle('active', el.dataset.region === region);
       });
@@ -672,6 +692,7 @@ sitemapLastmod: 2026-05-19
     function showNav() {
       regionNav.hidden = false;
       detailWrap.hidden = true;
+      backBar.hidden = true;
       document.querySelectorAll('.region-detail').forEach(function(el) { el.classList.remove('active'); });
       map.flyTo(regions.all.center, regions.all.zoom, { duration: 0.8 });
       wineryMarkers.forEach(function(m) { m.addTo(map); });
