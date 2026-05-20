@@ -794,7 +794,7 @@ SOM.whisky = (function() {
 //  Panel states: nav → region → distillery (producer card)
 // ══════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
-  var W = SOM.whisky;
+  var W = window.SOM.whisky; // window. prefix bypasses const SOM from sommelier.js
 
   // ── Panel state ───────────────────────────────────────────────
   var panelState   = 'nav';   // 'nav' | 'region' | 'distillery'
