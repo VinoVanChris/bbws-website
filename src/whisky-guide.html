@@ -63,35 +63,40 @@ schema: |
   <!-- ===== FLAVOUR COMPASS ===== -->
   <section class="section section-alt" id="whisky-compass" style="padding-top:40px;padding-bottom:40px;">
     <div class="container" style="max-width:var(--max-width)">
-      <div class="section-header fade-in">
+      <div class="section-header fade-in" style="margin-bottom:24px;">
         <p class="section-eyebrow">Orientation</p>
         <h2>The Flavour Compass.</h2>
         <div class="divider"></div>
-        <p style="max-width:56ch;margin:0 auto;">Every bottle mapped by how it tastes. Hover or tap a dot to identify the whisky. Filter by region using the buttons below.</p>
       </div>
 
-      <div class="whisky-compass-wrap fade-in">
-        <div class="whisky-compass-filter" id="whisky-compass-filter">
-          <button class="whisky-filter-btn active" data-region="all" type="button">All</button>
-          <!-- JS adds region buttons -->
-        </div>
-
-        <div class="whisky-compass-container" id="whisky-compass">
-          <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
-          <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
-          <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
-          <div class="whisky-compass-label whisky-compass-label--right">Bold</div>
-          <div class="whisky-compass-xaxis"></div>
-          <div class="whisky-compass-yaxis"></div>
-          <div class="whisky-compass-dots" id="whisky-compass-dots">
-            <!-- JS rendered -->
+      <div class="whisky-compass-card fade-in">
+        <!-- Left: compass plot -->
+        <div class="whisky-compass-left">
+          <div class="whisky-compass-filter" id="whisky-compass-filter">
+            <button class="whisky-filter-btn active" data-region="all" type="button">All</button>
+          </div>
+          <div class="whisky-compass-container" id="whisky-compass">
+            <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
+            <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
+            <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
+            <div class="whisky-compass-label whisky-compass-label--right">Bold</div>
+            <div class="whisky-compass-xaxis"></div>
+            <div class="whisky-compass-yaxis"></div>
+            <div class="whisky-compass-dots" id="whisky-compass-dots"></div>
           </div>
         </div>
-
-        <div class="whisky-compass-tooltip" id="whisky-compass-tooltip" hidden>
-          <strong id="wct-name"></strong>
-          <span id="wct-region"></span>
-          <span id="wct-note"></span>
+        <!-- Right: info panel -->
+        <div class="whisky-compass-right">
+          <div class="whisky-compass-default" id="whisky-compass-default">
+            <p class="whisky-compass-hint">Hover a dot to explore a bottle.</p>
+            <p class="whisky-compass-hint-sub">Gold dots are Scotch. Each colour represents a different origin country.</p>
+          </div>
+          <div class="whisky-compass-info" id="whisky-compass-tooltip" hidden>
+            <span class="whisky-info-region" id="wct-region"></span>
+            <strong class="whisky-info-name" id="wct-name"></strong>
+            <span class="whisky-info-tier" id="wct-tier"></span>
+            <p class="whisky-info-note" id="wct-note"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -413,15 +418,17 @@ SOM.whisky = (function() {
   function showTooltip(id) {
     var b = W.bottles.find(function(x) { return x.id === id; });
     if (!b) return;
-    var tt = document.getElementById('whisky-compass-tooltip');
     document.getElementById('wct-name').textContent   = b.name;
     document.getElementById('wct-region').textContent = W.regions[b.region] ? W.regions[b.region].label : '';
+    document.getElementById('wct-tier').textContent   = b.tier;
     document.getElementById('wct-note').textContent   = b.note;
-    tt.hidden = false;
+    document.getElementById('whisky-compass-tooltip').hidden  = false;
+    document.getElementById('whisky-compass-default').hidden  = true;
   }
 
   function hideTooltip() {
-    document.getElementById('whisky-compass-tooltip').hidden = true;
+    document.getElementById('whisky-compass-tooltip').hidden  = true;
+    document.getElementById('whisky-compass-default').hidden  = false;
   }
 
   // ── COMPASS FILTERS ──────────────────────────────────────────
