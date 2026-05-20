@@ -27,6 +27,70 @@ schema: |
   }
 ---
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+<style>
+/* ── Whisky Region Map ──────────────────────────────────── */
+#whisky-world-map { width:100%; height:520px; display:block; position:relative; z-index:0; }
+.wmap-wrap {
+  position:relative; border-radius:var(--radius); overflow:hidden;
+  border:1px solid rgba(0,0,0,0.08);
+}
+.wmap-panel {
+  position:absolute; top:0; right:0; width:300px; max-width:90%; height:100%;
+  background:rgba(252,250,246,0.97); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  border-left:1px solid var(--border-gold); overflow:hidden; z-index:400;
+  box-shadow:-6px 0 32px rgba(0,0,0,0.13); display:flex; flex-direction:column;
+}
+.wmap-back-bar {
+  flex-shrink:0; padding:14px 22px 12px; border-bottom:1px solid var(--border-gold);
+  background:rgba(252,250,246,0.97);
+}
+.wmap-back {
+  display:inline-flex; align-items:center; gap:5px; font-size:0.72rem; font-weight:600;
+  color:var(--text-muted); background:none; border:none; cursor:pointer; padding:0 0 14px;
+  border-bottom:1px solid var(--border-gold); margin-bottom:20px; width:100%;
+  text-align:left; font-family:inherit; transition:color var(--transition);
+}
+.wmap-back:hover { color:var(--text); }
+.wmap-body { flex:1; overflow-y:auto; overflow-x:hidden; padding:24px 22px 32px; }
+.wmap-eyebrow {
+  font-size:0.60rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase;
+  color:var(--gold); margin:0 0 10px;
+}
+.wmap-eyebrow + .wmap-eyebrow { margin-top:20px; }
+.wmap-nav-btn {
+  display:flex; align-items:center; justify-content:space-between; width:100%;
+  padding:10px 0; border:none; border-bottom:1px solid rgba(201,168,76,0.14);
+  background:none; cursor:pointer; font-size:0.83rem; font-weight:600; color:var(--text);
+  text-align:left; transition:color var(--transition); font-family:inherit;
+}
+.wmap-nav-btn:last-of-type { border-bottom:none; }
+.wmap-nav-btn:hover { color:var(--gold); }
+.wmap-nav-btn svg { opacity:0.3; flex-shrink:0; transition:opacity var(--transition),transform var(--transition); }
+.wmap-nav-btn:hover svg { opacity:0.8; transform:translateX(3px); }
+.wmap-bottle {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 0; border-bottom:1px solid rgba(201,168,76,0.12); gap:8px;
+}
+.wmap-bottle:last-child { border-bottom:none; }
+.wmap-bottle-name { font-size:0.82rem; font-weight:600; color:var(--text); }
+.wmap-bottle-tier {
+  font-size:0.58rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:#8a6e1a; background:rgba(201,168,76,0.12); padding:2px 7px;
+  border-radius:20px; white-space:nowrap; flex-shrink:0;
+}
+@media (max-width:640px) {
+  .wmap-wrap { overflow:visible; border-radius:var(--radius) var(--radius) 0 0; }
+  #whisky-world-map { height:320px; }
+  .wmap-panel {
+    position:static; width:100%; max-width:100%; height:auto;
+    border-left:none; border-top:1px solid var(--border-gold);
+    border-radius:0 0 var(--radius) var(--radius); box-shadow:none; backdrop-filter:none;
+  }
+}
+</style>
+
 <main class="page-content">
 
   <!-- ===== HERO ===== -->
@@ -39,23 +103,44 @@ schema: |
     </div>
   </section>
 
-  <!-- ===== REGIONS ===== -->
+  <!-- ===== REGIONS MAP ===== -->
   <section class="section" id="whisky-regions" style="padding-top:40px;padding-bottom:40px;">
     <div class="container" style="max-width:var(--max-width)">
-      <div class="section-header fade-in">
+      <div class="section-header fade-in" style="margin-bottom:28px;">
         <p class="section-eyebrow">Start Here</p>
         <h2>Find Your Region.</h2>
         <div class="divider"></div>
-        <p style="max-width:56ch;margin:0 auto;">Every whisky tells you where it is from the moment you open the bottle. Click a region to explore its character and the bottles we carry.</p>
       </div>
 
-      <div class="whisky-region-grid fade-in" id="whisky-region-grid">
-        <!-- JS rendered -->
-      </div>
+      <div class="wmap-wrap fade-in">
+        <div id="whisky-world-map"></div>
 
-      <div class="whisky-region-panel fade-in" id="whisky-region-panel" hidden>
-        <button class="whisky-region-back" id="whisky-region-back" type="button">← All Regions</button>
-        <div id="whisky-region-panel-inner"></div>
+        <aside class="wmap-panel" aria-label="Whisky region details">
+          <div class="wmap-back-bar" id="wmap-back-bar" hidden>
+            <button class="wmap-back" id="wmap-back" type="button">
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M7 1L3 5l4 4"/></svg>
+              All Regions
+            </button>
+          </div>
+          <div class="wmap-body">
+            <div id="wmap-nav">
+              <h3 style="margin-bottom:18px;">Whisky Regions</h3>
+              <p class="wmap-eyebrow">Scotland</p>
+              <button class="wmap-nav-btn" data-region="islay"       type="button">Islay <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="speyside"    type="button">Speyside <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="highlands"   type="button">Highlands <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="islands"     type="button">Islands <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="campbeltown" type="button">Campbeltown <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="lowlands"    type="button">Lowlands <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <p class="wmap-eyebrow">World</p>
+              <button class="wmap-nav-btn" data-region="japan"   type="button">Japan <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="ireland" type="button">Ireland <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="america" type="button">America <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="wmap-nav-btn" data-region="canada"  type="button">Canada <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+            </div>
+            <div id="wmap-detail" hidden></div>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -425,70 +510,6 @@ SOM.whisky = (function() {
   var W = SOM.whisky;
   var SCOTCH = ['islay','speyside','highlands','islands','campbeltown','lowlands'];
 
-  // ── REGION GRID ─────────────────────────────────────────────
-  function renderRegionGrid() {
-    var grid = document.getElementById('whisky-region-grid');
-    if (!grid) return;
-
-    function makeCards(ids) {
-      return ids.map(function(id) {
-        var r = W.regions[id];
-        return '<button class="whisky-region-card" data-region="' + id + '" type="button">'
-             + '<span class="whisky-region-name">' + r.label + '</span>'
-             + '<span class="whisky-region-char">' + r.character + '</span>'
-             + '</button>';
-      }).join('');
-    }
-
-    grid.innerHTML =
-      '<div class="whisky-region-group">'
-      + '<p class="whisky-region-group-label">Scotland</p>'
-      + '<div class="whisky-region-row">' + makeCards(SCOTCH) + '</div>'
-      + '</div>'
-      + '<div class="whisky-region-group">'
-      + '<p class="whisky-region-group-label">World</p>'
-      + '<div class="whisky-region-row">' + makeCards(['japan','ireland','america','canada']) + '</div>'
-      + '</div>';
-
-    grid.addEventListener('click', function(e) {
-      var card = e.target.closest('.whisky-region-card');
-      if (card) openRegion(card.dataset.region);
-    });
-  }
-
-  function openRegion(id) {
-    var r = W.regions[id];
-    var btls = W.getBottlesByRegion(id);
-    var grid  = document.getElementById('whisky-region-grid');
-    var panel = document.getElementById('whisky-region-panel');
-    var inner = document.getElementById('whisky-region-panel-inner');
-
-    var bottleHtml = btls.map(function(b) {
-      return '<div class="whisky-bottle-card">'
-           + '<div class="whisky-bottle-top">'
-           + '<strong>' + b.name + '</strong>'
-           + '<span class="whisky-bottle-tier whisky-bottle-tier--' + b.tier + '">' + b.tier + '</span>'
-           + '</div>'
-           + '<p>' + b.note + '</p>'
-           + '</div>';
-    }).join('');
-
-    inner.innerHTML =
-      '<p class="section-eyebrow" style="margin-bottom:8px;">' + r.character + '</p>'
-      + '<h3 style="font-size:1.8rem;margin-bottom:16px;">' + r.label + '</h3>'
-      + '<p style="color:var(--text-muted);line-height:1.7;max-width:60ch;margin-bottom:32px;">' + r.body + '</p>'
-      + '<p class="whisky-region-bottles-label">Bottles We Carry</p>'
-      + '<div class="whisky-bottle-grid">' + bottleHtml + '</div>';
-
-    grid.hidden  = true;
-    panel.hidden = false;
-  }
-
-  document.getElementById('whisky-region-back').addEventListener('click', function() {
-    document.getElementById('whisky-region-grid').hidden  = false;
-    document.getElementById('whisky-region-panel').hidden = true;
-  });
-
   // ── COMPASS STATE MACHINE ────────────────────────────────────
   var GROUPS = [
     { key:'all',      label:'All',      regions: null },
@@ -720,7 +741,6 @@ SOM.whisky = (function() {
 
   // ── INIT ─────────────────────────────────────────────────────
   W.fetchInventory().then(function() {
-    renderRegionGrid();
     renderDots(null);
     initDotListeners(); // attach once -- renderDots() only updates innerHTML
     renderRight();
@@ -729,4 +749,175 @@ SOM.whisky = (function() {
   });
 
 })();
+</script>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+//  WHISKY REGION MAP  (Leaflet -- same pattern as BC Producers)
+// ══════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+  var W = SOM.whisky;
+
+  // ── Map views ────────────────────────────────────────────────
+  var VIEWS = {
+    all:         { center:[30, 0],          zoom:2  },
+    islay:       { center:[55.72, -6.33],   zoom:11 },
+    speyside:    { center:[57.45, -3.20],   zoom:10 },
+    highlands:   { center:[57.20, -4.50],   zoom:8  },
+    islands:     { center:[58.00, -5.50],   zoom:8  },
+    campbeltown: { center:[55.43, -5.62],   zoom:12 },
+    lowlands:    { center:[55.85, -4.00],   zoom:10 },
+    japan:       { center:[39.00, 138.00],  zoom:5  },
+    ireland:     { center:[53.50, -7.50],   zoom:7  },
+    america:     { center:[37.80, -85.50],  zoom:7  },
+    canada:      { center:[43.30, -81.00],  zoom:7  },
+  };
+
+  // ── Distillery locations ──────────────────────────────────────
+  var DISTILLERIES = [
+    // Islay
+    { name:'Ardbeg',              region:'islay',       lat:55.640, lng:-6.356,  bottles:['ardbeg-10'] },
+    { name:'Laphroaig',           region:'islay',       lat:55.630, lng:-6.369,  bottles:['laphroaig-10'] },
+    { name:'Lagavulin',           region:'islay',       lat:55.629, lng:-6.348,  bottles:['lagavulin-16'] },
+    { name:'Bowmore',             region:'islay',       lat:55.756, lng:-6.290,  bottles:['bowmore-12'] },
+    { name:'Bruichladdich',       region:'islay',       lat:55.770, lng:-6.370,  bottles:['bruichladdich-cl'] },
+    // Speyside
+    { name:'Glenfiddich / Balvenie', region:'speyside', lat:57.454, lng:-3.133,  bottles:['glenfiddich-12','balvenie-12'] },
+    { name:'The Macallan',        region:'speyside',    lat:57.470, lng:-3.195,  bottles:['macallan-12-sherry'] },
+    { name:'Aberlour',            region:'speyside',    lat:57.468, lng:-3.214,  bottles:['aberlour-12'] },
+    { name:'The Glenlivet',       region:'speyside',    lat:57.282, lng:-3.375,  bottles:['glenlivet-12'] },
+    // Highlands
+    { name:'Glenmorangie',        region:'highlands',   lat:57.883, lng:-4.068,  bottles:['glenmorangie-10'] },
+    { name:'Dalmore',             region:'highlands',   lat:57.640, lng:-4.162,  bottles:['dalmore-12'] },
+    { name:'Oban',                region:'highlands',   lat:56.415, lng:-5.471,  bottles:['oban-14'] },
+    // Islands
+    { name:'Talisker',            region:'islands',     lat:57.302, lng:-6.358,  bottles:['talisker-10'] },
+    { name:'Highland Park',       region:'islands',     lat:58.987, lng:-2.970,  bottles:['highland-park-12'] },
+    // Campbeltown
+    { name:'Springbank',          region:'campbeltown', lat:55.433, lng:-5.619,  bottles:['springbank-10'] },
+    // Lowlands
+    { name:'Auchentoshan',        region:'lowlands',    lat:55.934, lng:-4.391,  bottles:['auchentoshan-3w'] },
+    // Japan
+    { name:'Suntory Yamazaki',    region:'japan',       lat:34.881, lng:135.671, bottles:['suntory-toki','hibiki-harmony','yamazaki-12'] },
+    { name:'Nikka Yoichi',        region:'japan',       lat:43.203, lng:140.745, bottles:['nikka-barrel'] },
+    // Ireland
+    { name:'Midleton Distillery', region:'ireland',     lat:51.914, lng:-8.173,  bottles:['jameson','redbreast-12','green-spot'] },
+    { name:'Bushmills',           region:'ireland',     lat:55.202, lng:-6.520,  bottles:[] },
+    // America
+    { name:'Buffalo Trace',       region:'america',     lat:38.193, lng:-84.893, bottles:['buffalo-trace'] },
+    { name:'Woodford Reserve',    region:'america',     lat:38.022, lng:-84.760, bottles:['woodford-reserve'] },
+    { name:"Angel's Envy",        region:'america',     lat:38.252, lng:-85.754, bottles:['angels-envy'] },
+    { name:'Four Roses (Bulleit)',region:'america',     lat:37.876, lng:-85.396, bottles:['bulleit-rye'] },
+    // Canada
+    { name:'Forty Creek',         region:'canada',      lat:43.199, lng:-79.576, bottles:['forty-creek'] },
+    { name:'Hiram Walker (Lot 40)',region:'canada',     lat:42.317, lng:-83.034, bottles:['lot-40'] },
+  ];
+
+  var COLORS = {
+    islay:'#c9a84c', speyside:'#c9a84c', highlands:'#c9a84c',
+    islands:'#c9a84c', campbeltown:'#c9a84c', lowlands:'#c9a84c',
+    japan:'#A1191D', ireland:'#2d7a6f', america:'#b87333', canada:'#b87333'
+  };
+
+  // ── Init map ──────────────────────────────────────────────────
+  var map = L.map('whisky-world-map', {
+    center: VIEWS.all.center, zoom: VIEWS.all.zoom,
+    zoomControl: false, scrollWheelZoom: false,
+  });
+  L.control.zoom({ position: 'topleft' }).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd', maxZoom: 19,
+  }).addTo(map);
+
+  // ── Markers ───────────────────────────────────────────────────
+  var markersByRegion = {};
+  DISTILLERIES.forEach(function(d) {
+    var col = COLORS[d.region] || '#c9a84c';
+    var bottleList = d.bottles.map(function(id) {
+      var b = W.bottles.find(function(x) { return x.id === id; });
+      return b ? '<li style="margin-bottom:2px;">' + b.name + '</li>' : '';
+    }).join('');
+    var popupHtml =
+      '<strong style="font-size:0.86rem;color:' + col + ';">' + d.name + '</strong>' +
+      (bottleList ? '<ul style="margin:6px 0 0;padding-left:16px;font-size:0.75rem;color:#555;">' + bottleList + '</ul>' : '');
+
+    var marker = L.circleMarker([d.lat, d.lng], {
+      radius:7, fillColor:col, color:'#fff', weight:1.5, fillOpacity:0.9,
+    }).addTo(map).bindPopup(popupHtml, { maxWidth:210 });
+
+    if (!markersByRegion[d.region]) markersByRegion[d.region] = [];
+    markersByRegion[d.region].push(marker);
+  });
+
+  // ── Legend ────────────────────────────────────────────────────
+  var legend = L.control({ position: 'bottomleft' });
+  legend.onAdd = function() {
+    var div = L.DomUtil.create('div');
+    div.style.cssText = 'background:rgba(255,255,255,0.92);backdrop-filter:blur(4px);padding:10px 14px;border-radius:8px;font-size:0.72rem;line-height:1.9;box-shadow:0 2px 8px rgba(0,0,0,0.12);';
+    div.innerHTML =
+      '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#c9a84c;"></span> Scotland</div>' +
+      '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#A1191D;"></span> Japan</div>' +
+      '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#2d7a6f;"></span> Ireland</div>' +
+      '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b87333;"></span> Americas</div>';
+    return div;
+  };
+  legend.addTo(map);
+
+  // ── Panel logic ───────────────────────────────────────────────
+  var nav     = document.getElementById('wmap-nav');
+  var detail  = document.getElementById('wmap-detail');
+  var backBar = document.getElementById('wmap-back-bar');
+  var backBtn = document.getElementById('wmap-back');
+
+  function showDetail(regionId) {
+    var r = W.regions[regionId];
+    if (!r) return;
+    var btls = W.getBottlesByRegion(regionId);
+    var bottleHtml = btls.map(function(b) {
+      return '<div class="wmap-bottle">'
+        + '<span class="wmap-bottle-name">' + b.name + '</span>'
+        + '<span class="wmap-bottle-tier">' + b.tier + '</span>'
+        + '</div>';
+    }).join('');
+    detail.innerHTML =
+      '<p style="font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">' + r.character + '</p>' +
+      '<h2 style="font-size:1.25rem;margin-bottom:14px;line-height:1.2;">' + r.label + '</h2>' +
+      '<p style="font-size:0.82rem;line-height:1.75;color:var(--text-muted);margin-bottom:20px;">' + r.body + '</p>' +
+      (bottleHtml
+        ? '<p style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Bottles We Carry</p>' + bottleHtml
+        : '');
+
+    nav.hidden     = true;
+    detail.hidden  = false;
+    backBar.hidden = false;
+    document.querySelector('.wmap-body').scrollTop = 0;
+
+    // Fly to region, highlight its markers
+    var v = VIEWS[regionId] || VIEWS.all;
+    map.flyTo(v.center, v.zoom, { duration:0.8 });
+    Object.keys(markersByRegion).forEach(function(key) {
+      markersByRegion[key].forEach(function(m) {
+        m.setStyle({ fillOpacity: key === regionId ? 0.95 : 0.15 });
+      });
+    });
+  }
+
+  function showNav() {
+    nav.hidden     = false;
+    detail.hidden  = true;
+    backBar.hidden = true;
+    detail.innerHTML = '';
+    map.flyTo(VIEWS.all.center, VIEWS.all.zoom, { duration:0.8 });
+    Object.keys(markersByRegion).forEach(function(key) {
+      markersByRegion[key].forEach(function(m) { m.setStyle({ fillOpacity:0.9 }); });
+    });
+  }
+
+  nav.addEventListener('click', function(e) {
+    var btn = e.target.closest('.wmap-nav-btn');
+    if (btn) showDetail(btn.dataset.region);
+  });
+  backBtn.addEventListener('click', showNav);
+});
 </script>
