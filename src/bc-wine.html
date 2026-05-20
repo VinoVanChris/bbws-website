@@ -314,82 +314,106 @@ sitemapLastmod: 2026-05-19
   };
 
   const wineries = [
-    /* ── Oliver / Osoyoos ──────────────────────────────────── */
-    { name:'Le Vieux Pin', region:'oliver', lat:49.108, lng:-119.548, url:'https://levieuxpin.ca', note:'Black Sage Bench. French technique, South Okanagan fruit. The Syrah Violette and Petit Blanc are on our shelf.' },
-    { name:'Black Hills Estate', region:'oliver', lat:49.092, lng:-119.528, url:'https://blackhillswinery.com', note:'Black Sage Bench. Nota Bene is their flagship Bordeaux blend — one of BC\'s most collectable reds.' },
-    { name:'Black Sage Vineyard', region:'oliver', lat:49.102, lng:-119.545, url:'https://blacksagevineyard.com', note:'Oliver. Estate-grown fruit from the Black Sage Bench, focused on big South Okanagan reds.' },
-    { name:'Road 13 Vineyards', region:'oliver', lat:49.070, lng:-119.552, url:'https://road13vineyards.com', note:'Golden Mile Bench, Oliver. Seventy-Four K and Honest John\'s are two bottles always worth having.' },
-    { name:'Tinhorn Creek', region:'oliver', lat:49.095, lng:-119.542, url:'https://tinhorn.com', note:'Golden Mile Bench. One of the South Okanagan\'s most established estates. Reliable Pinot Gris and Cab Franc.' },
-    { name:'Culmina Family Estate', region:'oliver', lat:49.088, lng:-119.548, url:'https://culmina.ca', note:'Golden Mile Bench, Oliver. Hypothesis is their flagship Bordeaux blend. Serious, structured wine.' },
-    { name:'Burrowing Owl', region:'oliver', lat:49.131, lng:-119.569, url:'https://burrowingowlwine.ca', note:'Black Sage Bench. Cabernet Sauvignon, Cabernet Franc, and Malbec are the standouts from this estate.' },
-    { name:'Gehringer Brothers', region:'oliver', lat:49.092, lng:-119.558, url:'https://gehringerbrothers.ca', note:'Oliver. One of the Okanagan\'s quietly reliable estates. Desert Sun white is a perennial favourite.' },
-    { name:'Lock &amp; Worth', region:'oliver', lat:49.106, lng:-119.547, url:'https://lockandworth.ca', note:'Oliver. Small production, focused on Sauvignon Blanc and Cabernet Franc from south Okanagan fruit.' },
-    { name:'Inniskillin Okanagan', region:'oliver', lat:49.090, lng:-119.555, url:'https://inniskillin.com', note:'Oliver. The Okanagan outpost of the Niagara estate. Pinot Noir and icewine are the draws.' },
-    { name:'Sandhill Wines', region:'oliver', lat:49.085, lng:-119.540, url:'https://sandhillwines.ca', note:'Oliver-grown fruit, Kelowna-based operation. Small Lots series is where their best work shows.' },
+    /* ── Oliver / Osoyoos ──────────────────────────────────────────────────────
+       Sources: yellowpages.ca, winemaps.com, destinationosoyoos.com, winebc.com
+    ── */
+    { name:'Le Vieux Pin', region:'oliver', lat:49.159, lng:-119.540, url:'https://levieuxpin.ca', note:'5496 Black Sage Rd. French technique, South Okanagan fruit. The Syrah Violette and Petit Blanc are on our shelf.' },
+    { name:'Black Hills Estate', region:'oliver', lat:49.110, lng:-119.549, url:'https://blackhillswinery.com', note:'4190 Black Sage Rd. Nota Bene is their flagship Bordeaux blend — one of BC\'s most collectable reds.' },
+    { name:'Black Sage Vineyard', region:'oliver', lat:49.135, lng:-119.540, url:'https://blacksagevineyard.com', note:'Black Sage Bench, Oliver. Estate-grown fruit focused on big South Okanagan reds.' },
+    { name:'Road 13 Vineyards', region:'oliver', lat:49.084, lng:-119.575, url:'https://road13vineyards.com', note:'799 Ponderosa Rd, Golden Mile Bench. Seventy-Four K and Honest John\'s are two bottles always worth having.' },
+    { name:'Tinhorn Creek', region:'oliver', lat:49.151, lng:-119.588, url:'https://tinhorn.com', note:'537 Tinhorn Creek Rd, Golden Mile Bench. One of the South Okanagan\'s most established estates.' },
+    { name:'Culmina Family Estate', region:'oliver', lat:49.148, lng:-119.572, url:'https://culmina.ca', note:'4790 Wild Rose St, Oliver. Hypothesis is their flagship Bordeaux blend. Serious, structured wine.' },
+    { name:'Burrowing Owl', region:'oliver', lat:49.101, lng:-119.533, url:'https://burrowingowlwine.ca', note:'500 Burrowing Owl Place, Black Sage Bench. Cab Sauv, Cab Franc, and Malbec are the standouts.' },
+    { name:'Gehringer Brothers', region:'oliver', lat:49.094, lng:-119.554, url:'https://gehringerbrothers.ca', note:'Golden Mile, Oliver. One of the Okanagan\'s quietly reliable estates. Desert Sun white is a perennial favourite.' },
+    { name:'Lock &amp; Worth', region:'oliver', lat:49.118, lng:-119.548, url:'https://lockandworth.ca', note:'Oliver. Small production, focused on Sauvignon Blanc and Cabernet Franc from south Okanagan fruit.' },
+    { name:'Inniskillin Okanagan', region:'oliver', lat:49.097, lng:-119.541, url:'https://inniskillin.com', note:'Oliver. The Okanagan outpost of the Niagara estate. Pinot Noir and icewine are the draws.' },
+    { name:'Sandhill Wines', region:'oliver', lat:49.086, lng:-119.544, url:'https://sandhillwines.ca', note:'Oliver-grown fruit, Kelowna-based operation. Small Lots series is where their best work shows.' },
     { name:'Monster Vineyards', region:'oliver', lat:49.052, lng:-119.492, url:'https://monstervineyards.com', note:'Osoyoos area. Malbec and Red Eyed blend are their signature bottles.' },
 
-    /* ── Naramata / Okanagan Falls ──────────────────────────── */
-    { name:'Painted Rock', region:'naramata', lat:49.395, lng:-119.600, url:'https://paintedrock.ca', note:'Skaha Bench. The Red Icon is their flagship Bordeaux blend — structured, age-worthy, worth every dollar.' },
-    { name:'Poplar Grove Winery', region:'naramata', lat:49.483, lng:-119.591, url:'https://poplargrove.ca', note:'Naramata. Merlot and The Legacy are the bottles they\'re known for. Consistent, approachable, food-friendly.' },
-    { name:'Joie Farm', region:'naramata', lat:49.466, lng:-119.590, url:'https://joiefarm.com', note:'Naramata Bench. Noble Blend and the Rosé are two of the best expressions of BC aromatics available.' },
-    { name:'Nichol Vineyard', region:'naramata', lat:49.477, lng:-119.595, url:'https://nicholvineyards.ca', note:'Naramata. Small family estate, old vines, and consistently interesting Pinot Gris and Syrah.' },
-    { name:'Elephant Island', region:'naramata', lat:49.458, lng:-119.591, url:'https://elephantislandwine.com', note:'Naramata. Fruit wines and dessert bottles, including an apricot dessert wine that\'s genuinely worth seeking.' },
-    { name:'Blue Mountain Vineyard', region:'naramata', lat:49.340, lng:-119.570, url:'https://bluemountainwinery.com', note:'Okanagan Falls. One of BC\'s most acclaimed Pinot Noir producers. Brut gold label sparkling is exceptional.' },
-    { name:'Liquidity Wines', region:'naramata', lat:49.340, lng:-119.572, url:'https://liquiditywines.com', note:'Okanagan Falls. Estate Chardonnay and Pinot Noir both show real precision. The winery is also worth visiting.' },
-    { name:'Wild Goose Vineyards', region:'naramata', lat:49.338, lng:-119.579, url:'https://wildgoosewinery.com', note:'Okanagan Falls. A family estate producing Autumn Gold — a reliable off-dry blend perfect for summer.' },
-    { name:'Synchromesh Wines', region:'naramata', lat:49.338, lng:-119.572, url:'https://synchromeshwines.ca', note:'Okanagan Falls. Long\'s View Vineyard Riesling is one of the most precise expressions of Okanagan Riesling.' },
-    { name:'Dirty Laundry Vineyard', region:'naramata', lat:49.620, lng:-119.686, url:'https://dirtylaundry.ca', note:'Summerland. Bordello and Hush are crowd-pleasing bottles. Great gateway wines for exploring BC.' },
-    { name:'Raven Conspiracy', region:'naramata', lat:49.550, lng:-119.640, url:'https://ravenconspiracy.com', note:'Summerland area. Honest, accessible reds and whites from South Okanagan fruit.' },
+    /* ── Naramata / Okanagan Falls ─────────────────────────────────────────────
+       Sources: winemaps.com, visitpenticton.com, yellowpages.ca
+    ── */
+    { name:'Painted Rock', region:'naramata', lat:49.429, lng:-119.570, url:'https://paintedrock.ca', note:'400 Smythe Dr, Skaha Bench. The Red Icon is their flagship Bordeaux blend — structured, age-worthy.' },
+    { name:'Poplar Grove Winery', region:'naramata', lat:49.478, lng:-119.574, url:'https://poplargrove.ca', note:'425 Middle Bench Rd, Naramata Bench. Merlot and The Legacy are the bottles they\'re known for.' },
+    { name:'Joie Farm', region:'naramata', lat:49.570, lng:-119.608, url:'https://joiefarm.com', note:'2825 Naramata Rd. Noble Blend and the Rosé are two of the best expressions of BC aromatics available.' },
+    { name:'Nichol Vineyard', region:'naramata', lat:49.562, lng:-119.610, url:'https://nicholvineyards.ca', note:'Naramata Bench. Small family estate, old vines, consistently interesting Pinot Gris and Syrah.' },
+    { name:'Elephant Island', region:'naramata', lat:49.550, lng:-119.607, url:'https://elephantislandwine.com', note:'Naramata. Fruit wines and dessert bottles, including an apricot dessert wine worth seeking out.' },
+    { name:'Blue Mountain Vineyard', region:'naramata', lat:49.313, lng:-119.531, url:'https://bluemountainwinery.com', note:'2385 Allendale Rd, Okanagan Falls. One of BC\'s most acclaimed Pinot Noir producers. Brut sparkling is exceptional.' },
+    { name:'Liquidity Wines', region:'naramata', lat:49.326, lng:-119.528, url:'https://liquiditywines.com', note:'Okanagan Falls. Estate Chardonnay and Pinot Noir both show real precision.' },
+    { name:'Wild Goose Vineyards', region:'naramata', lat:49.320, lng:-119.535, url:'https://wildgoosewinery.com', note:'Okanagan Falls. A family estate producing Autumn Gold — a reliable off-dry blend perfect for summer.' },
+    { name:'Synchromesh Wines', region:'naramata', lat:49.315, lng:-119.530, url:'https://synchromeshwines.ca', note:'Okanagan Falls. Long\'s View Vineyard Riesling is one of the most precise expressions of Okanagan Riesling.' },
+    { name:'Dirty Laundry Vineyard', region:'naramata', lat:49.574, lng:-119.641, url:'https://dirtylaundry.ca', note:'7311 Fiske St, Summerland. Bordello and Hush are crowd-pleasing bottles. Great gateway wines for exploring BC.' },
+    { name:'Raven Conspiracy', region:'naramata', lat:49.588, lng:-119.648, url:'https://ravenconspiracy.com', note:'Summerland area. Honest, accessible reds and whites from South Okanagan fruit.' },
 
-    /* ── Kelowna ────────────────────────────────────────────── */
-    { name:'Sperling Vineyards', region:'kelowna', lat:49.923, lng:-119.440, url:'https://sperlingvineyards.com', note:'East Kelowna. One of the oldest family vineyards in BC. Certified organic. The Pet Nat is exceptional.' },
-    { name:'Tantalus Vineyards', region:'kelowna', lat:49.875, lng:-119.420, url:'https://tantalus.ca', note:'East Kelowna. The Riesling is one of the most consistently well-made whites in BC. Old vine, serious terroir.' },
-    { name:'CedarCreek Estate Winery', region:'kelowna', lat:49.896, lng:-119.402, url:'https://cedarcreek.bc.ca', note:'East Kelowna. Now under the National Wine Group banner but quality remains high. Pinot Noir is the top bottle.' },
-    { name:'Mission Hill Family Estate', region:'kelowna', lat:49.845, lng:-119.636, url:'https://missionhillwinery.com', note:'West Kelowna. The winery that put BC on the international map. Reserve Meritage and Chardonnay are solid.' },
-    { name:'Quails\' Gate Winery', region:'kelowna', lat:49.840, lng:-119.634, url:'https://quailsgate.com', note:'West Kelowna. Old Vines Foch is the one to know. Field &amp; Flight Pinot Noir and Rosé round out the range.' },
+    /* ── Kelowna ────────────────────────────────────────────────────────────────
+       Sources: yelp.com, tourismkelowna.com, quailsgate.com, winemaps.com
+    ── */
+    { name:'Sperling Vineyards', region:'kelowna', lat:49.852, lng:-119.466, url:'https://sperlingvineyards.com', note:'1405 Pioneer Rd. One of the oldest family vineyards in BC. Certified organic. The Pet Nat is exceptional.' },
+    { name:'Tantalus Vineyards', region:'kelowna', lat:49.835, lng:-119.416, url:'https://tantalus.ca', note:'1670 Dehart Rd. The Riesling is one of the most consistently well-made whites in BC. Old vine, serious terroir.' },
+    { name:'CedarCreek Estate Winery', region:'kelowna', lat:49.848, lng:-119.490, url:'https://cedarcreek.bc.ca', note:'5445 Lakeshore Rd. Quality remains high under National Wine Group. Pinot Noir is the top bottle.' },
+    { name:'Mission Hill Family Estate', region:'kelowna', lat:49.843, lng:-119.639, url:'https://missionhillwinery.com', note:'1730 Mission Hill Rd, West Kelowna. The winery that put BC on the international map.' },
+    { name:'Quails\' Gate Winery', region:'kelowna', lat:49.843, lng:-119.566, url:'https://quailsgate.com', note:'3303 Boucherie Rd, West Kelowna. Old Vines Foch is the one to know. Field &amp; Flight Pinot Noir rounds out the range.' },
 
-    /* ── Similkameen — Cawston / Keremeos area ─────────────── */
-    { name:'Clos du Soleil', region:'similkameen', lat:49.218, lng:-119.726, url:'https://closdusoleil.ca', note:'Cawston. The Lumière rosé and Signature Bordeaux blend are two of the best bottles coming out of BC right now.' },
-    { name:'Orofino Vineyards', region:'similkameen', lat:49.222, lng:-119.735, url:'https://orofinovineyards.com', note:'Cawston. Gamay, Red Bridge Red, and the Washington Series Cinsault are worth having. Low-intervention, high character.' },
+    /* ── Similkameen — Cawston / Keremeos area ─────────────────────────────────
+       Sources: winemaps.com (Orofino: 49.1894, -119.7479), closdusoleil.ca
+    ── */
+    { name:'Clos du Soleil', region:'similkameen', lat:49.207, lng:-119.752, url:'https://closdusoleil.ca', note:'2568 Upper Bench Rd, Keremeos. The Lumière rosé and Signature Bordeaux blend are two of the best in BC right now.' },
+    { name:'Orofino Vineyards', region:'similkameen', lat:49.189, lng:-119.748, url:'https://orofinovineyards.com', note:'2152 Barcelo Rd, Cawston. Gamay, Red Bridge Red, and the Washington Series Cinsault. Low-intervention, high character.' },
 
-    /* ── Fraser Valley ──────────────────────────────────────── */
-    { name:'Whispering Horse Winery', region:'fraser', lat:49.072, lng:-121.985, url:'https://www.whisperinghorsewinery.com', note:'Yarrow, Chilliwack. Estate-grown Fraser Valley fruit. La Crescent, Pinot Gris, and a Pet Nat Acadie — genuinely distinctive.' },
+    /* ── Fraser Valley ──────────────────────────────────────────────────────────
+       Source: whisperinghorsewinery.com — 43721 Vedder Mountain Rd, Chilliwack
+    ── */
+    { name:'Whispering Horse Winery', region:'fraser', lat:49.072, lng:-121.985, url:'https://www.whisperinghorsewinery.com', note:'43721 Vedder Mountain Rd, Yarrow. Estate-grown Fraser Valley fruit. La Crescent, Pinot Gris, and a Pet Nat Acadie.' },
 
-    /* ── Gulf Islands ───────────────────────────────────────── */
-    { name:'A Sunday in August', region:'islands', lat:48.840, lng:-123.500, url:'https://asundayinaugust.com', note:'Salt Spring Island. Natural winemaking, estate-grown fruit. The Carbonic Orange and Gulf Island Vermouth are both in store.' },
+    /* ── Gulf Islands ────────────────────────────────────────────────────────────
+       Source: asundayinaugust.com — 165 Hedger Rd, Salt Spring Island
+    ── */
+    { name:'A Sunday in August', region:'islands', lat:48.773, lng:-123.500, url:'https://asundayinaugust.com', note:'165 Hedger Rd, Salt Spring Island. Natural winemaking, estate-grown fruit. The Carbonic Orange and Vermouth are both in store.' },
 
-    /* ── Vancouver Island ───────────────────────────────────── */
-    { name:'Averill Creek Vineyard', region:'island', lat:48.690, lng:-123.700, url:'https://averillcreek.ca', note:'Cowichan Valley. The Chardonnay, Joué White, Pinot Noir, and a Charme de L\'Île sparkling are all on our shelf.' },
-    { name:'Blue Grouse Estate Winery', region:'island', lat:48.750, lng:-123.660, url:'https://bluegrouse.ca', note:'Cowichan Valley. Quill Red and Pinot Gris are the bottles that have stood out for us. Estate grown, consistently reliable.' },
+    /* ── Vancouver Island ────────────────────────────────────────────────────────
+       Sources: tripadvisor, tourismcowichan.com
+       Averill Creek: Mt Prevost, Cowichan Valley
+       Blue Grouse: 2182 Lakeside Rd, Duncan (48.707, -123.671)
+    ── */
+    { name:'Averill Creek Vineyard', region:'island', lat:48.741, lng:-123.741, url:'https://averillcreek.ca', note:'Cowichan Valley, on the side of Mt Prevost. Chardonnay, Joué White, Pinot Noir, and a Charme de L\'Île sparkling.' },
+    { name:'Blue Grouse Estate Winery', region:'island', lat:48.707, lng:-123.671, url:'https://bluegrouse.ca', note:'2182 Lakeside Rd, Duncan. Quill Red and Pinot Gris are the bottles that have stood out for us.' },
   ];
 
   const distilleries = [
-    { name:'Ampersand Distilling', lat:48.810, lng:-123.560, url:'https://ampersanddistilling.com', note:'Duncan, Cowichan Valley. Gin, vodka, and spirits from Vancouver Island grain and botanicals.' },
-    { name:'Sons of Vancouver', lat:49.310, lng:-123.070, url:'https://sonsofvancouver.ca', note:'North Vancouver. Amaretto, rum, and vodka made from scratch in a North Shore distillery.' },
-    { name:'Shelter Point Distillery', lat:49.830, lng:-124.970, url:'https://shelterpointdistillery.com', note:'Black Creek, Vancouver Island. Estate-grown grain whisky — one of BC\'s most serious whisky operations.' },
+    /* Sources: tourismcowichan.com (Ampersand: 4077 Lanchaster Rd, Duncan)
+                yellowpages.ca (Sons of Van: 1431 Crown St, North Vancouver)
+                alltopsights.com (Shelter Point: 49.8768, -125.1265)
+                macaloneys.com, phillipsbeer.com (Victoria) */
+    { name:'Ampersand Distilling', lat:48.781, lng:-123.772, url:'https://ampersanddistilling.com', note:'4077 Lanchaster Rd, Duncan. Gin, vodka, and spirits from Vancouver Island grain and botanicals.' },
+    { name:'Sons of Vancouver', lat:49.317, lng:-123.072, url:'https://sonsofvancouver.ca', note:'1431 Crown St, North Vancouver. Amaretto, rum, and vodka made from scratch in a North Shore distillery.' },
+    { name:'Shelter Point Distillery', lat:49.877, lng:-125.126, url:'https://shelterpointdistillery.com', note:'4650 Regent Rd, Oyster River (Campbell River area). Estate-grown grain whisky — one of BC\'s most serious whisky operations.' },
     { name:'Macaloney\'s Island Distillery', lat:48.435, lng:-123.370, url:'https://macaloneys.com', note:'Victoria. Single malt Scotch-style whisky made with BC barley. Remarkable depth for a young distillery.' },
     { name:'Phillips Brewing & Malting', lat:48.430, lng:-123.375, url:'https://phillipsbeer.com', note:'Victoria. Better known for beer, Phillips also produces spirits from their Victoria malthouse.' },
   ];
 
   const breweries = [
-    { name:'33 Acres', lat:49.270, lng:-123.101, url:'https://33acresbrew.com', note:'Mount Pleasant, Vancouver. Clean, precise lagers and ales. The 33 Acres of Ocean is a standout.' },
-    { name:'Backcountry Brewing', lat:49.702, lng:-123.156, url:'https://backcountrybrewing.com', note:'Squamish. Adventure-themed brewery with solid IPAs and seasonals.' },
-    { name:'Bridge Brewing', lat:49.314, lng:-123.073, url:'https://bridgebrewing.com', note:'North Vancouver. One of the Shore\'s originals. Honest, well-made West Coast ales.' },
-    { name:'Central City Brewing', lat:49.192, lng:-122.846, url:'https://centralcitybrewing.com', note:'Surrey. Red Racer IPA is one of BC\'s most recognized craft beers.' },
-    { name:'Dageraad Brewing', lat:49.234, lng:-122.981, url:'https://dageraad.com', note:'Burnaby. Belgian-inspired. Burnabarian and Blonde are two of the best in their category in BC.' },
+    /* Sources: yelp, yellowpages.ca, beeradvocate.com, canadabeermap.com
+       Dageraad confirmed: 3191 Thunderbird Crescent, Burnaby (49.2560, -122.9219)
+       Strange Fellows confirmed: 1345 Clark Dr, Vancouver
+       Four Winds confirmed: 4-7355 72 St, Delta V4G 1L5 */
+    { name:'33 Acres', lat:49.263, lng:-123.101, url:'https://33acresbrew.com', note:'15 W 8th Ave, Vancouver (Mount Pleasant). Clean, precise lagers and ales. 33 Acres of Ocean is a standout.' },
+    { name:'Backcountry Brewing', lat:49.702, lng:-123.155, url:'https://backcountrybrewing.com', note:'Squamish. Adventure-themed brewery with solid IPAs and seasonals.' },
+    { name:'Bridge Brewing', lat:49.320, lng:-123.059, url:'https://bridgebrewing.com', note:'North Vancouver. One of the Shore\'s originals. Honest, well-made West Coast ales.' },
+    { name:'Central City Brewing', lat:49.178, lng:-122.845, url:'https://centralcitybrewing.com', note:'Surrey. Red Racer IPA is one of BC\'s most recognized craft beers.' },
+    { name:'Dageraad Brewing', lat:49.256, lng:-122.922, url:'https://dageraad.com', note:'3191 Thunderbird Crescent, Burnaby. Belgian-inspired. Burnabarian and Blonde are two of the best in BC.' },
     { name:'Driftwood Brewery', lat:48.453, lng:-123.362, url:'https://driftwoodbeer.com', note:'Victoria. Fat Tug IPA put Driftwood on the map. Farmhand and Bird of Prey are also worth seeking.' },
-    { name:'Four Winds Brewing', lat:49.083, lng:-122.970, url:'https://fourwindsbrewing.ca', note:'Delta. One of BC\'s most respected craft breweries. Saison and IPA programs are exceptional.' },
-    { name:'Fuggles & Warlock', lat:49.163, lng:-123.128, url:'https://fugglesandwarlock.com', note:'Richmond. Whimsical names, serious beer. Known for creative flavour combinations.' },
+    { name:'Four Winds Brewing', lat:49.168, lng:-122.922, url:'https://fourwindsbrewing.ca', note:'7355 72 St, Delta (Tilbury). One of BC\'s most respected craft breweries. Saison and IPA programs are exceptional.' },
+    { name:'Fuggles & Warlock', lat:49.166, lng:-123.133, url:'https://fugglesandwarlock.com', note:'Richmond. Whimsical names, serious beer. Known for creative flavour combinations.' },
     { name:'Hoyne Brewing', lat:48.451, lng:-123.381, url:'https://hoynebrewing.ca', note:'Victoria. Dark Matter, Wolf Vine Pale Ale, and Pilsner are cornerstones of Victoria craft beer.' },
-    { name:'Longwood Brewery', lat:49.150, lng:-123.930, url:'https://longwoodbrewery.com', note:'Nanaimo. Vancouver Island\'s oldest surviving independent brewery. Excellent lager program.' },
-    { name:'Main Street Brewing', lat:49.263, lng:-123.101, url:'https://mainstreetbrewing.ca', note:'Vancouver. Anchor-style lagers and ales in a neighbourhood taproom on Main Street.' },
+    { name:'Longwood Brewery', lat:49.152, lng:-123.960, url:'https://longwoodbrewery.com', note:'Nanaimo. Vancouver Island\'s oldest surviving independent brewery. Excellent lager program.' },
+    { name:'Main Street Brewing', lat:49.263, lng:-123.098, url:'https://mainstreetbrewing.ca', note:'261 E 7th Ave, Vancouver. Anchor-style lagers and ales in a neighbourhood taproom.' },
     { name:'Okanagan Spring', lat:50.267, lng:-119.272, url:'https://okspring.com', note:'Vernon. 1516 Lager and Premium Extra Pale Ale are BC staples. A pioneer of BC craft brewing.' },
-    { name:'Parallel 49', lat:49.274, lng:-123.053, url:'https://parallel49beer.com', note:'East Vancouver. Gypsy Tears Ruby Ale and Tricycle Grapefruit Radler are on our shelf regularly.' },
-    { name:'Powell Street Craft Brewery', lat:49.282, lng:-123.072, url:'https://powellbeer.com', note:'East Vancouver. Old Jalopy Pale Ale and Dive Bomb Porter are two of the best in the city.' },
+    { name:'Parallel 49', lat:49.276, lng:-123.054, url:'https://parallel49beer.com', note:'East Vancouver. Gypsy Tears Ruby Ale and Tricycle Grapefruit Radler are on our shelf regularly.' },
+    { name:'Powell Street Craft Brewery', lat:49.280, lng:-123.069, url:'https://powellbeer.com', note:'East Vancouver. Old Jalopy Pale Ale and Dive Bomb Porter are two of the best in the city.' },
     { name:'Red Truck Beer', lat:49.274, lng:-123.100, url:'https://redtruckbeer.com', note:'Vancouver. Lager-focused, reliable, and widely distributed across BC.' },
-    { name:'Stanley Park Brewing', lat:49.288, lng:-123.140, url:'https://stanleyparkbrewing.com', note:'Vancouver. 1897 Amber Ale and Sunsetter Wheat brewed with the park as backdrop.' },
-    { name:'Steamworks Brewing', lat:49.295, lng:-123.112, url:'https://steamworks.com', note:'Gastown and Burnaby. Flagship Steam Engine Lager is one of BC\'s best lagers.' },
-    { name:'Strange Fellows Brewing', lat:49.280, lng:-123.050, url:'https://strangefellowsbrewing.com', note:'East Vancouver. Charm School Saison and Talisman Pale Ale are essential Strange Fellows bottles.' },
+    { name:'Stanley Park Brewing', lat:49.288, lng:-123.143, url:'https://stanleyparkbrewing.com', note:'Vancouver. 1897 Amber Ale and Sunsetter Wheat brewed with the park as backdrop.' },
+    { name:'Steamworks Brewing', lat:49.284, lng:-123.108, url:'https://steamworks.com', note:'Burnaby (also Gastown taproom). Flagship Steam Engine Lager is one of BC\'s best lagers.' },
+    { name:'Strange Fellows Brewing', lat:49.278, lng:-123.071, url:'https://strangefellowsbrewing.com', note:'1345 Clark Dr, Vancouver. Charm School Saison and Talisman Pale Ale are essential Strange Fellows bottles.' },
     { name:'Twin Sails Brewing', lat:49.284, lng:-122.840, url:'https://twinsailsbrewing.com', note:'Port Moody. Experimental and hazy IPAs. A rotating single-hop series worth following.' },
     { name:'Vancouver Island Brewing', lat:48.440, lng:-123.371, url:'https://vancouverislandbrewing.com', note:'Victoria. Piper\'s Pale Ale is a BC institution. Consistent, clean, and widely available.' },
     { name:'Whistler Brewing', lat:50.120, lng:-122.954, url:'https://whistlerbeer.com', note:'Whistler. Bears Paw Honey Lager and Powder Mountain Lager are solid après-ski staples.' },
