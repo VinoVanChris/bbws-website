@@ -81,6 +81,42 @@ schema: |
   color:#8a6e1a; background:rgba(201,168,76,0.12); padding:2px 7px;
   border-radius:20px; white-space:nowrap; flex-shrink:0;
 }
+/* ── Distillery list in region view ─────────────────────────── */
+.wmap-dist-btn {
+  display:flex; align-items:center; justify-content:space-between; width:100%;
+  padding:10px 0; border:none; border-bottom:1px solid rgba(201,168,76,0.14);
+  background:none; cursor:pointer; font-size:0.82rem; font-weight:500; color:var(--text);
+  text-align:left; font-family:inherit; transition:color var(--transition); gap:8px;
+}
+.wmap-dist-btn:last-child { border-bottom:none; }
+.wmap-dist-btn:hover { color:var(--gold); }
+.wmap-dist-btn > span { display:flex; flex-direction:column; gap:1px; }
+.wmap-dist-year {
+  font-size:0.60rem; font-weight:400; color:var(--text-muted);
+  letter-spacing:0; text-transform:none; display:block;
+}
+.wmap-dist-btn:hover .wmap-dist-year { color:var(--gold); opacity:0.7; }
+.wmap-dist-btn svg { opacity:0.3; flex-shrink:0; transition:opacity var(--transition),transform var(--transition); }
+.wmap-dist-btn:hover svg { opacity:0.8; transform:translateX(3px); }
+/* ── Producer card ──────────────────────────────────────────── */
+.wmap-producer-header { border-radius:8px; padding:22px 20px 20px; margin:0 0 18px; }
+.wmap-producer-region {
+  font-size:0.60rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+  margin:0 0 6px;
+}
+.wmap-producer-name { font-size:1.25rem; line-height:1.2; margin:0; color:var(--text); }
+.wmap-producer-desc {
+  font-size:0.82rem; line-height:1.8; color:var(--text-muted); margin-bottom:20px;
+}
+.wmap-section-label {
+  font-size:0.60rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--text-muted); margin:0 0 10px;
+}
+/* ── Leaflet tooltip skin ───────────────────────────────────── */
+.wmap-tip { background:rgba(20,14,8,0.88) !important; color:#fff !important; border:none !important;
+  font-size:0.72rem; font-weight:600; padding:4px 10px !important; border-radius:4px !important;
+  box-shadow:0 2px 8px rgba(0,0,0,0.22) !important; }
+.wmap-tip::before { border-top-color:rgba(20,14,8,0.88) !important; }
 @media (max-width:640px) {
   .wmap-wrap { overflow:visible; border-radius:var(--radius) var(--radius) 0 0; }
   #whisky-world-map { height:320px; }
@@ -120,7 +156,7 @@ schema: |
           <div class="wmap-back-bar" id="wmap-back-bar" hidden>
             <button class="wmap-back" id="wmap-back" type="button">
               <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M7 1L3 5l4 4"/></svg>
-              All Regions
+              <span id="wmap-back-label">All Regions</span>
             </button>
           </div>
           <div class="wmap-body">
@@ -755,9 +791,15 @@ SOM.whisky = (function() {
 <script>
 // ══════════════════════════════════════════════════════════════════
 //  WHISKY REGION MAP  (Leaflet -- same pattern as BC Producers)
+//  Panel states: nav → region → distillery (producer card)
 // ══════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
   var W = SOM.whisky;
+
+  // ── Panel state ───────────────────────────────────────────────
+  var panelState   = 'nav';   // 'nav' | 'region' | 'distillery'
+  var activeRegion = null;    // regionId string
+  var activeDist   = null;    // index into DISTILLERIES
 
   // ── Map views ────────────────────────────────────────────────
   var VIEWS = {
@@ -774,44 +816,96 @@ document.addEventListener('DOMContentLoaded', function() {
     canada:      { center:[43.30, -81.00],  zoom:7  },
   };
 
-  // ── Distillery locations ──────────────────────────────────────
+  // ── Distillery data (name, coords, story, bottles) ───────────
   var DISTILLERIES = [
     // Islay
-    { name:'Ardbeg',              region:'islay',       lat:55.640, lng:-6.356,  bottles:['ardbeg-10'] },
-    { name:'Laphroaig',           region:'islay',       lat:55.630, lng:-6.369,  bottles:['laphroaig-10'] },
-    { name:'Lagavulin',           region:'islay',       lat:55.629, lng:-6.348,  bottles:['lagavulin-16'] },
-    { name:'Bowmore',             region:'islay',       lat:55.756, lng:-6.290,  bottles:['bowmore-12'] },
-    { name:'Bruichladdich',       region:'islay',       lat:55.770, lng:-6.370,  bottles:['bruichladdich-cl'] },
+    { name:'Ardbeg',           region:'islay',       lat:55.640, lng:-6.356,  founded:1815,
+      desc:'Remote on Islay\'s southern shore, Ardbeg produces some of the most intensely peated whisky in Scotland. Closed for years before a revival in 1997, it is now one of the world\'s most celebrated and awarded distilleries.',
+      bottles:['ardbeg-10'] },
+    { name:'Laphroaig',        region:'islay',       lat:55.630, lng:-6.369,  founded:1815,
+      desc:'Founded the same year as Ardbeg, Laphroaig is defined by its medicinal, seaweed-heavy peat smoke. Awarded a Royal Warrant in 1994, it remains the most divisive and arguably the most distinctive malt made anywhere in Scotland.',
+      bottles:['laphroaig-10'] },
+    { name:'Lagavulin',        region:'islay',       lat:55.629, lng:-6.348,  founded:1816,
+      desc:'Sitting in a sheltered bay on Islay\'s south coast, Lagavulin is the benchmark for classic Islay malt. The 16 Year Old is one of the most complex and satisfying whiskies produced anywhere in Scotland.',
+      bottles:['lagavulin-16'] },
+    { name:'Bowmore',          region:'islay',       lat:55.756, lng:-6.290,  founded:1779,
+      desc:'The oldest distillery on Islay, founded in 1779 and sitting at the heart of the island. Bowmore bridges the gap between fruity and peated, producing a balanced, approachable malt that rewards patient exploration.',
+      bottles:['bowmore-12'] },
+    { name:'Bruichladdich',    region:'islay',       lat:55.770, lng:-6.370,  founded:1881,
+      desc:'Reopened in 2001 after a decade of silence, Bruichladdich took a radically different path from its Islay neighbours. Unpeated, terroir-focused, and independently minded, it is one of Scotland\'s most progressive distilleries.',
+      bottles:['bruichladdich-cl'] },
     // Speyside
-    { name:'Glenfiddich / Balvenie', region:'speyside', lat:57.454, lng:-3.133,  bottles:['glenfiddich-12','balvenie-12'] },
-    { name:'The Macallan',        region:'speyside',    lat:57.470, lng:-3.195,  bottles:['macallan-12-sherry'] },
-    { name:'Aberlour',            region:'speyside',    lat:57.468, lng:-3.214,  bottles:['aberlour-12'] },
-    { name:'The Glenlivet',       region:'speyside',    lat:57.282, lng:-3.375,  bottles:['glenlivet-12'] },
+    { name:'Glenfiddich & Balvenie', region:'speyside', lat:57.454, lng:-3.133, founded:1887,
+      desc:'Two of Scotland\'s most admired distilleries share a Dufftown hillside under the William Grant family. Glenfiddich is the world\'s best-selling single malt. Balvenie, built five years later, is one of Scotland\'s most craft-focused operations.',
+      bottles:['glenfiddich-12','balvenie-12'] },
+    { name:'The Macallan',     region:'speyside',    lat:57.470, lng:-3.195,  founded:1824,
+      desc:'One of the most recognised names in Scotch whisky, The Macallan built its reputation on sherry oak maturation. Its Easter Elchies House estate and striking new distillery complex have made it a landmark of the Speyside region.',
+      bottles:['macallan-12-sherry'] },
+    { name:'Aberlour',         region:'speyside',    lat:57.468, lng:-3.214,  founded:1879,
+      desc:'A Speyside gem that often gets overlooked in favour of more famous neighbours. Double-cask maturation in bourbon and sherry oak produces a whisky of real richness and depth at a price that remains consistently honest.',
+      bottles:['aberlour-12'] },
+    { name:'The Glenlivet',    region:'speyside',    lat:57.282, lng:-3.375,  founded:1824,
+      desc:'The first distillery to take out a legal licence in the Scottish Highlands under the 1823 Excise Act. The Glenlivet set the template for light, floral Speyside whisky and remains one of the best-selling single malts in the world.',
+      bottles:['glenlivet-12'] },
     // Highlands
-    { name:'Glenmorangie',        region:'highlands',   lat:57.883, lng:-4.068,  bottles:['glenmorangie-10'] },
-    { name:'Dalmore',             region:'highlands',   lat:57.640, lng:-4.162,  bottles:['dalmore-12'] },
-    { name:'Oban',                region:'highlands',   lat:56.415, lng:-5.471,  bottles:['oban-14'] },
+    { name:'Glenmorangie',     region:'highlands',   lat:57.883, lng:-4.068,  founded:1843,
+      desc:'Glenmorangie uses the tallest pot stills in Scotland, rising over five metres at its Tain distillery on the Dornoch Firth. The exceptional height produces a light, elegant spirit that takes beautifully to cask finishing.',
+      bottles:['glenmorangie-10'] },
+    { name:'Dalmore',          region:'highlands',   lat:57.640, lng:-4.162,  founded:1839,
+      desc:'Set on the shores of the Cromarty Firth, Dalmore is known for rich, sherried Highland malts and elaborate vintage expressions. The 12 Year Old remains one of the best value whiskies on the shelf at its price point.',
+      bottles:['dalmore-12'] },
+    { name:'Oban',             region:'highlands',   lat:56.415, lng:-5.471,  founded:1794,
+      desc:'Founded in 1794, Oban is one of Scotland\'s oldest and smallest distilleries, wedged between the hillside and the harbour in the town of the same name. It produces a coastal Highland malt of real character and distinction.',
+      bottles:['oban-14'] },
     // Islands
-    { name:'Talisker',            region:'islands',     lat:57.302, lng:-6.358,  bottles:['talisker-10'] },
-    { name:'Highland Park',       region:'islands',     lat:58.987, lng:-2.970,  bottles:['highland-park-12'] },
+    { name:'Talisker',         region:'islands',     lat:57.302, lng:-6.358,  founded:1830,
+      desc:'The only distillery on the Isle of Skye, Talisker is defined by its maritime intensity. Peat smoke, black pepper, and open ocean define a whisky that Robert Louis Stevenson once called one of Scotland\'s finest.',
+      bottles:['talisker-10'] },
+    { name:'Highland Park',    region:'islands',     lat:58.987, lng:-2.970,  founded:1798,
+      desc:'The most northerly Scotch whisky distillery, sitting on Orkney\'s windswept mainland. Highland Park still uses its own floor maltings with local Orkney peat, producing a complex, heathery malt with a gentle smoky character.',
+      bottles:['highland-park-12'] },
     // Campbeltown
-    { name:'Springbank',          region:'campbeltown', lat:55.433, lng:-5.619,  bottles:['springbank-10'] },
+    { name:'Springbank',       region:'campbeltown', lat:55.433, lng:-5.619,  founded:1828,
+      desc:'One of the most talked-about independent distilleries in the world, and the most individual in Campbeltown. Springbank does everything in-house, including its own malting, and produces three distinct styles under three different labels.',
+      bottles:['springbank-10'] },
     // Lowlands
-    { name:'Auchentoshan',        region:'lowlands',    lat:55.934, lng:-4.391,  bottles:['auchentoshan-3w'] },
+    { name:'Auchentoshan',     region:'lowlands',    lat:55.934, lng:-4.391,  founded:1823,
+      desc:'Sitting between Glasgow and the Firth of Clyde, Auchentoshan is triple-distilled in the Lowland tradition, producing one of Scotland\'s lightest and most delicate single malts. An ideal introduction to Scotch whisky.',
+      bottles:['auchentoshan-3w'] },
     // Japan
-    { name:'Suntory Yamazaki',    region:'japan',       lat:34.881, lng:135.671, bottles:['suntory-toki','hibiki-harmony','yamazaki-12'] },
-    { name:'Nikka Yoichi',        region:'japan',       lat:43.203, lng:140.745, bottles:['nikka-barrel'] },
+    { name:'Suntory Yamazaki', region:'japan',       lat:34.881, lng:135.671, founded:1923,
+      desc:'Japan\'s first malt whisky distillery, built by Shinjiro Torii in the forested foothills outside Kyoto. Yamazaki pioneered Japanese whisky and remains its flagship, producing some of the most sought-after bottles in the world.',
+      bottles:['suntory-toki','hibiki-harmony','yamazaki-12'] },
+    { name:'Nikka Yoichi',     region:'japan',       lat:43.203, lng:140.745, founded:1934,
+      desc:'Founded by Masataka Taketsuru, who studied distillation in Scotland before bringing those traditions to Hokkaido. Yoichi\'s coal-fired stills and northern climate produce a rich, peated Japanese whisky unlike anything else made in Japan.',
+      bottles:['nikka-barrel'] },
     // Ireland
-    { name:'Midleton Distillery', region:'ireland',     lat:51.914, lng:-8.173,  bottles:['jameson','redbreast-12','green-spot'] },
-    { name:'Bushmills',           region:'ireland',     lat:55.202, lng:-6.520,  bottles:[] },
+    { name:'Midleton Distillery', region:'ireland',  lat:51.914, lng:-8.173,  founded:1825,
+      desc:'The most productive distillery in Ireland and home to its most celebrated names, including Jameson, Redbreast, and Green Spot. The modern Midleton complex, opened in 1975, is a masterclass in Irish whiskey production at scale.',
+      bottles:['jameson','redbreast-12','green-spot'] },
+    { name:'Bushmills',        region:'ireland',     lat:55.202, lng:-6.520,  founded:1608,
+      desc:'The oldest licensed whiskey distillery in the world, operating in County Antrim since 1608. Bushmills\' triple-distilled, unpeated style produces light, smooth Irish single malts with genuine character and real history behind every bottle.',
+      bottles:[] },
     // America
-    { name:'Buffalo Trace',       region:'america',     lat:38.193, lng:-84.893, bottles:['buffalo-trace'] },
-    { name:'Woodford Reserve',    region:'america',     lat:38.022, lng:-84.760, bottles:['woodford-reserve'] },
-    { name:"Angel's Envy",        region:'america',     lat:38.252, lng:-85.754, bottles:['angels-envy'] },
-    { name:'Four Roses (Bulleit)',region:'america',     lat:37.876, lng:-85.396, bottles:['bulleit-rye'] },
+    { name:'Buffalo Trace',    region:'america',     lat:38.193, lng:-84.893, founded:1787,
+      desc:'One of the oldest continuously operating distilleries in America, on the banks of the Kentucky River in Frankfort. Home to some of bourbon\'s most coveted expressions, including Eagle Rare, Blanton\'s, and the legendary Pappy Van Winkle.',
+      bottles:['buffalo-trace'] },
+    { name:'Woodford Reserve', region:'america',     lat:38.022, lng:-84.760, founded:1812,
+      desc:'Set in a National Historic Landmark in Versailles, Kentucky, Woodford Reserve is one of only a handful of bourbon producers using pot still distillation alongside column stills. A premium, flavour-forward Kentucky expression.',
+      bottles:['woodford-reserve'] },
+    { name:"Angel's Envy",     region:'america',     lat:38.252, lng:-85.754, founded:2011,
+      desc:'Founded in Louisville by master distiller Lincoln Henderson, Angel\'s Envy is known for finishing its bourbon in ruby port wine barrels. A newer name in Kentucky but one that has earned serious recognition from enthusiasts worldwide.',
+      bottles:['angels-envy'] },
+    { name:'Four Roses',       region:'america',     lat:37.876, lng:-85.396, founded:1888,
+      desc:'One of the few Kentucky distilleries using two different mash bills and five yeast strains, producing ten distinct bourbon recipes. A distillery that rewards exploration and the source of many highly regarded rye expressions.',
+      bottles:['bulleit-rye'] },
     // Canada
-    { name:'Forty Creek',         region:'canada',      lat:43.199, lng:-79.576, bottles:['forty-creek'] },
-    { name:'Hiram Walker (Lot 40)',region:'canada',     lat:42.317, lng:-83.034, bottles:['lot-40'] },
+    { name:'Forty Creek',      region:'canada',      lat:43.199, lng:-79.576, founded:1992,
+      desc:'Founded by former winemaker John Hall in Grimsby, Ontario, Forty Creek helped reshape the reputation of Canadian whisky. Distilled in small batches from separate grain recipes, it consistently exceeds expectations at its price point.',
+      bottles:['forty-creek'] },
+    { name:'Hiram Walker',     region:'canada',      lat:42.317, lng:-83.034, founded:1858,
+      desc:'One of the largest distilleries in North America, on the shore of the Detroit River in Windsor, Ontario. Home to Canadian Club and Lot 40, it has been a cornerstone of Canadian whisky production for more than 160 years.',
+      bottles:['lot-40'] },
   ];
 
   var COLORS = {
@@ -819,6 +913,14 @@ document.addEventListener('DOMContentLoaded', function() {
     islands:'#c9a84c', campbeltown:'#c9a84c', lowlands:'#c9a84c',
     japan:'#A1191D', ireland:'#2d7a6f', america:'#b87333', canada:'#b87333'
   };
+
+  // Hex → rgba helper for gradient backgrounds
+  function rgba(hex, a) {
+    var r = parseInt(hex.slice(1,3),16);
+    var g = parseInt(hex.slice(3,5),16);
+    var b = parseInt(hex.slice(5,7),16);
+    return 'rgba('+r+','+g+','+b+','+a+')';
+  }
 
   // ── Init map ──────────────────────────────────────────────────
   var map = L.map('whisky-world-map', {
@@ -831,24 +933,22 @@ document.addEventListener('DOMContentLoaded', function() {
     subdomains: 'abcd', maxZoom: 19,
   }).addTo(map);
 
-  // ── Markers ───────────────────────────────────────────────────
-  var markersByRegion = {};
-  DISTILLERIES.forEach(function(d) {
+  // ── Markers (parallel array to DISTILLERIES) ──────────────────
+  var markers = [];
+  DISTILLERIES.forEach(function(d, i) {
     var col = COLORS[d.region] || '#c9a84c';
-    var bottleList = d.bottles.map(function(id) {
-      var b = W.bottles.find(function(x) { return x.id === id; });
-      return b ? '<li style="margin-bottom:2px;">' + b.name + '</li>' : '';
-    }).join('');
-    var popupHtml =
-      '<strong style="font-size:0.86rem;color:' + col + ';">' + d.name + '</strong>' +
-      (bottleList ? '<ul style="margin:6px 0 0;padding-left:16px;font-size:0.75rem;color:#555;">' + bottleList + '</ul>' : '');
-
     var marker = L.circleMarker([d.lat, d.lng], {
       radius:7, fillColor:col, color:'#fff', weight:1.5, fillOpacity:0.9,
-    }).addTo(map).bindPopup(popupHtml, { maxWidth:210 });
+    }).addTo(map);
 
-    if (!markersByRegion[d.region]) markersByRegion[d.region] = [];
-    markersByRegion[d.region].push(marker);
+    marker.bindTooltip(d.name, { direction:'top', offset:[0,-10], className:'wmap-tip' });
+
+    marker.on('click', function() {
+      activeRegion = d.region;
+      showDistillery(i);
+    });
+
+    markers.push(marker);
   });
 
   // ── Legend ────────────────────────────────────────────────────
@@ -865,61 +965,150 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   legend.addTo(map);
 
-  // ── Panel logic ───────────────────────────────────────────────
-  var nav     = document.getElementById('wmap-nav');
-  var detail  = document.getElementById('wmap-detail');
-  var backBar = document.getElementById('wmap-back-bar');
-  var backBtn = document.getElementById('wmap-back');
+  // ── Panel elements ────────────────────────────────────────────
+  var nav       = document.getElementById('wmap-nav');
+  var detail    = document.getElementById('wmap-detail');
+  var backBar   = document.getElementById('wmap-back-bar');
+  var backBtn   = document.getElementById('wmap-back');
+  var backLabel = document.getElementById('wmap-back-label');
 
-  function showDetail(regionId) {
-    var r = W.regions[regionId];
-    if (!r) return;
-    var btls = W.getBottlesByRegion(regionId);
-    var bottleHtml = btls.map(function(b) {
-      return '<div class="wmap-bottle">'
-        + '<span class="wmap-bottle-name">' + b.name + '</span>'
-        + '<span class="wmap-bottle-tier">' + b.tier + '</span>'
-        + '</div>';
-    }).join('');
-    detail.innerHTML =
-      '<p style="font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">' + r.character + '</p>' +
-      '<h2 style="font-size:1.25rem;margin-bottom:14px;line-height:1.2;">' + r.label + '</h2>' +
-      '<p style="font-size:0.82rem;line-height:1.75;color:var(--text-muted);margin-bottom:20px;">' + r.body + '</p>' +
-      (bottleHtml
-        ? '<p style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Bottles We Carry</p>' + bottleHtml
-        : '');
+  function setBackLabel(text) { if (backLabel) backLabel.textContent = text; }
 
-    nav.hidden     = true;
-    detail.hidden  = false;
-    backBar.hidden = false;
-    document.querySelector('.wmap-body').scrollTop = 0;
-
-    // Fly to region, highlight its markers
-    var v = VIEWS[regionId] || VIEWS.all;
-    map.flyTo(v.center, v.zoom, { duration:0.8 });
-    Object.keys(markersByRegion).forEach(function(key) {
-      markersByRegion[key].forEach(function(m) {
-        m.setStyle({ fillOpacity: key === regionId ? 0.95 : 0.15 });
-      });
+  // Style all markers: full for active region, highlight for active distillery, dim others
+  function styleMarkers(regionId, activeIdx) {
+    markers.forEach(function(m, i) {
+      var d   = DISTILLERIES[i];
+      var col = COLORS[d.region] || '#c9a84c';
+      var inRegion = !regionId || d.region === regionId;
+      if (activeIdx != null && i === activeIdx) {
+        m.setStyle({ fillOpacity:1, radius:10, weight:2.5, color:col });
+      } else if (inRegion) {
+        m.setStyle({ fillOpacity:0.85, radius:7,  weight:1.5, color:'#fff' });
+      } else {
+        m.setStyle({ fillOpacity:0.1,  radius:5,  weight:1,   color:'#fff' });
+      }
     });
   }
 
+  // ── Show functions ────────────────────────────────────────────
+
   function showNav() {
+    panelState   = 'nav';
+    activeRegion = null;
+    activeDist   = null;
     nav.hidden     = false;
     detail.hidden  = true;
     backBar.hidden = true;
     detail.innerHTML = '';
     map.flyTo(VIEWS.all.center, VIEWS.all.zoom, { duration:0.8 });
-    Object.keys(markersByRegion).forEach(function(key) {
-      markersByRegion[key].forEach(function(m) { m.setStyle({ fillOpacity:0.9 }); });
+    styleMarkers(null, null);
+  }
+
+  function showRegion(regionId) {
+    panelState   = 'region';
+    activeRegion = regionId;
+    activeDist   = null;
+
+    var r = W.regions[regionId];
+    if (!r) return;
+
+    // Build distillery list for this region
+    var distHtml = '';
+    DISTILLERIES.forEach(function(d, i) {
+      if (d.region !== regionId) return;
+      distHtml +=
+        '<button class="wmap-dist-btn" data-idx="' + i + '" type="button">' +
+          '<span>' + d.name +
+            (d.founded ? '<span class="wmap-dist-year">Est. ' + d.founded + '</span>' : '') +
+          '</span>' +
+          '<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg>' +
+        '</button>';
+    });
+
+    detail.innerHTML =
+      '<p class="wmap-eyebrow">' + r.character + '</p>' +
+      '<h2 style="font-size:1.25rem;margin:6px 0 14px;line-height:1.2;">' + r.label + '</h2>' +
+      '<p style="font-size:0.82rem;line-height:1.75;color:var(--text-muted);margin-bottom:24px;">' + r.body + '</p>' +
+      '<p class="wmap-section-label">Distilleries</p>' +
+      '<div class="wmap-dist-list">' + distHtml + '</div>';
+
+    nav.hidden     = true;
+    detail.hidden  = false;
+    backBar.hidden = false;
+    setBackLabel('All Regions');
+    document.querySelector('.wmap-body').scrollTop = 0;
+
+    var v = VIEWS[regionId] || VIEWS.all;
+    map.flyTo(v.center, v.zoom, { duration:0.8 });
+    styleMarkers(regionId, null);
+
+    detail.querySelectorAll('.wmap-dist-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        showDistillery(parseInt(btn.dataset.idx, 10));
+      });
     });
   }
 
+  function showDistillery(idx) {
+    panelState = 'distillery';
+    activeDist = idx;
+
+    var d = DISTILLERIES[idx];
+    if (!d) return;
+    activeRegion = d.region;
+
+    var r   = W.regions[d.region];
+    var col = COLORS[d.region] || '#c9a84c';
+
+    var btls = d.bottles.map(function(id) {
+      return W.bottles.find(function(b) { return b.id === id; });
+    }).filter(Boolean);
+
+    var bottleHtml = btls.length
+      ? '<p class="wmap-section-label" style="margin-top:20px;">Bottles We Carry</p>'
+        + btls.map(function(b) {
+            return '<div class="wmap-bottle">'
+              + '<span class="wmap-bottle-name">' + b.name + '</span>'
+              + '<span class="wmap-bottle-tier">' + b.tier + '</span>'
+              + '</div>';
+          }).join('')
+      : '';
+
+    detail.innerHTML =
+      '<div class="wmap-producer-header" style="background:linear-gradient(135deg,' + rgba(col,0.13) + ',' + rgba(col,0.30) + ');">' +
+        '<p class="wmap-producer-region" style="color:' + col + ';">' +
+          (r ? r.label : d.region) + (d.founded ? ' &middot; Est. ' + d.founded : '') +
+        '</p>' +
+        '<h2 class="wmap-producer-name">' + d.name + '</h2>' +
+      '</div>' +
+      '<p class="wmap-producer-desc">' + (d.desc || '') + '</p>' +
+      bottleHtml;
+
+    nav.hidden     = true;
+    detail.hidden  = false;
+    backBar.hidden = false;
+    setBackLabel(r ? r.label : 'Region');
+    document.querySelector('.wmap-body').scrollTop = 0;
+
+    var v = VIEWS[d.region] || VIEWS.all;
+    map.flyTo(v.center, v.zoom, { duration:0.6 });
+    styleMarkers(d.region, idx);
+  }
+
+  // ── Back button ───────────────────────────────────────────────
+  backBtn.addEventListener('click', function() {
+    if (panelState === 'distillery') {
+      showRegion(activeRegion);
+    } else {
+      showNav();
+    }
+  });
+
+  // ── Region nav buttons ────────────────────────────────────────
   document.querySelectorAll('.wmap-nav-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      showDetail(btn.dataset.region);
+      showRegion(btn.dataset.region);
     });
   });
-  backBtn.addEventListener('click', showNav);
 });
 </script>
