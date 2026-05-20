@@ -288,11 +288,11 @@ sitemapLastmod: 2026-05-19
 <script>
 (function() {
   const regions = {
-    all:         { center: [49.5, -120.2], zoom: 7 },
+    all:         { center: [49.4, -121.8], zoom: 6 },
     oliver:      { center: [49.10, -119.55], zoom: 12 },
     naramata:    { center: [49.40, -119.59], zoom: 11 },
     kelowna:     { center: [49.87, -119.52], zoom: 11 },
-    similkameen: { center: [49.38, -120.10], zoom: 11 },
+    similkameen: { center: [49.22, -119.76], zoom: 12 },
     islands:     { center: [48.83, -123.50], zoom: 10 },
     island:      { center: [48.72, -123.68], zoom: 10 },
   };
@@ -332,10 +332,10 @@ sitemapLastmod: 2026-05-19
     { name:'Mission Hill Family Estate', region:'kelowna', lat:49.845, lng:-119.636, url:'https://missionhillwinery.com', note:'West Kelowna. The winery that put BC on the international map. Reserve Meritage and Chardonnay are solid.' },
     { name:'Quails\' Gate Winery', region:'kelowna', lat:49.840, lng:-119.634, url:'https://quailsgate.com', note:'West Kelowna. Old Vines Foch is the one to know. Field &amp; Flight Pinot Noir and Rosé round out the range.' },
 
-    /* ── Similkameen ────────────────────────────────────────── */
-    { name:'Clos du Soleil', region:'similkameen', lat:49.407, lng:-119.924, url:'https://closdusoleil.ca', note:'Keremeos. The Lumière rosé and Signature Bordeaux blend are two of the best bottles coming out of BC right now.' },
-    { name:'Orofino Vineyards', region:'similkameen', lat:49.351, lng:-120.438, url:'https://orofinovineyards.com', note:'Cawston. Gamay, Red Bridge Red, and the Washington Series Cinsault are worth having. Low-intervention, high character.' },
-    { name:'Whispering Horse Winery', region:'similkameen', lat:49.351, lng:-120.441, url:'https://whisperinghorse.ca', note:'Cawston. La Crescent, Pinot Gris, and a rare Pet Nat L\'Acadie. Small production, genuinely distinctive wines.' },
+    /* ── Similkameen — corrected to Cawston / Keremeos area ── */
+    { name:'Clos du Soleil', region:'similkameen', lat:49.218, lng:-119.726, url:'https://closdusoleil.ca', note:'Cawston. The Lumière rosé and Signature Bordeaux blend are two of the best bottles coming out of BC right now.' },
+    { name:'Orofino Vineyards', region:'similkameen', lat:49.222, lng:-119.735, url:'https://orofinovineyards.com', note:'Cawston. Gamay, Red Bridge Red, and the Washington Series Cinsault are worth having. Low-intervention, high character.' },
+    { name:'Whispering Horse Winery', region:'similkameen', lat:49.215, lng:-119.741, url:'https://whisperinghorse.ca', note:'Cawston. La Crescent, Pinot Gris, and a rare Pet Nat L\'Acadie. Small production, genuinely distinctive wines.' },
 
     /* ── Gulf Islands ───────────────────────────────────────── */
     { name:'A Sunday in August', region:'islands', lat:48.840, lng:-123.500, url:'https://asundayinaugust.com', note:'Salt Spring Island. Natural winemaking, estate-grown fruit. The Carbonic Orange and Gulf Island Vermouth are both in store.' },
@@ -345,9 +345,42 @@ sitemapLastmod: 2026-05-19
     { name:'Blue Grouse Estate Winery', region:'island', lat:48.750, lng:-123.660, url:'https://bluegrouse.ca', note:'Cowichan Valley. Quill Red and Pinot Gris are the bottles that have stood out for us. Estate grown, consistently reliable.' },
   ];
 
-  function makePin() {
+  const distilleries = [
+    { name:'Ampersand Distilling', lat:48.810, lng:-123.560, url:'https://ampersanddistilling.com', note:'Duncan, Cowichan Valley. Gin, vodka, and spirits from Vancouver Island grain and botanicals.' },
+    { name:'Sons of Vancouver', lat:49.310, lng:-123.070, url:'https://sonsofvancouver.ca', note:'North Vancouver. Amaretto, rum, and vodka made from scratch in a North Shore distillery.' },
+    { name:'Shelter Point Distillery', lat:49.830, lng:-124.970, url:'https://shelterpointdistillery.com', note:'Black Creek, Vancouver Island. Estate-grown grain whisky — one of BC\'s most serious whisky operations.' },
+    { name:'Macaloney\'s Island Distillery', lat:48.435, lng:-123.370, url:'https://macaloneys.com', note:'Victoria. Single malt Scotch-style whisky made with BC barley. Remarkable depth for a young distillery.' },
+    { name:'Phillips Brewing & Malting', lat:48.430, lng:-123.375, url:'https://phillipsbeer.com', note:'Victoria. Better known for beer, Phillips also produces spirits from their Victoria malthouse.' },
+  ];
+
+  const breweries = [
+    { name:'33 Acres', lat:49.270, lng:-123.101, url:'https://33acresbrew.com', note:'Mount Pleasant, Vancouver. Clean, precise lagers and ales. The 33 Acres of Ocean is a standout.' },
+    { name:'Backcountry Brewing', lat:49.702, lng:-123.156, url:'https://backcountrybrewing.com', note:'Squamish. Adventure-themed brewery with solid IPAs and seasonals.' },
+    { name:'Bridge Brewing', lat:49.314, lng:-123.073, url:'https://bridgebrewing.com', note:'North Vancouver. One of the Shore\'s originals. Honest, well-made West Coast ales.' },
+    { name:'Central City Brewing', lat:49.192, lng:-122.846, url:'https://centralcitybrewing.com', note:'Surrey. Red Racer IPA is one of BC\'s most recognized craft beers.' },
+    { name:'Dageraad Brewing', lat:49.234, lng:-122.981, url:'https://dageraad.com', note:'Burnaby. Belgian-inspired. Burnabarian and Blonde are two of the best in their category in BC.' },
+    { name:'Driftwood Brewery', lat:48.453, lng:-123.362, url:'https://driftwoodbeer.com', note:'Victoria. Fat Tug IPA put Driftwood on the map. Farmhand and Bird of Prey are also worth seeking.' },
+    { name:'Four Winds Brewing', lat:49.083, lng:-122.970, url:'https://fourwindsbrewing.ca', note:'Delta. One of BC\'s most respected craft breweries. Saison and IPA programs are exceptional.' },
+    { name:'Fuggles & Warlock', lat:49.163, lng:-123.128, url:'https://fugglesandwarlock.com', note:'Richmond. Whimsical names, serious beer. Known for creative flavour combinations.' },
+    { name:'Hoyne Brewing', lat:48.451, lng:-123.381, url:'https://hoynebrewing.ca', note:'Victoria. Dark Matter, Wolf Vine Pale Ale, and Pilsner are cornerstones of Victoria craft beer.' },
+    { name:'Longwood Brewery', lat:49.150, lng:-123.930, url:'https://longwoodbrewery.com', note:'Nanaimo. Vancouver Island\'s oldest surviving independent brewery. Excellent lager program.' },
+    { name:'Main Street Brewing', lat:49.263, lng:-123.101, url:'https://mainstreetbrewing.ca', note:'Vancouver. Anchor-style lagers and ales in a neighbourhood taproom on Main Street.' },
+    { name:'Okanagan Spring', lat:50.267, lng:-119.272, url:'https://okspring.com', note:'Vernon. 1516 Lager and Premium Extra Pale Ale are BC staples. A pioneer of BC craft brewing.' },
+    { name:'Parallel 49', lat:49.274, lng:-123.053, url:'https://parallel49beer.com', note:'East Vancouver. Gypsy Tears Ruby Ale and Tricycle Grapefruit Radler are on our shelf regularly.' },
+    { name:'Powell Street Craft Brewery', lat:49.282, lng:-123.072, url:'https://powellbeer.com', note:'East Vancouver. Old Jalopy Pale Ale and Dive Bomb Porter are two of the best in the city.' },
+    { name:'Red Truck Beer', lat:49.274, lng:-123.100, url:'https://redtruckbeer.com', note:'Vancouver. Lager-focused, reliable, and widely distributed across BC.' },
+    { name:'Stanley Park Brewing', lat:49.288, lng:-123.140, url:'https://stanleyparkbrewing.com', note:'Vancouver. 1897 Amber Ale and Sunsetter Wheat brewed with the park as backdrop.' },
+    { name:'Steamworks Brewing', lat:49.295, lng:-123.112, url:'https://steamworks.com', note:'Gastown and Burnaby. Flagship Steam Engine Lager is one of BC\'s best lagers.' },
+    { name:'Strange Fellows Brewing', lat:49.280, lng:-123.050, url:'https://strangefellowsbrewing.com', note:'East Vancouver. Charm School Saison and Talisman Pale Ale are essential Strange Fellows bottles.' },
+    { name:'Twin Sails Brewing', lat:49.284, lng:-122.840, url:'https://twinsailsbrewing.com', note:'Port Moody. Experimental and hazy IPAs. A rotating single-hop series worth following.' },
+    { name:'Vancouver Island Brewing', lat:48.440, lng:-123.371, url:'https://vancouverislandbrewing.com', note:'Victoria. Piper\'s Pale Ale is a BC institution. Consistent, clean, and widely available.' },
+    { name:'Whistler Brewing', lat:50.120, lng:-122.954, url:'https://whistlerbeer.com', note:'Whistler. Bears Paw Honey Lager and Powder Mountain Lager are solid après-ski staples.' },
+    { name:'Yellow Dog Brewing', lat:49.283, lng:-122.836, url:'https://yellowdogbrew.com', note:'Port Moody. Play Dead IPA and Fetch American Amber are two of the better Port Moody offerings.' },
+  ];
+
+  function makePin(fill, stroke) {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="24" height="36">
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 24 12 24S24 21 24 12C24 5.373 18.627 0 12 0z" fill="#C9A84C" stroke="#A8892F" stroke-width="1"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 24 12 24S24 21 24 12C24 5.373 18.627 0 12 0z" fill="${fill}" stroke="${stroke}" stroke-width="1"/>
       <circle cx="12" cy="12" r="4.5" fill="white" opacity="0.9"/>
     </svg>`;
     return L.divIcon({ html: svg, className: '', iconSize:[24,36], iconAnchor:[12,36], popupAnchor:[0,-36] });
@@ -364,17 +397,50 @@ sitemapLastmod: 2026-05-19
       subdomains: 'abcd', maxZoom: 19,
     }).addTo(map);
 
-    const icon = makePin();
-    const markers = wineries.map(function(w) {
-      const m = L.marker([w.lat, w.lng], { icon })
+    /* Popup style helper */
+    function popup(name, url, note, accentColor) {
+      return `<strong style="font-size:0.88rem;"><a href="${url}" target="_blank" rel="noopener" style="color:${accentColor};text-decoration:none;">${name} ↗</a></strong>` +
+        `<br><span style="font-size:0.76rem;color:#555;line-height:1.5;display:block;margin-top:4px;max-width:200px;">${note}</span>`;
+    }
+
+    /* Winery markers (gold) */
+    const wineryIcon = makePin('#C9A84C', '#A8892F');
+    const wineryMarkers = wineries.map(function(w) {
+      const m = L.marker([w.lat, w.lng], { icon: wineryIcon })
         .addTo(map)
-        .bindPopup(
-          `<strong style="font-size:0.88rem;"><a href="${w.url}" target="_blank" rel="noopener" style="color:#C9A84C;text-decoration:none;">${w.name} ↗</a></strong>` +
-          `<br><span style="font-size:0.76rem;color:#555;line-height:1.5;display:block;margin-top:4px;max-width:200px;">${w.note}</span>`
-        );
+        .bindPopup(popup(w.name, w.url, w.note, '#C9A84C'));
       m._wineryRegion = w.region;
       return m;
     });
+
+    /* Distillery markers (brand red) */
+    const distilleryIcon = makePin('#a1191d', '#7a1215');
+    distilleries.forEach(function(d) {
+      L.marker([d.lat, d.lng], { icon: distilleryIcon })
+        .addTo(map)
+        .bindPopup(popup(d.name, d.url, d.note, '#a1191d'));
+    });
+
+    /* Brewery markers (deep amber) */
+    const breweryIcon = makePin('#7a4e12', '#5a380c');
+    breweries.forEach(function(b) {
+      L.marker([b.lat, b.lng], { icon: breweryIcon })
+        .addTo(map)
+        .bindPopup(popup(b.name, b.url, b.note, '#7a4e12'));
+    });
+
+    /* Map legend */
+    const legend = L.control({ position: 'bottomleft' });
+    legend.onAdd = function() {
+      const div = L.DomUtil.create('div');
+      div.style.cssText = 'background:rgba(255,255,255,0.92);backdrop-filter:blur(4px);padding:10px 14px;border-radius:8px;font-size:0.74rem;line-height:1.8;box-shadow:0 2px 8px rgba(0,0,0,0.12);';
+      div.innerHTML =
+        '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#C9A84C;flex-shrink:0;"></span> Winery</div>' +
+        '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#a1191d;flex-shrink:0;"></span> Distillery</div>' +
+        '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#7a4e12;flex-shrink:0;"></span> Brewery</div>';
+      return div;
+    };
+    legend.addTo(map);
 
     /* Populate region winery chips */
     wineries.forEach(function(w) {
@@ -407,7 +473,7 @@ sitemapLastmod: 2026-05-19
       });
       const r = regions.all;
       map.flyTo(r.center, r.zoom, { duration: 0.8 });
-      markers.forEach(function(m) { m.addTo(map); });
+      wineryMarkers.forEach(function(m) { m.addTo(map); });
     }
 
     closeBtn.addEventListener('click', closePanel);
@@ -419,7 +485,7 @@ sitemapLastmod: 2026-05-19
         document.querySelectorAll('.btn-choice[data-region]').forEach(function(b) { b.classList.toggle('active', b === btn); });
         const r = regions[region];
         if (r) map.flyTo(r.center, r.zoom, { duration: 0.8 });
-        markers.forEach(function(m) {
+        wineryMarkers.forEach(function(m) {
           if (region === 'all' || m._wineryRegion === region) { m.addTo(map); } else { m.remove(); }
         });
         if (region === 'all') {
