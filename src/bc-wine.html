@@ -328,18 +328,17 @@ sitemapLastmod: 2026-05-19
 
               <div class="region-detail" data-region="island">
                 <h2>Vancouver Island</h2>
-                <p>The Cowichan Valley is the most established sub-region. Maritime climate means white wines and Pinot Noir are the natural strengths. Averill Creek makes some of the most serious wine coming off the island. Blue Grouse has been at it for decades.</p>
+                <p>The Cowichan Valley is the most established sub-region. Maritime climate means white wines and Pinot Noir are the natural strengths. Averill Creek makes some of the most serious wine coming off the island. Blue Grouse has been at it for decades. Shelter Point and Ampersand are two of BC's most serious distilleries.</p>
                 <div class="region-blurb-wineries" id="wineries-island"></div>
+                <div class="region-blurb-wineries" id="distilleries-island"></div>
+                <div class="region-blurb-wineries" id="breweries-island"></div>
               </div>
 
               <div class="region-detail" data-region="vancouver">
                 <h2>Metro Vancouver</h2>
                 <p>Vancouver doesn't grow grapes, but it's the heart of BC's craft beer scene. Strange Fellows, Four Winds, Dageraad, Powell Street, Parallel 49, and more. Sons of Vancouver on the North Shore is the city's standout craft distillery.</p>
-              </div>
-
-              <div class="region-detail" data-region="island-beer">
-                <h2>Vancouver Island</h2>
-                <p>Beyond wine, Vancouver Island has a thriving craft beer and spirits scene. Driftwood, Hoyne, Phillips, and Vancouver Island Brewing anchor the Victoria end. Longwood holds down Nanaimo. Shelter Point and Ampersand are two of BC's most serious distilleries.</p>
+                <div class="region-blurb-wineries" id="distilleries-vancouver"></div>
+                <div class="region-blurb-wineries" id="breweries-vancouver"></div>
               </div>
 
             </div>
@@ -472,11 +471,11 @@ sitemapLastmod: 2026-05-19
                 yellowpages.ca (Sons of Van: 1431 Crown St, North Vancouver)
                 alltopsights.com (Shelter Point: 49.8768, -125.1265)
                 macaloneys.com, phillipsbeer.com (Victoria) */
-    { name:'Ampersand Distilling', lat:48.781, lng:-123.772, url:'https://ampersanddistilling.com', note:'4077 Lanchaster Rd, Duncan. Gin, vodka, and spirits from Vancouver Island grain and botanicals.' },
-    { name:'Sons of Vancouver', lat:49.317, lng:-123.072, url:'https://sonsofvancouver.ca', note:'1431 Crown St, North Vancouver. Amaretto, rum, and vodka made from scratch in a North Shore distillery.' },
-    { name:'Shelter Point Distillery', lat:49.877, lng:-125.126, url:'https://shelterpointdistillery.com', note:'4650 Regent Rd, Oyster River (Campbell River area). Estate-grown grain whisky — one of BC\'s most serious whisky operations.' },
-    { name:'Macaloney\'s Island Distillery', lat:48.435, lng:-123.370, url:'https://macaloneys.com', note:'Victoria. Single malt Scotch-style whisky made with BC barley. Remarkable depth for a young distillery.' },
-    { name:'Phillips Brewing & Malting', lat:48.430, lng:-123.375, url:'https://phillipsbeer.com', note:'Victoria. Better known for beer, Phillips also produces spirits from their Victoria malthouse.' },
+    { name:'Ampersand Distilling', lat:48.781, lng:-123.772, url:'https://ampersanddistilling.com', region:'island', note:'4077 Lanchaster Rd, Duncan. Gin, vodka, and spirits from Vancouver Island grain and botanicals.' },
+    { name:'Sons of Vancouver', lat:49.317, lng:-123.072, url:'https://sonsofvancouver.ca', region:'vancouver', note:'1431 Crown St, North Vancouver. Amaretto, rum, and vodka made from scratch in a North Shore distillery.' },
+    { name:'Shelter Point Distillery', lat:49.877, lng:-125.126, url:'https://shelterpointdistillery.com', region:'island', note:'4650 Regent Rd, Oyster River (Campbell River area). Estate-grown grain whisky — one of BC\'s most serious whisky operations.' },
+    { name:'Macaloney\'s Island Distillery', lat:48.435, lng:-123.370, url:'https://macaloneys.com', region:'island', note:'Victoria. Single malt Scotch-style whisky made with BC barley. Remarkable depth for a young distillery.' },
+    { name:'Phillips Brewing & Malting', lat:48.430, lng:-123.375, url:'https://phillipsbeer.com', region:'island', note:'Victoria. Better known for beer, Phillips also produces spirits from their Victoria malthouse.' },
   ];
 
   const breweries = [
@@ -484,28 +483,28 @@ sitemapLastmod: 2026-05-19
        Dageraad confirmed: 3191 Thunderbird Crescent, Burnaby (49.2560, -122.9219)
        Strange Fellows confirmed: 1345 Clark Dr, Vancouver
        Four Winds confirmed: 4-7355 72 St, Delta V4G 1L5 */
-    { name:'33 Acres', lat:49.263, lng:-123.101, url:'https://33acresbrew.com', note:'15 W 8th Ave, Vancouver (Mount Pleasant). Clean, precise lagers and ales. 33 Acres of Ocean is a standout.' },
-    { name:'Backcountry Brewing', lat:49.702, lng:-123.155, url:'https://backcountrybrewing.com', note:'Squamish. Adventure-themed brewery with solid IPAs and seasonals.' },
-    { name:'Bridge Brewing', lat:49.320, lng:-123.059, url:'https://bridgebrewing.com', note:'North Vancouver. One of the Shore\'s originals. Honest, well-made West Coast ales.' },
-    { name:'Central City Brewing', lat:49.178, lng:-122.845, url:'https://centralcitybrewing.com', note:'Surrey. Red Racer IPA is one of BC\'s most recognized craft beers.' },
-    { name:'Dageraad Brewing', lat:49.256, lng:-122.922, url:'https://dageraad.com', note:'3191 Thunderbird Crescent, Burnaby. Belgian-inspired. Burnabarian and Blonde are two of the best in BC.' },
-    { name:'Driftwood Brewery', lat:48.453, lng:-123.362, url:'https://driftwoodbeer.com', note:'Victoria. Fat Tug IPA put Driftwood on the map. Farmhand and Bird of Prey are also worth seeking.' },
-    { name:'Four Winds Brewing', lat:49.168, lng:-122.922, url:'https://fourwindsbrewing.ca', note:'7355 72 St, Delta (Tilbury). One of BC\'s most respected craft breweries. Saison and IPA programs are exceptional.' },
-    { name:'Fuggles & Warlock', lat:49.166, lng:-123.133, url:'https://fugglesandwarlock.com', note:'Richmond. Whimsical names, serious beer. Known for creative flavour combinations.' },
-    { name:'Hoyne Brewing', lat:48.451, lng:-123.381, url:'https://hoynebrewing.ca', note:'Victoria. Dark Matter, Wolf Vine Pale Ale, and Pilsner are cornerstones of Victoria craft beer.' },
-    { name:'Longwood Brewery', lat:49.152, lng:-123.960, url:'https://longwoodbrewery.com', note:'Nanaimo. Vancouver Island\'s oldest surviving independent brewery. Excellent lager program.' },
-    { name:'Main Street Brewing', lat:49.263, lng:-123.098, url:'https://mainstreetbrewing.ca', note:'261 E 7th Ave, Vancouver. Anchor-style lagers and ales in a neighbourhood taproom.' },
-    { name:'Okanagan Spring', lat:50.267, lng:-119.272, url:'https://okspring.com', note:'Vernon. 1516 Lager and Premium Extra Pale Ale are BC staples. A pioneer of BC craft brewing.' },
-    { name:'Parallel 49', lat:49.276, lng:-123.054, url:'https://parallel49beer.com', note:'East Vancouver. Gypsy Tears Ruby Ale and Tricycle Grapefruit Radler are on our shelf regularly.' },
-    { name:'Powell Street Craft Brewery', lat:49.280, lng:-123.069, url:'https://powellbeer.com', note:'East Vancouver. Old Jalopy Pale Ale and Dive Bomb Porter are two of the best in the city.' },
-    { name:'Red Truck Beer', lat:49.274, lng:-123.100, url:'https://redtruckbeer.com', note:'Vancouver. Lager-focused, reliable, and widely distributed across BC.' },
-    { name:'Stanley Park Brewing', lat:49.288, lng:-123.143, url:'https://stanleyparkbrewing.com', note:'Vancouver. 1897 Amber Ale and Sunsetter Wheat brewed with the park as backdrop.' },
-    { name:'Steamworks Brewing', lat:49.284, lng:-123.108, url:'https://steamworks.com', note:'Burnaby (also Gastown taproom). Flagship Steam Engine Lager is one of BC\'s best lagers.' },
-    { name:'Strange Fellows Brewing', lat:49.278, lng:-123.071, url:'https://strangefellowsbrewing.com', note:'1345 Clark Dr, Vancouver. Charm School Saison and Talisman Pale Ale are essential Strange Fellows bottles.' },
-    { name:'Twin Sails Brewing', lat:49.284, lng:-122.840, url:'https://twinsailsbrewing.com', note:'Port Moody. Experimental and hazy IPAs. A rotating single-hop series worth following.' },
-    { name:'Vancouver Island Brewing', lat:48.440, lng:-123.371, url:'https://vancouverislandbrewing.com', note:'Victoria. Piper\'s Pale Ale is a BC institution. Consistent, clean, and widely available.' },
-    { name:'Whistler Brewing', lat:50.120, lng:-122.954, url:'https://whistlerbeer.com', note:'Whistler. Bears Paw Honey Lager and Powder Mountain Lager are solid après-ski staples.' },
-    { name:'Yellow Dog Brewing', lat:49.283, lng:-122.836, url:'https://yellowdogbrew.com', note:'Port Moody. Play Dead IPA and Fetch American Amber are two of the better Port Moody offerings.' },
+    { name:'33 Acres', lat:49.263, lng:-123.101, url:'https://33acresbrew.com', region:'vancouver', note:'15 W 8th Ave, Vancouver (Mount Pleasant). Clean, precise lagers and ales. 33 Acres of Ocean is a standout.' },
+    { name:'Backcountry Brewing', lat:49.702, lng:-123.155, url:'https://backcountrybrewing.com', region:'vancouver', note:'Squamish. Adventure-themed brewery with solid IPAs and seasonals.' },
+    { name:'Bridge Brewing', lat:49.320, lng:-123.059, url:'https://bridgebrewing.com', region:'vancouver', note:'North Vancouver. One of the Shore\'s originals. Honest, well-made West Coast ales.' },
+    { name:'Central City Brewing', lat:49.178, lng:-122.845, url:'https://centralcitybrewing.com', region:'vancouver', note:'Surrey. Red Racer IPA is one of BC\'s most recognized craft beers.' },
+    { name:'Dageraad Brewing', lat:49.256, lng:-122.922, url:'https://dageraad.com', region:'vancouver', note:'3191 Thunderbird Crescent, Burnaby. Belgian-inspired. Burnabarian and Blonde are two of the best in BC.' },
+    { name:'Driftwood Brewery', lat:48.453, lng:-123.362, url:'https://driftwoodbeer.com', region:'island', note:'Victoria. Fat Tug IPA put Driftwood on the map. Farmhand and Bird of Prey are also worth seeking.' },
+    { name:'Four Winds Brewing', lat:49.168, lng:-122.922, url:'https://fourwindsbrewing.ca', region:'vancouver', note:'7355 72 St, Delta (Tilbury). One of BC\'s most respected craft breweries. Saison and IPA programs are exceptional.' },
+    { name:'Fuggles & Warlock', lat:49.166, lng:-123.133, url:'https://fugglesandwarlock.com', region:'vancouver', note:'Richmond. Whimsical names, serious beer. Known for creative flavour combinations.' },
+    { name:'Hoyne Brewing', lat:48.451, lng:-123.381, url:'https://hoynebrewing.ca', region:'island', note:'Victoria. Dark Matter, Wolf Vine Pale Ale, and Pilsner are cornerstones of Victoria craft beer.' },
+    { name:'Longwood Brewery', lat:49.152, lng:-123.960, url:'https://longwoodbrewery.com', region:'island', note:'Nanaimo. Vancouver Island\'s oldest surviving independent brewery. Excellent lager program.' },
+    { name:'Main Street Brewing', lat:49.263, lng:-123.098, url:'https://mainstreetbrewing.ca', region:'vancouver', note:'261 E 7th Ave, Vancouver. Anchor-style lagers and ales in a neighbourhood taproom.' },
+    { name:'Okanagan Spring', lat:50.267, lng:-119.272, url:'https://okspring.com', region:'kelowna', note:'Vernon. 1516 Lager and Premium Extra Pale Ale are BC staples. A pioneer of BC craft brewing.' },
+    { name:'Parallel 49', lat:49.276, lng:-123.054, url:'https://parallel49beer.com', region:'vancouver', note:'East Vancouver. Gypsy Tears Ruby Ale and Tricycle Grapefruit Radler are on our shelf regularly.' },
+    { name:'Powell Street Craft Brewery', lat:49.280, lng:-123.069, url:'https://powellbeer.com', region:'vancouver', note:'East Vancouver. Old Jalopy Pale Ale and Dive Bomb Porter are two of the best in the city.' },
+    { name:'Red Truck Beer', lat:49.274, lng:-123.100, url:'https://redtruckbeer.com', region:'vancouver', note:'Vancouver. Lager-focused, reliable, and widely distributed across BC.' },
+    { name:'Stanley Park Brewing', lat:49.288, lng:-123.143, url:'https://stanleyparkbrewing.com', region:'vancouver', note:'Vancouver. 1897 Amber Ale and Sunsetter Wheat brewed with the park as backdrop.' },
+    { name:'Steamworks Brewing', lat:49.284, lng:-123.108, url:'https://steamworks.com', region:'vancouver', note:'Burnaby (also Gastown taproom). Flagship Steam Engine Lager is one of BC\'s best lagers.' },
+    { name:'Strange Fellows Brewing', lat:49.278, lng:-123.071, url:'https://strangefellowsbrewing.com', region:'vancouver', note:'1345 Clark Dr, Vancouver. Charm School Saison and Talisman Pale Ale are essential Strange Fellows bottles.' },
+    { name:'Twin Sails Brewing', lat:49.284, lng:-122.840, url:'https://twinsailsbrewing.com', region:'vancouver', note:'Port Moody. Experimental and hazy IPAs. A rotating single-hop series worth following.' },
+    { name:'Vancouver Island Brewing', lat:48.440, lng:-123.371, url:'https://vancouverislandbrewing.com', region:'island', note:'Victoria. Piper\'s Pale Ale is a BC institution. Consistent, clean, and widely available.' },
+    { name:'Whistler Brewing', lat:50.120, lng:-122.954, url:'https://whistlerbeer.com', region:'vancouver', note:'Whistler. Bears Paw Honey Lager and Powder Mountain Lager are solid après-ski staples.' },
+    { name:'Yellow Dog Brewing', lat:49.283, lng:-122.836, url:'https://yellowdogbrew.com', region:'vancouver', note:'Port Moody. Play Dead IPA and Fetch American Amber are two of the better Port Moody offerings.' },
   ];
 
   function makePin(fill, stroke) {
@@ -549,17 +548,19 @@ sitemapLastmod: 2026-05-19
     /* Distillery markers (brand red) */
     const distilleryIcon = makePin('#a1191d', '#7a1215');
     distilleries.forEach(function(d) {
-      L.marker([d.lat, d.lng], { icon: distilleryIcon })
+      const m = L.marker([d.lat, d.lng], { icon: distilleryIcon })
         .addTo(map)
         .bindPopup(popup(d.name, d.url, d.note, '#a1191d'));
+      markerByName[d.name] = m;
     });
 
     /* Brewery markers (deep amber) */
     const breweryIcon = makePin('#7a4e12', '#5a380c');
     breweries.forEach(function(b) {
-      L.marker([b.lat, b.lng], { icon: breweryIcon })
+      const m = L.marker([b.lat, b.lng], { icon: breweryIcon })
         .addTo(map)
         .bindPopup(popup(b.name, b.url, b.note, '#7a4e12'));
+      markerByName[b.name] = m;
     });
 
     /* Map legend */
@@ -599,6 +600,34 @@ sitemapLastmod: 2026-05-19
         }
       });
       container.appendChild(btn);
+    });
+
+    /* Populate region brewery/distillery chips */
+    function makeProducerChip(p, pinColor) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'region-winery-chip';
+      const addr = addrFromNote(p.note);
+      btn.innerHTML = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${pinColor};flex-shrink:0;margin-right:2px;"></span><span class="chip-text"><span class="chip-name">${p.name}</span>${addr ? `<span class="chip-addr">${addr}</span>` : ''}</span><svg class="chip-arrow" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><path d="M3 1l4 4-4 4"/></svg>`;
+      btn.addEventListener('click', function() {
+        const marker = markerByName[p.name];
+        if (marker) {
+          marker.addTo(map);
+          map.flyTo([p.lat, p.lng], 14, { duration: 0.6 });
+          setTimeout(function() { marker.openPopup(); }, 700);
+        }
+      });
+      return btn;
+    }
+    distilleries.forEach(function(d) {
+      const container = document.getElementById('distilleries-' + d.region);
+      if (!container) return;
+      container.appendChild(makeProducerChip(d, '#a1191d'));
+    });
+    breweries.forEach(function(b) {
+      const container = document.getElementById('breweries-' + b.region);
+      if (!container) return;
+      container.appendChild(makeProducerChip(b, '#7a4e12'));
     });
 
     const regionNav = document.getElementById('region-nav');
