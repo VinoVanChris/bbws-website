@@ -24,17 +24,21 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
 <style>
-.beach-map-wrap {
-  position: relative;
+.beach-layout {
   display: flex;
   height: 480px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.08);
 }
-#beach-map {
+.beach-map-wrap {
+  position: relative;
   flex: 1;
   min-width: 0;
+}
+#beach-map {
+  width: 100%;
+  height: 480px;
   border-radius: 0;
   border: none;
 }
@@ -105,9 +109,12 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   line-height: 1.4;
 }
 @media (max-width: 700px) {
-  .beach-map-wrap { flex-direction: column; height: auto; }
-  #beach-map { height: 320px; }
-  .beach-panel { width: 100%; border-left: none; border-top: 1px solid rgba(0,0,0,0.08); height: 240px; }
+  .beach-layout { flex-direction: column; height: auto; overflow: visible; border: none; border-radius: 0; gap: 16px; }
+  .beach-map-wrap { height: 300px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
+  #beach-map { height: 300px; }
+  .beach-panel { width: 100%; border-left: none; border-top: none; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; height: auto; overflow: visible; }
+  #beach-list { max-height: none; display: grid; grid-template-columns: 1fr 1fr; }
+  .beach-chip { border-right: 1px solid rgba(0,0,0,0.05); }
 }
 </style>
 
@@ -142,8 +149,10 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
 
         <!-- ── Interactive Map ── -->
         <div class="fade-in" style="margin:32px 0 16px;">
-          <div class="beach-map-wrap" style="position:relative;z-index:0;">
-            <div id="beach-map"></div>
+          <div class="beach-layout" style="position:relative;z-index:0;">
+            <div class="beach-map-wrap">
+              <div id="beach-map"></div>
+            </div>
             <aside class="beach-panel">
               <div class="beach-panel-header">Approved Beaches &amp; Parks</div>
               <div id="beach-list"></div>
