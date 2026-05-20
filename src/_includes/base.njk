@@ -124,20 +124,20 @@
     </div>
   </nav>
   <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="/index.html"{% if navPage == 'home' %} class="active"{% endif %}>Home</a>
-    <a href="/about.html"{% if navPage == 'about' %} class="active"{% endif %}>About</a>
-    <a href="/blog.html"{% if navPage == 'blog' %} class="active"{% endif %}>Blog</a>
-    <span class="mobile-nav-shop-label">Guides</span>
-    <a href="/pairings.html"{% if navPage == 'pairings' %} class="active"{% endif %} class="mobile-nav-sub">Restaurants & Take-Out</a>
-    <a href="/blog/vancouver-beaches-alcohol-legal.html"{% if navPage == 'guide' %} class="active"{% endif %} class="mobile-nav-sub">Beaches</a>
-    <a href="/party.html"{% if navPage == 'party' %} class="active"{% endif %} class="mobile-nav-sub">Party Planner</a>
-    <a href="/bc-wine-beer-spirits-producers.html"{% if navPage == 'bcwine' %} class="active"{% endif %} class="mobile-nav-sub">BC Producers</a>
-    <a href="/corporate.html"{% if navPage == 'corporate' %} class="active"{% endif %}>Corporate</a>
-    <a href="/contact.html"{% if navPage == 'contact' %} class="active"{% endif %}>Contact</a>
+    <a href="/index.html" class="{% if navPage == 'home' %}active{% endif %}">Home</a>
+    <a href="/about.html" class="{% if navPage == 'about' %}active{% endif %}">About</a>
     <span class="mobile-nav-shop-label">Order Online</span>
-    <a href="/delivery.html"{% if navPage == 'delivery' %} class="active"{% endif %} class="mobile-nav-sub">Delivery Info</a>
+    <a href="/delivery.html" class="mobile-nav-sub{% if navPage == 'delivery' %} active{% endif %}">Delivery Info</a>
     <a href="https://www.ubereats.com/ca/store/broadway-beer-wine-%26-spirits-2752-west-broadway/txYsHr2XVKO1dt6xFUk8pQ" target="_blank" rel="noopener" class="mobile-nav-sub">Uber Eats</a>
     <a href="https://www.doordash.com/en-CA/convenience/store/broadway-beer-wine-&-spirits-vancouver-39133145/" target="_blank" rel="noopener" class="mobile-nav-sub">DoorDash</a>
+    <a href="/blog.html" class="{% if navPage == 'blog' %}active{% endif %}">Blog</a>
+    <span class="mobile-nav-shop-label">Guides</span>
+    <a href="/pairings.html" class="mobile-nav-sub{% if navPage == 'pairings' %} active{% endif %}">Restaurants &amp; Take-Out</a>
+    <a href="/blog/vancouver-beaches-alcohol-legal.html" class="mobile-nav-sub{% if navPage == 'guide' %} active{% endif %}">Beaches</a>
+    <a href="/party.html" class="mobile-nav-sub{% if navPage == 'party' %} active{% endif %}">Party Planner</a>
+    <a href="/bc-wine-beer-spirits-producers.html" class="mobile-nav-sub{% if navPage == 'bcwine' %} active{% endif %}">BC Producers</a>
+    <a href="/corporate.html" class="{% if navPage == 'corporate' %}active{% endif %}">Corporate</a>
+    <a href="/contact.html" class="{% if navPage == 'contact' %}active{% endif %}">Contact</a>
   </div>
 
   <div id="main">{{ content | safe }}</div>
@@ -171,8 +171,11 @@
           <li><a href="/index.html">Home</a></li>
           <li><a href="/about.html">About</a></li>
           <li><a href="/delivery.html">Delivery</a></li>
-          <li><a href="/pairings.html">Pairings</a></li>
           <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/pairings.html">Restaurants &amp; Take-Out</a></li>
+          <li><a href="/blog/vancouver-beaches-alcohol-legal.html">Beaches Guide</a></li>
+          <li><a href="/party.html">Party Planner</a></li>
+          <li><a href="/bc-wine-beer-spirits-producers.html">BC Producers</a></li>
           <li><a href="/corporate.html">Corporate</a></li>
           <li><a href="/contact.html">Contact</a></li>
         </ul>
