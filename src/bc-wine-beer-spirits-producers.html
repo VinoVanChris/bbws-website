@@ -12,7 +12,7 @@ ogImageHeight: 630
 preloadHero: "/images/okanagan-winery.webp"
 sitemapPriority: 0.85
 sitemapChangefreq: monthly
-sitemapLastmod: 2026-05-19
+sitemapLastmod: 2026-05-20
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
@@ -434,6 +434,9 @@ sitemapLastmod: 2026-05-19
     { name:'Inniskillin Okanagan', region:'oliver', lat:49.097, lng:-119.541, url:'https://inniskillin.com', note:'Oliver. The Okanagan outpost of the Niagara estate. Pinot Noir and icewine are the draws.' },
     { name:'Sandhill Wines', region:'oliver', lat:49.086, lng:-119.544, url:'https://sandhillwines.ca', note:'Oliver-grown fruit, Kelowna-based operation. Small Lots series is where their best work shows.' },
     { name:'Monster Vineyards', region:'oliver', lat:49.052, lng:-119.492, url:'https://monstervineyards.com', note:'Osoyoos area. Malbec and Red Eyed blend are their signature bottles.' },
+    { name:'LaStella Winery', region:'oliver', lat:49.054, lng:-119.498, url:'https://lastella.ca', img:'/images/producers/lastella.webp', note:'Italian-inspired winemaking on Osoyoos Lake, with wines named after musical notations. Allegretto and Vivace are the ones to know.' },
+    { name:'Rust Wine Co.', region:'oliver', lat:49.183, lng:-119.550, url:'https://www.rustwine.com', img:'/images/producers/rust-wine-co.webp', note:'Sourcing from five BC appellations including the Golden Mile Bench. Single-vineyard focused wines with a Naramata tasting room.' },
+    { name:'Foolish Wine', region:'oliver', lat:49.183, lng:-119.545, url:'https://www.foolishwine.com', note:'Boisterous and unpretentious at District Wine Village in Oliver. Great for discovering something new without any of the fuss.' },
 
     /* ── Naramata / Okanagan Falls ─────────────────────────────────────────────
        Sources: winemaps.com, visitpenticton.com, yellowpages.ca
@@ -449,6 +452,14 @@ sitemapLastmod: 2026-05-19
     { name:'Synchromesh Wines', region:'naramata', lat:49.315, lng:-119.530, url:'https://synchromeshwines.ca', note:'Okanagan Falls. Long\'s View Vineyard Riesling is one of the most precise expressions of Okanagan Riesling.' },
     { name:'Dirty Laundry Vineyard', region:'naramata', lat:49.574, lng:-119.641, url:'https://dirtylaundry.ca', note:'7311 Fiske St, Summerland. Bordello and Hush are crowd-pleasing bottles. Great gateway wines for exploring BC.' },
     { name:'Raven Conspiracy', region:'naramata', lat:49.588, lng:-119.648, url:'https://ravenconspiracy.com', note:'Summerland area. Honest, accessible reds and whites from South Okanagan fruit.' },
+    { name:'8th Generation Vineyard', region:'naramata', lat:49.576, lng:-119.632, url:'https://www.8thgeneration.com', img:'/images/producers/8th-generation.webp', note:'A family with generations of winemaking heritage behind them, now rooted in Summerland. Their Frizzante and aromatic whites are reliably lovely.' },
+    { name:'Blasted Church Vineyards', region:'naramata', lat:49.390, lng:-119.559, url:'https://blastedchurch.com', img:'/images/producers/blasted-church.webp', note:'Named after actual dynamited church history. Okanagan Falls wines that punch well above their playful labels. A reliable go-to for Pinot Gris.' },
+    { name:'Rigour &amp; Whimsy', region:'naramata', lat:49.340, lng:-119.560, url:'https://www.rigourandwhimsy.ca', img:'/images/producers/rigour-and-whimsy.webp', note:'A regenerative family farm in Okanagan Falls making thoughtful, low-intervention wines. Costa and Jody Gavaris are doing something genuinely special here.' },
+    { name:'Echo Bay Vineyard', region:'naramata', lat:49.373, lng:-119.565, url:'https://echobayvineyard.ca', img:'/images/producers/echo-bay.webp', note:'Five generations of family on the eastern shore of Skaha Lake, farming organically and biodynamically. Minimal intervention wines from a beautiful spot.' },
+    { name:'Pamplemousse Jus', region:'naramata', lat:49.589, lng:-119.695, url:'https://www.pamplemoussejus.ca', note:'A small crew of industry veterans farming in Summerland and making some of the most alive natural wines in BC. Their co-ferments are worth seeking out.' },
+    { name:'Roche Wines', region:'naramata', lat:49.502, lng:-119.567, url:'https://www.rterroir.ca', img:'/images/producers/roche-wines.webp', note:'Naramata Bench naturalists rooted in French tradition, farming without intervention. Their Chardonnay and Pinot Noir are wines worth seeking out.' },
+    { name:'Coolshanagh Winery', region:'naramata', lat:49.538, lng:-119.564, url:'https://coolshanagh.ca', img:'/images/producers/coolshanagh.webp', note:'A tiny, meticulous estate north of Naramata making estate-only Chardonnay and Pinot Noir in very small quantities. Old World sensibility, BC soul.' },
+    { name:'Lightning Rock Winery', region:'naramata', lat:49.575, lng:-119.661, url:'https://lightningrockwinery.com', img:'/images/producers/lightning-rock.webp', note:'A small Summerland estate making benchmark traditional-method bubbles and Pinot Noir. Their sparkling wines have earned national attention.' },
 
     /* ── Kelowna ────────────────────────────────────────────────────────────────
        Sources: yelp.com, tourismkelowna.com, quailsgate.com, winemaps.com
@@ -458,22 +469,28 @@ sitemapLastmod: 2026-05-19
     { name:'CedarCreek Estate Winery', region:'kelowna', lat:49.848, lng:-119.490, url:'https://cedarcreek.bc.ca', img:'/images/producers/cedarcreek.webp', note:'5445 Lakeshore Rd. Quality remains high under National Wine Group. Pinot Noir is the top bottle.' },
     { name:'Mission Hill Family Estate', region:'kelowna', lat:49.843, lng:-119.639, url:'https://missionhillwinery.com', img:'/images/producers/mission-hill.webp', note:'1730 Mission Hill Rd, West Kelowna. The winery that put BC on the international map.' },
     { name:'Quails\' Gate Winery', region:'kelowna', lat:49.843, lng:-119.566, url:'https://quailsgate.com', img:'/images/producers/quails-gate.webp', note:'3303 Boucherie Rd, West Kelowna. Old Vines Foch is the one to know. Field &amp; Flight Pinot Noir rounds out the range.' },
+    { name:'The Hatch Wines', region:'kelowna', lat:49.846, lng:-119.559, url:'https://thehatchwines.com', note:'Eccentric, fun, and unapologetically themselves in West Kelowna. The Hatch makes wine for people who want great bottles without any stuffy ceremony.' },
+    { name:'St. Hubertus Estate Winery', region:'kelowna', lat:49.795, lng:-119.536, url:'https://st-hubertus.bc.ca', note:'The Gebert family has been farming the South Kelowna Slopes sustainably for decades. 100% estate-grown wines that genuinely reflect their terroir.' },
 
     /* -- Similkameen - Cawston / Keremeos area ---------------------------------
        Sources: winemaps.com (Orofino: 49.1894, -119.7479), closdusoleil.ca
     ── */
     { name:'Clos du Soleil', region:'similkameen', lat:49.207, lng:-119.752, url:'https://closdusoleil.ca', img:'/images/producers/clos-du-soleil.webp', note:'2568 Upper Bench Rd, Keremeos. The Lumière rosé and Signature Bordeaux blend are two of the best in BC right now.' },
     { name:'Orofino Vineyards', region:'similkameen', lat:49.189, lng:-119.748, url:'https://orofinovineyards.com', img:'/images/producers/orofino.webp', note:'2152 Barcelo Rd, Cawston. Gamay, Red Bridge Red, and the Washington Series Cinsault. Low-intervention, high character.' },
+    { name:'Scout Vineyard', region:'similkameen', lat:49.182, lng:-119.761, url:'https://scoutvineyard.com', img:'/images/producers/scout-vineyard.webp', note:'A 6-acre cooperative wine farm in Cawston run by four friends doing regenerative farming right. Natural, honest Similkameen wines that taste like the land they come from.' },
 
     /* ── Fraser Valley ──────────────────────────────────────────────────────────
        Source: whisperinghorsewinery.com - 43721 Vedder Mountain Rd, Chilliwack
     ── */
     { name:'Whispering Horse Winery', region:'fraser', lat:49.072, lng:-121.985, url:'https://www.whisperinghorsewinery.com', img:'/images/producers/whispering-horse.webp', note:'43721 Vedder Mountain Rd, Yarrow. Estate-grown Fraser Valley fruit. La Crescent, Pinot Gris, and a Pet Nat Acadie.' },
+    { name:'Thorn &amp; Burrow Wines', region:'vancouver', lat:49.283, lng:-123.121, url:'https://thornandburrowwines.com', img:'/images/producers/thorn-and-burrow.webp', note:'Vancouver-based and semi-nomadic, Alex Thornley makes skin-contact wines sourced from BC vineyards in the Okanagan and Fraser Valley. One to follow.' },
 
     /* ── Gulf Islands ────────────────────────────────────────────────────────────
        Source: asundayinaugust.com - 165 Hedger Rd, Salt Spring Island
     ── */
     { name:'A Sunday in August', region:'islands', lat:48.773, lng:-123.500, url:'https://asundayinaugust.com', img:'/images/producers/a-sunday-in-august.webp', note:'165 Hedger Rd, Salt Spring Island. Natural winemaking, estate-grown fruit. The Carbonic Orange and Vermouth are both in store.' },
+    { name:'Kutatás Wines', region:'islands', lat:48.865, lng:-123.514, url:'https://kutataswines.com', note:'Eight acres of estate vines on Salt Spring Island plus a Patricia Bay vineyard on Vancouver Island. Their cellar door is open weekends and worth the ferry.' },
+    { name:'St. Katharina Vineyard', region:'islands', lat:48.780, lng:-123.180, url:'https://stkatharinavineyard.ca', note:'A Gulf Islands vineyard making individual sparkling wines from Pinot Noir. Their traditional-method bubble is as distinctive as the place it comes from.' },
 
     /* ── Vancouver Island ────────────────────────────────────────────────────────
        Sources: tripadvisor, tourismcowichan.com
@@ -482,6 +499,7 @@ sitemapLastmod: 2026-05-19
     ── */
     { name:'Averill Creek Vineyard', region:'island', lat:48.741, lng:-123.741, url:'https://averillcreek.ca', img:'/images/producers/averill-creek.webp', note:'Cowichan Valley, on the side of Mt Prevost. Chardonnay, Joué White, Pinot Noir, and a Charme de L\'Île sparkling.' },
     { name:'Blue Grouse Estate Winery', region:'island', lat:48.707, lng:-123.671, url:'https://bluegrouse.ca', img:'/images/producers/blue-grouse.webp', note:'2182 Lakeside Rd, Duncan. Quill Red and Pinot Gris are the bottles that have stood out for us.' },
+    { name:'Esquimalt Wine Co.', region:'island', lat:49.169, lng:-123.981, url:'https://esquimaltvermouth.ca', img:'/images/producers/esquimalt-wine.webp', note:'Nanaimo-based makers of vermouth and aperitifs crafted from mead and wild-foraged Vancouver Island botanicals. A genuinely local take on a classic category.' },
   ];
 
   const distilleries = [
@@ -494,6 +512,11 @@ sitemapLastmod: 2026-05-19
     { name:'Shelter Point Distillery', lat:49.877, lng:-125.126, url:'https://shelterpointdistillery.com', region:'island', img:'/images/producers/shelter-point.webp', note:'4650 Regent Rd, Oyster River (Campbell River area). Estate-grown grain whisky, one of BC\'s most serious whisky operations.' },
     { name:'Macaloney\'s Island Distillery', lat:48.435, lng:-123.370, url:'https://macaloneys.com', region:'island', img:'/images/producers/macaloneys.webp', note:'Victoria. Single malt Scotch-style whisky made with BC barley. Remarkable depth for a young distillery.' },
     { name:'Phillips Brewing & Malting', lat:48.430, lng:-123.375, url:'https://phillipsbeer.com', region:'island', img:'/images/producers/phillips.webp', note:'Victoria. Better known for beer, Phillips also produces spirits from their Victoria malthouse.' },
+    { name:'Odd Society Spirits', lat:49.284, lng:-123.069, url:'https://www.oddsocietyspirits.com', region:'vancouver', img:'/images/producers/odd-society.webp', note:'East Vancouver small-batch distillery blending Old World tradition with Pacific Northwest ingredients. Their malt-based spirits and gin are some of the best in BC.' },
+    { name:'The Woods Spirit Co.', lat:49.308, lng:-123.033, url:'https://thewoodsspiritco.com', region:'vancouver', img:'/images/producers/the-woods-spirit.webp', note:'North Vancouver distillery making Italian-inspired spirits and liqueurs using vacuum distillation and Pacific Northwest botanicals. A beautiful local find.' },
+    { name:'Mad Laboratory Distilling', lat:49.208, lng:-123.091, url:'https://www.madlabdistilling.com', region:'vancouver', img:'/images/producers/mad-laboratory.webp', note:'South Vancouver micro-distillery making small-batch spirits from 100% BC-grown malted barley. Their Gin6 is worth tracking down.' },
+    { name:'Stillhead Distillery', lat:48.779, lng:-123.708, url:'https://stillhead.ca', region:'island', img:'/images/producers/stillhead.webp', note:'Family-owned in the Cowichan Valley, making award-winning spirits from wild-harvested BC botanicals and local honey. Distinctly Vancouver Island.' },
+    { name:'Sweetwater Distilling Co.', lat:48.839, lng:-123.533, url:'https://www.sweetwaterdistilling.ca', region:'islands', note:'Farm-to-bottle spirits crafted on Salt Spring Island using local ingredients, including a Wild Blackberry Gin made with 100% locally harvested berries.' },
   ];
 
   const breweries = [
@@ -523,11 +546,28 @@ sitemapLastmod: 2026-05-19
     { name:'Vancouver Island Brewing', lat:48.440, lng:-123.371, url:'https://vancouverislandbrewing.com', region:'island', img:'/images/producers/vi-brewing.webp', note:'Victoria. Piper\'s Pale Ale is a BC institution. Consistent, clean, and widely available.' },
     { name:'Whistler Brewing', lat:50.120, lng:-122.954, url:'https://whistlerbeer.com', region:'vancouver', img:'/images/producers/whistler-brewing.webp', note:'Whistler. Bears Paw Honey Lager and Powder Mountain Lager are solid après-ski staples.' },
     { name:'Yellow Dog Brewing', lat:49.283, lng:-122.836, url:'https://yellowdogbrew.com', region:'vancouver', img:'/images/producers/yellow-dog.webp', note:'Port Moody. Play Dead IPA and Fetch American Amber are two of the better Port Moody offerings.' },
+    { name:'Ile Sauvage Brewing', lat:48.440, lng:-123.374, url:'https://ilesauvage.com', region:'island', note:'Victoria\'s home for wild and sour beers, using Brettanomyces, Lactobacillus, and secondary fruit ferments to make some of the most interesting beer on the island.' },
+    { name:'Superflux Beer Company', lat:49.280, lng:-123.078, url:'https://www.superfluxbeer.com', region:'vancouver', note:'East Van IPA specialists on Clark Drive, endlessly experimental with a dog-friendly patio. Nearly 100% IPAs, all of them worth your attention.' },
+    { name:'Container Brewing', lat:49.282, lng:-123.079, url:'https://drinkcontainer.beer', region:'vancouver', img:'/images/producers/container-brewing.webp', note:'Award-winning craft beer on Franklin Street in East Van. Classic styles done right, with a dog-friendly patio and no shortcuts anywhere.' },
+    { name:'Grey Fox Brewing', lat:49.925, lng:-119.494, url:'https://www.greyfoxbrewing.com', region:'kelowna', note:'BC\'s dedicated gluten-free craft brewery in Lake Country north of Kelowna, proving that gluten-free and full-flavoured are not mutually exclusive.' },
   ];
 
   const farms = [
     /* Source: farmersdotter.ca/contact - 2036 Osprey Lane, Cawston */
     { name:'Farmersdotter Organics', lat:49.194, lng:-119.738, url:'https://www.farmersdotter.ca', region:'similkameen', img:'/images/producers/farmersdotter.webp', note:'2036 Osprey Lane, Cawston. Certified organic garlic farm in the Similkameen. Their garlic scape salt is on our shelf.' },
+  ];
+
+  const ciders = [
+    { name:'Bowen Cider House', lat:49.364, lng:-123.382, url:'https://www.bowenciderhouse.ca', region:'vancouver', img:'/images/producers/bowen-cider.webp', note:'Three generations growing 700+ heritage apple trees on Bowen Island. Award-winning ciders from ultra-dry to barrel-aged, right on the family farm.' },
+    { name:'Sunday Cider', lat:49.407, lng:-123.527, url:'https://www.sundaycider.com', region:'vancouver', note:'Made on BC\'s Sunshine Coast from 100% fresh-pressed BC apples, with a huge outdoor picnic area surrounded by West Coast forest.' },
+    { name:'Nomad Cider', lat:49.580, lng:-119.684, url:'https://www.nomadcider.ca', region:'naramata', note:'Farm-to-glass cidery in Summerland using fresh-pressed Okanagan-Similkameen apples and pears. No concentrates, no shortcuts, just honest BC fruit.' },
+    { name:'Twin Island Cider', lat:48.775, lng:-123.262, url:'https://www.twinislandcider.com', region:'islands', img:'/images/producers/twin-island-cider.webp', note:'A traditional cidery on Pender Island tending century-old dry-farmed orchards and turning them into something remarkable. Tasting room open weekends.' },
+    { name:'Element Cider Co.', lat:49.182, lng:-119.761, url:'https://www.elementcider.ca', region:'similkameen', note:'Certified organic cider from Cawston in the Similkameen, made from exceptional valley fruit. Clean, honest, and a great way to taste what that region does best.' },
+    { name:'Scenic Road Cider Co.', lat:49.931, lng:-119.421, url:'https://scenicroadcider.com', region:'kelowna', img:'/images/producers/scenic-road-cider.webp', note:'Family-run apple orchard cidery in Kelowna\'s North Glenmore, inside a 1930s packinghouse. Their Razz cider has become a bit of a local legend.' },
+    { name:'Dominion Cider Co.', lat:49.590, lng:-119.693, url:'https://dominioncider.com', region:'naramata', note:'Summerland cidery making refined Okanagan ciders with a tasting room overlooking the valley. The Foundational series is a reliable starting point for any cider lover.' },
+    { name:'Salt Spring Wild Cider', lat:48.862, lng:-123.521, url:'https://saltspringwildcider.com', region:'islands', img:'/images/producers/salt-spring-wild.webp', note:'Heritage apples and pears from Salt Spring\'s old orchards turned into artisanal ciders. Dog-friendly tasting room and genuinely lovely.' },
+    { name:'Left Field Cider Co.', lat:50.495, lng:-120.813, url:'https://www.leftfieldcider.com', region:'kelowna', note:'Sisters Theresa and Kate make handcrafted English-style cider near Logan Lake, blending English and French cider apple varieties with BC dessert fruit.' },
+    { name:'Golden Age Meadery', lat:49.168, lng:-122.972, url:'https://www.goldenagemead.com', region:'vancouver', img:'/images/producers/golden-age-meadery.webp', note:'Richmond-based family meadery using Salt Spring Island and Fraser Valley honey, wild herbs, and local fruit. A rare and genuinely local take on mead.' },
   ];
 
   function makePin(fill, stroke) {
@@ -599,6 +639,15 @@ sitemapLastmod: 2026-05-19
       markerByName[f.name] = m;
     });
 
+    /* Cider & mead markers (teal) */
+    const ciderIcon = makePin('#2d7a6f', '#1f5a52');
+    ciders.forEach(function(c) {
+      const m = L.marker([c.lat, c.lng], { icon: ciderIcon })
+        .addTo(map)
+        .bindPopup(popup(c.name, c.url, c.note, '#2d7a6f', c.img), { maxWidth: 220 });
+      markerByName[c.name] = m;
+    });
+
     /* Map legend */
     const legend = L.control({ position: 'bottomleft' });
     legend.onAdd = function() {
@@ -608,6 +657,7 @@ sitemapLastmod: 2026-05-19
         '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#C9A84C;flex-shrink:0;"></span> Winery</div>' +
         '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#a1191d;flex-shrink:0;"></span> Distillery</div>' +
         '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#7a4e12;flex-shrink:0;"></span> Brewery</div>' +
+        '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#2d7a6f;flex-shrink:0;"></span> Cider &amp; Mead</div>' +
         '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#4a7c3f;flex-shrink:0;"></span> Farm</div>';
       return div;
     };
