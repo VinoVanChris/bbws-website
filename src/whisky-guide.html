@@ -70,32 +70,42 @@ schema: |
       </div>
 
       <div class="whisky-compass-card fade-in">
-        <!-- Left: compass plot -->
-        <div class="whisky-compass-left">
-          <div class="whisky-compass-filter" id="whisky-compass-filter">
-            <button class="whisky-filter-btn active" data-region="all" type="button">All</button>
-          </div>
-          <div class="whisky-compass-container" id="whisky-compass">
-            <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
-            <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
-            <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
-            <div class="whisky-compass-label whisky-compass-label--right">Bold</div>
-            <div class="whisky-compass-xaxis"></div>
-            <div class="whisky-compass-yaxis"></div>
-            <div class="whisky-compass-dots" id="whisky-compass-dots"></div>
-          </div>
+        <!-- Filter row: full width -->
+        <div class="whisky-compass-filter" id="whisky-compass-filter">
+          <button class="whisky-filter-btn active" data-region="all" type="button">All</button>
         </div>
-        <!-- Right: info panel -->
-        <div class="whisky-compass-right">
-          <div class="whisky-compass-default" id="whisky-compass-default">
-            <p class="whisky-compass-hint">Hover a dot to explore a bottle.</p>
-            <p class="whisky-compass-hint-sub">Gold dots are Scotch. Each colour represents a different origin country.</p>
+        <!-- Body: plot + info -->
+        <div class="whisky-compass-body">
+          <!-- Left: compass plot -->
+          <div class="whisky-compass-left">
+            <div class="whisky-compass-container" id="whisky-compass">
+              <div class="whisky-compass-label whisky-compass-label--top">Peated</div>
+              <div class="whisky-compass-label whisky-compass-label--bottom">Unpeated</div>
+              <div class="whisky-compass-label whisky-compass-label--left">Delicate</div>
+              <div class="whisky-compass-label whisky-compass-label--right">Bold</div>
+              <div class="whisky-compass-xaxis"></div>
+              <div class="whisky-compass-yaxis"></div>
+              <div class="whisky-compass-dots" id="whisky-compass-dots"></div>
+            </div>
           </div>
-          <div class="whisky-compass-info" id="whisky-compass-tooltip" hidden>
-            <span class="whisky-info-region" id="wct-region"></span>
-            <strong class="whisky-info-name" id="wct-name"></strong>
-            <span class="whisky-info-tier" id="wct-tier"></span>
-            <p class="whisky-info-note" id="wct-note"></p>
+          <!-- Right: info panel -->
+          <div class="whisky-compass-right">
+            <div class="whisky-compass-default" id="whisky-compass-default">
+              <p class="whisky-compass-hint">Hover a dot to explore.</p>
+              <div class="whisky-compass-legend">
+                <div class="wcl-item"><span class="wcl-dot" style="background:#c9a84c;"></span>Scotland</div>
+                <div class="wcl-item"><span class="wcl-dot" style="background:#A1191D;"></span>Japan</div>
+                <div class="wcl-item"><span class="wcl-dot" style="background:#2d7a6f;"></span>Ireland</div>
+                <div class="wcl-item"><span class="wcl-dot" style="background:#b87333;"></span>America &amp; Canada</div>
+              </div>
+              <p class="whisky-compass-hint-sub">Plotted by peat level (vertical) and body weight (horizontal).</p>
+            </div>
+            <div class="whisky-compass-info" id="whisky-compass-tooltip" hidden>
+              <span class="whisky-info-region" id="wct-region"></span>
+              <strong class="whisky-info-name" id="wct-name"></strong>
+              <span class="whisky-info-tier" id="wct-tier"></span>
+              <p class="whisky-info-note" id="wct-note"></p>
+            </div>
           </div>
         </div>
       </div>
