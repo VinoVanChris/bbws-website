@@ -1,23 +1,63 @@
 /* Broadway Beer Wine & Spirits - Main JS */
 
-// Mobile nav toggle
+// Mobile nav drawer
 const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobile-nav');
+const drawer    = document.getElementById('nav-drawer');
+const overlay   = document.getElementById('nav-drawer-overlay');
+const drawerClose = document.getElementById('nav-drawer-close');
 
-if (hamburger && mobileNav) {
-  hamburger.addEventListener('click', () => {
-    mobileNav.classList.toggle('open');
-    const isOpen = mobileNav.classList.contains('open');
-    hamburger.setAttribute('aria-expanded', isOpen);
-  });
+function openDrawer() {
+  drawer.classList.add('open');
+  overlay.classList.add('open');
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  drawer.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  drawer.classList.remove('open');
+  overlay.classList.remove('open');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  drawer.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
 
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
-      mobileNav.classList.remove('open');
+if (hamburger && drawer) {
+  hamburger.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+  overlay.addEventListener('click', closeDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDrawer(); });
+}
+
+// Accordion groups
+document.querySelectorAll('.nav-drawer-group-trigger').forEach(trigger => {
+  const group = trigger.closest('.nav-drawer-group');
+  const body  = group.querySelector('.nav-drawer-group-body');
+
+  // Auto-open group if it contains the active page
+  if (trigger.classList.contains('active-group')) {
+    group.classList.add('open');
+    body.style.height = body.scrollHeight + 'px';
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+
+  trigger.addEventListener('click', () => {
+    const isOpen = group.classList.contains('open');
+    // Close all groups
+    document.querySelectorAll('.nav-drawer-group').forEach(g => {
+      g.classList.remove('open');
+      g.querySelector('.nav-drawer-group-body').style.height = '0';
+      g.querySelector('.nav-drawer-group-trigger').setAttribute('aria-expanded', 'false');
+    });
+    // Open clicked one if it was closed
+    if (!isOpen) {
+      group.classList.add('open');
+      body.style.height = body.scrollHeight + 'px';
+      trigger.setAttribute('aria-expanded', 'true');
     }
   });
-}
+});
 
 // Nav dropdown — keyboard / click toggle (CSS handles hover for pointer users)
 const navDropdownTrigger = document.querySelector('.nav-dropdown-trigger');
@@ -52,7 +92,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 // Mark active nav link
 const currentPath = window.location.pathname.replace(/\/$/, '') || '/index.html';
-document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
+document.querySelectorAll('.nav-links a, .nav-drawer-link, .nav-drawer-sub-link').forEach(link => {
   if (!link.href) return;
   const linkPath = new URL(link.href).pathname.replace(/\/$/, '');
   if (linkPath === currentPath || (currentPath.endsWith('index.html') && linkPath === '')) {

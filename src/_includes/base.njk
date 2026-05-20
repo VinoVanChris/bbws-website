@@ -124,23 +124,52 @@
       </button>
     </div>
   </nav>
-  <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
-    <a href="/index.html" class="{% if navPage == 'home' %}active{% endif %}">Home</a>
-    <a href="/about.html" class="{% if navPage == 'about' %}active{% endif %}">About</a>
-    <span class="mobile-nav-shop-label">Order Online</span>
-    <a href="/delivery.html" class="mobile-nav-sub{% if navPage == 'delivery' %} active{% endif %}">Delivery Info</a>
-    <a href="https://www.ubereats.com/ca/store/broadway-beer-wine-%26-spirits-2752-west-broadway/txYsHr2XVKO1dt6xFUk8pQ" target="_blank" rel="noopener" class="mobile-nav-sub">Uber Eats</a>
-    <a href="https://www.doordash.com/en-CA/convenience/store/broadway-beer-wine-&-spirits-vancouver-39133145/" target="_blank" rel="noopener" class="mobile-nav-sub">DoorDash</a>
-    <a href="/blog.html" class="{% if navPage == 'blog' %}active{% endif %}">Blog</a>
-    <span class="mobile-nav-shop-label">Guides</span>
-    <a href="/pairings.html" class="mobile-nav-sub{% if navPage == 'pairings' %} active{% endif %}">Restaurants &amp; Take-Out</a>
-    <a href="/blog/vancouver-beaches-alcohol-legal.html" class="mobile-nav-sub{% if navPage == 'guide' %} active{% endif %}">Beaches</a>
-    <a href="/party.html" class="mobile-nav-sub{% if navPage == 'party' %} active{% endif %}">Party Planner</a>
-    <a href="/bc-wine-beer-spirits-producers.html" class="mobile-nav-sub{% if navPage == 'bcwine' %} active{% endif %}">BC Producers</a>
-    <a href="/whisky-guide.html" class="mobile-nav-sub{% if navPage == 'whisky' %} active{% endif %}">Whisky Guide</a>
-    <a href="/corporate.html" class="{% if navPage == 'corporate' %}active{% endif %}">Corporate</a>
-    <a href="/contact.html" class="{% if navPage == 'contact' %}active{% endif %}">Contact</a>
-  </div>
+  <!-- ===== MOBILE DRAWER ===== -->
+  <div class="nav-drawer-overlay" id="nav-drawer-overlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="nav-drawer" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="nav-drawer-header">
+      <span class="nav-drawer-wordmark">Broadway Beer Wine &amp; Spirits</span>
+      <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Close menu">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="18" height="18" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+      </button>
+    </div>
+    <div class="nav-drawer-body">
+
+      <a href="/index.html" class="nav-drawer-link{% if navPage == 'home' %} active{% endif %}">Home</a>
+      <a href="/about.html" class="nav-drawer-link{% if navPage == 'about' %} active{% endif %}">About</a>
+      <a href="/blog.html" class="nav-drawer-link{% if navPage == 'blog' %} active{% endif %}">Blog</a>
+
+      <div class="nav-drawer-group">
+        <button type="button" class="nav-drawer-group-trigger{% if navPage == 'delivery' %} active-group{% endif %}" aria-expanded="false">
+          Order Online
+          <svg class="nav-drawer-group-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="nav-drawer-group-body">
+          <a href="/delivery.html" class="nav-drawer-sub-link{% if navPage == 'delivery' %} active{% endif %}">Delivery Info</a>
+          <a href="https://www.ubereats.com/ca/store/broadway-beer-wine-%26-spirits-2752-west-broadway/txYsHr2XVKO1dt6xFUk8pQ" target="_blank" rel="noopener" class="nav-drawer-sub-link">Uber Eats <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="9" height="9" aria-hidden="true"><path d="M2 8L8 2M4 2h4v4"/></svg></a>
+          <a href="https://www.doordash.com/en-CA/convenience/store/broadway-beer-wine-&-spirits-vancouver-39133145/" target="_blank" rel="noopener" class="nav-drawer-sub-link">DoorDash <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="9" height="9" aria-hidden="true"><path d="M2 8L8 2M4 2h4v4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="nav-drawer-group">
+        <button type="button" class="nav-drawer-group-trigger{% if navPage == 'pairings' or navPage == 'guide' or navPage == 'party' or navPage == 'bcwine' or navPage == 'whisky' %} active-group{% endif %}" aria-expanded="false">
+          Guides
+          <svg class="nav-drawer-group-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="nav-drawer-group-body">
+          <a href="/pairings.html" class="nav-drawer-sub-link{% if navPage == 'pairings' %} active{% endif %}">Restaurants &amp; Take-Out</a>
+          <a href="/blog/vancouver-beaches-alcohol-legal.html" class="nav-drawer-sub-link{% if navPage == 'guide' %} active{% endif %}">Beaches</a>
+          <a href="/party.html" class="nav-drawer-sub-link{% if navPage == 'party' %} active{% endif %}">Party Planner</a>
+          <a href="/bc-wine-beer-spirits-producers.html" class="nav-drawer-sub-link{% if navPage == 'bcwine' %} active{% endif %}">BC Producers</a>
+          <a href="/whisky-guide.html" class="nav-drawer-sub-link{% if navPage == 'whisky' %} active{% endif %}">Whisky Guide</a>
+        </div>
+      </div>
+
+      <a href="/corporate.html" class="nav-drawer-link{% if navPage == 'corporate' %} active{% endif %}">Corporate</a>
+      <a href="/contact.html" class="nav-drawer-link{% if navPage == 'contact' %} active{% endif %}">Contact</a>
+
+    </div>
+  </nav>
 
   <div id="main">{{ content | safe }}</div>
 
