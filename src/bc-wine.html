@@ -126,37 +126,88 @@ sitemapLastmod: 2026-05-19
   .region-panel.visible { display: block; }
   .region-panel-close { display: none; }
 }
-.bc-producers-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  margin-top: 56px;
+/* ── All-producers directory ──────────────────────────── */
+.producers-all {
+  margin-top: 64px;
   padding-top: 56px;
   border-top: 1px solid var(--border-gold);
 }
-@media (max-width: 700px) { .bc-producers-grid { grid-template-columns: 1fr; gap: 32px; } }
-.bc-producers-section h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); margin-bottom: 8px; }
-.bc-producers-section > p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
-.bc-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.bc-chip {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: var(--bg-alt);
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 100px;
-  padding: 5px 12px;
-  text-decoration: none;
-  transition: all var(--transition);
+.producers-all > .section-eyebrow { margin-bottom: 6px; }
+.producers-cat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 20px;
 }
-.bc-chip:hover { color: var(--text); border-color: var(--gold); background: var(--gold-bg); }
-.bc-chip-sub {
+.producers-cat-head svg { opacity: 0.8; flex-shrink: 0; }
+/* Winery grid — one column per region */
+.producers-wine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 32px 24px;
+  margin-bottom: 52px;
+}
+.producers-region-col h5 {
+  font-size: 0.60rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-gold);
+}
+/* Generic producer list */
+.producers-list { margin: 0; padding: 0; }
+.producers-entry {
+  display: block;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.producers-entry:last-child { border-bottom: none; }
+.producers-entry-name {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  transition: color var(--transition);
+}
+.producers-entry:hover .producers-entry-name { color: var(--gold); }
+.producers-entry-loc {
   display: block;
   font-size: 0.68rem;
-  font-weight: 400;
-  color: var(--text-light);
+  color: var(--text-muted);
   margin-top: 2px;
+  font-weight: 400;
+}
+/* Distilleries + Beer row */
+.producers-spirits-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border-gold);
+}
+.producers-beer-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+}
+@media (max-width: 860px) {
+  .producers-spirits-row { grid-template-columns: 1fr; gap: 40px; }
+  .producers-beer-cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .producers-wine-grid { grid-template-columns: 1fr 1fr; }
+  .producers-beer-cols { grid-template-columns: 1fr; }
 }
 </style>
 
@@ -247,48 +298,35 @@ sitemapLastmod: 2026-05-19
         </aside>
       </div>
 
-      <!-- BC Distilleries + Breweries -->
-      <div class="bc-producers-grid fade-in">
+      <!-- All BC Producers directory -->
+      <div class="producers-all fade-in">
+        <p class="section-eyebrow" style="margin-bottom:28px;">All BC Producers We Carry</p>
 
-        <div class="bc-producers-section">
-          <h3>BC Distilleries</h3>
-          <p>We carry spirits from some of BC's most interesting small distilleries — Vancouver Island, the North Shore, and the Okanagan.</p>
-          <div class="bc-chips">
-            <a href="https://ampersanddistilling.com" target="_blank" rel="noopener" class="bc-chip">Ampersand Distilling<span class="bc-chip-sub">Cowichan Valley, VI</span></a>
-            <a href="https://sonsofvancouver.ca" target="_blank" rel="noopener" class="bc-chip">Sons of Vancouver<span class="bc-chip-sub">North Vancouver</span></a>
-            <a href="https://shelterpointdistillery.com" target="_blank" rel="noopener" class="bc-chip">Shelter Point Distillery<span class="bc-chip-sub">Campbell River, VI</span></a>
-            <a href="https://macaloneys.com" target="_blank" rel="noopener" class="bc-chip">Macaloney's Island Distillery<span class="bc-chip-sub">Victoria, VI</span></a>
-            <a href="https://phillipsbeer.com" target="_blank" rel="noopener" class="bc-chip">Phillips Brewing &amp; Malting<span class="bc-chip-sub">Victoria, VI</span></a>
-          </div>
+        <!-- Wineries by region (JS-populated) -->
+        <div class="producers-cat-head">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M4.5 2h7L10 8a2.5 2.5 0 01-5 0L4.5 2z"/><line x1="8" y1="10.5" x2="8" y2="13.5"/><line x1="5.5" y1="13.5" x2="10.5" y2="13.5"/></svg>
+          Wineries
         </div>
+        <div class="producers-wine-grid" id="all-wineries-grid"></div>
 
-        <div class="bc-producers-section">
-          <h3>BC Craft Beer</h3>
-          <p>We carry over 30 BC craft breweries — from North Vancouver to the Okanagan, the Island to the Fraser Valley.</p>
-          <div class="bc-chips">
-            <a href="https://33acresbrew.com" target="_blank" rel="noopener" class="bc-chip">33 Acres<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://backcountrybrewing.com" target="_blank" rel="noopener" class="bc-chip">Backcountry Brewing<span class="bc-chip-sub">Squamish</span></a>
-            <a href="https://bridgebrewing.com" target="_blank" rel="noopener" class="bc-chip">Bridge Brewing<span class="bc-chip-sub">North Vancouver</span></a>
-            <a href="https://centralcitybrewing.com" target="_blank" rel="noopener" class="bc-chip">Central City Brewing<span class="bc-chip-sub">Surrey</span></a>
-            <a href="https://dageraad.com" target="_blank" rel="noopener" class="bc-chip">Dageraad Brewing<span class="bc-chip-sub">Burnaby</span></a>
-            <a href="https://driftwoodbeer.com" target="_blank" rel="noopener" class="bc-chip">Driftwood Brewery<span class="bc-chip-sub">Victoria, VI</span></a>
-            <a href="https://fourwindsbrewing.ca" target="_blank" rel="noopener" class="bc-chip">Four Winds Brewing<span class="bc-chip-sub">Delta</span></a>
-            <a href="https://fugglesandwarlock.com" target="_blank" rel="noopener" class="bc-chip">Fuggles &amp; Warlock<span class="bc-chip-sub">Richmond</span></a>
-            <a href="https://hoynebrewing.ca" target="_blank" rel="noopener" class="bc-chip">Hoyne Brewing<span class="bc-chip-sub">Victoria, VI</span></a>
-            <a href="https://longwoodbrewery.com" target="_blank" rel="noopener" class="bc-chip">Longwood Brewery<span class="bc-chip-sub">Nanaimo, VI</span></a>
-            <a href="https://mainstreetbrewing.ca" target="_blank" rel="noopener" class="bc-chip">Main Street Brewing<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://okspring.com" target="_blank" rel="noopener" class="bc-chip">Okanagan Spring Brewery<span class="bc-chip-sub">Vernon</span></a>
-            <a href="https://parallel49beer.com" target="_blank" rel="noopener" class="bc-chip">Parallel 49 Brewing<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://phillipsbeer.com" target="_blank" rel="noopener" class="bc-chip">Phillips Brewing<span class="bc-chip-sub">Victoria, VI</span></a>
-            <a href="https://powellbeer.com" target="_blank" rel="noopener" class="bc-chip">Powell Street Craft Brewery<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://redtruckbeer.com" target="_blank" rel="noopener" class="bc-chip">Red Truck Beer<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://stanleyparkbrewing.com" target="_blank" rel="noopener" class="bc-chip">Stanley Park Brewing<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://steamworks.com" target="_blank" rel="noopener" class="bc-chip">Steamworks Brewing<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://strangefellowsbrewing.com" target="_blank" rel="noopener" class="bc-chip">Strange Fellows Brewing<span class="bc-chip-sub">Vancouver</span></a>
-            <a href="https://twinsailsbrewing.com" target="_blank" rel="noopener" class="bc-chip">Twin Sails Brewing<span class="bc-chip-sub">Port Moody</span></a>
-            <a href="https://vancouverislandbrewing.com" target="_blank" rel="noopener" class="bc-chip">Vancouver Island Brewing<span class="bc-chip-sub">Victoria, VI</span></a>
-            <a href="https://whistlerbeer.com" target="_blank" rel="noopener" class="bc-chip">Whistler Brewing<span class="bc-chip-sub">Whistler</span></a>
-            <a href="https://yellowdogbrew.com" target="_blank" rel="noopener" class="bc-chip">Yellow Dog Brewing<span class="bc-chip-sub">Port Moody</span></a>
+        <!-- Distilleries + Craft Beer -->
+        <div class="producers-spirits-row">
+          <div>
+            <div class="producers-cat-head">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M6 2h4l1 4H5L6 2z"/><path d="M5 6c0 0-1 2-1 4a4 4 0 008 0c0-2-1-4-1-4"/><line x1="8" y1="14" x2="8" y2="15"/></svg>
+              Distilleries
+            </div>
+            <div class="producers-list" id="all-distilleries-list"></div>
+          </div>
+          <div>
+            <div class="producers-cat-head">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M5 2h6v3l2 3v5H3v-5l2-3V2z"/><line x1="3" y1="10" x2="13" y2="10"/></svg>
+              Craft Beer
+            </div>
+            <div class="producers-beer-cols">
+              <div class="producers-list" id="all-breweries-list-a"></div>
+              <div class="producers-list" id="all-breweries-list-b"></div>
+            </div>
           </div>
         </div>
 
@@ -517,6 +555,56 @@ sitemapLastmod: 2026-05-19
       map.flyTo(r.center, r.zoom, { duration: 0.8 });
       wineryMarkers.forEach(function(m) { m.addTo(map); });
     }
+
+    /* ── All-producers directory ────────────────────────────── */
+    function cityFromNote(note) {
+      const loc = note.split('. ')[0];
+      // Strip leading street address (starts with digit) and take city after last comma
+      if (/^\d/.test(loc)) {
+        const parts = loc.split(',');
+        return parts[parts.length - 1].trim();
+      }
+      return loc;
+    }
+    function makeEntry(name, url, city) {
+      const a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      a.className = 'producers-entry';
+      a.innerHTML = `<span class="producers-entry-name">${name}</span><span class="producers-entry-loc">${city}</span>`;
+      return a;
+    }
+
+    // Wineries grouped by region
+    const regionOrder = ['oliver','naramata','kelowna','similkameen','fraser','islands','island'];
+    const regionLabels = {
+      oliver:'Oliver / Osoyoos', naramata:'Naramata / Ok. Falls', kelowna:'Kelowna',
+      similkameen:'Similkameen', fraser:'Fraser Valley', islands:'Gulf Islands', island:'Vancouver Island',
+    };
+    const wineByRegion = {};
+    wineries.forEach(function(w) { (wineByRegion[w.region] = wineByRegion[w.region] || []).push(w); });
+    const wineGrid = document.getElementById('all-wineries-grid');
+    regionOrder.forEach(function(region) {
+      if (!wineByRegion[region]) return;
+      const col = document.createElement('div');
+      col.className = 'producers-region-col';
+      col.innerHTML = `<h5>${regionLabels[region]}</h5>`;
+      wineByRegion[region].forEach(function(w) { col.appendChild(makeEntry(w.name, w.url, '')); });
+      wineGrid.appendChild(col);
+    });
+    // Remove empty city spans from winery entries (region header provides context)
+    wineGrid.querySelectorAll('.producers-entry-loc').forEach(function(el) { el.remove(); });
+
+    // Distilleries
+    const distList = document.getElementById('all-distilleries-list');
+    distilleries.forEach(function(d) { distList.appendChild(makeEntry(d.name, d.url, cityFromNote(d.note))); });
+
+    // Breweries — split alphabetically across two columns
+    const half = Math.ceil(breweries.length / 2);
+    const bListA = document.getElementById('all-breweries-list-a');
+    const bListB = document.getElementById('all-breweries-list-b');
+    breweries.forEach(function(b, i) {
+      (i < half ? bListA : bListB).appendChild(makeEntry(b.name, b.url, cityFromNote(b.note)));
+    });
 
     closeBtn.addEventListener('click', closePanel);
 
