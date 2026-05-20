@@ -17,12 +17,6 @@ sitemapLastmod: 2026-05-19
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
 <style>
-.region-btn-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-}
 /* Map + panel wrapper */
 .map-region-wrap {
   position: relative;
@@ -37,94 +31,118 @@ sitemapLastmod: 2026-05-19
   position: relative;
   z-index: 0;
 }
-/* Sliding panel overlay */
+/* Persistent panel — always open */
 .region-panel {
   position: absolute;
   top: 0;
   right: 0;
-  width: 340px;
+  width: 320px;
   max-width: 90%;
   height: 100%;
   background: rgba(252,250,246,0.97);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-left: 1px solid var(--border-gold);
-  transform: translateX(100%);
-  transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 400;
   box-shadow: -6px 0 32px rgba(0,0,0,0.13);
 }
-.region-panel.visible {
-  transform: translateX(0);
+.region-panel-body { padding: 24px 22px 32px; }
+
+/* Region nav list (default panel state) */
+.region-nav-eyebrow {
+  font-size: 0.60rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 10px;
 }
-.region-panel-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 28px;
-  height: 28px;
-  border: none;
-  background: var(--bg-alt);
-  border-radius: 50%;
-  cursor: pointer;
+.region-nav-eyebrow + .region-nav-eyebrow { margin-top: 20px; }
+.region-nav-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid rgba(201,168,76,0.14);
+  background: none;
+  cursor: pointer;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+  transition: color var(--transition);
+  font-family: inherit;
+}
+.region-nav-btn:last-of-type { border-bottom: none; }
+.region-nav-btn:hover { color: var(--red); }
+.region-nav-btn svg { opacity: 0.3; flex-shrink: 0; transition: opacity var(--transition), transform var(--transition); }
+.region-nav-btn:hover svg { opacity: 0.8; transform: translateX(3px); }
+
+/* Region detail state */
+.region-panel-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
   color: var(--text-muted);
-  transition: background var(--transition), color var(--transition);
-  z-index: 10;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--border-gold);
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  transition: color var(--transition);
 }
-.region-panel-close:hover { background: var(--gold); color: #1a1208; }
-.region-panel-body {
-  padding: 28px 24px 32px;
-}
-.region-blurb { display: none; }
-.region-blurb.active { display: block; }
-.region-blurb h2 { font-size: clamp(1.2rem, 2.2vw, 1.55rem); margin-bottom: 14px; padding-right: 24px; }
-.region-blurb > p { font-size: 0.83rem; line-height: 1.75; color: var(--text-muted); }
+.region-panel-back:hover { color: var(--text); }
+.region-detail { display: none; }
+.region-detail.active { display: block; }
+.region-detail h2 { font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 12px; line-height: 1.25; }
+.region-detail > p { font-size: 0.82rem; line-height: 1.75; color: var(--text-muted); }
 .region-blurb-wineries {
-  margin-top: 22px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 .region-winery-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
+  gap: 5px;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text);
   background: #fff;
   border: 1px solid var(--border-gold);
   border-radius: 100px;
-  padding: 5px 12px;
+  padding: 4px 11px;
   text-decoration: none;
   transition: all var(--transition);
 }
 .region-winery-chip:hover { background: var(--gold); color: #1a1208; border-color: var(--gold); }
-/* Mobile: panel below map */
+
+/* Mobile: panel stacks below map */
 @media (max-width: 640px) {
-  .map-region-wrap { overflow: visible; }
-  #bc-wine-map { height: 380px; border-radius: var(--radius) var(--radius) 0 0; }
+  .map-region-wrap { overflow: visible; border-radius: var(--radius) var(--radius) 0 0; }
+  #bc-wine-map { height: 360px; }
   .region-panel {
     position: static;
     width: 100%;
     max-width: 100%;
     height: auto;
-    max-height: none;
-    transform: none;
     border-left: none;
     border-top: 1px solid var(--border-gold);
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: none;
-    display: none;
     backdrop-filter: none;
   }
-  .region-panel.visible { display: block; }
-  .region-panel-close { display: none; }
 }
 /* ── All-producers directory ──────────────────────────── */
 .producers-all {
@@ -224,76 +242,88 @@ sitemapLastmod: 2026-05-19
   <section class="section">
     <div class="container">
 
-      <!-- Region filter buttons -->
-      <div class="region-btn-wrap fade-in" role="group" aria-label="Select a wine region">
-        <button class="btn-choice active" data-region="all" type="button">All Regions</button>
-        <button class="btn-choice" data-region="oliver" type="button">Oliver / Osoyoos</button>
-        <button class="btn-choice" data-region="naramata" type="button">Naramata / Okanagan Falls</button>
-        <button class="btn-choice" data-region="kelowna" type="button">Kelowna</button>
-        <button class="btn-choice" data-region="similkameen" type="button">Similkameen</button>
-        <button class="btn-choice" data-region="fraser" type="button">Fraser Valley</button>
-        <button class="btn-choice" data-region="vancouver" type="button">Metro Vancouver</button>
-        <button class="btn-choice" data-region="islands" type="button">Gulf Islands</button>
-        <button class="btn-choice" data-region="island" type="button">Vancouver Island</button>
-      </div>
-
-      <!-- Map + sliding region panel -->
+      <!-- Map + persistent region panel -->
       <div class="map-region-wrap fade-in">
         <div id="bc-wine-map"></div>
 
         <aside class="region-panel" id="region-panel" aria-label="Region details">
-          <button class="region-panel-close" id="region-panel-close" aria-label="Close region panel" type="button">
-            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
-          </button>
           <div class="region-panel-body">
 
-            <div class="region-blurb" data-region="oliver">
-              <h2>Oliver / Osoyoos</h2>
-              <p>The south end of the Okanagan, where the landscape turns to semi-desert. Canada's only true desert sits just south of Osoyoos, and the growing conditions here are unlike anywhere else in the country. Long, hot days. Cool nights. Soils ranging from sandy loam on the Black Sage Bench to clay and gravel on the Golden Mile. This is where BC's most serious reds come from — Syrah, Cabernet Franc, Merlot-based blends that can age a decade or more.</p>
-              <div class="region-blurb-wineries" id="wineries-oliver"></div>
+            <!-- Nav list (default state) -->
+            <div id="region-nav">
+              <p class="region-nav-eyebrow">Wine Regions</p>
+              <button class="region-nav-btn" data-region="oliver" type="button">Oliver / Osoyoos <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="region-nav-btn" data-region="naramata" type="button">Naramata / Ok. Falls <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="region-nav-btn" data-region="kelowna" type="button">Kelowna <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="region-nav-btn" data-region="similkameen" type="button">Similkameen <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="region-nav-btn" data-region="fraser" type="button">Fraser Valley <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="region-nav-btn" data-region="islands" type="button">Gulf Islands <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="region-nav-btn" data-region="island" type="button">Vancouver Island <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <p class="region-nav-eyebrow" style="margin-top:22px;">Beer &amp; Spirits</p>
+              <button class="region-nav-btn" data-region="vancouver" type="button">Metro Vancouver <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
+              <button class="region-nav-btn" data-region="island-beer" type="button">Vancouver Island <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M3 1l4 4-4 4"/></svg></button>
             </div>
 
-            <div class="region-blurb" data-region="naramata">
-              <h2>Naramata / Okanagan Falls</h2>
-              <p>Naramata Bench runs north from Penticton along the east shore of Okanagan Lake, producing wines with more tension and freshness than the south — elegant reds, whites with real structure, and some of the better rosé in the province. Okanagan Falls, just south, sits at the head of Skaha Lake and has quietly become one of the most interesting clusters of small producers in BC.</p>
-              <div class="region-blurb-wineries" id="wineries-naramata"></div>
-            </div>
+            <!-- Detail view (hidden until region selected) -->
+            <div id="region-detail-wrap" hidden>
+              <button class="region-panel-back" id="region-panel-back" type="button">
+                <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" aria-hidden="true"><path d="M7 1L3 5l4 4"/></svg>
+                All Regions
+              </button>
 
-            <div class="region-blurb" data-region="kelowna">
-              <h2>Kelowna</h2>
-              <p>The commercial heart of BC wine country, but some of the oldest vineyards in the province are here. Okanagan Lake moderates temperatures in both directions, giving Kelowna the range to produce everything from sparkling to late-harvest. Organic farming is increasingly common. Tantalus and Sperling are the ones we keep coming back to.</p>
-              <div class="region-blurb-wineries" id="wineries-kelowna"></div>
-            </div>
+              <div class="region-detail" data-region="oliver">
+                <h2>Oliver / Osoyoos</h2>
+                <p>The south end of the Okanagan, where the landscape turns to semi-desert. Long, hot days. Cool nights. Soils ranging from sandy loam on the Black Sage Bench to clay and gravel on the Golden Mile. This is where BC's most serious reds come from — Syrah, Cabernet Franc, Merlot-based blends that can age a decade or more.</p>
+                <div class="region-blurb-wineries" id="wineries-oliver"></div>
+              </div>
 
-            <div class="region-blurb" data-region="similkameen">
-              <h2>Similkameen Valley</h2>
-              <p>BC's smallest wine region and one of its most interesting. The valley runs east-west through the Cascade Mountains west of the Okanagan, with extreme diurnal temperature swings and gravelly alluvial soils that stress the vines in the best possible way. Organic farming is widespread here. Clos du Soleil and Orofino are two compelling reasons to pay attention to Cawston.</p>
-              <div class="region-blurb-wineries" id="wineries-similkameen"></div>
-            </div>
+              <div class="region-detail" data-region="naramata">
+                <h2>Naramata / Okanagan Falls</h2>
+                <p>Naramata Bench runs north from Penticton along the east shore of Okanagan Lake, producing wines with more tension and freshness than the south — elegant reds, whites with real structure, and some of the better rosé in the province. Okanagan Falls has quietly become one of the most interesting clusters of small producers in BC.</p>
+                <div class="region-blurb-wineries" id="wineries-naramata"></div>
+              </div>
 
-            <div class="region-blurb" data-region="vancouver">
-              <h2>Metro Vancouver</h2>
-              <p>Vancouver doesn't grow wine grapes, but it's the heart of BC's craft beer scene. We carry breweries from across the city and surrounding municipalities — Strange Fellows, Four Winds, Dageraad, Powell Street, Parallel 49, and more. Sons of Vancouver on the North Shore is the city's standout craft distillery. The map shows all of their locations.</p>
-            </div>
+              <div class="region-detail" data-region="kelowna">
+                <h2>Kelowna</h2>
+                <p>The commercial heart of BC wine country, but some of the oldest vineyards in the province are here. Okanagan Lake moderates temperatures in both directions, giving Kelowna the range to produce everything from sparkling to late-harvest. Tantalus and Sperling are the ones we keep coming back to.</p>
+                <div class="region-blurb-wineries" id="wineries-kelowna"></div>
+              </div>
 
-            <div class="region-blurb" data-region="fraser">
-              <h2>Fraser Valley</h2>
-              <p>Less than two hours from Vancouver, the Fraser Valley is an emerging wine region with a cooler, wetter climate than the Okanagan. The focus is on hardy varietals and estate-grown fruit that reflects the valley's rich agricultural land. Whispering Horse, in Yarrow near Chilliwack, is making some of BC's more unusual whites from their Vedder Mountain vineyard.</p>
-              <div class="region-blurb-wineries" id="wineries-fraser"></div>
-            </div>
+              <div class="region-detail" data-region="similkameen">
+                <h2>Similkameen Valley</h2>
+                <p>BC's smallest wine region and one of its most interesting. The valley runs east-west through the Cascades with extreme diurnal temperature swings and gravelly alluvial soils. Organic farming is widespread. Clos du Soleil and Orofino are two compelling reasons to pay attention to Cawston.</p>
+                <div class="region-blurb-wineries" id="wineries-similkameen"></div>
+              </div>
 
-            <div class="region-blurb" data-region="islands">
-              <h2>Gulf Islands</h2>
-              <p>Cool, maritime, and producing small quantities from boutique estate producers. The growing conditions are the opposite of the Okanagan — less heat, more rainfall, shorter seasons. The wines lean toward aromatic whites, skin-contact styles, and natural winemaking. A Sunday in August, out of Salt Spring Island, is exactly the kind of producer this region attracts.</p>
-              <div class="region-blurb-wineries" id="wineries-islands"></div>
-            </div>
+              <div class="region-detail" data-region="fraser">
+                <h2>Fraser Valley</h2>
+                <p>Less than two hours from Vancouver, the Fraser Valley is an emerging wine region with a cooler, wetter climate than the Okanagan. Whispering Horse, in Yarrow near Chilliwack, is making some of BC's more unusual whites from their Vedder Mountain vineyard.</p>
+                <div class="region-blurb-wineries" id="wineries-fraser"></div>
+              </div>
 
-            <div class="region-blurb" data-region="island">
-              <h2>Vancouver Island</h2>
-              <p>The Cowichan Valley, just north of Victoria, is the most established sub-region. The climate is maritime, which means white wines and Pinot Noir are the natural strengths. Averill Creek makes some of the most serious wine coming off the island. Blue Grouse has been at it for decades. The island is also home to some of BC's best distilleries.</p>
-              <div class="region-blurb-wineries" id="wineries-island"></div>
-            </div>
+              <div class="region-detail" data-region="islands">
+                <h2>Gulf Islands</h2>
+                <p>Cool, maritime, and producing small quantities from boutique estate producers. The wines lean toward aromatic whites, skin-contact styles, and natural winemaking. A Sunday in August, out of Salt Spring Island, is exactly the kind of producer this region attracts.</p>
+                <div class="region-blurb-wineries" id="wineries-islands"></div>
+              </div>
 
+              <div class="region-detail" data-region="island">
+                <h2>Vancouver Island</h2>
+                <p>The Cowichan Valley is the most established sub-region. Maritime climate means white wines and Pinot Noir are the natural strengths. Averill Creek makes some of the most serious wine coming off the island. Blue Grouse has been at it for decades.</p>
+                <div class="region-blurb-wineries" id="wineries-island"></div>
+              </div>
+
+              <div class="region-detail" data-region="vancouver">
+                <h2>Metro Vancouver</h2>
+                <p>Vancouver doesn't grow grapes, but it's the heart of BC's craft beer scene. Strange Fellows, Four Winds, Dageraad, Powell Street, Parallel 49, and more. Sons of Vancouver on the North Shore is the city's standout craft distillery.</p>
+              </div>
+
+              <div class="region-detail" data-region="island-beer">
+                <h2>Vancouver Island</h2>
+                <p>Beyond wine, Vancouver Island has a thriving craft beer and spirits scene. Driftwood, Hoyne, Phillips, and Vancouver Island Brewing anchor the Victoria end. Longwood holds down Nanaimo. Shelter Point and Ampersand are two of BC's most serious distilleries.</p>
+              </div>
+
+            </div>
           </div>
         </aside>
       </div>
@@ -349,6 +379,7 @@ sitemapLastmod: 2026-05-19
     vancouver:   { center: [49.25, -123.05], zoom: 11 },
     islands:     { center: [48.83, -123.50], zoom: 10 },
     island:      { center: [48.72, -123.68], zoom: 10 },
+    'island-beer': { center: [48.52, -123.60], zoom: 9 },
   };
 
   const wineries = [
@@ -535,24 +566,29 @@ sitemapLastmod: 2026-05-19
       container.appendChild(chip);
     });
 
-    const panel = document.getElementById('region-panel');
-    const closeBtn = document.getElementById('region-panel-close');
+    const regionNav = document.getElementById('region-nav');
+    const detailWrap = document.getElementById('region-detail-wrap');
+    const backBtn = document.getElementById('region-panel-back');
 
-    function openPanel(region) {
-      document.querySelectorAll('.region-blurb').forEach(function(el) {
+    function showDetail(region) {
+      regionNav.hidden = true;
+      detailWrap.hidden = false;
+      document.querySelectorAll('.region-detail').forEach(function(el) {
         el.classList.toggle('active', el.dataset.region === region);
       });
-      panel.classList.add('visible');
+      const r = regions[region] || regions.all;
+      map.flyTo(r.center, r.zoom, { duration: 0.8 });
+      const wineRegion = (region === 'island-beer' || region === 'vancouver') ? null : region;
+      wineryMarkers.forEach(function(m) {
+        if (!wineRegion || m._wineryRegion === wineRegion) { m.addTo(map); } else { m.remove(); }
+      });
     }
 
-    function closePanel() {
-      panel.classList.remove('visible');
-      document.querySelectorAll('.region-blurb').forEach(function(el) { el.classList.remove('active'); });
-      document.querySelectorAll('.btn-choice[data-region]').forEach(function(b) {
-        b.classList.toggle('active', b.dataset.region === 'all');
-      });
-      const r = regions.all;
-      map.flyTo(r.center, r.zoom, { duration: 0.8 });
+    function showNav() {
+      regionNav.hidden = false;
+      detailWrap.hidden = true;
+      document.querySelectorAll('.region-detail').forEach(function(el) { el.classList.remove('active'); });
+      map.flyTo(regions.all.center, regions.all.zoom, { duration: 0.8 });
       wineryMarkers.forEach(function(m) { m.addTo(map); });
     }
 
@@ -606,25 +642,9 @@ sitemapLastmod: 2026-05-19
       (i < half ? bListA : bListB).appendChild(makeEntry(b.name, b.url, cityFromNote(b.note)));
     });
 
-    closeBtn.addEventListener('click', closePanel);
-
-    /* Region switching */
-    document.querySelectorAll('.btn-choice[data-region]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        const region = btn.dataset.region;
-        document.querySelectorAll('.btn-choice[data-region]').forEach(function(b) { b.classList.toggle('active', b === btn); });
-        const r = regions[region];
-        if (r) map.flyTo(r.center, r.zoom, { duration: 0.8 });
-        wineryMarkers.forEach(function(m) {
-          if (region === 'all' || m._wineryRegion === region) { m.addTo(map); } else { m.remove(); }
-        });
-        if (region === 'all') {
-          panel.classList.remove('visible');
-          document.querySelectorAll('.region-blurb').forEach(function(el) { el.classList.remove('active'); });
-        } else {
-          openPanel(region);
-        }
-      });
+    backBtn.addEventListener('click', showNav);
+    document.querySelectorAll('.region-nav-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { showDetail(btn.dataset.region); });
     });
   });
 })();
