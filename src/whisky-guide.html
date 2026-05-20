@@ -873,109 +873,140 @@ document.addEventListener('DOMContentLoaded', function() {
     canada:      { center:[52.50, -100.00], zoom:4  },
   };
 
-  // ── Distillery data (name, coords, story, bottles) ───────────
+  // ── Distillery data (name, coords, story, bottles, img) ─────────
   var DISTILLERIES = [
     // Islay
     { name:'Ardbeg',           region:'islay',       lat:55.640, lng:-6.356,  founded:1815,
+      img:'/images/distilleries/ardbeg.webp',
       desc:'Remote on Islay\'s southern shore, Ardbeg produces some of the most intensely peated whisky in Scotland. Closed for years before a revival in 1997, it is now one of the world\'s most celebrated and awarded distilleries.',
       bottles:['ardbeg-10'] },
     { name:'Laphroaig',        region:'islay',       lat:55.630, lng:-6.369,  founded:1815,
+      img:'/images/distilleries/laphroaig.webp',
       desc:'Founded the same year as Ardbeg, Laphroaig is defined by its medicinal, seaweed-heavy peat smoke. Awarded a Royal Warrant in 1994, it remains the most divisive and arguably the most distinctive malt made anywhere in Scotland.',
       bottles:['laphroaig-10'] },
     { name:'Lagavulin',        region:'islay',       lat:55.629, lng:-6.348,  founded:1816,
+      img:'/images/distilleries/lagavulin.webp',
       desc:'Sitting in a sheltered bay on Islay\'s south coast, Lagavulin is the benchmark for classic Islay malt. The 16 Year Old is one of the most complex and satisfying whiskies produced anywhere in Scotland.',
       bottles:['lagavulin-16'] },
     { name:'Bowmore',          region:'islay',       lat:55.756, lng:-6.290,  founded:1779,
+      img:'/images/distilleries/bowmore.webp',
       desc:'The oldest distillery on Islay, founded in 1779 and sitting at the heart of the island. Bowmore bridges the gap between fruity and peated, producing a balanced, approachable malt that rewards patient exploration.',
       bottles:['bowmore-12'] },
     { name:'Bruichladdich',    region:'islay',       lat:55.770, lng:-6.370,  founded:1881,
+      img:'/images/distilleries/bruichladdich.webp',
       desc:'Reopened in 2001 after a decade of silence, Bruichladdich took a radically different path from its Islay neighbours. Unpeated, terroir-focused, and independently minded, it is one of Scotland\'s most progressive distilleries.',
       bottles:['bruichladdich-cl'] },
     // Speyside
     { name:'Glenfiddich & Balvenie', region:'speyside', lat:57.454, lng:-3.133, founded:1887,
+      img:'/images/distilleries/glenfiddich.webp',
       desc:'Two of Scotland\'s most admired distilleries share a Dufftown hillside under the William Grant family. Glenfiddich is the world\'s best-selling single malt. Balvenie, built five years later, is one of Scotland\'s most craft-focused operations.',
       bottles:['glenfiddich-12','balvenie-12'] },
     { name:'The Macallan',     region:'speyside',    lat:57.470, lng:-3.195,  founded:1824,
+      img:'/images/distilleries/macallan.webp',
       desc:'One of the most recognised names in Scotch whisky, The Macallan built its reputation on sherry oak maturation. Its Easter Elchies House estate and striking new distillery complex have made it a landmark of the Speyside region.',
       bottles:['macallan-12-sherry'] },
     { name:'Aberlour',         region:'speyside',    lat:57.468, lng:-3.214,  founded:1879,
+      img:'/images/distilleries/aberlour.webp',
       desc:'A Speyside gem that often gets overlooked in favour of more famous neighbours. Double-cask maturation in bourbon and sherry oak produces a whisky of real richness and depth at a price that remains consistently honest.',
       bottles:['aberlour-12'] },
     { name:'The Glenlivet',    region:'speyside',    lat:57.282, lng:-3.375,  founded:1824,
+      img:'/images/distilleries/glenlivet.webp',
       desc:'The first distillery to take out a legal licence in the Scottish Highlands under the 1823 Excise Act. The Glenlivet set the template for light, floral Speyside whisky and remains one of the best-selling single malts in the world.',
       bottles:['glenlivet-12'] },
     // Highlands
     { name:'Glenmorangie',     region:'highlands',   lat:57.883, lng:-4.068,  founded:1843,
+      img:'/images/distilleries/glenmorangie.webp',
       desc:'Glenmorangie uses the tallest pot stills in Scotland, rising over five metres at its Tain distillery on the Dornoch Firth. The exceptional height produces a light, elegant spirit that takes beautifully to cask finishing.',
       bottles:['glenmorangie-10'] },
     { name:'Dalmore',          region:'highlands',   lat:57.640, lng:-4.162,  founded:1839,
+      img:'/images/distilleries/dalmore.webp',
       desc:'Set on the shores of the Cromarty Firth, Dalmore is known for rich, sherried Highland malts and elaborate vintage expressions. The 12 Year Old remains one of the best value whiskies on the shelf at its price point.',
       bottles:['dalmore-12'] },
     { name:'Oban',             region:'highlands',   lat:56.415, lng:-5.471,  founded:1794,
+      img:'/images/distilleries/oban.webp',
       desc:'Founded in 1794, Oban is one of Scotland\'s oldest and smallest distilleries, wedged between the hillside and the harbour in the town of the same name. It produces a coastal Highland malt of real character and distinction.',
       bottles:['oban-14'] },
     // Islands
     { name:'Talisker',         region:'islands',     lat:57.302, lng:-6.358,  founded:1830,
+      img:'/images/distilleries/talisker.webp',
       desc:'The only distillery on the Isle of Skye, Talisker is defined by its maritime intensity. Peat smoke, black pepper, and open ocean define a whisky that Robert Louis Stevenson once called one of Scotland\'s finest.',
       bottles:['talisker-10'] },
     { name:'Highland Park',    region:'islands',     lat:58.987, lng:-2.970,  founded:1798,
+      img:'/images/distilleries/highland-park.webp',
       desc:'The most northerly Scotch whisky distillery, sitting on Orkney\'s windswept mainland. Highland Park still uses its own floor maltings with local Orkney peat, producing a complex, heathery malt with a gentle smoky character.',
       bottles:['highland-park-12'] },
     // Campbeltown
     { name:'Springbank',       region:'campbeltown', lat:55.433, lng:-5.619,  founded:1828,
+      img:'/images/distilleries/springbank.webp',
       desc:'One of the most talked-about independent distilleries in the world, and the most individual in Campbeltown. Springbank does everything in-house, including its own malting, and produces three distinct styles under three different labels.',
       bottles:['springbank-10'] },
     // Lowlands
     { name:'Auchentoshan',     region:'lowlands',    lat:55.934, lng:-4.391,  founded:1823,
+      img:'/images/distilleries/auchentoshan.webp',
       desc:'Sitting between Glasgow and the Firth of Clyde, Auchentoshan is triple-distilled in the Lowland tradition, producing one of Scotland\'s lightest and most delicate single malts. An ideal introduction to Scotch whisky.',
       bottles:['auchentoshan-3w'] },
     // Japan
     { name:'Suntory Yamazaki', region:'japan',       lat:34.881, lng:135.671, founded:1923,
+      img:'/images/distilleries/yamazaki.webp',
       desc:'Japan\'s first malt whisky distillery, built by Shinjiro Torii in the forested foothills outside Kyoto. Yamazaki pioneered Japanese whisky and remains its flagship, producing some of the most sought-after bottles in the world.',
       bottles:['suntory-toki','hibiki-harmony','yamazaki-12'] },
     { name:'Nikka Yoichi',     region:'japan',       lat:43.203, lng:140.745, founded:1934,
+      img:'/images/distilleries/nikka-yoichi.webp',
       desc:'Founded by Masataka Taketsuru, who studied distillation in Scotland before bringing those traditions to Hokkaido. Yoichi\'s coal-fired stills and northern climate produce a rich, peated Japanese whisky unlike anything else made in Japan.',
       bottles:['nikka-barrel'] },
     // Ireland
     { name:'Midleton Distillery', region:'ireland',  lat:51.914, lng:-8.173,  founded:1825,
+      img:'/images/distilleries/midleton.webp',
       desc:'The most productive distillery in Ireland and home to its most celebrated names, including Jameson, Redbreast, and Green Spot. The modern Midleton complex, opened in 1975, is a masterclass in Irish whiskey production at scale.',
       bottles:['jameson','redbreast-12','green-spot'] },
     { name:'Bushmills',        region:'ireland',     lat:55.202, lng:-6.520,  founded:1608,
+      img:'/images/distilleries/bushmills.webp',
       desc:'The oldest licensed whiskey distillery in the world, operating in County Antrim since 1608. Bushmills\' triple-distilled, unpeated style produces light, smooth Irish single malts with genuine character and real history behind every bottle.',
       bottles:[] },
     // America
     { name:'Buffalo Trace',    region:'america',     lat:38.193, lng:-84.893, founded:1787,
+      img:'/images/distilleries/buffalo-trace.webp',
       desc:'One of the oldest continuously operating distilleries in America, on the banks of the Kentucky River in Frankfort. Home to some of bourbon\'s most coveted expressions, including Eagle Rare, Blanton\'s, and the legendary Pappy Van Winkle.',
       bottles:['buffalo-trace'] },
     { name:'Woodford Reserve', region:'america',     lat:38.022, lng:-84.760, founded:1812,
+      img:'/images/distilleries/woodford-reserve.webp',
       desc:'Set in a National Historic Landmark in Versailles, Kentucky, Woodford Reserve is one of only a handful of bourbon producers using pot still distillation alongside column stills. A premium, flavour-forward Kentucky expression.',
       bottles:['woodford-reserve'] },
     { name:"Angel's Envy",     region:'america',     lat:38.252, lng:-85.754, founded:2011,
+      img:'/images/distilleries/angels-envy.webp',
       desc:'Founded in Louisville by master distiller Lincoln Henderson, Angel\'s Envy is known for finishing its bourbon in ruby port wine barrels. A newer name in Kentucky but one that has earned serious recognition from enthusiasts worldwide.',
       bottles:['angels-envy'] },
     { name:'Four Roses',       region:'america',     lat:37.876, lng:-85.396, founded:1888,
+      img:'/images/distilleries/four-roses.webp',
       desc:'One of the few Kentucky distilleries using two different mash bills and five yeast strains, producing ten distinct bourbon recipes. A distillery that rewards exploration and the source of many highly regarded rye expressions.',
       bottles:['bulleit-rye'] },
     // Canada
     { name:'Forty Creek',         region:'canada', lat:43.199, lng:-79.576, founded:1992,
+      img:'/images/distilleries/forty-creek.webp',
       desc:'Founded by former winemaker John Hall in Grimsby, Ontario, Forty Creek helped reshape the reputation of Canadian whisky. Distilled in small batches from separate grain recipes, it consistently exceeds expectations at its price point.',
       bottles:['forty-creek'] },
     { name:'Hiram Walker & Sons', region:'canada', lat:42.317, lng:-83.034, founded:1858,
+      img:'/images/distilleries/hiram-walker.webp',
       desc:'One of the largest distilleries in North America, on the shore of the Detroit River in Windsor, Ontario. Home to Canadian Club, Lot 40, J.P. Wiser\'s, and Pike Creek, it has been a cornerstone of Canadian whisky for more than 160 years.',
       bottles:['lot-40','canadian-club-12','wisers-deluxe','pike-creek-10'] },
     { name:'Crown Royal Distillery', region:'canada', lat:51.575, lng:-96.990, founded:1939,
+      img:'/images/distilleries/crown-royal.webp',
       desc:'Built in Gimli, Manitoba on the western shore of Lake Winnipeg, Crown Royal was established by Seagram in 1939 to honour the royal visit of King George VI. It is now one of the best-selling Canadian whiskies in the world.',
       bottles:['crown-royal','crown-royal-rye'] },
     { name:'Alberta Distillers',  region:'canada', lat:51.048, lng:-114.061, founded:1946,
+      img:'/images/distilleries/alberta-distillers.webp',
       desc:'Alberta Distillers in Calgary produces some of the purest expressions of rye whisky in Canada, using 100% rye mash. Alberta Premium and its Dark Horse expression have earned genuine international recognition from whisky critics.',
       bottles:['alberta-dark-horse'] },
     { name:'Highwood Distillers', region:'canada', lat:50.583, lng:-113.873, founded:1974,
+      img:'/images/distilleries/highwood.webp',
       desc:'Located in High River, Alberta, Highwood is one of Canada\'s most prolific craft-oriented producers. Home to the Bearface Triple Oak programme, it has attracted serious attention from whisky drinkers looking beyond the mainstream.',
       bottles:['bearface-triple-oak'] },
     { name:'Shelter Point Distillery', region:'canada', lat:50.019, lng:-125.247, founded:2011,
+      img:'/images/distilleries/shelter-point.webp',
       desc:'Set on a 380-acre working farm on Vancouver Island, Shelter Point is BC\'s pioneering craft single malt distillery. Using estate-grown barley and Pacific coastal air, it produces whisky that stands alongside anything Scotland makes at a comparable age.',
       bottles:['shelter-point-sm'] },
     { name:'Okanagan Spirits',    region:'canada', lat:50.267, lng:-119.272, founded:2004,
+      img:'/images/distilleries/okanagan-spirits.webp',
       desc:'BC\'s original craft distillery, founded in Vernon in 2004 and now operating across the Okanagan Valley. Okanagan Spirits has built its reputation on the Laird of Fintry whisky, aged in local wine casks for extraordinary depth and complexity.',
       bottles:['okanagan-laird'] },
   ];
@@ -1017,13 +1048,23 @@ document.addEventListener('DOMContentLoaded', function() {
         '</div>'
       : '';
 
+    var headerHtml = d.img
+      ? '<img src="' + d.img + '" alt="' + d.name + '" style="width:100%;height:128px;object-fit:cover;display:block;" loading="lazy" />' +
+        '<div style="background:linear-gradient(135deg,' + rgba(col,0.07) + ',' + rgba(col,0.17) + ');padding:10px 14px 8px;">' +
+          '<p style="font-size:0.58rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:' + col + ';margin:0 0 3px;">' +
+            (r ? r.label : d.region) + (d.founded ? ' &middot; Est. ' + d.founded : '') +
+          '</p>' +
+          '<strong style="font-size:0.94rem;line-height:1.2;display:block;color:#1a120a;">' + d.name + '</strong>' +
+        '</div>'
+      : '<div style="background:linear-gradient(135deg,' + rgba(col,0.1) + ',' + rgba(col,0.26) + ');padding:14px 14px 11px;">' +
+          '<p style="font-size:0.58rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:' + col + ';margin:0 0 4px;">' +
+            (r ? r.label : d.region) + (d.founded ? ' &middot; Est. ' + d.founded : '') +
+          '</p>' +
+          '<strong style="font-size:0.94rem;line-height:1.2;display:block;color:#1a120a;">' + d.name + '</strong>' +
+        '</div>';
+
     return '<div style="font-family:inherit;">' +
-      '<div style="background:linear-gradient(135deg,' + rgba(col,0.1) + ',' + rgba(col,0.26) + ');padding:14px 14px 11px;">' +
-        '<p style="font-size:0.58rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:' + col + ';margin:0 0 4px;">' +
-          (r ? r.label : d.region) + (d.founded ? ' &middot; Est. ' + d.founded : '') +
-        '</p>' +
-        '<strong style="font-size:0.94rem;line-height:1.2;display:block;color:#1a120a;">' + d.name + '</strong>' +
-      '</div>' +
+      headerHtml +
       '<div style="padding:10px 14px 10px;">' +
         '<p style="font-size:0.74rem;line-height:1.6;color:#666;margin:0;">' + shortDesc + '</p>' +
       '</div>' +
