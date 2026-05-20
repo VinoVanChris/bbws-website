@@ -103,16 +103,16 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   }
 
   const beaches = [
-    { name: 'Kitsilano Beach',    lat: 49.2738, lng: -123.1532, note: 'Cans & soft flasks only. No glass on the sand.' },
-    { name: 'English Bay Beach',  lat: 49.2843, lng: -123.1444, note: 'Cans & soft flasks only. No glass on the sand.' },
-    { name: 'Sunset Beach',       lat: 49.2771, lng: -123.1391, note: 'Cans & soft flasks only. No glass on the sand.' },
-    { name: 'Second Beach',       lat: 49.2963, lng: -123.1447, note: 'Stanley Park. Cans & soft flasks only.' },
-    { name: 'Third Beach',        lat: 49.3027, lng: -123.1516, note: 'Stanley Park. Cans & soft flasks only.' },
-    { name: 'Jericho Beach',      lat: 49.2744, lng: -123.1972, note: 'Cans & soft flasks only. No glass on the sand.' },
-    { name: 'Locarno Beach',      lat: 49.2753, lng: -123.2094, note: 'Cans & soft flasks only. No glass on the sand.' },
-    { name: 'Spanish Banks',      lat: 49.2747, lng: -123.2214, note: 'Cans & soft flasks only. No glass on the sand.' },
-    { name: 'Trout Lake Park',    lat: 49.2490, lng: -123.0707, note: 'Park. No sand rule. Drink responsibly.' },
-    { name: 'Hadden Park',        lat: 49.2739, lng: -123.1454, note: 'Park. No sand rule. Drink responsibly.' },
+    { name: 'Kitsilano Beach',   lat: 49.2738, lng: -123.1532, img: '../images/beaches/kitsilano.webp',    note: 'No glass on the sand. Cans or soft flasks. 4 min from the shop.' },
+    { name: 'English Bay Beach', lat: 49.2843, lng: -123.1444, img: '../images/beaches/english-bay.webp',  note: 'No glass on the sand. Cans or soft flasks. West End sunset views.' },
+    { name: 'Sunset Beach',      lat: 49.2771, lng: -123.1391, img: '../images/beaches/sunset-beach.webp', note: 'No glass on the sand. Cans or soft flasks. False Creek waterfront.' },
+    { name: 'Second Beach',      lat: 49.2963, lng: -123.1447, img: '../images/beaches/second-beach.webp', note: 'Stanley Park. Cans or soft flasks. Outdoor pool next door.' },
+    { name: 'Third Beach',       lat: 49.3027, lng: -123.1516, img: '../images/beaches/third-beach.webp',  note: 'Stanley Park. Quieter than Second. No glass on the sand.' },
+    { name: 'Jericho Beach',     lat: 49.2744, lng: -123.1972, img: '../images/beaches/jericho.webp',      note: 'No glass on the sand. Cans or soft flasks. Mountain backdrop.' },
+    { name: 'Locarno Beach',     lat: 49.2753, lng: -123.2094, img: '../images/beaches/locarno.webp',      note: 'No glass on the sand. Quieter stretch west of Jericho.' },
+    { name: 'Spanish Banks',     lat: 49.2747, lng: -123.2214, img: '../images/beaches/spanish-banks.webp',note: 'No glass on the sand. Wide tidal flats. Best at low tide.' },
+    { name: 'Trout Lake Park',   lat: 49.2490, lng: -123.0707, img: '../images/beaches/trout-lake.webp',   note: 'East Van park. No sand rule applies. Freshwater lake swimming.' },
+    { name: 'Hadden Park',       lat: 49.2739, lng: -123.1454, img: '../images/beaches/hadden-park.webp',  note: 'Vanier Park. Waterfront lawn. Kitsilano-adjacent.' },
   ];
 
   const store = { name: 'Broadway Beer Wine & Spirits', lat: 49.2639, lng: -123.1674, note: '2752 W Broadway · Open daily 10am–11pm' };
@@ -132,9 +132,12 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
     }).addTo(map);
 
     beaches.forEach(function(b) {
+      const imgHtml = b.img
+        ? `<img src="${b.img}" alt="${b.name}" style="width:100%;height:100px;object-fit:cover;border-radius:4px;display:block;margin-bottom:8px;" loading="lazy" />`
+        : '';
       L.marker([b.lat, b.lng], { icon: makeIcon(false) })
         .addTo(map)
-        .bindPopup(`<strong style="font-size:0.9rem;">${b.name}</strong><br><span style="font-size:0.8rem;color:#555;">${b.note}</span>`);
+        .bindPopup(imgHtml + `<strong style="font-size:0.88rem;color:#2d6a2d;">${b.name}</strong><br><span style="font-size:0.76rem;color:#555;line-height:1.5;display:block;margin-top:4px;">${b.note}</span>`, { maxWidth: 220 });
     });
 
     L.marker([store.lat, store.lng], { icon: makeIcon(true) })
