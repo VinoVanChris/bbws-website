@@ -20,6 +20,71 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+<style>
+.beach-map-wrap {
+  position: relative;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+#beach-map {
+  flex: 1;
+  height: 480px;
+  border-radius: 0;
+  border: none;
+}
+.beach-panel {
+  width: 256px;
+  flex-shrink: 0;
+  background: #fff;
+  overflow-y: auto;
+  border-left: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+.beach-panel-header {
+  flex-shrink: 0;
+  padding: 14px 16px 11px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #888;
+}
+.beach-chip {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px 16px;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background: none;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.beach-chip:hover { background: rgba(45,106,45,0.05); }
+.beach-chip.active { background: rgba(45,106,45,0.10); }
+.beach-chip-name {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #2d6a2d;
+  display: block;
+}
+.beach-chip-desc {
+  font-size: 0.71rem;
+  color: #888;
+  margin-top: 2px;
+  display: block;
+  line-height: 1.4;
+}
+@media (max-width: 700px) {
+  .beach-map-wrap { flex-direction: column; }
+  #beach-map { height: 320px; }
+  .beach-panel { width: 100%; border-left: none; border-top: 1px solid rgba(0,0,0,0.08); max-height: 240px; }
+}
+</style>
 
 <main class="page-content">
     <section class="section" style="padding-top: 40px;">
@@ -49,7 +114,13 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
 
         <!-- ── Interactive Map ── -->
         <div class="fade-in" style="margin:32px 0 48px;">
-          <div id="beach-map" style="width:100%;height:480px;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);position:relative;z-index:0;"></div>
+          <div class="beach-map-wrap" style="position:relative;z-index:0;">
+            <div id="beach-map"></div>
+            <aside class="beach-panel">
+              <div class="beach-panel-header">Approved Beaches &amp; Parks</div>
+              <div id="beach-list"></div>
+            </aside>
+          </div>
           <p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px;">Approved locations per the Vancouver Park Board. No glass on the sand. Cans or plastic cups only. Keep it reasonable.</p>
         </div>
 
@@ -103,16 +174,16 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   }
 
   const beaches = [
-    { name: 'Kitsilano Beach',   lat: 49.2738, lng: -123.1532, img: '../images/beaches/kitsilano.webp',    note: 'No glass on the sand. Cans or soft flasks. 4 min from the shop.' },
-    { name: 'English Bay Beach', lat: 49.2843, lng: -123.1444, img: '../images/beaches/english-bay.webp',  note: 'No glass on the sand. Cans or soft flasks. West End sunset views.' },
-    { name: 'Sunset Beach',      lat: 49.2771, lng: -123.1391, img: '../images/beaches/sunset-beach.webp', note: 'No glass on the sand. Cans or soft flasks. False Creek waterfront.' },
-    { name: 'Second Beach',      lat: 49.2963, lng: -123.1447, img: '../images/beaches/second-beach.webp', note: 'Stanley Park. Cans or soft flasks. Outdoor pool next door.' },
-    { name: 'Third Beach',       lat: 49.3027, lng: -123.1516, img: '../images/beaches/third-beach.webp',  note: 'Stanley Park. Quieter than Second. No glass on the sand.' },
-    { name: 'Jericho Beach',     lat: 49.2744, lng: -123.1972, img: '../images/beaches/jericho.webp',      note: 'No glass on the sand. Cans or soft flasks. Mountain backdrop.' },
-    { name: 'Locarno Beach',     lat: 49.2753, lng: -123.2094, img: '../images/beaches/locarno.webp',      note: 'No glass on the sand. Quieter stretch west of Jericho.' },
-    { name: 'Spanish Banks',     lat: 49.2747, lng: -123.2214, img: '../images/beaches/spanish-banks.webp',note: 'No glass on the sand. Wide tidal flats. Best at low tide.' },
-    { name: 'Trout Lake Park',   lat: 49.2490, lng: -123.0707, img: '../images/beaches/trout-lake.webp',   note: 'East Van park. No sand rule applies. Freshwater lake swimming.' },
-    { name: 'Hadden Park',       lat: 49.2739, lng: -123.1454, img: '../images/beaches/hadden-park.webp',  note: 'Vanier Park. Waterfront lawn. Kitsilano-adjacent.' },
+    { name: 'Kitsilano Beach',   desc: '4 min from the shop',           lat: 49.2738, lng: -123.1532, img: '../images/beaches/kitsilano.webp',    note: 'No glass on the sand. Cans or soft flasks. 4 min from the shop.' },
+    { name: 'English Bay Beach', desc: 'West End sunset views',          lat: 49.2843, lng: -123.1444, img: '../images/beaches/english-bay.webp',  note: 'No glass on the sand. Cans or soft flasks. West End sunset views.' },
+    { name: 'Sunset Beach',      desc: 'False Creek waterfront',         lat: 49.2771, lng: -123.1391, img: '../images/beaches/sunset-beach.webp', note: 'No glass on the sand. Cans or soft flasks. False Creek waterfront.' },
+    { name: 'Second Beach',      desc: 'Stanley Park, outdoor pool',     lat: 49.2963, lng: -123.1447, img: '../images/beaches/second-beach.webp', note: 'Stanley Park. Cans or soft flasks. Outdoor pool next door.' },
+    { name: 'Third Beach',       desc: 'Stanley Park, quieter spot',     lat: 49.3027, lng: -123.1516, img: '../images/beaches/third-beach.webp',  note: 'Stanley Park. Quieter than Second. No glass on the sand.' },
+    { name: 'Jericho Beach',     desc: 'Mountain backdrop',              lat: 49.2744, lng: -123.1972, img: '../images/beaches/jericho.webp',      note: 'No glass on the sand. Cans or soft flasks. Mountain backdrop.' },
+    { name: 'Locarno Beach',     desc: 'Quiet stretch west of Jericho',  lat: 49.2753, lng: -123.2094, img: '../images/beaches/locarno.webp',      note: 'No glass on the sand. Quieter stretch west of Jericho.' },
+    { name: 'Spanish Banks',     desc: 'Wide tidal flats, best at low tide', lat: 49.2747, lng: -123.2214, img: '../images/beaches/spanish-banks.webp', note: 'No glass on the sand. Wide tidal flats. Best at low tide.' },
+    { name: 'Trout Lake Park',   desc: 'East Van, freshwater swimming',  lat: 49.2490, lng: -123.0707, img: '../images/beaches/trout-lake.webp',   note: 'East Van park. No sand rule applies. Freshwater lake swimming.' },
+    { name: 'Hadden Park',       desc: 'Vanier Park, waterfront lawn',   lat: 49.2739, lng: -123.1454, img: '../images/beaches/hadden-park.webp',  note: 'Vanier Park. Waterfront lawn. Kitsilano-adjacent.' },
   ];
 
   const store = { name: 'Broadway Beer Wine & Spirits', lat: 49.2639, lng: -123.1674, note: '2752 W Broadway · Open daily 10am–11pm' };
@@ -131,19 +202,40 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
       maxZoom: 19,
     }).addTo(map);
 
+    const markerByName = {};
+
     beaches.forEach(function(b) {
       const imgHtml = b.img
-        ? `<img src="${b.img}" alt="${b.name}" style="width:100%;height:100px;object-fit:cover;border-radius:4px;display:block;margin-bottom:8px;" loading="lazy" />`
+        ? `<img src="${b.img}" alt="${b.name}" style="width:100%;height:110px;object-fit:cover;border-radius:4px;display:block;margin-bottom:8px;" loading="lazy" />`
         : '';
-      L.marker([b.lat, b.lng], { icon: makeIcon(false) })
+      const marker = L.marker([b.lat, b.lng], { icon: makeIcon(false) })
         .addTo(map)
         .bindPopup(imgHtml + `<strong style="font-size:0.88rem;color:#2d6a2d;">${b.name}</strong><br><span style="font-size:0.76rem;color:#555;line-height:1.5;display:block;margin-top:4px;">${b.note}</span>`, { maxWidth: 220 });
+      markerByName[b.name] = marker;
     });
 
     L.marker([store.lat, store.lng], { icon: makeIcon(true) })
       .addTo(map)
       .bindPopup(`<strong style="font-size:0.9rem;color:#c9a84c;">${store.name}</strong><br><span style="font-size:0.8rem;color:#555;">${store.note}</span>`)
       .openPopup();
+
+    // ── Beach list panel ──────────────────────────────────────────────
+    const listEl = document.getElementById('beach-list');
+    let activeChip = null;
+
+    beaches.forEach(function(b) {
+      const btn = document.createElement('button');
+      btn.className = 'beach-chip';
+      btn.innerHTML = `<span class="beach-chip-name">${b.name}</span><span class="beach-chip-desc">${b.desc}</span>`;
+      btn.addEventListener('click', function() {
+        if (activeChip) activeChip.classList.remove('active');
+        btn.classList.add('active');
+        activeChip = btn;
+        map.flyTo([b.lat, b.lng], 15, { duration: 0.6 });
+        setTimeout(function() { markerByName[b.name].openPopup(); }, 700);
+      });
+      listEl.appendChild(btn);
+    });
   });
 })();
 </script>
