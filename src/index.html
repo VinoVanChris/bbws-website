@@ -111,13 +111,6 @@ sitemapLastmod: 2026-05-18
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
 
-      <!-- Dots -->
-      <div class="hero-dots" aria-hidden="true">
-        <button class="hero-dot active" data-slide="0"></button>
-        <button class="hero-dot" data-slide="1"></button>
-        <button class="hero-dot" data-slide="2"></button>
-      </div>
-
       <!-- Scroll indicator (slide 1 only) -->
       <div class="hero-scroll" aria-hidden="true">
         <div class="hero-scroll-line"></div>
@@ -399,29 +392,19 @@ sitemapLastmod: 2026-05-18
 <script>
   (function() {
     var slides = document.querySelectorAll('.hero-slide');
-    var dots   = document.querySelectorAll('.hero-dot');
     var current = 0;
     var timer;
 
     function goTo(n) {
       slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
       current = (n + slides.length) % slides.length;
       slides[current].classList.add('active');
-      dots[current].classList.add('active');
     }
 
     function next() { goTo(current + 1); }
 
     function startTimer() { timer = setInterval(next, 6000); }
     function resetTimer()  { clearInterval(timer); startTimer(); }
-
-    dots.forEach(function(dot) {
-      dot.addEventListener('click', function() {
-        goTo(parseInt(dot.dataset.slide));
-        resetTimer();
-      });
-    });
 
     document.getElementById('hero-prev').addEventListener('click', function() { goTo(current - 1); resetTimer(); });
     document.getElementById('hero-next').addEventListener('click', function() { goTo(current + 1); resetTimer(); });
