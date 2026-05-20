@@ -2679,7 +2679,7 @@ textarea.som-input { resize: none; line-height: 1.5; }
   padding: 14px;
   border-right: 1px solid rgba(0,0,0,0.09);
   display: flex;
-  align-items: center; /* center compass vertically when right panel grows */
+  align-items: stretch; /* stretch compass to fill card height */
 }
 .whisky-compass-right {
   flex: 1;
@@ -2693,7 +2693,8 @@ textarea.som-input { resize: none; line-height: 1.5; }
 .whisky-compass-container {
   position: relative;
   width: 280px;
-  height: 210px;
+  height: auto;        /* grows with the card */
+  min-height: 210px;   /* never smaller than the default size */
   background: var(--bg-alt);
   border: 1px solid rgba(0,0,0,0.07);
   border-radius: 8px;
@@ -2888,7 +2889,7 @@ textarea.som-input { resize: none; line-height: 1.5; }
 @media (max-width: 600px) {
   .whisky-compass-body { flex-direction: column; }
   .whisky-compass-left { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.07); }
-  .whisky-compass-container { width: 100%; height: 200px; }
+  .whisky-compass-container { width: 100%; min-height: 200px; height: auto; }
 }
 
 /* Collections */
