@@ -312,6 +312,7 @@ sitemapLastmod: 2026-05-19
                 <h2>Similkameen Valley</h2>
                 <p>BC's smallest wine region and one of its most interesting. The valley runs east-west through the Cascades with extreme diurnal temperature swings and gravelly alluvial soils. Organic farming is widespread. Clos du Soleil and Orofino are two compelling reasons to pay attention to Cawston.</p>
                 <div class="region-blurb-wineries" id="wineries-similkameen"></div>
+                <div class="region-blurb-wineries" id="farms-similkameen"></div>
               </div>
 
               <div class="region-detail" data-region="fraser">
@@ -507,6 +508,11 @@ sitemapLastmod: 2026-05-19
     { name:'Yellow Dog Brewing', lat:49.283, lng:-122.836, url:'https://yellowdogbrew.com', region:'vancouver', note:'Port Moody. Play Dead IPA and Fetch American Amber are two of the better Port Moody offerings.' },
   ];
 
+  const farms = [
+    /* Source: farmersdotter.ca/contact - 2036 Osprey Lane, Cawston */
+    { name:'Farmersdotter Organics', lat:49.194, lng:-119.738, url:'https://www.farmersdotter.ca', region:'similkameen', note:'2036 Osprey Lane, Cawston. Certified organic garlic farm in the Similkameen. Their garlic scape salt is on our shelf.' },
+  ];
+
   function makePin(fill, stroke) {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 36" width="24" height="36">
       <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 24 12 24S24 21 24 12C24 5.373 18.627 0 12 0z" fill="${fill}" stroke="${stroke}" stroke-width="1"/>
@@ -563,6 +569,15 @@ sitemapLastmod: 2026-05-19
       markerByName[b.name] = m;
     });
 
+    /* Farm markers (sage green) */
+    const farmIcon = makePin('#4a7c3f', '#336130');
+    farms.forEach(function(f) {
+      const m = L.marker([f.lat, f.lng], { icon: farmIcon })
+        .addTo(map)
+        .bindPopup(popup(f.name, f.url, f.note, '#4a7c3f'));
+      markerByName[f.name] = m;
+    });
+
     /* Map legend */
     const legend = L.control({ position: 'bottomleft' });
     legend.onAdd = function() {
@@ -571,7 +586,8 @@ sitemapLastmod: 2026-05-19
       div.innerHTML =
         '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#C9A84C;flex-shrink:0;"></span> Winery</div>' +
         '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#a1191d;flex-shrink:0;"></span> Distillery</div>' +
-        '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#7a4e12;flex-shrink:0;"></span> Brewery</div>';
+        '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#7a4e12;flex-shrink:0;"></span> Brewery</div>' +
+        '<div style="display:flex;align-items:center;gap:7px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#4a7c3f;flex-shrink:0;"></span> Farm</div>';
       return div;
     };
     legend.addTo(map);
@@ -628,6 +644,11 @@ sitemapLastmod: 2026-05-19
       const container = document.getElementById('breweries-' + b.region);
       if (!container) return;
       container.appendChild(makeProducerChip(b, '#7a4e12'));
+    });
+    farms.forEach(function(f) {
+      const container = document.getElementById('farms-' + f.region);
+      if (!container) return;
+      container.appendChild(makeProducerChip(f, '#4a7c3f'));
     });
 
     const regionNav = document.getElementById('region-nav');
