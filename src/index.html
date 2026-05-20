@@ -103,6 +103,14 @@ sitemapLastmod: 2026-05-18
         </div>
       </div>
 
+      <!-- Arrows -->
+      <button class="hero-arrow hero-arrow--prev" id="hero-prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="hero-arrow hero-arrow--next" id="hero-next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
       <!-- Dots -->
       <div class="hero-dots" aria-hidden="true">
         <button class="hero-dot active" data-slide="0"></button>
@@ -414,6 +422,9 @@ sitemapLastmod: 2026-05-18
         resetTimer();
       });
     });
+
+    document.getElementById('hero-prev').addEventListener('click', function() { goTo(current - 1); resetTimer(); });
+    document.getElementById('hero-next').addEventListener('click', function() { goTo(current + 1); resetTimer(); });
 
     var carousel = document.getElementById('hero-carousel');
     carousel.addEventListener('mouseenter', function() { clearInterval(timer); });

@@ -588,9 +588,44 @@ p { color: var(--text-muted); max-width: 66ch; }
   transform: scale(1.25);
 }
 
+/* Carousel arrows */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.hero-arrow:hover { background: rgba(0,0,0,0.55); border-color: rgba(255,255,255,0.45); }
+.hero-arrow--prev { left: 20px; }
+.hero-arrow--next { right: 20px; }
+/* Light slide (Kopke) -- dark arrows */
+.hero-slide--light.active ~ .hero-arrow,
+.hero-carousel:has(.hero-slide--light.active) .hero-arrow {
+  background: rgba(255,255,255,0.55);
+  border-color: rgba(0,0,0,0.15);
+  color: #1a1000;
+}
+.hero-carousel:has(.hero-slide--light.active) .hero-arrow:hover {
+  background: rgba(255,255,255,0.85);
+}
+
 @media (max-width: 600px) {
   .hero-slide-bottle-text { left: 28px; bottom: 64px; }
   .hero-bottle-name { font-size: 1.4rem; }
+  .hero-arrow { width: 36px; height: 36px; }
+  .hero-arrow--prev { left: 12px; }
+  .hero-arrow--next { right: 12px; }
 }
 
 /* ============================================
