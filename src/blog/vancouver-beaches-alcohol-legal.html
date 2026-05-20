@@ -196,15 +196,15 @@ excerpt: "As of today, you can drink alcohol on Vancouver's beaches. Responsibly
   }
 
   const beaches = [
-    { name: 'Kitsilano Beach',   desc: '4 min from the shop',               lat: 49.2757, lng: -123.1537, img: '../images/beaches/kitsilano.webp',    note: 'No glass on the sand. Cans or soft flasks. 4 min from the shop.' },
-    { name: 'English Bay Beach', desc: 'West End sunset views',            lat: 49.2865, lng: -123.1437, img: '../images/beaches/english-bay.webp',  note: 'No glass on the sand. Cans or soft flasks. West End sunset views.' },
-    { name: 'Sunset Beach',      desc: 'False Creek waterfront',           lat: 49.2777, lng: -123.1364, img: '../images/beaches/sunset-beach.webp', note: 'No glass on the sand. Cans or soft flasks. False Creek waterfront.' },
-    { name: 'Second Beach',      desc: 'Stanley Park, outdoor pool',       lat: 49.2953, lng: -123.1515, img: '../images/beaches/second-beach.webp', note: 'Stanley Park. Cans or soft flasks. Outdoor pool next door.' },
-    { name: 'Third Beach',       desc: 'Stanley Park, quieter spot',       lat: 49.3026, lng: -123.1553, img: '../images/beaches/third-beach.webp',  note: 'Stanley Park. Quieter than Second. No glass on the sand.' },
-    { name: 'Jericho Beach',     desc: 'Mountain backdrop',                lat: 49.2741, lng: -123.1969, img: '../images/beaches/jericho.webp',      note: 'No glass on the sand. Cans or soft flasks. Mountain backdrop.' },
-    { name: 'Locarno Beach',     desc: 'Quiet stretch west of Jericho',    lat: 49.2760, lng: -123.2123, img: '../images/beaches/locarno.webp',      note: 'No glass on the sand. Quieter stretch west of Jericho.' },
-    { name: 'Spanish Banks',     desc: 'Wide tidal flats, best at low tide', lat: 49.2776, lng: -123.2209, img: '../images/beaches/spanish-banks.webp', note: 'No glass on the sand. Wide tidal flats. Best at low tide.' },
-    { name: 'Hadden Park',       desc: 'Vanier Park, waterfront lawn',     lat: 49.2780, lng: -123.1477, img: '../images/beaches/hadden-park.webp',  note: 'Vanier Park. Waterfront lawn. Kitsilano-adjacent.' },
+    { name: 'Kitsilano Beach',   driveMin: 4,  desc: '4 min · right down the hill',              lat: 49.2757, lng: -123.1537, img: '../images/beaches/kitsilano.webp',    note: 'No glass on the sand. Cans or soft flasks. 4 min from the shop.' },
+    { name: 'Hadden Park',       driveMin: 6,  desc: '6 min · Vanier Park waterfront',           lat: 49.2780, lng: -123.1477, img: '../images/beaches/hadden-park.webp',  note: 'Vanier Park. Waterfront lawn. Kitsilano-adjacent.' },
+    { name: 'Jericho Beach',     driveMin: 8,  desc: '8 min · mountain backdrop',                lat: 49.2741, lng: -123.1969, img: '../images/beaches/jericho.webp',      note: 'No glass on the sand. Cans or soft flasks. Mountain backdrop.' },
+    { name: 'Sunset Beach',      driveMin: 8,  desc: '8 min · False Creek waterfront',           lat: 49.2777, lng: -123.1364, img: '../images/beaches/sunset-beach.webp', note: 'No glass on the sand. Cans or soft flasks. False Creek waterfront.' },
+    { name: 'Locarno Beach',     driveMin: 8,  desc: '8 min · quiet, west of Jericho',          lat: 49.2760, lng: -123.2123, img: '../images/beaches/locarno.webp',      note: 'No glass on the sand. Quieter stretch west of Jericho.' },
+    { name: 'English Bay Beach', driveMin: 10, desc: '10 min · West End sunset views',           lat: 49.2865, lng: -123.1437, img: '../images/beaches/english-bay.webp',  note: 'No glass on the sand. Cans or soft flasks. West End sunset views.' },
+    { name: 'Spanish Banks',     driveMin: 10, desc: '10 min · wide tidal flats',                lat: 49.2776, lng: -123.2209, img: '../images/beaches/spanish-banks.webp', note: 'No glass on the sand. Wide tidal flats. Best at low tide.' },
+    { name: 'Second Beach',      driveMin: 13, desc: '13 min · Stanley Park outdoor pool',       lat: 49.2953, lng: -123.1515, img: '../images/beaches/second-beach.webp', note: 'Stanley Park. Cans or soft flasks. Outdoor pool next door.' },
+    { name: 'Third Beach',       driveMin: 21, desc: '21 min · Stanley Park, worth the drive',   lat: 49.3026, lng: -123.1553, img: '../images/beaches/third-beach.webp',  note: 'Stanley Park. Quieter than Second. No glass on the sand.' },
   ];
 
   const store = { name: 'Broadway Beer Wine & Spirits', lat: 49.2639, lng: -123.1674, note: '2752 W Broadway · Open daily 10am–11pm' };
