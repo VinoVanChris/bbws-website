@@ -673,7 +673,27 @@ SOM.whisky = (function() {
       aroma:'Light smoke, malt, honey, coastal air, vanilla',
       flavour:'Smoke, malt sweetness, honey, gentle peat, coastal note',
       finish:'Long, smoky, warming',
-      tags:['enthusiast','peated'],   note:"Shelter Point's peated expression, using lightly peated malt in a style closer to Scottish island whiskies than BC craft. One of the most distinctive Canadian single malts available.",  inStock:true }
+      tags:['enthusiast','peated'],   note:"Shelter Point's peated expression, using lightly peated malt in a style closer to Scottish island whiskies than BC craft. One of the most distinctive Canadian single malts available.",  inStock:true },
+    { id:'sons-of-van-rye',   name:'Sons of Vancouver Wheated Rye', producer:'Sons of Vancouver Distillery', region:'canada', peat:0, body:6, tier:'mid',
+      aroma:'Rye grain, vanilla, dried herbs, light caramel, wheat sweetness',
+      flavour:'Rye spice, wheat softness, vanilla, dried fruit, gentle oak',
+      finish:'Medium, clean, lightly sweet with lingering spice',
+      tags:['enthusiast'],            note:'Made in North Vancouver using a wheated rye mash bill -- a distinctly BC take on Canadian rye. The wheat rounds out the spice for a softer, more approachable expression than most straight ryes.',  inStock:true },
+    { id:'macaloneys-cath',   name:"Macaloney's Caledonian Cath na Haven", producer:"Macaloney's Island Distillery", region:'canada', peat:0, body:6, tier:'mid',
+      aroma:'Malt, dried fruit, sherry, vanilla, light oak',
+      flavour:'Rich malt, dried fruit, sherry sweetness, warming spice',
+      finish:'Long, malty, gently spiced',
+      tags:['enthusiast','gift'],     note:"Victoria's Macaloney's Caledonian distillery is built to Scottish standards -- pot still distillation, traditional malt, and genuine patience. The Cath na Haven is a seriously made single malt that competes with Scotland.",  inStock:true },
+    { id:'odd-society-rye',   name:'Odd Society Prospector Rye',   producer:'Odd Society Spirits',           region:'canada', peat:0, body:5, tier:'mid',
+      aroma:'Rye spice, dried herbs, light vanilla, grain, subtle fruit',
+      flavour:'Rye forward, pepper, dried fruit, vanilla, light oak',
+      finish:'Medium, spiced, clean',
+      tags:['enthusiast'],            note:"Made in East Vancouver from 100% BC rye grain. Odd Society's Prospector is the most locally-rooted whisky on the shelf -- a serious craft rye from the neighbourhood.",  inStock:true },
+    { id:'stillhead-islay-rye', name:'Stillhead Islay Cask Rye',   producer:'Stillhead Distillery',          region:'canada', peat:3, body:6, tier:'mid',
+      aroma:'Light peat smoke, rye grain, vanilla, coastal hint, dried herbs',
+      flavour:'Rye spice, gentle smoke, vanilla, dried fruit, light maritime',
+      finish:'Medium, smoky, spiced fade',
+      tags:['enthusiast','peated'],   note:"Duncan BC's Stillhead takes a provocative approach: finish their rye in Islay casks for a subtle smoke that bridges Scottish island character and Canadian grain. One of the most interesting bottles on this shelf.",  inStock:true }
   ];
 
   // ── COLLECTIONS ────────────────────────────────────────────────
@@ -1232,6 +1252,22 @@ document.addEventListener('DOMContentLoaded', function() {
       img:'/images/distilleries/shelter-point.webp',
       desc:'Set on a 380-acre working farm on Vancouver Island, Shelter Point is BC\'s pioneering craft single malt distillery. Using estate-grown barley and Pacific coastal air, it produces whisky with genuine regional character.',
       bottles:['shelter-point-sm','shelter-point-rye','shelter-point-ripple','shelter-point-smoke'] },
+    { name:'Sons of Vancouver Distillery', region:'canada', lat:49.317, lng:-123.073, founded:2015,
+      img:null,
+      desc:'Founded in North Vancouver, Sons of Vancouver has built a reputation for thoughtful, grain-forward Canadian whisky. Their Wheated Rye uses a mash bill that softens the classic rye spice for something distinctly West Coast.',
+      bottles:['sons-of-van-rye'] },
+    { name:"Macaloney's Island Distillery", region:'canada', lat:48.427, lng:-123.370, founded:2016,
+      img:null,
+      desc:'Built in Victoria to Scottish standards by Graeme Macaloney, this distillery is one of the most serious craft single malt operations in North America. Pot still distillation, traditional malt, and genuine patience in every bottle.',
+      bottles:['macaloneys-cath'] },
+    { name:'Odd Society Spirits', region:'canada', lat:49.278, lng:-123.067, founded:2013,
+      img:null,
+      desc:'An East Vancouver craft distillery making whisky from 100% BC-grown rye grain. The Prospector is their flagship whisky -- locally rooted, properly made, and a genuine expression of the neighbourhood it comes from.',
+      bottles:['odd-society-rye'] },
+    { name:'Stillhead Distillery', region:'canada', lat:48.779, lng:-123.707, founded:2016,
+      img:null,
+      desc:'A small-batch distillery in Duncan on Vancouver Island, Stillhead finishes its rye whisky in retired Islay casks for a subtle smoke that bridges Scottish island character and Canadian grain tradition.',
+      bottles:['stillhead-islay-rye'] },
   ];
 
   var COLORS = {
