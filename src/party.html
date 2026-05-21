@@ -489,6 +489,9 @@ a.pick-chip:hover {
     color: #999;
     text-align: center;
   }
+
+  /* Suppress URL expansion on pick chip links */
+  a.pick-chip::after { content: none !important; }
 }
 
 /* Hide print-only elements on screen */
