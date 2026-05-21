@@ -591,6 +591,34 @@ a.pick-chip:hover {
           </div>
         </div>
 
+        <!-- Beer style (conditional) -->
+        <div class="party-field" id="beer-style-field" style="display:none;">
+          <span class="party-label">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><rect x="4" y="2" width="8" height="12" rx="1"/><path d="M12 5h2v4h-2"/><line x1="7" y1="6" x2="7" y2="10"/><line x1="9" y1="6" x2="9" y2="10"/></svg>
+            What style of beer?
+          </span>
+          <div class="btn-group" id="beer-style-group">
+            <button class="btn-choice active" data-value="ipa" type="button">Craft IPA</button>
+            <button class="btn-choice" data-value="lager" type="button">Craft Lager</button>
+            <button class="btn-choice" data-value="domestic" type="button">Crowd Pleaser</button>
+          </div>
+        </div>
+
+        <!-- Spirits type (conditional) -->
+        <div class="party-field" id="spirits-type-field" style="display:none;">
+          <span class="party-label">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M5 2h6l-2 5h-2L5 2z"/><path d="M6 7c0 2.5 4 2.5 4 5v1H6v-1c0-2.5 4-2.5 4-5"/></svg>
+            What spirits are you pouring?
+          </span>
+          <div class="btn-group" id="spirits-type-group">
+            <button class="btn-choice active" data-value="whisky" type="button">Whisky</button>
+            <button class="btn-choice" data-value="gin" type="button">Gin</button>
+            <button class="btn-choice" data-value="vodka" type="button">Vodka</button>
+            <button class="btn-choice" data-value="rum" type="button">Rum</button>
+            <button class="btn-choice" data-value="tequila" type="button">Tequila</button>
+          </div>
+        </div>
+
         <!-- Toast -->
         <div class="party-field">
           <span class="party-label">
@@ -707,6 +735,22 @@ a.pick-chip:hover {
   setupGroup('hours-group');
   setupGroup('occasion-group');
   setupGroup('vibe-group');
+  setupGroup('beer-style-group');
+  setupGroup('spirits-type-group');
+
+  // ── Show / hide conditional fields based on vibe ────────────
+  const beerVibes    = new Set(['beer', 'balanced', 'fullbar']);
+  const spiritsVibes = new Set(['spirits', 'cocktail', 'fullbar']);
+  const beerField    = document.getElementById('beer-style-field');
+  const spiritsField = document.getElementById('spirits-type-field');
+
+  document.getElementById('vibe-group').addEventListener('click', e => {
+    const btn = e.target.closest('.btn-choice');
+    if (!btn) return;
+    const vibe = btn.dataset.value;
+    beerField.style.display    = beerVibes.has(vibe)    ? '' : 'none';
+    spiritsField.style.display = spiritsVibes.has(vibe) ? '' : 'none';
+  });
 
   // ── Bottle picks (Barnet IDs + short display names) ────────
   const PICKS = {
@@ -727,7 +771,18 @@ a.pick-chip:hover {
       sports:   [['5136731','Attems Sauvignon Blanc'],     ['5136405','Sperling Pet Nat']],
     },
     sparkling: [['5137539','Bottega Gold Prosecco'],       ['5137775','Duval-Leroy Champagne']],
-    spirits:   [['5137692','Montelobos Mezcal']],
+    beer: {
+      ipa:      [['5136855','Four Winds Featherweight IPA'], ['5136425','Driftwood Fat Tug IPA']],
+      lager:    [['5137453','Parallel 49 Craft Lager'],      ['5182416','Backcountry Sh*tty Kitty Lager']],
+      domestic: [['5137412','Heineken 12PK'],                ['5136481','Stella Artois 12PK']],
+    },
+    spirits: {
+      whisky:  [['5137700','Johnnie Walker Black'],   ['5136371','Basil Hayden\'s Bourbon']],
+      gin:     [['5137260','Hendrick\'s Gin'],         ['5137656','Aviation Gin']],
+      vodka:   [['5136378','Absolut'],                 ['5137525','Tito\'s Vodka']],
+      rum:     [['5136549','Appleton Estate'],         ['5240757','Kraken Black Rum']],
+      tequila: [['5137267','Casamigos Blanco'],        ['5137692','Montelobos Mezcal']],
+    },
   };
 
   function picksHtml(list) {
@@ -814,8 +869,11 @@ a.pick-chip:hover {
     // Toast sparkling (6 flutes per bottle for a proper toast pour)
     const sparklingBottles = toast ? Math.ceil(guests / 6) : 0;
 
+    const beerStyle   = beerVibes.has(vibe)    ? getActive('beer-style-group')    : null;
+    const spiritsType = spiritsVibes.has(vibe) ? getActive('spirits-type-group')  : null;
+
     return {
-      guests, hours, occasion, vibe, toast,
+      guests, hours, occasion, vibe, toast, beerStyle, spiritsType,
       total, redBottles, whiteBottles, beerUnits, spiritBottles, sparklingBottles
     };
   }
@@ -894,14 +952,14 @@ a.pick-chip:hover {
     });
     if (r.beerUnits > 0) items.push({
       name: 'Beer',
-      sub: 'Mix of lager and something with a bit more character. We have the wall for it.',
-      picks: '',
+      sub: r.beerStyle ? 'On the shelf right now:' : 'Mix of lager and something with character. We have the wall for it.',
+      picks: r.beerStyle ? picksHtml(PICKS.beer[r.beerStyle]) : '',
       qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
     });
     if (r.spiritBottles > 0) items.push({
       name: 'Spirits',
-      sub: spiritSubs[r.vibe] || 'A base spirit and a mixer go a long way.',
-      picks: (r.vibe === 'spirits' || r.vibe === 'cocktail' || r.vibe === 'fullbar') ? picksHtml(PICKS.spirits) : '',
+      sub: r.spiritsType ? 'On the shelf right now:' : (spiritSubs[r.vibe] || 'A base spirit and a mixer go a long way.'),
+      picks: r.spiritsType ? picksHtml(PICKS.spirits[r.spiritsType]) : '',
       qty: `${r.spiritBottles} bottle${r.spiritBottles !== 1 ? 's' : ''}`
     });
     items.push({
