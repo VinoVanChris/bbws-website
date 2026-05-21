@@ -775,9 +775,9 @@ a.pick-chip:hover {
     },
     sparkling: [['5137539','Bottega Gold Prosecco'],       ['5137775','Duval-Leroy Champagne']],
     beer: {
-      ipa:      [['5136855','Four Winds Featherweight IPA'], ['5136425','Driftwood Fat Tug IPA']],
-      lager:    [['5137453','Parallel 49 Craft Lager'],      ['5182416','Backcountry Sh*tty Kitty Lager']],
-      domestic: [['5137412','Heineken 12PK'],                ['5136481','Stella Artois 12PK']],
+      ipa:      [['5136855','Four Winds Featherweight IPA', 6], ['5136425','Driftwood Fat Tug IPA', 4]],
+      lager:    [['5137453','Parallel 49 Craft Lager', 6],      ['5182416','Backcountry Sh*tty Kitty Lager', 4]],
+      domestic: [['5137412','Heineken', 12],                     ['5136481','Stella Artois', 12]],
     },
     spirits: {
       whisky:  [['5137700','Johnnie Walker Black'],   ['5136371','Basil Hayden\'s Bourbon']],
@@ -940,6 +940,7 @@ a.pick-chip:hover {
       sub: 'On the shelf right now:',
       picks: picksHtml(PICKS.red[r.occasion] || PICKS.red.dinner),
       picksRaw: PICKS.red[r.occasion] || PICKS.red.dinner,
+      qtyNum: r.redBottles,
       qty: `${r.redBottles} bottle${r.redBottles !== 1 ? 's' : ''}`
     });
     if (r.whiteBottles > 0) items.push({
@@ -947,6 +948,7 @@ a.pick-chip:hover {
       sub: 'On the shelf right now:',
       picks: picksHtml(PICKS.white[r.occasion] || PICKS.white.dinner),
       picksRaw: PICKS.white[r.occasion] || PICKS.white.dinner,
+      qtyNum: r.whiteBottles,
       qty: `${r.whiteBottles} bottle${r.whiteBottles !== 1 ? 's' : ''}`
     });
     if (r.sparklingBottles > 0) items.push({
@@ -954,6 +956,7 @@ a.pick-chip:hover {
       sub: 'On the shelf right now:',
       picks: picksHtml(PICKS.sparkling),
       picksRaw: PICKS.sparkling,
+      qtyNum: r.sparklingBottles,
       qty: `${r.sparklingBottles} bottle${r.sparklingBottles !== 1 ? 's' : ''}`
     });
     if (r.beerUnits > 0) items.push({
@@ -961,6 +964,7 @@ a.pick-chip:hover {
       sub: r.beerStyle ? 'On the shelf right now:' : 'Mix of lager and something with character. We have the wall for it.',
       picks: r.beerStyle ? picksHtml(PICKS.beer[r.beerStyle]) : '',
       picksRaw: r.beerStyle ? PICKS.beer[r.beerStyle] : null,
+      qtyNum: r.beerUnits,
       qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
     });
     if (r.spiritBottles > 0) items.push({
@@ -968,6 +972,7 @@ a.pick-chip:hover {
       sub: r.spiritsType ? 'On the shelf right now:' : (spiritSubs[r.vibe] || 'A base spirit and a mixer go a long way.'),
       picks: r.spiritsType ? picksHtml(PICKS.spirits[r.spiritsType]) : '',
       picksRaw: r.spiritsType ? PICKS.spirits[r.spiritsType] : null,
+      qtyNum: r.spiritBottles,
       qty: `${r.spiritBottles} bottle${r.spiritBottles !== 1 ? 's' : ''}`
     });
     items.push({
@@ -975,6 +980,7 @@ a.pick-chip:hover {
       sub: 'Sparkling water, soft drinks, juice. Always underestimated.',
       picks: '',
       picksRaw: null,
+      qtyNum: 0,
       qty: 'Don\'t forget'
     });
 
@@ -1003,11 +1009,23 @@ a.pick-chip:hover {
       `Built ${new Date().toLocaleDateString('en-CA', {year:'numeric',month:'long',day:'numeric'})}`;
 
     // Email link
-    function picksText(list) {
+    function picksText(list, totalQty, isBeer) {
       if (!window.BARNET || !list || !list.length) return '';
-      return list.map(([id, name]) => {
+      const n = list.length;
+      return list.map(([id, name, packSize], i) => {
         const p = window.BARNET[id];
-        return p ? `  - ${name} ($${p.price})${p.inStock ? '' : ' [call ahead]'}` : '';
+        if (!p) return '';
+        let qtyStr = '';
+        if (totalQty) {
+          if (isBeer && packSize) {
+            const packs = Math.max(1, Math.round(totalQty / n / packSize));
+            qtyStr = ` (${packs} x ${packSize}pk)`;
+          } else {
+            const each = i === 0 ? Math.ceil(totalQty / n) : Math.floor(totalQty / n);
+            qtyStr = ` (${each} bottle${each !== 1 ? 's' : ''})`;
+          }
+        }
+        return `  - ${name}${qtyStr} $${p.price}${p.inStock ? '' : ' [call ahead - check stock]'}`;
       }).filter(Boolean).join('\n');
     }
 
@@ -1016,10 +1034,13 @@ a.pick-chip:hover {
       `My party shopping list: ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
       items.filter(i => i.qty !== "Don't forget").map(i => {
         let line = `• ${i.name}: ${i.qty}`;
-        if (i.picksRaw) line += '\n' + picksText(i.picksRaw);
+        if (i.picksRaw) {
+          const txt = picksText(i.picksRaw, i.qtyNum, i.name === 'Beer');
+          if (txt) line += '\n' + txt;
+        }
         return line;
       }).join('\n') +
-      `\n• Non-Alcoholic: Don't forget` +
+      `\n• Non-Alcoholic: Don't forget (sparkling water, juice, soft drinks)` +
       `\n\nNote: ${somNotes[r.occasion] || ''}` +
       `\n\nSomething to eat: ${foodSuggestions[r.occasion] || ''}` +
       `\n\nBuilt at broadwaybeerwine.ca/party.html` +
