@@ -326,7 +326,7 @@ p { color: var(--text-muted); max-width: 66ch; }
   border-bottom: 1px solid var(--border-gold);
 }
 .nav-drawer-logo img {
-  height: 48px;
+  height: 60px;
   width: auto;
   display: block;
 }
