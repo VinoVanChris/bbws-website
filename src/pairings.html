@@ -33,6 +33,35 @@ sitemapLastmod: 2026-05-18
   on current inventory.
   ──────────────────────────────────────────────────────────────────────────
 #}
+<style>
+/* ── Barnet live stock badges ── */
+.pairing-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  vertical-align: middle;
+  font-style: normal;
+}
+.pairing-price {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0;
+}
+.pairing-stock {
+  font-size: 0.60rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.pairing-stock--in  { background: rgba(46,125,50,0.10); color: #2e7d32; }
+.pairing-stock--out { background: rgba(0,0,0,0.06);     color: var(--text-muted); }
+</style>
+
 <main class="page-content">
 
   <!-- HERO -->
@@ -378,3 +407,74 @@ sitemapLastmod: 2026-05-18
   </section>
 
 </main>
+<script>
+(function () {
+  var BOTTLES = [
+    { match: 'hugel gentil',                    id: '5137095' },
+    { match: 'speritz pet',                     id: '5136405' },
+    { match: 'beaujolais villages',             id: '5152901' },
+    { match: 'duval-leroy',                     id: '5137775' },
+    { match: 'boisset les ursulines',           id: '5137456' },
+    { match: 'baudry',                          id: '5137768' },
+    { match: 'perrin c',                        id: '5136585' },
+    { match: 'pamplemousse',                    id: '5207395' },
+    { match: 'astro bunny',                     id: '5136959' },
+    { match: 'orofino gamay',                   id: '5190638' },
+    { match: 'attems',                          id: '5136731' },
+    { match: 'averill creek chardonnay',        id: '5137205' },
+    { match: 'montelobos',                      id: '5137692' },
+    { match: 'chiarlo le orme',                 id: '5137756' },
+    { match: 'escorihuela 1884 mendoza malbec', id: '5137673' },
+    { match: 'argyle reserve',                  id: '5136921' },
+    { match: 'tantalus riesling',               id: '5237614' },
+    { match: 'bottega gold',                    id: '5137539' },
+    { match: 'petit v',                         id: '5136539' },
+    { match: 'yoshi no gawa',                   id: '5136825' },
+  ];
+
+  function normalize(s) {
+    return s.toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  var bottleMap = [];
+  var toFetch   = [];
+
+  document.querySelectorAll('li.pairing-bottle').forEach(function (el) {
+    var strong = el.querySelector('strong');
+    if (!strong) return;
+    var name  = normalize(strong.textContent);
+    var entry = BOTTLES.find(function (b) { return name.includes(b.match); });
+    if (!entry) return;
+    bottleMap.push({ el: el, id: entry.id });
+    if (!toFetch.includes(entry.id)) toFetch.push(entry.id);
+  });
+
+  if (!toFetch.length) return;
+
+  var cache = {};
+  Promise.all(toFetch.map(function (id) {
+    return fetch('https://barnetnetwork.com/api/shop/739-360/products/' + id)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) { if (data) cache[id] = data; })
+      .catch(function () {});
+  })).then(function () {
+    bottleMap.forEach(function (item) {
+      var p = cache[item.id];
+      if (!p) return;
+      var strong = item.el.querySelector('strong');
+      if (!strong) return;
+      var price   = parseFloat(p.price || p.net_price || 0).toFixed(2);
+      var inStock = p.available_for_sale;
+      var live    = document.createElement('span');
+      live.className = 'pairing-live';
+      live.innerHTML =
+        '<span class="pairing-price">$' + price + '</span>' +
+        '<span class="pairing-stock pairing-stock--' + (inStock ? 'in' : 'out') + '">' +
+        (inStock ? 'In Stock' : 'Out of Stock') + '</span>';
+      strong.insertAdjacentElement('afterend', live);
+    });
+  });
+})();
+</script>
