@@ -222,11 +222,12 @@ sitemapLastmod: 2026-05-18
 .list-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 14px 32px;
   border-bottom: 1px solid rgba(0,0,0,0.04);
   gap: 16px;
 }
+.list-item-qty { margin-top: 2px; }
 .list-item:last-child { border-bottom: none; }
 .list-item-name {
   font-size: 0.95rem;
@@ -289,6 +290,42 @@ sitemapLastmod: 2026-05-18
   border-radius: 100px;
   padding: 5px 14px;
 }
+.list-item > div:first-child {
+  min-width: 0;
+  flex: 1;
+}
+.list-item-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.pick-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px 3px 8px;
+  border-radius: 100px;
+  border: 1px solid rgba(201,168,76,0.35);
+  background: rgba(201,168,76,0.07);
+  color: var(--text);
+  white-space: nowrap;
+}
+.pick-chip--out {
+  border-color: rgba(0,0,0,0.1);
+  background: rgba(0,0,0,0.03);
+  color: var(--text-muted);
+}
+.pick-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pick-dot--in  { background: #2e7d32; }
+.pick-dot--out { background: rgba(0,0,0,0.2); }
 /* ── Results banner ───────────────────────────────────────── */
 .results-banner {
   position: relative;
@@ -645,7 +682,7 @@ sitemapLastmod: 2026-05-18
   </section>
 
 </main>
-
+<script>window.BARNET = {{ barnet | dump | safe }};</script>
 <script>
 (function () {
 
@@ -662,6 +699,42 @@ sitemapLastmod: 2026-05-18
   setupGroup('hours-group');
   setupGroup('occasion-group');
   setupGroup('vibe-group');
+
+  // ── Bottle picks (Barnet IDs + short display names) ────────
+  const PICKS = {
+    red: {
+      dinner:   [['5137456','JC Boisset Les Ursulines'],  ['5137768','Baudry Chinon']],
+      garden:   [['5152901','Beaujolais Drouhin'],         ['5190638','Orofino Gamay']],
+      cocktail: [['5152901','Beaujolais Drouhin'],         ['5136585','Perrin Côtes du Rhône']],
+      birthday: [['5152901','Beaujolais Drouhin'],         ['5136921','Argyle Pinot Noir']],
+      holiday:  [['5137456','JC Boisset Les Ursulines'],  ['5136585','Perrin Côtes du Rhône']],
+      sports:   [['5137673','Escorihuela 1884 Malbec'],   ['5137756','Chiarlo Barbera']],
+    },
+    white: {
+      dinner:   [['5137095','Hugel Gentil'],               ['5137205','Averill Creek Chardonnay']],
+      garden:   [['5136731','Attems Sauvignon Blanc'],     ['5136405','Sperling Pet Nat']],
+      cocktail: [['5136731','Attems Sauvignon Blanc'],     ['5237614','Tantalus Riesling']],
+      birthday: [['5136405','Sperling Pet Nat'],           ['5136731','Attems Sauvignon Blanc']],
+      holiday:  [['5137095','Hugel Gentil'],               ['5137205','Averill Creek Chardonnay']],
+      sports:   [['5136731','Attems Sauvignon Blanc'],     ['5136405','Sperling Pet Nat']],
+    },
+    sparkling: [['5137539','Bottega Gold Prosecco'],       ['5137775','Duval-Leroy Champagne']],
+    spirits:   [['5137692','Montelobos Mezcal']],
+  };
+
+  function picksHtml(list) {
+    if (!window.BARNET || !list || !list.length) return '';
+    const chips = list.map(([id, name]) => {
+      const p = window.BARNET[id];
+      if (!p) return '';
+      const inStock = p.inStock;
+      return `<span class="pick-chip${inStock ? '' : ' pick-chip--out'}">` +
+        `<span class="pick-dot pick-dot--${inStock ? 'in' : 'out'}"></span>` +
+        `${name} $${p.price}` +
+        `</span>`;
+    }).filter(Boolean).join('');
+    return chips ? `<div class="list-item-picks">${chips}</div>` : '';
+  }
 
   // ── Guest counter ───────────────────────────────────────────
   const guestInput = document.getElementById('guest-count');
@@ -793,32 +866,38 @@ sitemapLastmod: 2026-05-18
 
     if (r.redBottles > 0) items.push({
       name: 'Red Wine',
-      sub: 'Full-bodied or medium. Ask us for current picks in the $20-35 range.',
+      sub: 'On the shelf right now:',
+      picks: picksHtml(PICKS.red[r.occasion] || PICKS.red.dinner),
       qty: `${r.redBottles} bottle${r.redBottles !== 1 ? 's' : ''}`
     });
     if (r.whiteBottles > 0) items.push({
       name: 'White Wine',
-      sub: 'Crisp and crowd-friendly. A Sauvignon Blanc or Pinot Gris works for almost everyone.',
+      sub: 'On the shelf right now:',
+      picks: picksHtml(PICKS.white[r.occasion] || PICKS.white.dinner),
       qty: `${r.whiteBottles} bottle${r.whiteBottles !== 1 ? 's' : ''}`
     });
     if (r.sparklingBottles > 0) items.push({
       name: 'Sparkling (Toast)',
-      sub: 'Prosecco or Cava at this size. No one needs Champagne for a group toast.',
+      sub: 'On the shelf right now:',
+      picks: picksHtml(PICKS.sparkling),
       qty: `${r.sparklingBottles} bottle${r.sparklingBottles !== 1 ? 's' : ''}`
     });
     if (r.beerUnits > 0) items.push({
       name: 'Beer',
       sub: 'Mix of lager and something with a bit more character. We have the wall for it.',
+      picks: '',
       qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
     });
     if (r.spiritBottles > 0) items.push({
       name: 'Spirits',
       sub: spiritSubs[r.vibe] || 'A base spirit and a mixer go a long way.',
+      picks: (r.vibe === 'spirits' || r.vibe === 'cocktail' || r.vibe === 'fullbar') ? picksHtml(PICKS.spirits) : '',
       qty: `${r.spiritBottles} bottle${r.spiritBottles !== 1 ? 's' : ''}`
     });
     items.push({
       name: 'Non-Alcoholic',
       sub: 'Sparkling water, soft drinks, juice. Always underestimated.',
+      picks: '',
       qty: 'Don\'t forget'
     });
 
@@ -827,6 +906,7 @@ sitemapLastmod: 2026-05-18
         <div>
           <div class="list-item-name">${item.name}</div>
           <div class="list-item-sub">${item.sub}</div>
+          ${item.picks || ''}
         </div>
         <div class="list-item-qty${item.qty === "Don't forget" ? ' list-item-qty--reminder' : ''}">${item.qty}</div>
       </div>
