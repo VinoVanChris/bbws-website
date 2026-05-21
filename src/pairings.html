@@ -61,6 +61,7 @@ sitemapLastmod: 2026-05-18
 .pairing-stock--in  { background: rgba(46,125,50,0.10); color: #2e7d32; }
 .pairing-stock--out { background: rgba(0,0,0,0.06);     color: var(--text-muted); }
 </style>
+{% macro badge(id) %}{% if barnet and barnet[id] %}<span class="pairing-live"><span class="pairing-price">${{ barnet[id].price }}</span><span class="pairing-stock pairing-stock--{{ 'in' if barnet[id].inStock else 'out' }}">{{ 'In Stock' if barnet[id].inStock else 'Out of Stock' }}</span></span>{% endif %}{% endmacro %}
 
 <main class="page-content">
 
@@ -109,15 +110,15 @@ sitemapLastmod: 2026-05-18
             <p class="pairing-bottles-label">Bring These</p>
             <ul>
               <li class="pairing-bottle">
-                <strong>Hugel Gentil</strong>
+                <strong>Hugel Gentil{{ badge("5137095") }}</strong>
                 <span>Riesling, Gewurztraminer, Muscat, and Pinot Gris in one Alsatian bottle. Off-dry, floral, with the acidity to cut through coconut milk and just enough sweetness to ride the chilli.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Sperling Vineyards Organic Speritz Pet Nat</strong>
+                <strong>Sperling Vineyards Organic Speritz Pet Nat{{ badge("5136405") }}</strong>
                 <span>Certified-organic Okanagan pétillant naturel. Bubbles are an underrated move with spicy food. This one lifts everything on the plate without fighting it.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Beaujolais Villages — Drouhin</strong>
+                <strong>Beaujolais Villages — Drouhin{{ badge("5152901") }}</strong>
                 <span>If you want a red, this is it. Drouhin's Beaujolais is light, fruity, and about as food-friendly as wine gets. Low-tannin Gamay handles Thai heat better than anything heavier.</span>
               </li>
             </ul>
@@ -138,7 +139,7 @@ sitemapLastmod: 2026-05-18
             <p class="pairing-bottles-label">Bring These</p>
             <ul>
               <li class="pairing-bottle">
-                <strong>Champagne Duval-Leroy Brut</strong>
+                <strong>Champagne Duval-Leroy Brut{{ badge("5137775") }}</strong>
                 <span>A house that punches above its price. Bready, fine, and precise. AnnaLena is a place to celebrate, and this is the bottle for it.</span>
               </li>
               <li class="pairing-bottle">
@@ -146,7 +147,7 @@ sitemapLastmod: 2026-05-18
                 <span>Similkameen Pinot from one of the most exciting small wineries in BC. If the menu leans into local ingredients, lean into local wine. This belongs in a room like AnnaLena.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>JC Boisset Les Ursulines Bourgogne Pinot Noir</strong>
+                <strong>JC Boisset Les Ursulines Bourgogne Pinot Noir{{ badge("5137456") }}</strong>
                 <span>The safe-but-stunning move. A proper Bourgogne never embarrasses you, especially next to refined Pacific Northwest cooking.</span>
               </li>
             </ul>
@@ -167,15 +168,15 @@ sitemapLastmod: 2026-05-18
             <p class="pairing-bottles-label">Bring These</p>
             <ul>
               <li class="pairing-bottle">
-                <strong>Domaine Baudry Les Granges Chinon</strong>
+                <strong>Domaine Baudry Les Granges Chinon{{ badge("5137768") }}</strong>
                 <span>Loire Cabernet Franc done right. Earthy, cool-climate precise, the grape at every bistro table in the Loire Valley. Read the full story on the <a href="/blog/bernard-baudry-chinon.html">Baudry post</a>.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Perrin Côtes du Rhône Villages</strong>
+                <strong>Perrin Côtes du Rhône Villages{{ badge("5136585") }}</strong>
                 <span>Grenache-led and generous, from a family that has been making wine in the Rhône since 1909. France has been pairing this with steak frites for centuries.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Beaujolais Villages — Drouhin</strong>
+                <strong>Beaujolais Villages — Drouhin{{ badge("5152901") }}</strong>
                 <span>Light Gamay with duck. With pork rillettes. With anything off a chalkboard. The cheapest way to drink like a Parisian.</span>
               </li>
             </ul>
@@ -196,15 +197,15 @@ sitemapLastmod: 2026-05-18
             <p class="pairing-bottles-label">Bring These</p>
             <ul>
               <li class="pairing-bottle">
-                <strong>Pamplemousse Jus Foch Nouveau</strong>
+                <strong>Pamplemousse Jus Foch Nouveau{{ badge("5207395") }}</strong>
                 <span>BC Maréchal Foch made nouveau-style: low-intervention, carbonic, zero pretension. Low sulphites, maximum personality. Right at home one block from Folke's kitchen.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Astro Bunny Pet-Nat Blend</strong>
+                <strong>Astro Bunny Pet-Nat Blend{{ badge("5136959") }}</strong>
                 <span>Ancient-method fizz from BC. Lively, textured, the kind of bottle you bring to a plant-forward dinner and everyone asks about.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Orofino Gamay 2025</strong>
+                <strong>Orofino Gamay 2025{{ badge("5190638") }}</strong>
                 <span>Similkameen Gamay from one of BC's most thoughtful producers. Juicy, low-tannin, and built for vegetable-forward cooking.</span>
               </li>
             </ul>
@@ -225,15 +226,15 @@ sitemapLastmod: 2026-05-18
             <p class="pairing-bottles-label">Bring These</p>
             <ul>
               <li class="pairing-bottle">
-                <strong>Champagne Duval-Leroy Brut</strong>
+                <strong>Champagne Duval-Leroy Brut{{ badge("5137775") }}</strong>
                 <span>Oysters and Champagne is the oldest move in the book, and it remains the right one. Duval-Leroy is the bottle we'd bring ourselves to a room like this.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Attems Sauvignon Blanc</strong>
+                <strong>Attems Sauvignon Blanc{{ badge("5136731") }}</strong>
                 <span>Friuli Sauvignon Blanc from the Collio, on the Slovenian border. Precise, mineral, and built for seafood. One of the most food-friendly whites on our shelf.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Averill Creek Chardonnay</strong>
+                <strong>Averill Creek Chardonnay{{ badge("5137205") }}</strong>
                 <span>Vancouver Island Chardonnay from one of BC's benchmarks. The category has arrived, and this holds its own next to anything from Burgundy.</span>
               </li>
             </ul>
@@ -258,11 +259,11 @@ sitemapLastmod: 2026-05-18
                 <span>BC skin-contact made with carbonic maceration: low-intervention, lively, a little funky. The right bottle for a room with this much energy and a menu that won't sit still.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Montelobos Mezcal</strong>
+                <strong>Montelobos Mezcal{{ badge("5137692") }}</strong>
                 <span>Highland agave from the Jalisco highlands, earthy and complex. When the menu leans into the Mexican thread, this is the move. Smoky, slow-sipping, built for share plates.</span>
               </li>
               <li class="pairing-bottle">
-                <strong>Beaujolais Villages — Drouhin</strong>
+                <strong>Beaujolais Villages — Drouhin{{ badge("5152901") }}</strong>
                 <span>When the menu jumps from PNW to Mexican to Asian, light Gamay survives all of it. The most versatile red on the shelf.</span>
               </li>
             </ul>
@@ -295,9 +296,9 @@ sitemapLastmod: 2026-05-18
           </header>
           <div class="pairing-bottles">
             <ul>
-              <li class="pairing-bottle"><strong>Michele Chiarlo Le Orme Barbera d'Asti</strong><span>Italy's pizza wine, from a Piedmont benchmark. High acid, low tannin, and built for tomato sauce.</span></li>
-              <li class="pairing-bottle"><strong>Beaujolais Villages — Drouhin</strong><span>If pepperoni is involved, Gamay never lets you down.</span></li>
-              <li class="pairing-bottle"><strong>Perrin Côtes du Rhône Villages</strong><span>Bigger, rustic, grenache-forward. Great with anything aggressively cheesy.</span></li>
+              <li class="pairing-bottle"><strong>Michele Chiarlo Le Orme Barbera d'Asti{{ badge("5137756") }}</strong><span>Italy's pizza wine, from a Piedmont benchmark. High acid, low tannin, and built for tomato sauce.</span></li>
+              <li class="pairing-bottle"><strong>Beaujolais Villages — Drouhin{{ badge("5152901") }}</strong><span>If pepperoni is involved, Gamay never lets you down.</span></li>
+              <li class="pairing-bottle"><strong>Perrin Côtes du Rhône Villages{{ badge("5136585") }}</strong><span>Bigger, rustic, grenache-forward. Great with anything aggressively cheesy.</span></li>
             </ul>
           </div>
         </article>
@@ -312,9 +313,9 @@ sitemapLastmod: 2026-05-18
           </header>
           <div class="pairing-bottles">
             <ul>
-              <li class="pairing-bottle"><strong>Sperling Vineyards Organic Speritz Pet Nat</strong><span>Certified-organic Okanagan bubbles. Pétillant naturel with sushi is criminally underrated.</span></li>
-              <li class="pairing-bottle"><strong>Attems Sauvignon Blanc</strong><span>Friuli Sauvignon Blanc: crisp, clean, salt-forward. Disappears into the meal in the best way.</span></li>
-              <li class="pairing-bottle"><strong>Yoshi No Gawa Brewmaster's Choice Honjozo</strong><span>A premium Honjozo from Niigata. Approachable, food-friendly, and proof that the obvious answer is usually the right one.</span></li>
+              <li class="pairing-bottle"><strong>Sperling Vineyards Organic Speritz Pet Nat{{ badge("5136405") }}</strong><span>Certified-organic Okanagan bubbles. Pétillant naturel with sushi is criminally underrated.</span></li>
+              <li class="pairing-bottle"><strong>Attems Sauvignon Blanc{{ badge("5136731") }}</strong><span>Friuli Sauvignon Blanc: crisp, clean, salt-forward. Disappears into the meal in the best way.</span></li>
+              <li class="pairing-bottle"><strong>Yoshi No Gawa Brewmaster's Choice Honjozo{{ badge("5136825") }}</strong><span>A premium Honjozo from Niigata. Approachable, food-friendly, and proof that the obvious answer is usually the right one.</span></li>
             </ul>
           </div>
         </article>
@@ -329,9 +330,9 @@ sitemapLastmod: 2026-05-18
           </header>
           <div class="pairing-bottles">
             <ul>
-              <li class="pairing-bottle"><strong>Escorihuela 1884 Mendoza Malbec</strong><span>The grape France let go and Argentina made famous. Dark fruit, soft tannin, built for a burger.</span></li>
+              <li class="pairing-bottle"><strong>Escorihuela 1884 Mendoza Malbec{{ badge("5137673") }}</strong><span>The grape France let go and Argentina made famous. Dark fruit, soft tannin, built for a burger.</span></li>
               <li class="pairing-bottle"><strong>BC Craft IPA</strong><span>A cold can is sometimes the only right answer. We have the wall for it.</span></li>
-              <li class="pairing-bottle"><strong>Argyle Reserve Willamette Pinot Noir</strong><span>If the burger is at a real restaurant, this is the move. Willamette Valley Pinot from one of Oregon's benchmark producers.</span></li>
+              <li class="pairing-bottle"><strong>Argyle Reserve Willamette Pinot Noir{{ badge("5136921") }}</strong><span>If the burger is at a real restaurant, this is the move. Willamette Valley Pinot from one of Oregon's benchmark producers.</span></li>
             </ul>
           </div>
         </article>
@@ -346,9 +347,9 @@ sitemapLastmod: 2026-05-18
           </header>
           <div class="pairing-bottles">
             <ul>
-              <li class="pairing-bottle"><strong>Tantalus Riesling 2025</strong><span>Okanagan Riesling from one of BC's top estates. Dry but intensely aromatic, with the precision to tame heat without surrendering to it.</span></li>
-              <li class="pairing-bottle"><strong>Astro Bunny Pet-Nat Blend</strong><span>BC pétillant naturel. Bubbles cut through ghee and chilli oil better than anything still.</span></li>
-              <li class="pairing-bottle"><strong>Beaujolais Villages — Drouhin</strong><span>The one red that survives a vindaloo. Light, juicy, low-tannin Gamay.</span></li>
+              <li class="pairing-bottle"><strong>Tantalus Riesling 2025{{ badge("5237614") }}</strong><span>Okanagan Riesling from one of BC's top estates. Dry but intensely aromatic, with the precision to tame heat without surrendering to it.</span></li>
+              <li class="pairing-bottle"><strong>Astro Bunny Pet-Nat Blend{{ badge("5136959") }}</strong><span>BC pétillant naturel. Bubbles cut through ghee and chilli oil better than anything still.</span></li>
+              <li class="pairing-bottle"><strong>Beaujolais Villages — Drouhin{{ badge("5152901") }}</strong><span>The one red that survives a vindaloo. Light, juicy, low-tannin Gamay.</span></li>
             </ul>
           </div>
         </article>
@@ -363,9 +364,9 @@ sitemapLastmod: 2026-05-18
           </header>
           <div class="pairing-bottles">
             <ul>
-              <li class="pairing-bottle"><strong>Bottega Gold Prosecco Brut</strong><span>Start here. The gold bottle sets the tone before anything hits the board. Dry, fine, and festive without being serious about it.</span></li>
-              <li class="pairing-bottle"><strong>Domaine Baudry Les Granges Chinon</strong><span>Loire Cab Franc with hard cheese is one of the great moves of all time. Earthy, cool-climate, and built for exactly this.</span></li>
-              <li class="pairing-bottle"><strong>Château Petit Védrines Sauternes 2017</strong><span>The end-of-night move. A 375ml of Sauternes with a ripe blue or aged hard cheese is a small dessert without being one. Devastating in the right way.</span></li>
+              <li class="pairing-bottle"><strong>Bottega Gold Prosecco Brut{{ badge("5137539") }}</strong><span>Start here. The gold bottle sets the tone before anything hits the board. Dry, fine, and festive without being serious about it.</span></li>
+              <li class="pairing-bottle"><strong>Domaine Baudry Les Granges Chinon{{ badge("5137768") }}</strong><span>Loire Cab Franc with hard cheese is one of the great moves of all time. Earthy, cool-climate, and built for exactly this.</span></li>
+              <li class="pairing-bottle"><strong>Château Petit Védrines Sauternes 2017{{ badge("5136539") }}</strong><span>The end-of-night move. A 375ml of Sauternes with a ripe blue or aged hard cheese is a small dessert without being one. Devastating in the right way.</span></li>
             </ul>
           </div>
         </article>
@@ -382,7 +383,7 @@ sitemapLastmod: 2026-05-18
             <ul>
               <li class="pairing-bottle"><strong>BC Craft Tallboys</strong><span>The wall of cans exists for exactly this. Local, cold, easy.</span></li>
               <li class="pairing-bottle"><strong>A Good Negroni RTD</strong><span>Pre-batched Negronis from craft producers. One of the fastest-growing categories in the shop, and for good reason.</span></li>
-              <li class="pairing-bottle"><strong>Beaujolais Villages — Drouhin</strong><span>Light enough to drink without thinking. Good enough to make the night feel like something.</span></li>
+              <li class="pairing-bottle"><strong>Beaujolais Villages — Drouhin{{ badge("5152901") }}</strong><span>Light enough to drink without thinking. Good enough to make the night feel like something.</span></li>
             </ul>
           </div>
         </article>
@@ -407,74 +408,3 @@ sitemapLastmod: 2026-05-18
   </section>
 
 </main>
-<script>
-(function () {
-  var BOTTLES = [
-    { match: 'hugel gentil',                    id: '5137095' },
-    { match: 'speritz pet',                     id: '5136405' },
-    { match: 'beaujolais villages',             id: '5152901' },
-    { match: 'duval-leroy',                     id: '5137775' },
-    { match: 'boisset les ursulines',           id: '5137456' },
-    { match: 'baudry',                          id: '5137768' },
-    { match: 'perrin c',                        id: '5136585' },
-    { match: 'pamplemousse',                    id: '5207395' },
-    { match: 'astro bunny',                     id: '5136959' },
-    { match: 'orofino gamay',                   id: '5190638' },
-    { match: 'attems',                          id: '5136731' },
-    { match: 'averill creek chardonnay',        id: '5137205' },
-    { match: 'montelobos',                      id: '5137692' },
-    { match: 'chiarlo le orme',                 id: '5137756' },
-    { match: 'escorihuela 1884 mendoza malbec', id: '5137673' },
-    { match: 'argyle reserve',                  id: '5136921' },
-    { match: 'tantalus riesling',               id: '5237614' },
-    { match: 'bottega gold',                    id: '5137539' },
-    { match: 'petit v',                         id: '5136539' },
-    { match: 'yoshi no gawa',                   id: '5136825' },
-  ];
-
-  function normalize(s) {
-    return s.toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
-  }
-
-  var bottleMap = [];
-  var toFetch   = [];
-
-  document.querySelectorAll('li.pairing-bottle').forEach(function (el) {
-    var strong = el.querySelector('strong');
-    if (!strong) return;
-    var name  = normalize(strong.textContent);
-    var entry = BOTTLES.find(function (b) { return name.includes(b.match); });
-    if (!entry) return;
-    bottleMap.push({ el: el, id: entry.id });
-    if (!toFetch.includes(entry.id)) toFetch.push(entry.id);
-  });
-
-  if (!toFetch.length) return;
-
-  var cache = {};
-  Promise.all(toFetch.map(function (id) {
-    return fetch('https://barnetnetwork.com/api/shop/739-360/products/' + id)
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (data) { if (data) cache[id] = data; })
-      .catch(function () {});
-  })).then(function () {
-    bottleMap.forEach(function (item) {
-      var p = cache[item.id];
-      if (!p) return;
-      var strong = item.el.querySelector('strong');
-      if (!strong) return;
-      var price   = parseFloat(p.price || p.net_price || 0).toFixed(2);
-      var inStock = p.available_for_sale;
-      var live    = document.createElement('span');
-      live.className = 'pairing-live';
-      live.innerHTML =
-        '<span class="pairing-price">$' + price + '</span>' +
-        '<span class="pairing-stock pairing-stock--' + (inStock ? 'in' : 'out') + '">' +
-        (inStock ? 'In Stock' : 'Out of Stock') + '</span>';
-      strong.insertAdjacentElement('afterend', live);
-    });
-  });
-})();
-</script>
