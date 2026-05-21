@@ -318,6 +318,14 @@ sitemapLastmod: 2026-05-18
   background: rgba(0,0,0,0.03);
   color: var(--text-muted);
 }
+a.pick-chip {
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+a.pick-chip:hover {
+  border-color: rgba(201,168,76,0.6);
+  background: rgba(201,168,76,0.14);
+}
 .pick-dot {
   width: 6px;
   height: 6px;
@@ -728,10 +736,12 @@ sitemapLastmod: 2026-05-18
       const p = window.BARNET[id];
       if (!p) return '';
       const inStock = p.inStock;
-      return `<span class="pick-chip${inStock ? '' : ' pick-chip--out'}">` +
+      const tag = p.url ? 'a' : 'span';
+      const href = p.url ? ` href="${p.url}" target="_blank" rel="noopener"` : '';
+      return `<${tag}${href} class="pick-chip${inStock ? '' : ' pick-chip--out'}">` +
         `<span class="pick-dot pick-dot--${inStock ? 'in' : 'out'}"></span>` +
         `${name} $${p.price}` +
-        `</span>`;
+        `</${tag}>`;
     }).filter(Boolean).join('');
     return chips ? `<div class="list-item-picks">${chips}</div>` : '';
   }

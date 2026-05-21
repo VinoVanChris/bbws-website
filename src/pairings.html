@@ -42,7 +42,9 @@ sitemapLastmod: 2026-05-18
   margin-left: 10px;
   vertical-align: middle;
   font-style: normal;
+  text-decoration: none;
 }
+.pairing-live:hover .pairing-stock--in { background: rgba(46,125,50,0.2); }
 .pairing-price {
   font-size: 0.75rem;
   font-weight: 700;
@@ -61,7 +63,7 @@ sitemapLastmod: 2026-05-18
 .pairing-stock--in  { background: rgba(46,125,50,0.10); color: #2e7d32; }
 .pairing-stock--out { background: rgba(0,0,0,0.06);     color: var(--text-muted); }
 </style>
-{% macro badge(id) %}{% if barnet and barnet[id] %}<span class="pairing-live"><span class="pairing-price">${{ barnet[id].price }}</span><span class="pairing-stock pairing-stock--{{ 'in' if barnet[id].inStock else 'out' }}">{{ 'In Stock' if barnet[id].inStock else 'Out of Stock' }}</span></span>{% endif %}{% endmacro %}
+{% macro badge(id) %}{% if barnet and barnet[id] %}<a class="pairing-live" href="{{ barnet[id].url }}" target="_blank" rel="noopener" aria-label="View product on Barnet"><span class="pairing-price">${{ barnet[id].price }}</span><span class="pairing-stock pairing-stock--{{ 'in' if barnet[id].inStock else 'out' }}">{{ 'In Stock' if barnet[id].inStock else 'Out of Stock' }}</span></a>{% endif %}{% endmacro %}
 
 <main class="page-content">
 

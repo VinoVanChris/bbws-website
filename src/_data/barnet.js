@@ -24,7 +24,12 @@ const PRODUCT_IDS = [
   '5136825', // Yoshi No Gawa Honjozo
 ];
 
-const BASE = 'https://barnetnetwork.com/api/shop/739-360/products/';
+const BASE      = 'https://barnetnetwork.com/api/shop/739-360/products/';
+const SHOP_BASE = 'https://barnetnetwork.com/shop/739-360/products/';
+
+function toSlug(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
 
 module.exports = async function () {
   const results = {};
@@ -34,9 +39,11 @@ module.exports = async function () {
         const res = await fetch(BASE + id);
         if (!res.ok) return;
         const d = await res.json();
+        const slug = toSlug(d.description || d.name || id);
         results[id] = {
           price:   parseFloat(d.price || d.net_price || 0).toFixed(2),
           inStock: !!d.available_for_sale,
+          url:     SHOP_BASE + id + '-' + slug,
         };
       } catch (_) {}
     })
