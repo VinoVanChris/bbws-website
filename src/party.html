@@ -936,36 +936,42 @@ a.pick-chip:hover {
       name: 'Red Wine',
       sub: 'On the shelf right now:',
       picks: picksHtml(PICKS.red[r.occasion] || PICKS.red.dinner),
+      picksRaw: PICKS.red[r.occasion] || PICKS.red.dinner,
       qty: `${r.redBottles} bottle${r.redBottles !== 1 ? 's' : ''}`
     });
     if (r.whiteBottles > 0) items.push({
       name: 'White Wine',
       sub: 'On the shelf right now:',
       picks: picksHtml(PICKS.white[r.occasion] || PICKS.white.dinner),
+      picksRaw: PICKS.white[r.occasion] || PICKS.white.dinner,
       qty: `${r.whiteBottles} bottle${r.whiteBottles !== 1 ? 's' : ''}`
     });
     if (r.sparklingBottles > 0) items.push({
       name: 'Sparkling (Toast)',
       sub: 'On the shelf right now:',
       picks: picksHtml(PICKS.sparkling),
+      picksRaw: PICKS.sparkling,
       qty: `${r.sparklingBottles} bottle${r.sparklingBottles !== 1 ? 's' : ''}`
     });
     if (r.beerUnits > 0) items.push({
       name: 'Beer',
       sub: r.beerStyle ? 'On the shelf right now:' : 'Mix of lager and something with character. We have the wall for it.',
       picks: r.beerStyle ? picksHtml(PICKS.beer[r.beerStyle]) : '',
+      picksRaw: r.beerStyle ? PICKS.beer[r.beerStyle] : null,
       qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
     });
     if (r.spiritBottles > 0) items.push({
       name: 'Spirits',
       sub: r.spiritsType ? 'On the shelf right now:' : (spiritSubs[r.vibe] || 'A base spirit and a mixer go a long way.'),
       picks: r.spiritsType ? picksHtml(PICKS.spirits[r.spiritsType]) : '',
+      picksRaw: r.spiritsType ? PICKS.spirits[r.spiritsType] : null,
       qty: `${r.spiritBottles} bottle${r.spiritBottles !== 1 ? 's' : ''}`
     });
     items.push({
       name: 'Non-Alcoholic',
       sub: 'Sparkling water, soft drinks, juice. Always underestimated.',
       picks: '',
+      picksRaw: null,
       qty: 'Don\'t forget'
     });
 
@@ -994,11 +1000,22 @@ a.pick-chip:hover {
       `Built ${new Date().toLocaleDateString('en-CA', {year:'numeric',month:'long',day:'numeric'})}`;
 
     // Email link
+    function picksText(list) {
+      if (!window.BARNET || !list || !list.length) return '';
+      return list.map(([id, name]) => {
+        const p = window.BARNET[id];
+        return p ? `  - ${name} ($${p.price})${p.inStock ? '' : ' [call ahead]'}` : '';
+      }).filter(Boolean).join('\n');
+    }
+
     const subject = encodeURIComponent(`Party Shopping List - Broadway Beer Wine & Spirits`);
     const body = encodeURIComponent(
       `My party shopping list: ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
-      items.filter(i => i.qty !== "Don't forget")
-           .map(i => `• ${i.name}: ${i.qty}`).join('\n') +
+      items.filter(i => i.qty !== "Don't forget").map(i => {
+        let line = `• ${i.name}: ${i.qty}`;
+        if (i.picksRaw) line += '\n' + picksText(i.picksRaw);
+        return line;
+      }).join('\n') +
       `\n• Non-Alcoholic: Don't forget` +
       `\n\nNote: ${somNotes[r.occasion] || ''}` +
       `\n\nSomething to eat: ${foodSuggestions[r.occasion] || ''}` +
