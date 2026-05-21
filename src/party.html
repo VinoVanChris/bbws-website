@@ -334,6 +334,67 @@ a.pick-chip:hover {
 }
 .pick-dot--in  { background: #2e7d32; }
 .pick-dot--out { background: rgba(0,0,0,0.2); }
+/* ── Explore feature ──────────────────────────────────────── */
+.explore-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  margin-top: 2px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.explore-btn:hover { opacity: 0.7; }
+.explore-pool {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 12px 14px;
+  background: var(--bg-alt);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+}
+.explore-pool[hidden] { display: none; }
+.pick-chip-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 3px 8px 3px 8px;
+  border-radius: 100px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: var(--bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.pick-chip-opt:hover { border-color: rgba(201,168,76,0.5); color: var(--text); }
+.pick-chip-opt--sel {
+  border-color: rgba(201,168,76,0.5);
+  background: rgba(201,168,76,0.1);
+  color: var(--text);
+  font-weight: 600;
+}
+.pick-chip-ext {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  text-decoration: none;
+  margin-left: 1px;
+  line-height: 1;
+}
+.pick-chip-ext:hover { color: var(--gold); }
+@media print { .explore-btn, .explore-pool { display: none !important; } }
 /* ── Results banner ───────────────────────────────────────── */
 .results-banner {
   position: relative;
@@ -742,6 +803,12 @@ a.pick-chip:hover {
   setupGroup('spirits-type-group');
 
 
+  // ── Explore feature state (module-level) ───────────────────
+  let currentItems = [];
+  let currentR     = null;
+  const activePicks = {}; // key → [[id, name, pack?], ...]
+  const exploreOpen = {}; // key → bool
+
   // ── Bottle picks (Barnet IDs + short display names) ────────
   const PICKS = {
     red: {
@@ -775,6 +842,119 @@ a.pick-chip:hover {
     },
   };
 
+  // ── Full product pools per category (explore feature) ──────
+  const POOLS = {
+    red: [
+      ['5137456','JC Boisset Les Ursulines'],
+      ['5137768','Baudry Chinon'],
+      ['5152901','Beaujolais Drouhin'],
+      ['5190638','Orofino Gamay'],
+      ['5136585','Perrin Cotes du Rhone'],
+      ['5137673','Escorihuela Malbec'],
+      ['5137756','Chiarlo Barbera'],
+      ['5136921','Argyle Pinot Noir'],
+      ['5207395','Pamplemousse Jus Foch Nouveau'],
+    ],
+    white: [
+      ['5137095','Hugel Gentil'],
+      ['5137205','Averill Creek Chardonnay'],
+      ['5136731','Attems Sauvignon Blanc'],
+      ['5237614','Tantalus Riesling'],
+      ['5136405','Sperling Pet Nat'],
+      ['5136959','Astro Bunny Pet-Nat'],
+    ],
+    sparkling: [
+      ['5137539','Bottega Gold Prosecco'],
+      ['5137775','Duval-Leroy Champagne'],
+    ],
+    beer: {
+      ipa:      [['5136855','Four Winds Featherweight IPA', 6], ['5136425','Driftwood Fat Tug IPA', 4]],
+      lager:    [['5137453','Parallel 49 Craft Lager', 6],      ['5182416','Backcountry Sh*tty Kitty Lager', 4]],
+      domestic: [['5137412','Heineken', 12],                     ['5136481','Stella Artois', 12]],
+    },
+    spirits: {
+      whisky:  [['5137700','Johnnie Walker Black'],  ['5136371','Basil Hayden\'s Bourbon'], ['5136625','Glenlivet 12yr']],
+      gin:     [['5137260','Hendrick\'s Gin'],        ['5137656','Aviation Gin']],
+      vodka:   [['5136378','Absolut'],                ['5137525','Tito\'s Vodka']],
+      rum:     [['5136549','Appleton Estate'],         ['5240757','Kraken Black Rum']],
+      tequila: [['5137267','Casamigos Blanco'],        ['5137603','Don Julio Reposado'],     ['5137692','Montelobos Mezcal']],
+    },
+  };
+
+  // ── Build the picks + explore section for one list item ────
+  function buildPicksSection(key, item) {
+    if (!window.BARNET || !item.pool) return '';
+    const selected = activePicks[key] || [];
+    const inStock  = item.pool.filter(([id]) => window.BARNET[id]?.inStock);
+    const alts     = inStock.filter(([id]) => !selected.some(s => s[0] === id));
+    if (!inStock.length) return '';
+
+    const activeChips = selected.map(([id, name]) => {
+      const p = window.BARNET[id]; if (!p) return '';
+      const tag  = p.url ? 'a' : 'span';
+      const href = p.url ? ` href="${p.url}" target="_blank" rel="noopener"` : '';
+      return `<${tag}${href} class="pick-chip"><span class="pick-dot pick-dot--in"></span>${name} $${p.price}</${tag}>`;
+    }).filter(Boolean).join('');
+
+    const poolChips = inStock.map(([id, name, pack]) => {
+      const p   = window.BARNET[id];
+      const sel = selected.some(s => s[0] === id);
+      const ext = p.url ? `<a href="${p.url}" target="_blank" rel="noopener" class="pick-chip-ext" title="View on Barnet">↗</a>` : '';
+      return `<button class="pick-chip-opt${sel ? ' pick-chip-opt--sel' : ''}" type="button"` +
+        ` data-key="${key}" data-id="${id}" data-name="${encodeURIComponent(name)}"${pack ? ` data-pack="${pack}"` : ''}>` +
+        `<span class="pick-dot pick-dot--in"></span>${name} $${p.price}${ext}</button>`;
+    }).join('');
+
+    const showExplore = alts.length > 0 || exploreOpen[key];
+    const exploreBtn  = showExplore
+      ? `<button class="explore-btn" data-key="${key}" type="button">${exploreOpen[key] ? 'See fewer options' : `+ ${alts.length} more in stock`}</button>`
+      : '';
+    const poolPanel = `<div class="explore-pool" id="explore-pool-${key}"${exploreOpen[key] ? '' : ' hidden'}>${poolChips}</div>`;
+
+    return `<div class="list-item-picks" id="picks-${key}">${activeChips}${exploreBtn}${poolPanel}</div>`;
+  }
+
+  // ── Toggle a pick on/off and refresh the section ────────────
+  function togglePick(key, id, name, pack) {
+    const picks = activePicks[key] || [];
+    const idx   = picks.findIndex(p => p[0] === id);
+    if (idx >= 0) picks.splice(idx, 1);
+    else picks.push(pack ? [id, name, pack] : [id, name]);
+    activePicks[key] = picks;
+
+    const item = currentItems.find(i => i.key === key);
+    const el   = document.getElementById('picks-' + key);
+    if (item && el) el.outerHTML = buildPicksSection(key, item);
+
+    updateEmail();
+  }
+
+  // ── Rebuild the email mailto href from current selections ───
+  function updateEmail() {
+    if (!currentR) return;
+    const r      = currentR;
+    const oLabel = occasionLabels[r.occasion];
+    const subject = encodeURIComponent('Party Shopping List - Broadway Beer Wine & Spirits');
+    const body    = encodeURIComponent(
+      `My party shopping list: ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
+      currentItems.filter(i => i.qty !== "Don't forget").map(i => {
+        let line = `• ${i.name}: ${i.qty}`;
+        if (i.key) {
+          const txt = picksText(activePicks[i.key] || [], i.qtyNum, i.name === 'Beer');
+          if (txt) line += '\n' + txt;
+        }
+        return line;
+      }).join('\n') +
+      `\n• Non-Alcoholic: Don't forget (sparkling water, juice, soft drinks)` +
+      `\n\nNote: ${somNotes[r.occasion] || ''}` +
+      `\n\nSomething to eat: ${foodSuggestions[r.occasion] || ''}` +
+      `\n\nBuilt at broadwaybeerwine.ca/party.html` +
+      `\nBroadway Beer Wine & Spirits, 2752 W Broadway, Vancouver. Open daily 10am-11pm.`
+    );
+    document.getElementById('email-btn').href = `mailto:?subject=${subject}&body=${body}`;
+  }
+
+  // ── Legacy helper (still used for initial active chip render)
   function picksHtml(list) {
     if (!window.BARNET || !list || !list.length) return '';
     const chips = list.map(([id, name]) => {
@@ -923,60 +1103,51 @@ a.pick-chip:hover {
     const items = [];
 
     if (r.redBottles > 0) items.push({
-      name: 'Red Wine',
-      sub: 'On the shelf right now:',
-      picks: picksHtml(PICKS.red[r.occasion] || PICKS.red.dinner),
-      picksRaw: PICKS.red[r.occasion] || PICKS.red.dinner,
-      qtyNum: r.redBottles,
-      qty: `${r.redBottles} bottle${r.redBottles !== 1 ? 's' : ''}`
+      key: 'red', name: 'Red Wine', sub: 'On the shelf right now:',
+      pool: POOLS.red, picksRaw: PICKS.red[r.occasion] || PICKS.red.dinner,
+      qtyNum: r.redBottles, qty: `${r.redBottles} bottle${r.redBottles !== 1 ? 's' : ''}`
     });
     if (r.whiteBottles > 0) items.push({
-      name: 'White Wine',
-      sub: 'On the shelf right now:',
-      picks: picksHtml(PICKS.white[r.occasion] || PICKS.white.dinner),
-      picksRaw: PICKS.white[r.occasion] || PICKS.white.dinner,
-      qtyNum: r.whiteBottles,
-      qty: `${r.whiteBottles} bottle${r.whiteBottles !== 1 ? 's' : ''}`
+      key: 'white', name: 'White Wine', sub: 'On the shelf right now:',
+      pool: POOLS.white, picksRaw: PICKS.white[r.occasion] || PICKS.white.dinner,
+      qtyNum: r.whiteBottles, qty: `${r.whiteBottles} bottle${r.whiteBottles !== 1 ? 's' : ''}`
     });
     if (r.sparklingBottles > 0) items.push({
-      name: 'Sparkling (Toast)',
-      sub: 'On the shelf right now:',
-      picks: picksHtml(PICKS.sparkling),
-      picksRaw: PICKS.sparkling,
-      qtyNum: r.sparklingBottles,
-      qty: `${r.sparklingBottles} bottle${r.sparklingBottles !== 1 ? 's' : ''}`
+      key: 'sparkling', name: 'Sparkling (Toast)', sub: 'On the shelf right now:',
+      pool: POOLS.sparkling, picksRaw: PICKS.sparkling,
+      qtyNum: r.sparklingBottles, qty: `${r.sparklingBottles} bottle${r.sparklingBottles !== 1 ? 's' : ''}`
     });
     if (r.beerUnits > 0) items.push({
-      name: 'Beer',
-      sub: 'On the shelf right now:',
-      picks: picksHtml(PICKS.beer[r.beerStyle]),
-      picksRaw: PICKS.beer[r.beerStyle],
-      qtyNum: r.beerUnits,
-      qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
+      key: 'beer', name: 'Beer', sub: 'On the shelf right now:',
+      pool: POOLS.beer[r.beerStyle], picksRaw: PICKS.beer[r.beerStyle],
+      qtyNum: r.beerUnits, qty: `${r.beerUnits} can${r.beerUnits !== 1 ? 's' : ''}`
     });
     if (r.spiritBottles > 0) items.push({
-      name: 'Spirits',
-      sub: 'On the shelf right now:',
-      picks: picksHtml(PICKS.spirits[r.spiritsType]),
-      picksRaw: PICKS.spirits[r.spiritsType],
-      qtyNum: r.spiritBottles,
-      qty: `${r.spiritBottles} bottle${r.spiritBottles !== 1 ? 's' : ''}`
+      key: 'spirits', name: 'Spirits', sub: 'On the shelf right now:',
+      pool: POOLS.spirits[r.spiritsType], picksRaw: PICKS.spirits[r.spiritsType],
+      qtyNum: r.spiritBottles, qty: `${r.spiritBottles} bottle${r.spiritBottles !== 1 ? 's' : ''}`
     });
     items.push({
-      name: 'Non-Alcoholic',
-      sub: 'Sparkling water, soft drinks, juice. Always underestimated.',
-      picks: '',
-      picksRaw: null,
-      qtyNum: 0,
-      qty: 'Don\'t forget'
+      name: 'Non-Alcoholic', sub: 'Sparkling water, soft drinks, juice. Always underestimated.',
+      qtyNum: 0, qty: 'Don\'t forget'
     });
+
+    // Seed active picks from curated defaults; reset explore state
+    items.forEach(i => {
+      if (i.key) {
+        activePicks[i.key] = i.picksRaw ? [...i.picksRaw] : [];
+        exploreOpen[i.key] = false;
+      }
+    });
+    currentItems = items;
+    currentR     = r;
 
     document.getElementById('list-items').innerHTML = items.map(item => `
       <div class="list-item">
         <div>
           <div class="list-item-name">${item.name}</div>
           <div class="list-item-sub">${item.sub}</div>
-          ${item.picks || ''}
+          ${item.key ? buildPicksSection(item.key, item) : ''}
         </div>
         <div class="list-item-qty${item.qty === "Don't forget" ? ' list-item-qty--reminder' : ''}">${item.qty}</div>
       </div>
@@ -995,49 +1166,67 @@ a.pick-chip:hover {
     document.getElementById('print-meta').textContent =
       `Built ${new Date().toLocaleDateString('en-CA', {year:'numeric',month:'long',day:'numeric'})}`;
 
-    // Email link
-    function picksText(list, totalQty, isBeer) {
-      if (!window.BARNET || !list || !list.length) return '';
-      const n = list.length;
-      return list.map(([id, name, packSize], i) => {
-        const p = window.BARNET[id];
-        if (!p) return '';
-        let qtyStr = '';
-        if (totalQty) {
-          if (isBeer && packSize) {
-            const packs = Math.max(1, Math.round(totalQty / n / packSize));
-            qtyStr = ` (${packs} x ${packSize}pk)`;
-          } else {
-            const each = i === 0 ? Math.ceil(totalQty / n) : Math.floor(totalQty / n);
-            qtyStr = ` (${each} bottle${each !== 1 ? 's' : ''})`;
-          }
-        }
-        return `  - ${name}${qtyStr} $${p.price}${p.inStock ? '' : ' [call ahead - check stock]'}`;
-      }).filter(Boolean).join('\n');
-    }
-
-    const subject = encodeURIComponent(`Party Shopping List - Broadway Beer Wine & Spirits`);
-    const body = encodeURIComponent(
-      `My party shopping list: ${oLabel} (${r.guests} guests, ${r.hours} hours):\n\n` +
-      items.filter(i => i.qty !== "Don't forget").map(i => {
-        let line = `• ${i.name}: ${i.qty}`;
-        if (i.picksRaw) {
-          const txt = picksText(i.picksRaw, i.qtyNum, i.name === 'Beer');
-          if (txt) line += '\n' + txt;
-        }
-        return line;
-      }).join('\n') +
-      `\n• Non-Alcoholic: Don't forget (sparkling water, juice, soft drinks)` +
-      `\n\nNote: ${somNotes[r.occasion] || ''}` +
-      `\n\nSomething to eat: ${foodSuggestions[r.occasion] || ''}` +
-      `\n\nBuilt at broadwaybeerwine.ca/party.html` +
-      `\nBroadway Beer Wine & Spirits, 2752 W Broadway, Vancouver. Open daily 10am-11pm.`
-    );
-    document.getElementById('email-btn').href = `mailto:?subject=${subject}&body=${body}`;
+    updateEmail();
 
     document.getElementById('som-results').style.display = 'block';
     document.getElementById('som-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  // ── Plain-text picks for email (reads from activePicks) ────
+  function picksText(list, totalQty, isBeer) {
+    if (!window.BARNET || !list || !list.length) return '';
+    const n = list.length;
+    return list.map(([id, name, packSize], i) => {
+      const p = window.BARNET[id];
+      if (!p) return '';
+      let qtyStr = '';
+      if (totalQty) {
+        if (isBeer && packSize) {
+          const packs = Math.max(1, Math.round(totalQty / n / packSize));
+          qtyStr = ` (${packs} x ${packSize}pk)`;
+        } else {
+          const each = i === 0 ? Math.ceil(totalQty / n) : Math.floor(totalQty / n);
+          qtyStr = ` (${each} bottle${each !== 1 ? 's' : ''})`;
+        }
+      }
+      return `  - ${name}${qtyStr} $${p.price}${p.inStock ? '' : ' [call ahead]'}`;
+    }).filter(Boolean).join('\n');
+  }
+
+  // ── Event delegation for explore toggle + pick selection ───
+  document.getElementById('list-items').addEventListener('click', e => {
+    // External Barnet link inside pool chip — let it navigate
+    if (e.target.closest('.pick-chip-ext')) return;
+
+    // Explore button — toggle pool visibility
+    const exploreBtn = e.target.closest('.explore-btn');
+    if (exploreBtn) {
+      const key  = exploreBtn.dataset.key;
+      const pool = document.getElementById('explore-pool-' + key);
+      if (pool) {
+        exploreOpen[key] = pool.hidden;
+        pool.hidden = !pool.hidden;
+        const item = currentItems.find(i => i.key === key);
+        const alts = item?.pool
+          ? item.pool.filter(([id]) => window.BARNET[id]?.inStock && !(activePicks[key] || []).some(s => s[0] === id))
+          : [];
+        exploreBtn.textContent = pool.hidden ? `+ ${alts.length} more in stock` : 'See fewer options';
+      }
+      return;
+    }
+
+    // Pool chip — toggle pick selection
+    const opt = e.target.closest('.pick-chip-opt');
+    if (opt) {
+      e.preventDefault();
+      togglePick(
+        opt.dataset.key,
+        opt.dataset.id,
+        decodeURIComponent(opt.dataset.name),
+        opt.dataset.pack ? parseInt(opt.dataset.pack) : undefined
+      );
+    }
+  });
 
   // ── Bind buttons ────────────────────────────────────────────
   document.getElementById('calculate-btn').addEventListener('click', () => {
